@@ -18,15 +18,9 @@
 
   padding: 70px 0 0;
   margin: 10px 0 0;
+background: #fff;
 
-  background: linear-gradient(
-    120deg,
-    #ff7a00,
-    #ff9b2f,
-    #ff8400,
-    #ffb347,
-    #ff7a00
-  );
+  color: #ff7a00;
 
   animation: footerGradient 10s ease infinite;
 }
@@ -156,17 +150,17 @@
 }
 
 .footerPet {
-    color: #000;
+  color: #000;;
 }
 
 .footerCard {
-    color: var(--orange);
+     color: #ff7a00;
 }
 
 .footerTagline {
     font-family: var(--font-tagline);
 
-    color: #000;
+      color: #000;
 
     font-size: 7px;
     font-weight: 800;
@@ -185,7 +179,7 @@
 
     margin: 20px 0 0;
 
-    color: #000;
+     color: #ff7a00;
 
     font-size: 13px;
     line-height: 1.8;
@@ -213,7 +207,7 @@
 
     border-radius: 50%;
 
-    color: #000;
+      color: #ff7a00;
 
     background: rgba(255, 255, 255, 0.08);
 
@@ -224,7 +218,7 @@
 }
 
 .socialLink:hover {
-    color: #000;
+     color: #fff;
 
     background: var(--orange);
 
@@ -242,7 +236,7 @@
 .footerColumn h4 {
     margin: 0 0 14px;
 
-    color: #000;
+     color: #ff7a00;
 
     font-size: 13px;
     font-weight: 800;
@@ -265,7 +259,7 @@
 
     width: fit-content;
 
-    color: #000;
+     color: #ff7a00;
 
     font-size: 12px;
     line-height: 1.45;
@@ -276,7 +270,7 @@
 }
 
 .footerLinks a:hover {
-    color: #000;
+      color: #ff7a00;
 
     transform: translateX(3px);
 }
@@ -303,7 +297,7 @@
 
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 
-    color: #000;
+     color: #ff7a00;
 
     font-size: 11px;
 

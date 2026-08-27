@@ -1,0 +1,963 @@
+/* =========================================================
+   ABOUT PAGE
+   ========================================================= */
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  padding: 85px 0 70px;
+
+  background:
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(255, 155, 47, 0.14),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #fffaf5 0%,
+      var(--bg) 100%
+    );
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+
+  align-items: center;
+
+  gap: 70px;
+}
+
+.heroContent {
+  max-width: 650px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  margin-bottom: 16px;
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  color: var(--orange);
+  background: var(--orange-soft);
+
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: clamp(44px, 5vw, 70px);
+  font-weight: 800;
+  line-height: 1.06;
+
+  letter-spacing: -2px;
+}
+
+.heroTitle span {
+  color: var(--orange);
+}
+
+.heroDescription {
+  max-width: 620px;
+
+  margin: 22px 0 0;
+
+  color: var(--muted);
+
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   PET VISUAL
+   ========================================================= */
+
+.petVisual {
+  position: relative;
+
+  min-height: 500px;
+
+  display: grid;
+  place-items: center;
+
+  isolation: isolate;
+}
+
+.petOrb {
+  position: absolute;
+
+  width: min(460px, 90%);
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #ffe1b5 0%,
+      #fff0d8 45%,
+      rgba(255, 240, 216, 0) 72%
+    );
+
+  animation: petOrbPulse 4s ease-in-out infinite;
+}
+
+@keyframes petOrbPulse {
+  0%,
+  100% {
+    transform: scale(0.96);
+    opacity: 0.78;
+  }
+
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   PET CARD
+   ========================================================= */
+
+.petCard {
+  position: relative;
+  z-index: 2;
+
+  width: min(330px, 78%);
+
+  padding: 22px;
+
+  border: 1px solid #eadfd6;
+  border-radius: 28px;
+
+  background: #fff;
+
+  box-shadow:
+    0 24px 60px rgba(56, 27, 14, 0.11),
+    0 0 30px rgba(255, 122, 0, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.petCard:hover {
+  transform: translateY(-8px);
+
+  border-color: #ffbd78;
+
+  box-shadow:
+    0 0 8px rgba(255, 122, 0, 0.25),
+    0 0 22px rgba(255, 155, 47, 0.16),
+    0 24px 55px rgba(56, 27, 14, 0.13);
+}
+
+.screenTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 14px;
+
+  border-bottom: 1px solid #f0e7e0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.petAvatar {
+  display: grid;
+  place-items: center;
+
+  width: 105px;
+  height: 105px;
+
+  margin: 25px auto 14px;
+
+  border-radius: 50%;
+
+  background: #fff0dc;
+
+  font-size: 58px;
+}
+
+.petCard h3 {
+  margin: 0;
+
+  color: var(--text);
+
+  text-align: center;
+
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.breed {
+  margin-top: 4px;
+
+  color: var(--muted);
+
+  text-align: center;
+
+  font-size: 10px;
+}
+
+.miniRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 9px;
+  padding: 11px 12px;
+
+  border-radius: 12px;
+
+  background: #fff8f1;
+
+  color: var(--text);
+
+  font-size: 10px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.miniRow:hover {
+  transform: translateX(4px);
+
+  box-shadow:
+    0 8px 20px rgba(56, 27, 14, 0.07);
+}
+
+.miniRow b {
+  color: var(--orange);
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.statsSection {
+  width: 100%;
+
+  padding: 75px 0;
+
+  background: #fff;
+}
+
+.stats {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 14px;
+}
+
+.stat {
+  position: relative;
+
+  padding: 25px 20px;
+
+  border: 1px solid #eadfd6;
+  border-radius: 22px;
+
+  background: #fff;
+
+  text-align: center;
+
+  box-shadow:
+    0 12px 35px rgba(56, 27, 14, 0.04);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.stat:hover {
+  transform: translateY(-8px);
+
+  border-color: #ffbd78;
+
+  box-shadow:
+    0 0 8px rgba(255, 122, 0, 0.25),
+    0 0 22px rgba(255, 155, 47, 0.16),
+    0 22px 45px rgba(56, 27, 14, 0.09);
+}
+
+.stat strong {
+  display: block;
+
+  color: var(--orange);
+
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.stat span {
+  display: block;
+
+  margin-top: 6px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   BELIEFS
+   ========================================================= */
+
+.beliefsSection {
+  width: 100%;
+
+  padding: 90px 0;
+
+  background: var(--soft);
+}
+
+.sectionHeading {
+  max-width: 760px;
+
+  margin-inline: auto;
+
+  text-align: center;
+}
+
+.sectionTitle {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+
+  letter-spacing: -1px;
+}
+
+.sectionTitle span {
+  color: var(--orange);
+}
+
+.sectionSubtitle {
+  max-width: 700px;
+
+  margin: 15px auto 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   BELIEF GRID
+   ========================================================= */
+
+.beliefGrid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 15px;
+
+  margin-top: 45px;
+}
+
+.beliefCard {
+  position: relative;
+
+  min-height: 220px;
+
+  padding: 25px 20px;
+
+  border: 1px solid #eadfd6;
+  border-radius: 22px;
+
+  background: #fff;
+
+  box-shadow:
+    0 12px 35px rgba(56, 27, 14, 0.04);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.beliefCard:hover {
+  transform: translateY(-8px);
+
+  border-color: #ffbd78;
+
+  box-shadow:
+    0 0 8px rgba(255, 122, 0, 0.25),
+    0 0 22px rgba(255, 155, 47, 0.16),
+    0 22px 45px rgba(56, 27, 14, 0.09);
+}
+
+.beliefIcon {
+  display: grid;
+  place-items: center;
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 15px;
+
+  color: var(--orange);
+  background: var(--orange-soft);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.beliefCard:hover .beliefIcon {
+  transform: scale(1.06);
+
+  background: #ffe5c8;
+}
+
+.beliefCard h3 {
+  margin: 18px 0 8px;
+
+  color: var(--text);
+
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.beliefCard p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1600px) {
+  .hero {
+    padding: 110px 0 90px;
+  }
+
+  .heroGrid {
+    gap: 95px;
+  }
+
+  .heroTitle {
+    font-size: 76px;
+  }
+
+  .heroDescription {
+    font-size: 17px;
+  }
+
+  .petVisual {
+    min-height: 570px;
+  }
+
+  .petCard {
+    width: 370px;
+  }
+
+  .statsSection {
+    padding: 90px 0;
+  }
+
+  .stat {
+    padding: 30px 24px;
+  }
+
+  .beliefsSection {
+    padding: 105px 0;
+  }
+}
+
+/* =========================================================
+   1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .hero {
+    padding: 70px 0 60px;
+  }
+
+  .heroGrid {
+    gap: 40px;
+  }
+
+  .heroTitle {
+    font-size: clamp(40px, 5.5vw, 60px);
+  }
+
+  .heroDescription {
+    font-size: 14px;
+  }
+
+  .petVisual {
+    min-height: 450px;
+  }
+
+  .beliefGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 30px;
+  }
+
+  .heroTitle {
+    font-size: clamp(38px, 6vw, 54px);
+  }
+
+  .petVisual {
+    min-height: 420px;
+  }
+
+  .petCard {
+    width: min(310px, 86%);
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .hero {
+    padding: 60px 0 50px;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+  }
+
+  .heroContent {
+    max-width: 100%;
+
+    text-align: center;
+  }
+
+  .heroContent .eyebrow {
+    margin-inline: auto;
+  }
+
+  .heroDescription {
+    margin-inline: auto;
+  }
+
+  .petVisual {
+    min-height: 400px;
+  }
+
+  .statsSection {
+    padding: 60px 0;
+  }
+
+  .beliefsSection {
+    padding: 70px 0;
+  }
+
+  .sectionTitle {
+    font-size: 40px;
+  }
+
+  .beliefGrid {
+    margin-top: 35px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .hero {
+    padding: 48px 0 40px;
+  }
+
+  .heroGrid {
+    gap: 25px;
+  }
+
+  .heroTitle {
+    font-size: 38px;
+
+    letter-spacing: -1px;
+  }
+
+  .heroDescription {
+    font-size: 12px;
+
+    line-height: 1.7;
+  }
+
+  .petVisual {
+    min-height: 365px;
+  }
+
+  .petOrb {
+    width: 320px;
+  }
+
+  .petCard {
+    width: min(295px, 86%);
+
+    padding: 18px;
+  }
+
+  .petAvatar {
+    width: 90px;
+    height: 90px;
+
+    margin-top: 22px;
+
+    font-size: 48px;
+  }
+
+  .statsSection {
+    padding: 50px 0;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+  }
+
+  .stat {
+    padding: 20px 12px;
+  }
+
+  .stat strong {
+    font-size: 20px;
+  }
+
+  .stat span {
+    font-size: 9px;
+  }
+
+  .beliefsSection {
+    padding: 60px 0;
+  }
+
+  .sectionTitle {
+    font-size: 32px;
+  }
+
+  .sectionSubtitle {
+    font-size: 11px;
+  }
+
+  .beliefGrid {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    margin-top: 30px;
+  }
+
+  .beliefCard {
+    min-height: auto;
+
+    padding: 22px 18px;
+  }
+
+  .beliefCard h3 {
+    font-size: 15px;
+  }
+
+  .beliefCard p {
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .hero {
+    padding: 40px 0 35px;
+  }
+
+  .heroTitle {
+    font-size: 34px;
+  }
+
+  .heroDescription {
+    font-size: 11px;
+  }
+
+  .petVisual {
+    min-height: 335px;
+  }
+
+  .petOrb {
+    width: 285px;
+  }
+
+  .petCard {
+    width: 88%;
+  }
+
+  .stats {
+    gap: 8px;
+  }
+
+  .stat {
+    padding: 18px 8px;
+  }
+
+  .stat strong {
+    font-size: 18px;
+  }
+
+  .sectionTitle {
+    font-size: 29px;
+  }
+}
+
+/* =========================================================
+   2K
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .hero {
+    padding: 125px 0 105px;
+  }
+
+  .heroGrid {
+    gap: 110px;
+  }
+
+  .heroTitle {
+    font-size: 82px;
+  }
+
+  .heroDescription {
+    max-width: 750px;
+
+    font-size: 18px;
+  }
+
+  .petVisual {
+    min-height: 620px;
+  }
+
+  .petCard {
+    width: 400px;
+  }
+
+  .statsSection {
+    padding: 105px 0;
+  }
+
+  .stat {
+    padding: 34px 28px;
+  }
+
+  .stat strong {
+    font-size: 30px;
+  }
+
+  .stat span {
+    font-size: 12px;
+  }
+
+  .beliefsSection {
+    padding: 120px 0;
+  }
+
+  .sectionTitle {
+    font-size: 60px;
+  }
+
+  .sectionSubtitle {
+    max-width: 800px;
+
+    font-size: 15px;
+  }
+
+  .beliefGrid {
+    gap: 22px;
+  }
+
+  .beliefCard {
+    min-height: 250px;
+
+    padding: 30px 24px;
+  }
+
+  .beliefCard h3 {
+    font-size: 18px;
+  }
+
+  .beliefCard p {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   4K
+   ========================================================= */
+
+@media (min-width: 2560px) {
+  .hero {
+    padding: 155px 0 135px;
+  }
+
+  .heroGrid {
+    gap: 140px;
+  }
+
+  .heroTitle {
+    font-size: 96px;
+  }
+
+  .heroDescription {
+    max-width: 850px;
+
+    font-size: 20px;
+  }
+
+  .petVisual {
+    min-height: 720px;
+  }
+
+  .petCard {
+    width: 450px;
+
+    padding: 30px;
+
+    border-radius: 34px;
+  }
+
+  .petAvatar {
+    width: 130px;
+    height: 130px;
+
+    font-size: 70px;
+  }
+
+  .statsSection {
+    padding: 130px 0;
+  }
+
+  .stat {
+    padding: 42px 30px;
+
+    border-radius: 26px;
+  }
+
+  .stat strong {
+    font-size: 36px;
+  }
+
+  .stat span {
+    font-size: 14px;
+  }
+
+  .beliefsSection {
+    padding: 140px 0;
+  }
+
+  .sectionTitle {
+    font-size: 72px;
+  }
+
+  .sectionSubtitle {
+    max-width: 900px;
+
+    font-size: 17px;
+  }
+
+  .beliefGrid {
+    gap: 25px;
+  }
+
+  .beliefCard {
+    min-height: 290px;
+
+    padding: 38px 30px;
+
+    border-radius: 26px;
+  }
+
+  .beliefIcon {
+    width: 58px;
+    height: 58px;
+  }
+
+  .beliefCard h3 {
+    font-size: 21px;
+  }
+
+  .beliefCard p {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .petOrb {
+    animation: none;
+  }
+
+  .petCard,
+  .stat,
+  .beliefCard,
+  .miniRow {
+    transition: none;
+  }
+}

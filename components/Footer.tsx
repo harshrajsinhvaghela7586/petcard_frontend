@@ -43,7 +43,7 @@ export default function Footer() {
               aria-label="PetCard home"
             >
               <Image
-                src="/images/dog-white.png"
+                src="/images/brand/dog.png"
                 alt="PetCard"
                 width={58}
                 height={58}

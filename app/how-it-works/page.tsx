@@ -1,19 +1,540 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, PawPrint } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarCheck,
+  Compass,
+  Gift,
+  Heart,
+  IdCard,
+  PawPrint,
+  ShieldCheck,
+  Sparkles,
+  UserRound,
+} from "lucide-react";
+
 import CTA from "../../components/CTA";
+import styles from "./HowItWorks.module.css";
 
 const steps = [
-  ["01","Create your account","Sign up with your basic details and start your PetCard journey."],
-  ["02","Add your pet","Create a pet profile and add the information you want to keep organized."],
-  ["03","Keep information updated","Add health details, reminders, notes and other useful information."],
-  ["04","Stay organized","Use PetCard whenever you need a quick overview of your pet's information."]
+  {
+    number: "01",
+    title: "Create Your Profile",
+    description:
+      "Tell us about yourself and your pet parent journey.",
+    icon: UserRound,
+  },
+  {
+    number: "02",
+    title: "Add Your Pet",
+    description:
+      "Add your pet's details and create an adorable profile.",
+    icon: PawPrint,
+  },
+  {
+    number: "03",
+    title: "Create Their PET CARD",
+    description:
+      "Give your pet their own unique digital identity.",
+    icon: IdCard,
+  },
+  {
+    number: "04",
+    title: "Care Every Day",
+    description:
+      "Track daily routines and build healthy habits together.",
+    icon: CalendarCheck,
+  },
+  {
+    number: "05",
+    title: "Earn & Grow",
+    description:
+      "Earn PawPoints, build streaks, unlock perks and level up.",
+    icon: Gift,
+  },
+  {
+    number: "06",
+    title: "Unlock & Customize",
+    description:
+      "Use rewards to unlock fun items and customize your pet.",
+    icon: Sparkles,
+  },
+  {
+    number: "07",
+    title: "Explore More",
+    description:
+      "Discover memories, reminders, news and more in one place.",
+    icon: Compass,
+  },
 ];
+const orbitSteps = [
+  {
+    number: "01",
+    title: "Create Your Profile",
+    description:
+      "Tell us about yourself and your pet parent journey.",
+    icon: UserRound,
+    className: "stepOne",
+    image:
+      "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=300&q=80",
+  },
 
+  {
+    number: "02",
+    title: "Add Your Pet",
+    description:
+      "Add your pet's details or choose an adorable avatar.",
+    icon: PawPrint,
+    className: "stepTwo",
+    image:
+      "https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=300&q=80",
+  },
+
+  {
+    number: "03",
+    title: "Create Their PET CARD",
+    description:
+      "Give your pet their own unique digital identity.",
+    icon: IdCard,
+    className: "stepThree",
+    image:
+      "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=300&q=80",
+  },
+
+  {
+    number: "04",
+    title: "Care Every Day",
+    description:
+      "Track daily routines and build healthy habits together.",
+    icon: CalendarCheck,
+    className: "stepFour",
+    image:
+      "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=300&q=80",
+  },
+
+  {
+    number: "05",
+    title: "Earn & Grow",
+    description:
+      "Earn PawPoints, build streaks, unlock badges and level up.",
+    icon: Gift,
+    className: "stepFive",
+    image:
+      "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=300&q=80",
+  },
+
+  {
+    number: "06",
+    title: "Unlock & Customize",
+    description:
+      "Use rewards to unlock fun items and customize your pet.",
+    icon: Sparkles,
+    className: "stepSix",
+    image:
+      "https://images.unsplash.com/photo-1598133894008-61f7f2f6e8a6?auto=format&fit=crop&w=300&q=80",
+  },
+
+  {
+    number: "07",
+    title: "Explore More",
+    description:
+      "Discover memories, reminders, news and more in one place.",
+    icon: Compass,
+    className: "stepSeven",
+    image:
+      "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80",
+  },
+];
 export default function HowItWorks() {
-  return <>
-    <section className="page-hero"><div className="container page-hero-grid"><div><div className="eyebrow">How It Works</div><h1>Simple to start. <span>Easy to use.</span></h1><p>PetCard is designed around a straightforward experience so pet parents can spend less time managing information and more time caring for their pets.</p><div className="hero-actions"><Link href="#download-app" className="btn btn-primary">Download Our App <ArrowRight size={17}/></Link></div></div><div className="pet-visual"><div className="pet-orb"/><div className="floating-paw paw-one">🐾</div><div className="pet-card"><div className="screen-top"><span>PetCard</span><span>9:41</span></div><div className="pet-avatar">🐶</div><h3>Bruno</h3><div className="breed">Your pet profile</div><div className="mini-row"><span>Profile setup</span><b>✓</b></div><div className="mini-row"><span>Health info</span><b>✓</b></div><div className="mini-row"><span>Reminders</span><b>✓</b></div></div></div></div></section>
-    <section className="section"><div className="container center"><div className="eyebrow">The Process</div><h2 className="section-title">How <span>PetCard</span> works</h2><p className="section-subtitle">A simple four-step flow for the promotional website. Exact product behavior can be connected when the app backend is ready.</p><div className="steps">{steps.map(([n,t,d])=><div className="step" key={n}><div className="step-number">{n}</div><h3>{t}</h3><p>{d}</p></div>)}</div></div></section>
-    <section className="section soft"><div className="container"><div className="page-hero-grid"><div><div className="eyebrow">One place</div><h2 className="section-title">Keep the important stuff <span>together.</span></h2><p className="section-subtitle">From profile information to reminders and notes, PetCard is designed to make everyday pet care easier to manage.</p><div style={{display:"grid",gap:12,marginTop:25}}>{["Simple pet profile","Organized care information","Useful reminders","Multiple-pet support"].map(x=><div key={x} style={{display:"flex",alignItems:"center",gap:10,fontWeight:600}}><span className="feature-icon" style={{width:34,height:34,borderRadius:10}}><Check size={17}/></span>{x}</div>)}</div></div><div className="pet-visual"><div className="pet-orb"/><div className="pet-card"><div className="screen-top"><span>PetCard</span><span>●</span></div><div className="pet-avatar">🐕</div><h3>Buddy</h3><div className="breed">Everything in one place</div>{["Pet Profile","Health","Vaccination","Notes"].map(x=><div className="mini-row" key={x}><span>{x}</span><b>›</b></div>)}</div></div></div></div></section>
-    <CTA />
-  </>;
+  return (
+    <div className={styles.page}>
+      {/* =====================================================
+          HERO / HOW IT WORKS
+          ===================================================== */}
+
+      <section className={styles.howHero}>
+        <div className="container">
+          <div className={styles.heroTop}>
+            {/* LEFT CONTENT */}
+            <div className={styles.heroContent}>
+
+              <h1 className={styles.heroTitle}>
+                7 simple steps
+                <br />
+                to <span>happier paws.</span>
+
+              </h1>
+
+              <p className={styles.heroDescription}>
+                From creating your pet&apos;s identity to building
+                healthy habits and memories together — PETCARD makes
+                every step meaningful.
+
+              </p>
+            </div>
+
+            {/* TOP RIGHT PET VISUAL */}
+            <div className={styles.heroPets}>
+              <div className={styles.heroPetsGlow} />
+
+              <div className={`${styles.pawDecor} ${styles.pawDecorTop}`}>
+                <PawPrint size={25} fill="currentColor" />
+              </div>
+
+              <div className={`${styles.pawDecor} ${styles.pawDecorRight}`}>
+                <PawPrint size={18} fill="currentColor" />
+              </div>
+
+              <div className={styles.petGroup}>
+                <div className={styles.petBlob} />
+
+                <Image
+                  src="/images/huchiko2.png"
+                  alt="PetCard pet"
+                  width={310}
+                  height={260}
+                  className={styles.heroDog}
+                  priority
+                />
+
+
+              </div>
+
+              <div className={styles.heroSpeech}>
+                <span>Every step</span>
+                <span>brings us closer</span>
+                <Heart size={13} fill="currentColor" />
+              </div>
+
+              <div className={`${styles.heroSparkle} ${styles.sparkleOne}`}>
+                ✦
+              </div>
+
+              <div className={`${styles.heroSparkle} ${styles.sparkleTwo}`}>
+                ✦
+              </div>
+
+              <div className={`${styles.heroSparkle} ${styles.sparkleThree}`}>
+                ♡
+              </div>
+            </div>
+          </div>
+
+          {/* =================================================
+              CIRCULAR PROCESS
+              ================================================= */}
+
+          <div className={styles.processVisual}>
+            {/* =================================================
+      DECORATIVE PAWS
+      ================================================= */}
+
+            <div className={styles.processPaws}>
+              <Image
+                src="/images/paw.png"
+                alt=""
+                width={52}
+                height={52}
+                className={`${styles.processPaw} ${styles.processPaw1}`}
+              />
+
+              <Image
+                src="/images/paw.png"
+                alt=""
+                width={42}
+                height={42}
+                className={`${styles.processPaw} ${styles.processPaw2}`}
+              />
+
+              <Image
+                src="/images/paw.png"
+                alt=""
+                width={58}
+                height={58}
+                className={`${styles.processPaw} ${styles.processPaw3}`}
+              />
+
+              <Image
+                src="/images/paw.png"
+                alt=""
+                width={44}
+                height={44}
+                className={`${styles.processPaw} ${styles.processPaw4}`}
+              />
+
+              <Image
+                src="/images/paw.png"
+                alt=""
+                width={48}
+                height={48}
+                className={`${styles.processPaw} ${styles.processPaw5}`}
+              />
+
+              <Image
+                src="/images/paw.png"
+                alt=""
+                width={36}
+                height={36}
+                className={`${styles.processPaw} ${styles.processPaw6}`}
+              />
+
+              <Image
+                src="/images/paw.png"
+                alt=""
+                width={32}
+                height={32}
+                className={`${styles.processPaw} ${styles.processPaw7}`}
+              />
+
+              <Image
+                src="/images/paw.png"
+                alt=""
+                width={38}
+                height={38}
+                className={`${styles.processPaw} ${styles.processPaw8}`}
+              />
+            </div>
+
+            {/* =================================================
+      OUTER ORBIT
+      ================================================= */}
+
+            <div className={styles.orbitOuter}>
+              <div className={styles.orbitTrack} />
+            </div>
+
+            {/* =================================================
+      INNER ORBIT
+      ================================================= */}
+
+            <div className={styles.orbitInner} />
+
+            {/* =================================================
+      ROTATING STEP SYSTEM
+      ================================================= */}
+
+            <div className={styles.stepsOrbit}>
+              {orbitSteps.map(
+                ({
+                  number,
+                  title,
+                  description,
+                  icon: Icon,
+                  className,
+                  image
+                }) => (
+                  <article
+                    className={`${styles.stepCard} ${styles[className as keyof typeof styles]
+                      }`}
+                    key={number}
+                  >
+                    <div className={styles.stepCardInner}>
+
+                      {/* HOVER IMAGE */}
+                      <div className={styles.stepHoverImage}>
+                        <Image
+                          src={image}
+                          alt=""
+                          width={75}
+                          height={75}
+                        />
+                      </div>
+
+                      {/* NUMBER */}
+                      <div className={styles.stepNumber}>
+                        {number}
+                      </div>
+
+                      {/* ICON */}
+                      <div className={styles.stepIcon}>
+                        <Icon
+                          size={23}
+                          strokeWidth={2.1}
+                        />
+                      </div>
+
+                      {/* TEXT */}
+                      <div className={styles.stepText}>
+                        <h3>{title}</h3>
+                        <p>{description}</p>
+                      </div>
+
+                    </div>
+                  </article>
+                ),
+              )}
+            </div>
+
+            {/* =================================================
+      CENTER PETCARD
+      ================================================= */}
+
+            <div className={styles.centerCard}>
+              <div className={styles.centerGlow} />
+
+              <div className={styles.centerIllustration}>
+                <Image
+                  src="/images/brand/dog.png"
+                  alt="PetCard dog"
+                  width={192}
+                  height={192}
+                />
+              </div>
+
+              <div className={styles.centerBrand}>
+                <span>PET</span>
+                <strong>CARD</strong>
+              </div>
+
+              <div className={styles.centerTagline}>
+                Your pet&apos;s digital identity
+              </div>
+            </div>
+          </div>
+
+          {/* =================================================
+    MOBILE PROCESS
+    ================================================= */}
+
+          <div className={styles.mobileSteps}>
+            {steps.map(
+              ({
+                number,
+                title,
+                description,
+                icon: Icon,
+              }) => (
+                <article
+                  className={styles.mobileStep}
+                  key={number}
+                >
+                  <div className={styles.mobileStepTop}>
+                    <span className={styles.mobileStepNumber}>
+                      {number}
+                    </span>
+
+                    <span className={styles.mobileStepIcon}>
+                      <Icon size={18} />
+                    </span>
+                  </div>
+
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              ),
+            )}
+          </div>
+
+          {/* =================================================
+              DOWNLOAD BAR
+              ================================================= */}
+
+          <div
+            className={styles.downloadBar}
+            id="download-app"
+          >
+            {/* =====================================================
+      DOG
+      ===================================================== */}
+            <div className={styles.downloadPet}>
+              <Image
+                src="/images/brand/dog.png"
+                alt="PetCard dog"
+                width={135}
+                height={115}
+              />
+            </div>
+
+
+            {/* =====================================================
+      COPY
+      ===================================================== */}
+            <div className={styles.downloadCopy}>
+              <h3>
+                Ready to start your
+                <br />
+                <span>pet&apos;s amazing journey?</span>
+              </h3>
+
+              <p>
+                Join thousands of pet parents who choose love,
+                care &amp; smart tracking.
+              </p>
+            </div>
+
+
+            {/* =====================================================
+      APP DOWNLOAD BUTTONS
+      ===================================================== */}
+            <div className={styles.downloadApps}>
+              <div className={styles.storeLinks}>
+
+                {/* APP STORE */}
+                <Link
+                  href="#"
+                  className={styles.storeLink}
+                  aria-label="Download on the App Store"
+                >
+                  <Image
+                    src="/images/apple-logo.png"
+                    alt=""
+                    width={22}
+                    height={22}
+                    className={styles.storeIcon}
+                  />
+
+                  <span className={styles.storeText}>
+                    <small>Download on the</small>
+                    <strong>App Store</strong>
+                  </span>
+                </Link>
+
+
+                {/* GOOGLE PLAY */}
+                <Link
+                  href="#"
+                  className={styles.storeLink}
+                  aria-label="Get it on Google Play"
+                >
+                  <Image
+                    src="/images/google-play.png"
+                    alt=""
+                    width={23}
+                    height={23}
+                    className={styles.storeIcon}
+                  />
+
+                  <span className={styles.storeText}>
+                    <small>GET IT ON</small>
+                    <strong>Google Play</strong>
+                  </span>
+                </Link>
+
+              </div>
+            </div>
+
+
+            {/* =====================================================
+      STATS
+      ===================================================== */}
+            <div className={styles.downloadStats}>
+              <div>
+                <strong>100k+</strong>
+                <span>Happy Pet Parents</span>
+              </div>
+
+              <div className={styles.downloadRating}>
+                <strong>4.8 ★</strong>
+                <span>From 12k+ reviews</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <CTA />
+    </div>
+  );
 }

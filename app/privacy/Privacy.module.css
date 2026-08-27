@@ -1,0 +1,475 @@
+/* =========================================================
+   PRIVACY PAGE
+   ========================================================= */
+
+.section {
+  width: 100%;
+  padding: 85px 0 100px;
+  background: var(--bg);
+}
+
+.container {
+  width: min(900px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 13px;
+
+  border-radius: 999px;
+
+  color: var(--orange);
+  background: var(--orange-soft);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 18px 0 15px;
+
+  color: var(--text);
+
+  font-size: clamp(38px, 6vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+}
+
+.header h1 span {
+  color: var(--orange);
+}
+
+.header > p {
+  max-width: 700px;
+  margin: 0 auto;
+
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.content {
+  display: grid;
+  gap: 16px;
+}
+
+.policyCard {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 20px;
+
+  padding: 25px 27px;
+
+  border: 1px solid var(--line);
+  border-radius: 22px;
+
+  background: #fff;
+
+  box-shadow:
+    0 12px 35px rgba(56, 27, 14, 0.045);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.policyCard:hover {
+  transform: translateY(-5px);
+
+  border-color: #ffd1a4;
+
+  box-shadow:
+    0 0 8px rgba(255, 122, 0, 0.2),
+    0 0 20px rgba(255, 155, 47, 0.12),
+    0 20px 42px rgba(56, 27, 14, 0.08);
+}
+
+/* =========================================================
+   NUMBER
+   ========================================================= */
+
+.cardNumber {
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 13px;
+
+  color: #fff;
+  background: var(--orange);
+
+  font-size: 11px;
+  font-weight: 800;
+
+  box-shadow:
+    0 8px 18px rgba(255, 122, 0, 0.18);
+}
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.cardContent {
+  flex: 1;
+}
+
+.cardContent h2 {
+  margin: 1px 0 8px;
+
+  color: var(--text);
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.cardContent p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   NOTICE
+   ========================================================= */
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 13px;
+
+  margin-top: 24px;
+  padding: 20px;
+
+  border: 1px solid #ffd5ae;
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff8f0,
+      #fff3e6
+    );
+
+  box-shadow:
+    0 10px 30px rgba(56, 27, 14, 0.045);
+}
+
+.notice > span {
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 10px;
+
+  background: #fff;
+}
+
+.notice strong {
+  display: block;
+
+  color: var(--text);
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.notice p {
+  margin: 5px 0 0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+  .section {
+    padding: 70px 0 80px;
+  }
+
+  .header {
+    margin-bottom: 38px;
+  }
+
+  .header h1 {
+    font-size: 48px;
+  }
+
+  .header > p {
+    font-size: 13px;
+  }
+
+  .policyCard {
+    padding: 22px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .section {
+    padding: 55px 0 65px;
+  }
+
+  .container {
+    width: min(100%, calc(100% - 28px));
+  }
+
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .eyebrow {
+    padding: 7px 11px;
+    font-size: 8px;
+  }
+
+  .header h1 {
+    margin: 14px 0 12px;
+
+    font-size: 36px;
+    letter-spacing: -0.8px;
+  }
+
+  .header > p {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .content {
+    gap: 12px;
+  }
+
+  .policyCard {
+    gap: 13px;
+
+    padding: 18px;
+
+    border-radius: 18px;
+  }
+
+  .cardNumber {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 10px;
+
+    font-size: 9px;
+  }
+
+  .cardContent h2 {
+    margin-top: 0;
+
+    font-size: 15px;
+  }
+
+  .cardContent p {
+    font-size: 10px;
+    line-height: 1.65;
+  }
+
+  .notice {
+    gap: 10px;
+
+    margin-top: 16px;
+    padding: 16px;
+
+    border-radius: 15px;
+  }
+
+  .notice > span {
+    width: 30px;
+    height: 30px;
+  }
+
+  .notice strong {
+    font-size: 10px;
+  }
+
+  .notice p {
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .header h1 {
+    font-size: 32px;
+  }
+
+  .policyCard {
+    padding: 15px;
+  }
+
+  .cardNumber {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cardContent h2 {
+    font-size: 14px;
+  }
+
+  .cardContent p {
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   LARGE LAPTOP / 2K
+   ========================================================= */
+
+@media (min-width: 1600px) {
+  .section {
+    padding: 110px 0 125px;
+  }
+
+  .container {
+    width: min(1050px, calc(100% - 60px));
+  }
+
+  .header {
+    margin-bottom: 60px;
+  }
+
+  .header h1 {
+    font-size: 68px;
+  }
+
+  .header > p {
+    font-size: 15px;
+  }
+
+  .policyCard {
+    padding: 30px;
+  }
+
+  .cardNumber {
+    width: 48px;
+    height: 48px;
+  }
+
+  .cardContent h2 {
+    font-size: 20px;
+  }
+
+  .cardContent p {
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   4K
+   ========================================================= */
+
+@media (min-width: 2560px) {
+  .section {
+    padding: 145px 0 160px;
+  }
+
+  .container {
+    width: min(1200px, calc(100% - 80px));
+  }
+
+  .header {
+    margin-bottom: 75px;
+  }
+
+  .header h1 {
+    font-size: 82px;
+  }
+
+  .header > p {
+    max-width: 900px;
+    font-size: 18px;
+  }
+
+  .policyCard {
+    gap: 25px;
+    padding: 38px;
+    border-radius: 28px;
+  }
+
+  .cardNumber {
+    width: 55px;
+    height: 55px;
+    border-radius: 15px;
+    font-size: 12px;
+  }
+
+  .cardContent h2 {
+    font-size: 24px;
+  }
+
+  .cardContent p {
+    font-size: 16px;
+  }
+
+  .notice {
+    padding: 25px;
+  }
+
+  .notice strong {
+    font-size: 14px;
+  }
+
+  .notice p {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .policyCard {
+    transition: none;
+  }
+}

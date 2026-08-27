@@ -1,29 +1,26 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { ArrowUp } from "lucide-react";
 
 export default function SiteEnhancements() {
+  const [showTopButton, setShowTopButton] = useState(false);
+
   useEffect(() => {
+    /* =====================================================
+       Scroll Progress
+       ===================================================== */
+
     const progress = document.createElement("div");
+
     progress.className = "scroll-progress";
     progress.setAttribute("aria-hidden", "true");
 
-    const topButton = document.createElement("button");
-    topButton.className = "back-to-top";
-    topButton.type = "button";
-    topButton.setAttribute("aria-label", "Back to top");
-    topButton.innerHTML = '<span class="back-to-top-icon"></span>';
+    document.body.appendChild(progress);
 
-    const handleTopClick = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    };
-
-    topButton.addEventListener("click", handleTopClick);
-
-    document.body.append(progress, topButton);
+    /* =====================================================
+       Reveal on Scroll
+       ===================================================== */
 
     const targets = document.querySelectorAll<HTMLElement>(
       ".section, .page-hero-grid, .feature-card, .step, .stat, .cta, .info-card, .form-card, .faq-item, .pet-card, [data-reveal]"
@@ -44,6 +41,7 @@ export default function SiteEnhancements() {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
                 entry.target.classList.add("is-visible");
+
                 observer?.unobserve(entry.target);
               }
             });
@@ -55,26 +53,34 @@ export default function SiteEnhancements() {
         );
 
     if (observer) {
-      targets.forEach((element) => observer.observe(element));
+      targets.forEach((element) => {
+        observer.observe(element);
+      });
     } else {
       targets.forEach((element) => {
         element.classList.add("is-visible");
       });
     }
 
+    /* =====================================================
+       Scroll UI
+       ===================================================== */
+
     const updateScrollUI = () => {
       const scrollable =
         document.documentElement.scrollHeight - window.innerHeight;
 
       const progressValue =
-        scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        scrollable > 0
+          ? (window.scrollY / scrollable) * 100
+          : 0;
 
       progress.style.width = `${Math.min(
         100,
         Math.max(0, progressValue)
       )}%`;
 
-      topButton.classList.toggle("show", window.scrollY > 520);
+      setShowTopButton(window.scrollY > 520);
     };
 
     updateScrollUI();
@@ -87,18 +93,44 @@ export default function SiteEnhancements() {
       passive: true,
     });
 
+    /* =====================================================
+       Cleanup
+       ===================================================== */
+
     return () => {
       observer?.disconnect();
 
       window.removeEventListener("scroll", updateScrollUI);
       window.removeEventListener("resize", updateScrollUI);
 
-      topButton.removeEventListener("click", handleTopClick);
-
       progress.remove();
-      topButton.remove();
     };
   }, []);
 
-  return null;
+  /* =======================================================
+     Back To Top
+     ======================================================= */
+
+  const handleTopClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <button
+      type="button"
+      className={`back-to-top ${
+        showTopButton ? "show" : ""
+      }`}
+      aria-label="Back to top"
+      onClick={handleTopClick}
+    >
+      <ArrowUp
+        size={21}
+        strokeWidth={2.5}
+      />
+    </button>
+  );
 }

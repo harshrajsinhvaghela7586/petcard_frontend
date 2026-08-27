@@ -565,7 +565,7 @@ export default function Home() {
           className={`${styles.homeHeroGrid} ${styles.container}`}
         >
           <div className={styles.homeHeroCopy}>
-            <SectionLabel>PetCard App</SectionLabel>
+            
 
             <h1>
               One Identity. A Lifetime of Care.{" "}
@@ -659,10 +659,10 @@ export default function Home() {
           <div
             className={`${styles.sectionHeading} ${styles.center}`}
           >
-            <SectionLabel>Meet PET CARD</SectionLabel>
+          
 
             <h2 className={styles.sectionTitle}>
-              More than a pet care app. <span>🧡</span>
+              More than a pet care app.
             </h2>
 
             <p className={styles.sectionSubtitle}>
@@ -769,15 +769,12 @@ export default function Home() {
             <div
               className={`${styles.identityFloatChip} ${styles.chipTwo}`}
             >
-              <ShieldAlert size={15} />
+              
               Emergency ready
             </div>
           </div>
 
           <div className={styles.identityCopy}>
-            <SectionLabel>
-              Your Pet&apos;s Digital Identity
-            </SectionLabel>
 
             <h2 className={styles.sectionTitle}>
               Every pet deserves their own{" "}
@@ -813,22 +810,6 @@ export default function Home() {
               <ArrowRight size={17} />
             </Link>
 
-            <div className={styles.creationFlow}>
-              {[
-                "Choose Pet",
-                "Add Details",
-                "Create Card",
-                "Ready 🎉",
-              ].map((item, index) => (
-                <div
-                  className={styles.creationStep}
-                  key={item}
-                >
-                  <span>{index + 1}</span>
-                  <small>{item}</small>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -846,8 +827,7 @@ export default function Home() {
           <div
             className={`${styles.sectionHeading} ${styles.center}`}
           >
-            <SectionLabel>How It Works</SectionLabel>
-
+          
             <h2 className={styles.sectionTitle}>
               Simple steps.{" "}
               <span>A happier pet.</span>
@@ -908,10 +888,7 @@ export default function Home() {
           className={`${styles.container} ${styles.careGrid}`}
         >
           <div className={styles.careCopy}>
-            <SectionLabel>
-              Daily Care
-            </SectionLabel>
-
+           
             <h2 className={styles.sectionTitle}>
               Care made easy.{" "}
               <span>Every single day.</span>
@@ -958,7 +935,7 @@ export default function Home() {
           <div className={styles.dashboardShowcase}>
             <div className={styles.dashboardPanel}>
               <div className={styles.dashboardHead}>
-                <span>☷ Today&apos;s Care</span>
+                <span>Today&apos;s Care</span>
                 <b>3 / 5 Completed</b>
               </div>
 
@@ -1027,10 +1004,7 @@ export default function Home() {
           </div>
 
           <div className={styles.gameCopy}>
-            <SectionLabel>
-              Turn Care Into a Game
-            </SectionLabel>
-
+           
             <h2 className={styles.sectionTitle}>
               The more you care,{" "}
               <span>the more you unlock.</span>
@@ -1080,10 +1054,7 @@ export default function Home() {
           <div
             className={`${styles.sectionHeading} ${styles.center}`}
           >
-            <SectionLabel>
-              Rewards & Customization
-            </SectionLabel>
-
+           
             <h2 className={styles.sectionTitle}>
               Unlock a world made{" "}
               <span>for your pet.</span>
@@ -1099,21 +1070,6 @@ export default function Home() {
 
           <PetCarousel />
 
-          {/* ================= REWARD CHIPS ================= */}
-
-          <div className={styles.rewardChips}>
-            {[
-              "👒 Accessories",
-              "🎀 Bandanas",
-              "👑 Crowns",
-              "🕶 Sunglasses",
-              "🌳 Backgrounds",
-              "🪪 PET CARD themes",
-              "🏅 Frames & badges",
-            ].map((item) => (
-              <span key={item}>{item}</span>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -1130,10 +1086,7 @@ export default function Home() {
           className={`${styles.container} ${styles.recordsGrid}`}
         >
           <div className={styles.recordsCopy}>
-            <SectionLabel>
-              Health & Records
-            </SectionLabel>
-
+          
             <h2 className={styles.sectionTitle}>
               Important information.{" "}
               <span>Always within reach.</span>
@@ -1303,9 +1256,7 @@ export default function Home() {
           </div>
 
           <div className={styles.emergencyCopy}>
-            <SectionLabel>
-              Be Ready for Emergencies
-            </SectionLabel>
+         
 
             <h2 className={styles.sectionTitle}>
               Important information matters most{" "}
@@ -1351,10 +1302,7 @@ export default function Home() {
           <div
             className={`${styles.sectionHeading} ${styles.center}`}
           >
-            <SectionLabel>
-              Shared Guardians & QR
-            </SectionLabel>
-
+           
             <h2 className={styles.sectionTitle}>
               Care is better{" "}
               <span>when it&apos;s shared.</span>
@@ -1398,21 +1346,6 @@ export default function Home() {
             ))}
           </div>
 
-          <div className={styles.sharedAccess}>
-            {[
-              "Daily care",
-              "Progress",
-              "Records",
-              "Memories",
-              "Reminders",
-              "Achievements",
-            ].map((item) => (
-              <span key={item}>
-                <Check size={14} />
-                {item}
-              </span>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -1429,10 +1362,7 @@ export default function Home() {
           className={`${styles.container} ${styles.memoriesGrid}`}
         >
           <div className={styles.memoriesCopy}>
-            <SectionLabel>
-              Memories
-            </SectionLabel>
-
+           
             <h2 className={styles.sectionTitle}>
               Some moments deserve more than your{" "}
               <span>camera roll.</span>
@@ -1544,7 +1474,6 @@ export default function Home() {
                 src="/images/home/home-dog.png"
                 alt="Bruno"
                 fill
-                sizes="280px"
               />
             </div>
 
@@ -1572,10 +1501,7 @@ export default function Home() {
           </div>
 
           <div className={styles.knowCopy}>
-            <SectionLabel>
-              Know Your Pet Better
-            </SectionLabel>
-
+          
             <h2 className={styles.sectionTitle}>
               Personalized care,{" "}
               <span>made for your pet.</span>
@@ -1602,7 +1528,7 @@ export default function Home() {
 
             <div className={styles.aiChat}>
               <div className={styles.aiChatHead}>
-                <span>🤖</span>
+                
 
                 <div>
                   <b>Ask PET CARD AI</b>
@@ -1639,10 +1565,7 @@ export default function Home() {
           <div
             className={`${styles.sectionHeading} ${styles.center}`}
           >
-            <SectionLabel>
-              Everything Your Pet Needs
-            </SectionLabel>
-
+          
             <h2 className={styles.sectionTitle}>
               One app.{" "}
               <span>One pet world.</span>
@@ -1663,6 +1586,48 @@ export default function Home() {
               className={`${styles.ecosystemOrbit} ${styles.orbitB}`}
             />
 
+<div className={styles.ecosystemPaws} aria-hidden="true">
+  <img
+    src="/images/paw.png"
+    alt=""
+    className={`${styles.ecoPaw} ${styles.ecoPaw1}`}
+  />
+  <img
+    src="/images/paw.png"
+    alt=""
+    className={`${styles.ecoPaw} ${styles.ecoPaw2}`}
+  />
+  <img
+    src="/images/paw.png"
+    alt=""
+    className={`${styles.ecoPaw} ${styles.ecoPaw3}`}
+  />
+  <img
+    src="/images/paw.png"
+    alt=""
+    className={`${styles.ecoPaw} ${styles.ecoPaw4}`}
+  />
+  <img
+    src="/images/paw.png"
+    alt=""
+    className={`${styles.ecoPaw} ${styles.ecoPaw5}`}
+  />
+  <img
+    src="/images/paw.png"
+    alt=""
+    className={`${styles.ecoPaw} ${styles.ecoPaw6}`}
+  />
+  <img
+    src="/images/paw.png"
+    alt=""
+    className={`${styles.ecoPaw} ${styles.ecoPaw7}`}
+  />
+  <img
+    src="/images/paw.png"
+    alt=""
+    className={`${styles.ecoPaw} ${styles.ecoPaw8}`}
+  />
+</div>
             <div className={styles.ecosystemCenter}>
               <img
                 src="/images/brand/dog.png"
@@ -1706,6 +1671,179 @@ export default function Home() {
       </section>
 
 
+{/* =====================================================
+    WHY CHOOSE US
+    ===================================================== */}
+
+<section
+  className={`${styles.section} ${styles.whySection}`}
+  id="why-choose-us"
+>
+  <div className={styles.container}>
+    <div
+      className={`${styles.sectionHeading} ${styles.center}`}
+    >
+     
+
+      <h2 className={styles.sectionTitle}>
+        Built around{" "}
+        <span>better pet care.</span>
+      </h2>
+
+      <p className={styles.sectionSubtitle}>
+        Everything your pet needs, thoughtfully brought
+        together in one simple and playful experience.
+      </p>
+    </div>
+
+    <div className={styles.whyGrid}>
+      {/* =================================================
+          LEFT CARD
+          ================================================= */}
+
+      <article
+        className={`${styles.whyCard} ${styles.whyCardLeft}`}
+      >
+        <div className={styles.whyCardTop}>
+          <div className={styles.whyCardIcon}>
+            <img
+              src="/images/paw.png"
+              alt=""
+              aria-hidden="true"
+            />
+          </div>
+
+        </div>
+
+        <h3>Everything in One Place</h3>
+
+        <p>
+          From your pet&apos;s identity and health records
+          to daily care, reminders, and memories—keep
+          everything together.
+        </p>
+
+        <div className={styles.whyCardFooter}>
+          <span>🪪 PET CARD</span>
+          <ArrowRight size={17} />
+        </div>
+
+        <div className={styles.whyCardPaw}>
+          <img
+            src="/images/paw.png"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+
+        <div className={`${styles.whyPet} ${styles.whyPetLeft}`}>
+          <Image
+            src="/images/coco2.png"
+            alt="Coco"
+            fill
+            sizes="(max-width: 768px) 180px, 240px"
+          />
+        </div>
+      </article>
+
+      {/* =================================================
+          CENTER CARD
+          ================================================= */}
+
+      <article
+        className={`${styles.whyCard} ${styles.whyCardCenter}`}
+      >
+        <div className={styles.whyCardTop}>
+          <div className={styles.whyCardIcon}>
+            <img
+              src="/images/paw.png"
+              alt=""
+              aria-hidden="true"
+            />
+          </div>
+
+        </div>
+
+        <h3>Made for Everyday Care</h3>
+
+        <p>
+          Stay on top of feeding, walks, training,
+          grooming, and other important routines with ease.
+        </p>
+
+        <div className={styles.whyCardFooter}>
+          <span>🐾 DAILY CARE</span>
+          <ArrowRight size={17} />
+        </div>
+
+        <div className={styles.whyCardPaw}>
+          <img
+            src="/images/paw.png"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+
+        <div className={`${styles.whyPet} ${styles.whyPetCenter}`}>
+          <Image
+            src="/images/zuzu2.png"
+            alt="Zuzu"
+            fill
+            sizes="(max-width: 768px) 180px, 240px"
+          />
+        </div>
+      </article>
+
+      {/* =================================================
+          RIGHT CARD
+          ================================================= */}
+
+      <article
+        className={`${styles.whyCard} ${styles.whyCardRight}`}
+      >
+        <div className={styles.whyCardTop}>
+          <div className={styles.whyCardIcon}>
+            <img
+              src="/images/paw.png"
+              alt=""
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+
+        <h3>Care That Feels Fun</h3>
+
+        <p>
+          Build streaks, earn PawPoints, unlock rewards,
+          and make caring for your pet a fun journey.
+        </p>
+
+        <div className={styles.whyCardFooter}>
+          <span>⭐ REWARDS</span>
+          <ArrowRight size={17} />
+        </div>
+
+        <div className={styles.whyCardPaw}>
+          <img
+            src="/images/paw.png"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+
+        <div className={`${styles.whyPet} ${styles.whyPetRight}`}>
+          <Image
+            src="/images/huchiko2.png"
+            alt="Huchiko"
+            fill
+            sizes="(max-width: 768px) 180px, 240px"
+          />
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
       {/* =====================================================
           ABOUT
           ===================================================== */}
@@ -1718,10 +1856,7 @@ export default function Home() {
           className={`${styles.container} ${styles.aboutHomeCard}`}
         >
           <div className={styles.aboutHomeCopy}>
-            <SectionLabel>
-              About PET CARD
-            </SectionLabel>
-
+        
             <h2 className={styles.sectionTitle}>
               Built for the love behind{" "}
               <span>every little paw.</span>
@@ -1814,10 +1949,7 @@ export default function Home() {
           className={`${styles.container} ${styles.finalDownloadCard}`}
         >
           <div className={styles.finalCopy}>
-            <SectionLabel>
-              Ready to Create Your Pet&apos;s World?
-            </SectionLabel>
-
+          
             <h2>
               Care today.{" "}
               <span>Stronger bond tomorrow.</span>

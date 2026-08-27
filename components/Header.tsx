@@ -8,8 +8,8 @@ import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
 
 const links = [
+  ["Home","/"],
   ["How It Works", "/how-it-works"],
-  ["Features", "/features"],
   ["Blogs", "/blogs"],
   ["About Us", "/about"],
 ] as const;
