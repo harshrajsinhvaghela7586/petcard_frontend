@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap");
 
+/* =========================================================
+   ROOT / BRAND
+   ========================================================= */
+
 :root {
   --font-brand: "Fredoka", sans-serif;
   --font-tagline: "Nunito", sans-serif;
@@ -21,15 +25,16 @@
   --radius: 24px;
 }
 
-/* =========================================
+/* =========================================================
    RESET
-========================================= */
+   ========================================================= */
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
 html,
 body {
   width: 100%;
@@ -39,8 +44,12 @@ body {
 }
 
 html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 74px;
+
   overflow-x: clip;
   overflow-y: auto;
+
   scrollbar-width: none;
 }
 
@@ -52,32 +61,43 @@ body {
   min-width: 320px;
   min-height: 100vh;
 
+  margin: 0;
+
+  font-family: Inter, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+
   overflow-x: clip;
   overflow-y: visible;
 }
+
+/* =========================================================
+   NEXT ROOT
+   ========================================================= */
 
 #__next {
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
+
   margin: 0;
   padding: 0;
+
   overflow: visible;
 }
 
 main {
   width: 100%;
   max-width: 100%;
+
+  margin: 0;
+  padding: 0;
 }
 
-.container {
-  width: min(1180px, calc(100% - 40px));
-  margin-inline: auto;
-}
 
-/* =========================================
+/* =========================================================
    COMMON ELEMENTS
-========================================= */
+   ========================================================= */
 
 a {
   color: inherit;
@@ -104,17 +124,15 @@ img {
   background: var(--orange);
 }
 
-/* =========================================
+/* =========================================================
    BUTTONS
-========================================= */
-/* =========================================
-   BUTTONS
-========================================= */
+   ========================================================= */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   gap: 9px;
 
   min-height: 50px;
@@ -129,15 +147,13 @@ img {
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
-    background 0.25s ease,
+    border-color 0.25s ease,
     color 0.25s ease;
 }
 
-
-/* =========================================
+/* =========================================================
    PRIMARY BUTTON
-   SAME AS BEFORE
-========================================= */
+   ========================================================= */
 
 .btn-primary {
   color: #fff;
@@ -150,22 +166,31 @@ img {
 .btn-primary:hover {
   transform: translateY(-3px);
 
+  color: #fff;
+  background: var(--orange);
+
   box-shadow:
     0 18px 36px rgba(255, 122, 0, 0.26);
 }
 
 
+/* =========================================================
+   OUTLINE BUTTON
+   ========================================================= */
+
 .btn-outline {
   color: var(--orange);
   background: #fff;
-  border-color: #ffc27f;
 
-  
+  border-color: #ffc27f;
 }
 
 .btn-outline:hover {
+  transform: translateY(-3px);
+
   color: var(--orange);
   background: #fff;
+
   border-color: var(--orange);
 
   box-shadow:
@@ -174,23 +199,51 @@ img {
     0 0 24px rgba(255, 155, 47, 0.2);
 }
 
-/* =========================================
+.btn-outline:active {
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   ACCESSIBILITY / FOCUS
+   ========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(255, 122, 0, 0.25);
+  outline-offset: 3px;
+}
+
+/* =========================================================
    MOBILE
-========================================= */
+   ========================================================= */
 
 @media (max-width: 480px) {
   html {
     scroll-padding-top: 68px;
   }
 
-  .container {
-    width: min(100%, calc(100% - 28px));
+  .btn {
+    min-height: 48px;
+    padding-inline: 18px;
   }
 }
 
-/* =========================================
+/* =========================================================
+   TABLET / SMALL LAPTOP
+   ========================================================= */
+
+@media (min-width: 481px) and (max-width: 1100px) {
+  .container {
+    width: min(100% - 40px, 960px);
+  }
+}
+
+
+/* =========================================================
    REDUCED MOTION
-========================================= */
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -206,58 +259,136 @@ img {
   }
 }
 
-/* =========================================
-   SITE ENHANCEMENTS
-   Keep utility UI outside document flow
-========================================= */
+.container {
+  width: min(1380px, calc(100% - 80px));
+  margin-inline: auto;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    width: calc(100% - 48px);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 28px);
+  }
+}
+
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+
 .back-to-top {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 9999;
+  right: 22px;
+  bottom: 22px;
 
-  width: 54px;
-  height: 54px;
+  z-index: 99999;
+
+  width: 50px;
+  height: 50px;
 
   display: grid;
   place-items: center;
 
-  border: none;
+  margin: 0;
+  padding: 0;
+
+  border: 1px solid #f0e5dc;
   border-radius: 50%;
 
-  background: #f5f5f5;
-  box-shadow: 0 8px 25px rgba(56, 27, 14, 0.12);
+  background: #fff;
+  color: #381b0e;
+
+  box-shadow:
+    0 8px 24px rgba(56, 27, 14, 0.14),
+    0 0 14px rgba(255, 122, 0, 0.08);
 
   opacity: 0;
   visibility: hidden;
-  transform: translateY(12px);
+  pointer-events: none;
+
+  transform: translateY(12px) scale(0.92);
+
+  cursor: pointer;
 
   transition:
     opacity 0.25s ease,
     visibility 0.25s ease,
-    transform 0.25s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .back-to-top.show {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  pointer-events: auto;
+
+  transform: translateY(0) scale(1);
 }
 
 .back-to-top:hover {
-  transform: translateY(-3px);
-  background: #ffffff;
+  transform: translateY(-3px) scale(1.04);
+
+  background: #fffaf5;
+
+  box-shadow:
+    0 12px 28px rgba(56, 27, 14, 0.17),
+    0 0 18px rgba(255, 122, 0, 0.18);
 }
 
-/* ↑ Arrow */
-.back-to-top-icon {
+.back-to-top svg {
   display: block;
-  width: 11px;
-  height: 11px;
+  flex-shrink: 0;
+}
 
-  border-left: 2.5px solid #381b0e;
-  border-top: 2.5px solid #381b0e;
+/* =========================================================
+   TABLET
+   ========================================================= */
 
-  transform: rotate(45deg);
-  margin-top: 5px;
+@media (max-width: 768px) {
+  .back-to-top {
+    right: 18px;
+    bottom: 18px;
+
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .back-to-top {
+    right: 15px;
+    bottom: 15px;
+
+    width: 46px;
+    height: 46px;
+  }
+
+  .back-to-top svg {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    transition: none;
+  }
 }
