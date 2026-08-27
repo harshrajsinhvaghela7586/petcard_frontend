@@ -1,0 +1,856 @@
+/* =========================================================
+   PETCARD FOOTER
+   Responsive:
+   - 4K
+   - 2K
+   - Desktop
+   - Laptop
+   - Tablet
+   - Mobile
+   - Small Mobile
+   ========================================================= */
+
+.footer {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+
+  padding: 70px 0 0;
+  margin: 10px 0 0;
+
+  background: linear-gradient(
+    120deg,
+    #ff7a00,
+    #ff9b2f,
+    #ff8400,
+    #ffb347,
+    #ff7a00
+  );
+
+  animation: footerGradient 10s ease infinite;
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 255, 255, 0.14),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(255, 255, 255, 0.10),
+            transparent 30%
+        );
+
+    animation: footerGlow 12s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+   
+@keyframes footerGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes footerGlow {
+    0% {
+        transform: translate3d(-5%, -3%, 0) scale(1);
+    }
+
+    100% {
+        transform: translate3d(5%, 3%, 0) scale(1.08);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .footer,
+    .footer::before {
+        animation: none;
+    }
+}
+
+/* =========================================================
+   FOOTER GRID
+   ========================================================= */
+
+.footerGrid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.7fr) minmax(120px, 1fr) minmax(120px, 1fr) minmax(120px, 1fr);
+
+    gap: 42px;
+
+    align-items: start;
+}
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.footerBrandColumn {
+    min-width: 0;
+}
+
+.footerBrand {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    text-decoration: none;
+
+    transition: transform 0.2s ease;
+}
+
+.footerBrand:hover {
+    transform: translateY(-1px);
+}
+
+.footerDogLogo {
+    flex: 0 0 auto;
+
+    width: 58px;
+    height: 58px;
+
+    object-fit: contain;
+}
+
+.footerBrandText {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.footerBrandName {
+    font-family: var(--font-brand);
+
+    font-size: 30px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    letter-spacing: -1px;
+
+    white-space: nowrap;
+}
+
+.footerPet {
+    color: #000;
+}
+
+.footerCard {
+    color: var(--orange);
+}
+
+.footerTagline {
+    font-family: var(--font-tagline);
+
+    color: #000;
+
+    font-size: 7px;
+    font-weight: 800;
+
+    line-height: 1.1;
+
+    white-space: nowrap;
+}
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.footerDescription {
+    max-width: 390px;
+
+    margin: 20px 0 0;
+
+    color: #000;
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   SOCIALS
+   ========================================================= */
+
+.footerSocials {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 18px;
+}
+
+.socialLink {
+    display: grid;
+    place-items: center;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    color: #000;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.socialLink:hover {
+    color: #000;
+
+    background: var(--orange);
+
+    transform: translateY(-3px);
+}
+
+/* =========================================================
+   FOOTER COLUMNS
+   ========================================================= */
+
+.footerColumn {
+    min-width: 0;
+}
+
+.footerColumn h4 {
+    margin: 0 0 14px;
+
+    color: #000;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    line-height: 1.3;
+}
+
+.footerLinks {
+    display: grid;
+
+    gap: 9px;
+}
+
+.footerLinks a {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    width: fit-content;
+
+    color: #000;
+
+    font-size: 12px;
+    line-height: 1.45;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.footerLinks a:hover {
+    color: #000;
+
+    transform: translateX(3px);
+}
+
+.footerLinks a svg {
+    flex: 0 0 auto;
+}
+
+/* =========================================================
+   COPYRIGHT
+   ========================================================= */
+
+.copyright {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 48px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    color: #000;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+.copyImage {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+/* =========================================================
+   4K
+   ========================================================= */
+
+@media (min-width: 2560px) {
+    .footer {
+        padding: 90px 0 30px;
+    }
+
+    .footerGrid {
+        grid-template-columns:
+            minmax(0, 1.8fr) minmax(170px, 1fr) minmax(170px, 1fr) minmax(170px, 1fr);
+
+        gap: 70px;
+    }
+
+    .footerDogLogo {
+        width: 74px;
+        height: 74px;
+    }
+
+    .footerBrand {
+        gap: 14px;
+    }
+
+    .footerBrandName {
+        font-size: 38px;
+    }
+
+    .footerTagline {
+        font-size: 8px;
+    }
+
+    .footerDescription {
+        max-width: 500px;
+
+        margin-top: 25px;
+
+        font-size: 15px;
+    }
+
+    .footerSocials {
+        gap: 11px;
+
+        margin-top: 23px;
+    }
+
+    .socialLink {
+        width: 44px;
+        height: 44px;
+    }
+
+    .footerColumn h4 {
+        margin-bottom: 18px;
+
+        font-size: 15px;
+    }
+
+    .footerLinks {
+        gap: 12px;
+    }
+
+    .footerLinks a {
+        font-size: 14px;
+    }
+
+    .copyright {
+        margin-top: 60px;
+
+        padding-top: 25px;
+
+        font-size: 12px;
+    }
+}
+
+/* =========================================================
+   2K
+   ========================================================= */
+
+@media (min-width: 1920px) and (max-width: 2559px) {
+    .footer {
+        padding: 82px 0 28px;
+    }
+
+    .footerGrid {
+        gap: 55px;
+    }
+
+    .footerDogLogo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .footerBrand {
+        gap: 13px;
+    }
+
+    .footerBrandName {
+        font-size: 36px;
+    }
+
+    .footerTagline {
+        font-size: 7.5px;
+    }
+
+    .footerDescription {
+        max-width: 450px;
+
+        font-size: 14px;
+    }
+
+    .footerColumn h4 {
+        font-size: 14px;
+    }
+
+    .footerLinks {
+        gap: 10px;
+    }
+
+    .footerLinks a {
+        font-size: 13px;
+    }
+
+    .copyright {
+        margin-top: 54px;
+    }
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   1440 - 1919
+   ========================================================= */
+
+@media (min-width: 1440px) and (max-width: 1919px) {
+    .footer {
+        padding: 75px 0 27px;
+    }
+
+    .footerGrid {
+        gap: 45px;
+    }
+
+    .footerDogLogo {
+        width: 64px;
+        height: 64px;
+    }
+
+    .footerBrandName {
+        font-size: 32px;
+    }
+}
+
+/* =========================================================
+   LAPTOP
+   1101 - 1439
+   ========================================================= */
+
+@media (min-width: 1101px) and (max-width: 1439px) {
+    .footer {
+        padding: 65px 0 24px;
+    }
+
+    .footerGrid {
+        grid-template-columns:
+            minmax(0, 1.6fr) minmax(110px, 1fr) minmax(110px, 1fr) minmax(110px, 1fr);
+
+        gap: 30px;
+    }
+
+    .footerDogLogo {
+        width: 54px;
+        height: 54px;
+    }
+
+    .footerBrandName {
+        font-size: 28px;
+    }
+
+    .footerDescription {
+        max-width: 350px;
+
+        font-size: 12px;
+    }
+
+    .footerColumn h4 {
+        font-size: 12px;
+    }
+
+    .footerLinks a {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   TABLET / SMALL LAPTOP
+   951 - 1100
+   ========================================================= */
+
+@media (min-width: 951px) and (max-width: 1100px) {
+    .footer {
+        padding: 58px 0 23px;
+    }
+
+    .footerGrid {
+        grid-template-columns:
+            minmax(0, 1.5fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr);
+
+        gap: 22px;
+    }
+
+    .footerDogLogo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .footerBrand {
+        gap: 8px;
+    }
+
+    .footerBrandName {
+        font-size: 25px;
+    }
+
+    .footerTagline {
+        font-size: 6px;
+    }
+
+    .footerDescription {
+        max-width: 300px;
+
+        margin-top: 15px;
+
+        font-size: 11px;
+    }
+
+    .footerSocials {
+        margin-top: 15px;
+    }
+
+    .socialLink {
+        width: 34px;
+        height: 34px;
+    }
+
+    .footerColumn h4 {
+        font-size: 11px;
+    }
+
+    .footerLinks {
+        gap: 7px;
+    }
+
+    .footerLinks a {
+        font-size: 10px;
+    }
+
+    .copyright {
+        margin-top: 40px;
+
+        padding-top: 18px;
+
+        font-size: 10px;
+    }
+}
+
+/* =========================================================
+   TABLET
+   <= 950
+   ========================================================= */
+
+@media (max-width: 950px) {
+    .footer {
+        padding: 60px 0 24px;
+    }
+
+    .footerGrid {
+        grid-template-columns:
+            minmax(0, 1.5fr) minmax(130px, 1fr) minmax(130px, 1fr);
+
+        gap: 38px 28px;
+    }
+
+    .footerBrandColumn {
+        grid-column: 1 / -1;
+    }
+
+    .footerDescription {
+        max-width: 600px;
+    }
+
+    .footerColumn h4 {
+        font-size: 13px;
+    }
+
+    .footerLinks a {
+        font-size: 12px;
+    }
+
+    .copyright {
+        margin-top: 42px;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   481 - 760
+   ========================================================= */
+
+@media (max-width: 760px) {
+    .footer {
+        padding: 52px 0 22px;
+    }
+
+    .footerGrid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 34px 24px;
+    }
+
+    .footerBrandColumn {
+        grid-column: 1 / -1;
+    }
+
+    .footerDogLogo {
+        width: 52px;
+        height: 52px;
+    }
+
+    .footerBrandName {
+        font-size: 28px;
+    }
+
+    .footerDescription {
+        max-width: 560px;
+
+        margin-top: 17px;
+
+        font-size: 12px;
+
+        line-height: 1.75;
+    }
+
+    .footerSocials {
+        margin-top: 17px;
+    }
+
+    .footerColumn h4 {
+        margin-bottom: 13px;
+
+        font-size: 12px;
+    }
+
+    .footerLinks {
+        gap: 8px;
+    }
+
+    .footerLinks a {
+        font-size: 11px;
+    }
+
+    .copyright {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 7px;
+
+        margin-top: 38px;
+
+        padding-top: 19px;
+
+        font-size: 10px;
+    }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   <= 480
+   ========================================================= */
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 46px 0 20px;
+    }
+
+    .footerGrid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 30px 18px;
+    }
+
+    .footerBrandColumn {
+        grid-column: 1 / -1;
+    }
+
+    .footerBrand {
+        gap: 8px;
+    }
+
+    .footerDogLogo {
+        width: 46px;
+        height: 46px;
+    }
+
+    .footerBrandText {
+        gap: 3px;
+    }
+
+    .footerBrandName {
+        font-size: 25px;
+
+        letter-spacing: -0.8px;
+    }
+
+    .footerTagline {
+        font-size: 6px;
+    }
+
+    .footerDescription {
+        margin-top: 15px;
+
+        font-size: 11px;
+
+        line-height: 1.7;
+    }
+
+    .footerSocials {
+        gap: 8px;
+
+        margin-top: 15px;
+    }
+
+    .socialLink {
+        width: 35px;
+        height: 35px;
+    }
+
+    .footerColumn h4 {
+        margin-bottom: 11px;
+
+        font-size: 11px;
+    }
+
+    .footerLinks {
+        gap: 7px;
+    }
+
+    .footerLinks a {
+        font-size: 10px;
+
+        line-height: 1.4;
+    }
+
+    .copyright {
+        gap: 5px;
+
+        margin-top: 32px;
+
+        padding-top: 17px;
+
+        font-size: 9px;
+    }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+   <= 360
+   ========================================================= */
+
+@media (max-width: 360px) {
+    .footer {
+        padding: 40px 0 18px;
+    }
+
+    .footerGrid {
+        gap: 27px 14px;
+    }
+
+    .footerDogLogo {
+        width: 41px;
+        height: 41px;
+    }
+
+    .footerBrand {
+        gap: 6px;
+    }
+
+    .footerBrandName {
+        font-size: 22px;
+
+        letter-spacing: -0.6px;
+    }
+
+    .footerTagline {
+        font-size: 5.5px;
+    }
+
+    .footerDescription {
+        font-size: 10px;
+    }
+
+    .socialLink {
+        width: 33px;
+        height: 33px;
+    }
+
+    .footerColumn h4 {
+        font-size: 10px;
+    }
+
+    .footerLinks {
+        gap: 6px;
+    }
+
+    .footerLinks a {
+        font-size: 9px;
+    }
+
+    .copyright {
+        font-size: 8px;
+    }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .footerBrand,
+    .socialLink,
+    .footerLinks a {
+        transition: none;
+    }
+}
