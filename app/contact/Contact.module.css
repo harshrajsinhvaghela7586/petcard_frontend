@@ -1,0 +1,1878 @@
+/* =========================================================
+   CONTACT PAGE
+   ========================================================= */
+
+.page {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  padding: 88px 0 78px;
+
+  background:
+    radial-gradient(
+      circle at 78% 40%,
+      rgba(255, 155, 47, 0.16),
+      transparent 29%
+    ),
+    linear-gradient(
+      135deg,
+      #fffdfb 0%,
+      #fff7ee 52%,
+      #ffe9d1 100%
+    );
+}
+
+.heroGlow {
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  right: -190px;
+  top: -270px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 122, 0, 0.13),
+      transparent 69%
+    );
+
+  filter: blur(8px);
+
+  pointer-events: none;
+}
+
+.heroPaw {
+  position: absolute;
+
+  pointer-events: none;
+
+  color: rgba(255, 122, 0, 0.08);
+
+  animation:
+    contactPawFloat 5s ease-in-out infinite;
+}
+
+.heroPawOne {
+  top: 18%;
+  left: 4%;
+
+  font-size: 42px;
+
+  transform: rotate(-16deg);
+}
+
+.heroPawTwo {
+  right: 8%;
+  bottom: 14%;
+
+  font-size: 28px;
+
+  animation-delay: -2s;
+}
+
+@keyframes contactPawFloat {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -10px;
+  }
+}
+
+.heroGrid {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.05fr)
+    minmax(380px, 0.95fr);
+
+  align-items: center;
+
+  gap: 70px;
+}
+
+.heroContent {
+  max-width: 700px;
+}
+
+.eyebrow,
+.sectionLabel {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  width: fit-content;
+
+  color: var(--orange);
+
+  background: var(--orange-soft);
+
+  border-radius: 999px;
+
+  padding: 7px 12px;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heroContent h1 {
+  margin: 16px 0 18px;
+
+  color: var(--text);
+
+  font-size: clamp(48px, 5vw, 76px);
+
+  line-height: 1.02;
+
+  letter-spacing: -2.8px;
+}
+
+.heroContent h1 span {
+  color: var(--orange);
+}
+
+.heroContent p {
+  max-width: 650px;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+.emailLink {
+  color: var(--orange);
+
+  font-weight: 800;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.emailLink:hover {
+  color: #e96d00;
+
+  text-decoration: underline;
+}
+
+.heroTrust {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 18px;
+
+  color: #8b796d;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.heroTrust svg {
+  color: var(--orange);
+}
+
+/* =========================================================
+   HERO VISUAL
+   ========================================================= */
+
+.heroVisual {
+  position: relative;
+
+  min-height: 490px;
+
+  display: grid;
+
+  place-items: center;
+
+  isolation: isolate;
+}
+
+.contactOrb {
+  position: absolute;
+
+  width: min(470px, 95%);
+
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 32%,
+      #fff2df 0%,
+      #ffd4a0 43%,
+      #ffac47 100%
+    );
+
+  box-shadow:
+    0 0 0 8px rgba(255, 122, 0, 0.05),
+    0 0 0 18px rgba(255, 122, 0, 0.028),
+    0 0 55px rgba(255, 122, 0, 0.2);
+
+  animation:
+    contactOrbPulse 4.5s ease-in-out infinite;
+}
+
+@keyframes contactOrbPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.025);
+  }
+}
+
+.contactCard {
+  position: relative;
+  z-index: 3;
+
+  width: min(350px, 77%);
+
+  padding: 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.95);
+
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  box-shadow:
+    0 30px 65px rgba(56, 27, 14, 0.15),
+    0 0 30px rgba(255, 122, 0, 0.07);
+
+  animation:
+    contactCardFloat 5s ease-in-out infinite;
+}
+
+@keyframes contactCardFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.contactCardTop {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 14px;
+
+  border-bottom: 1px solid #f0e8df;
+
+  color: #8f8077;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.contactCardTop svg {
+  color: var(--orange);
+}
+
+.contactAvatar {
+  display: grid;
+  place-items: center;
+
+  width: 91px;
+  height: 91px;
+
+  margin: 23px auto 10px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #fff4e2,
+      #ffd9ab
+    );
+
+  box-shadow:
+    0 0 0 6px rgba(255, 122, 0, 0.04);
+    
+  font-size: 48px;
+}
+
+.contactCard h3 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 19px;
+
+  text-align: center;
+}
+
+.contactSubtitle {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #9a8b82;
+
+  font-size: 8px;
+
+  text-align: center;
+}
+
+.contactMiniRows {
+  display: grid;
+
+  gap: 7px;
+
+  margin-top: 18px;
+}
+
+.contactMiniRows > div {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 11px;
+
+  border-radius: 10px;
+
+  background: #fff8f1;
+
+  color: var(--text);
+
+  font-size: 9px;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.contactMiniRows > div:hover {
+  transform: translateX(4px);
+
+  background: #fff0df;
+}
+
+.contactMiniRows b {
+  color: var(--orange);
+}
+
+.contactCardFooter {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 13px;
+
+  padding-top: 12px;
+
+  border-top: 1px solid #f0e8df;
+
+  color: #908077;
+
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.onlineDot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #61b76a;
+
+  box-shadow:
+    0 0 0 4px rgba(97, 183, 106, 0.1);
+}
+
+.floatingChip {
+  position: absolute;
+
+  z-index: 5;
+
+  padding: 10px 13px;
+
+  border: 1px solid #eadfd6;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  box-shadow:
+    0 14px 30px rgba(56, 27, 14, 0.08);
+
+  color: var(--orange);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  animation:
+    contactChipFloat 4s ease-in-out infinite;
+}
+
+.chipOne {
+  top: 14%;
+  left: 0;
+}
+
+.chipTwo {
+  right: 0;
+  bottom: 15%;
+
+  animation-delay: -1.8s;
+}
+
+@keyframes contactChipFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* =========================================================
+   CONTACT SECTION
+   ========================================================= */
+
+.contactSection {
+  padding: 100px 0 110px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffdf9 0%,
+      #fffaf5 100%
+    );
+}
+
+.contactGrid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.05fr)
+    minmax(350px, 0.95fr);
+
+  align-items: stretch;
+
+  gap: 30px;
+}
+
+.formWrap {
+  min-width: 0;
+}
+
+.formWrap > .sectionLabel {
+  margin-bottom: 4px;
+}
+
+.sectionTitle {
+  max-width: 700px;
+
+  margin: 10px 0 12px;
+
+  color: var(--text);
+
+  font-size: clamp(38px, 4vw, 57px);
+
+  line-height: 1.02;
+
+  letter-spacing: -2px;
+}
+
+.sectionTitle span {
+  color: var(--orange);
+}
+
+.sectionSubtitle {
+  max-width: 600px;
+
+  margin: 0 0 25px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  line-height: 1.8;
+}
+
+.formContainer {
+  position: relative;
+
+  width: 100%;
+}
+
+/* =========================================================
+   CONTACT FORM COMPONENT
+   These are global selectors scoped INSIDE this CSS module.
+   ========================================================= */
+
+.formContainer :global(.form-card) {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  padding: 30px;
+
+  border: 1px solid #eadfd6;
+
+  border-radius: 25px;
+
+  background: #fff;
+
+  box-shadow:
+    0 18px 45px rgba(56, 27, 14, 0.055);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.formContainer :global(.form-card:hover) {
+  transform: translateY(-5px);
+
+  border-color: #ffc183;
+
+  box-shadow:
+    0 0 8px rgba(255, 122, 0, 0.14),
+    0 0 22px rgba(255, 155, 47, 0.09),
+    0 24px 50px rgba(56, 27, 14, 0.08);
+}
+
+.formContainer :global(.form-card h2) {
+  margin: 0 0 8px;
+
+  color: var(--text);
+
+  font-size: 27px;
+
+  line-height: 1.1;
+}
+
+.formContainer :global(.form-card p) {
+  color: var(--muted);
+
+  font-size: 10px;
+
+  line-height: 1.7;
+}
+
+.formContainer :global(.form-card form) {
+  display: grid;
+
+  gap: 14px;
+}
+
+.formContainer :global(.form-card label) {
+  display: grid;
+
+  gap: 6px;
+
+  color: var(--text);
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.formContainer
+  :global(.form-card input),
+.formContainer
+  :global(.form-card textarea),
+.formContainer
+  :global(.form-card select) {
+  width: 100%;
+
+  border: 1px solid #e7ddd5;
+
+  border-radius: 12px;
+
+  outline: none;
+
+  color: var(--text);
+
+  background: #fffdfb;
+
+  font-size: 10px;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.formContainer
+  :global(.form-card input),
+.formContainer
+  :global(.form-card select) {
+  height: 46px;
+
+  padding: 0 13px;
+}
+
+.formContainer
+  :global(.form-card textarea) {
+  min-height: 125px;
+
+  padding: 12px 13px;
+
+  resize: vertical;
+}
+
+.formContainer
+  :global(.form-card input:focus),
+.formContainer
+  :global(.form-card textarea:focus),
+.formContainer
+  :global(.form-card select:focus) {
+  border-color: #ffb56d;
+
+  background: #fff;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 122, 0, 0.08);
+}
+
+.formContainer
+  :global(.form-card button) {
+  min-height: 49px;
+
+  border: 0;
+
+  border-radius: 13px;
+
+  color: #fff;
+
+  background: var(--orange);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 12px 25px rgba(255, 122, 0, 0.18);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.formContainer
+  :global(.form-card button:hover) {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 17px 30px rgba(255, 122, 0, 0.24);
+}
+
+/* =========================================================
+   INFO CARD
+   ========================================================= */
+
+.infoCard {
+  position: relative;
+  isolation: isolate;
+
+  overflow: hidden;
+
+  padding: 32px;
+
+  border: 1px solid #eadfd6;
+
+  border-radius: 26px;
+
+  background: #fff;
+
+  box-shadow:
+    0 18px 45px rgba(56, 27, 14, 0.055);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.infoCard::before {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  top: -175px;
+  right: -140px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 155, 47, 0.13),
+      transparent 70%
+    );
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+.infoCard:hover {
+  transform: translateY(-5px);
+
+  border-color: #ffc183;
+
+  box-shadow:
+    0 0 8px rgba(255, 122, 0, 0.13),
+    0 0 22px rgba(255, 155, 47, 0.08),
+    0 24px 50px rgba(56, 27, 14, 0.08);
+}
+
+.infoHeader {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.infoIcon {
+  display: grid;
+  place-items: center;
+
+  width: 45px;
+  height: 45px;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  color: var(--orange);
+
+  background: var(--orange-soft);
+}
+
+.infoLabel {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #9a8a80;
+
+  font-size: 7px;
+  font-weight: 800;
+
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.infoHeader h2 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 25px;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.7px;
+}
+
+.infoHeader h2 span {
+  color: var(--orange);
+}
+
+.infoDescription {
+  max-width: 420px;
+
+  margin: 19px 0 5px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   INFO LIST
+   ========================================================= */
+
+.infoList {
+  display: grid;
+
+  margin-top: 17px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid #f0e7df;
+}
+
+.infoItem:last-child {
+  border-bottom: 0;
+}
+
+.infoItemIcon {
+  display: grid;
+  place-items: center;
+
+  width: 43px;
+  height: 43px;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  color: var(--orange);
+
+  background: #fff1e3;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.infoItem:hover .infoItemIcon {
+  transform: scale(1.06);
+
+  background: #ffe4c4;
+
+  box-shadow:
+    0 0 10px rgba(255, 122, 0, 0.1);
+}
+
+.infoItemContent {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 2px;
+}
+
+.infoItemContent strong {
+  color: var(--text);
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.infoItemContent span,
+.infoItemContent a {
+  margin-top: 4px;
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+  line-height: 1.65;
+
+  word-break: break-word;
+}
+
+.infoEmail {
+  color: var(--orange) !important;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.infoEmail:hover {
+  color: #e86d00 !important;
+
+  text-decoration: underline;
+}
+
+/* =========================================================
+   INFO FOOTER
+   ========================================================= */
+
+.infoFooter {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin-top: 20px;
+
+  padding-top: 16px;
+
+  border-top: 1px solid #f0e7df;
+
+  color: #8e7d72;
+
+  font-size: 8px;
+
+  line-height: 1.7;
+}
+
+.infoFooter svg {
+  flex-shrink: 0;
+
+  margin-top: 2px;
+
+  color: var(--orange);
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.ctaSection {
+  background: #fffdf9;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .heroGrid {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(320px, 0.9fr);
+
+    gap: 35px;
+  }
+
+  .heroContent h1 {
+    font-size: clamp(43px, 5.8vw, 60px);
+  }
+
+  .heroVisual {
+    min-height: 430px;
+  }
+
+  .contactOrb {
+    width: 390px;
+  }
+
+  .contactGrid {
+    gap: 20px;
+  }
+
+  .formContainer
+    :global(.form-card),
+  .infoCard {
+    padding: 25px;
+  }
+}
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+
+    gap: 28px;
+  }
+
+  .heroContent {
+    max-width: 760px;
+
+    margin-inline: auto;
+
+    text-align: center;
+  }
+
+  .heroContent .eyebrow {
+    margin-inline: auto;
+  }
+
+  .heroContent p {
+    margin-inline: auto;
+  }
+
+  .heroTrust {
+    justify-content: center;
+  }
+
+  .heroVisual {
+    min-height: 410px;
+  }
+
+  .contactGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formWrap {
+    max-width: 780px;
+
+    margin-inline: auto;
+  }
+
+  .infoCard {
+    max-width: 780px;
+
+    width: 100%;
+
+    margin-inline: auto;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 62px 0 55px;
+  }
+
+  .heroGrid {
+    gap: 16px;
+  }
+
+  .heroContent h1 {
+    font-size: clamp(38px, 9vw, 55px);
+
+    letter-spacing: -1.7px;
+  }
+
+  .heroContent p {
+    font-size: 11px;
+  }
+
+  .heroVisual {
+    min-height: 375px;
+  }
+
+  .contactOrb {
+    width: 340px;
+  }
+
+  .contactCard {
+    width: min(300px, 84%);
+
+    padding: 18px;
+  }
+
+  .floatingChip {
+    font-size: 7px;
+  }
+
+  .chipOne {
+    left: 1%;
+  }
+
+  .chipTwo {
+    right: 1%;
+  }
+
+  .contactSection {
+    padding: 70px 0 75px;
+  }
+
+  .sectionTitle {
+    font-size: 34px;
+
+    letter-spacing: -1.2px;
+  }
+
+  .sectionSubtitle {
+    font-size: 9px;
+  }
+
+  .formContainer
+    :global(.form-card),
+  .infoCard {
+    padding: 22px;
+
+    border-radius: 21px;
+  }
+
+  .formContainer
+    :global(.form-card h2),
+  .infoHeader h2 {
+    font-size: 24px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 48px 0 45px;
+  }
+
+  .eyebrow,
+  .sectionLabel {
+    padding: 6px 10px;
+
+    font-size: 7px;
+  }
+
+  .heroContent h1 {
+    font-size: 34px;
+  }
+
+  .heroContent p {
+    font-size: 10px;
+
+    line-height: 1.7;
+  }
+
+  .heroVisual {
+    min-height: 325px;
+  }
+
+  .contactOrb {
+    width: 285px;
+  }
+
+  .contactCard {
+    width: min(270px, 88%);
+
+    padding: 15px;
+
+    border-radius: 21px;
+  }
+
+  .contactAvatar {
+    width: 78px;
+    height: 78px;
+
+    margin-top: 19px;
+
+    font-size: 40px;
+  }
+
+  .contactCard h3 {
+    font-size: 16px;
+  }
+
+  .contactSubtitle {
+    font-size: 7px;
+  }
+
+  .contactMiniRows > div {
+    padding: 8px;
+
+    font-size: 8px;
+  }
+
+  .contactCardFooter {
+    font-size: 7px;
+  }
+
+  .floatingChip {
+    padding: 8px 9px;
+
+    font-size: 6px;
+  }
+
+  .contactSection {
+    padding: 55px 0 65px;
+  }
+
+  .sectionTitle {
+    font-size: 30px;
+  }
+
+  .sectionSubtitle {
+    font-size: 9px;
+  }
+
+  .formContainer
+    :global(.form-card),
+  .infoCard {
+    padding: 18px;
+
+    border-radius: 19px;
+  }
+
+  .formContainer
+    :global(.form-card h2),
+  .infoHeader h2 {
+    font-size: 21px;
+  }
+
+  .formContainer
+    :global(.form-card p) {
+    font-size: 9px;
+  }
+
+  .formContainer
+    :global(.form-card form) {
+    gap: 12px;
+  }
+
+  .formContainer
+    :global(.form-card label) {
+    font-size: 8px;
+  }
+
+  .formContainer
+    :global(.form-card input),
+  .formContainer
+    :global(.form-card select) {
+    height: 43px;
+
+    padding-inline: 10px;
+
+    font-size: 9px;
+  }
+
+  .formContainer
+    :global(.form-card textarea) {
+    min-height: 105px;
+
+    padding: 10px;
+
+    font-size: 9px;
+  }
+
+  .formContainer
+    :global(.form-card button) {
+    min-height: 44px;
+
+    font-size: 9px;
+  }
+
+  .infoHeader {
+    gap: 9px;
+  }
+
+  .infoIcon {
+    width: 39px;
+    height: 39px;
+  }
+
+  .infoDescription {
+    font-size: 9px;
+  }
+
+  .infoItem {
+    gap: 10px;
+
+    padding: 12px 0;
+  }
+
+  .infoItemIcon {
+    width: 37px;
+    height: 37px;
+  }
+
+  .infoItemIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .infoItemContent strong {
+    font-size: 9px;
+  }
+
+  .infoItemContent span,
+  .infoItemContent a {
+    font-size: 8px;
+  }
+
+  .infoFooter {
+    font-size: 7px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 360px) {
+  .heroContent h1 {
+    font-size: 30px;
+  }
+
+  .heroVisual {
+    min-height: 300px;
+  }
+
+  .contactOrb {
+    width: 255px;
+  }
+
+  .contactCard {
+    width: 89%;
+  }
+
+  .floatingChip {
+    transform: scale(0.88);
+  }
+
+  .sectionTitle {
+    font-size: 28px;
+  }
+}
+
+/* =========================================================
+   LARGE LAPTOP
+   ========================================================= */
+
+@media (min-width: 1440px) {
+  .hero {
+    padding: 108px 0 92px;
+  }
+
+  .heroGrid {
+    gap: 90px;
+  }
+
+  .heroContent h1 {
+    font-size: 83px;
+  }
+
+  .heroContent p {
+    font-size: 15px;
+  }
+
+  .heroVisual {
+    min-height: 565px;
+  }
+
+  .contactOrb {
+    width: 510px;
+  }
+
+  .contactCard {
+    width: 390px;
+
+    padding: 23px;
+  }
+
+  .contactSection {
+    padding: 120px 0 130px;
+  }
+
+  .contactGrid {
+    gap: 36px;
+  }
+
+  .formContainer
+    :global(.form-card),
+  .infoCard {
+    padding: 36px;
+  }
+
+  .sectionTitle {
+    font-size: 61px;
+  }
+
+  .infoHeader h2 {
+    font-size: 31px;
+  }
+}
+
+/* =========================================================
+   2K
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .hero {
+    padding: 135px 0 115px;
+  }
+
+  .heroGrid {
+    gap: 125px;
+  }
+
+  .heroContent h1 {
+    font-size: 101px;
+  }
+
+  .heroContent p {
+    max-width: 850px;
+
+    font-size: 18px;
+  }
+
+  .heroVisual {
+    min-height: 700px;
+  }
+
+  .contactOrb {
+    width: 590px;
+  }
+
+  .contactCard {
+    width: 450px;
+
+    padding: 28px;
+
+    border-radius: 31px;
+  }
+
+  .contactAvatar {
+    width: 110px;
+    height: 110px;
+
+    font-size: 58px;
+  }
+
+  .contactCard h3 {
+    font-size: 24px;
+  }
+
+  .contactSubtitle {
+    font-size: 9px;
+  }
+
+  .contactMiniRows > div {
+    padding: 12px;
+
+    font-size: 10px;
+  }
+
+  .contactCardFooter {
+    font-size: 9px;
+  }
+
+  .contactSection {
+    padding: 150px 0 160px;
+  }
+
+  .contactGrid {
+    gap: 46px;
+  }
+
+  .sectionTitle {
+    font-size: 70px;
+  }
+
+  .sectionSubtitle {
+    font-size: 13px;
+  }
+
+  .formContainer
+    :global(.form-card),
+  .infoCard {
+    padding: 44px;
+
+    border-radius: 30px;
+  }
+
+  .formContainer
+    :global(.form-card h2),
+  .infoHeader h2 {
+    font-size: 38px;
+  }
+
+  .formContainer
+    :global(.form-card p),
+  .infoDescription {
+    font-size: 13px;
+  }
+
+  .formContainer
+    :global(.form-card label) {
+    font-size: 11px;
+  }
+
+  .formContainer
+    :global(.form-card input),
+  .formContainer
+    :global(.form-card select) {
+    height: 52px;
+
+    font-size: 12px;
+  }
+
+  .formContainer
+    :global(.form-card textarea) {
+    min-height: 155px;
+
+    font-size: 12px;
+  }
+
+  .infoItem {
+    padding: 19px 0;
+  }
+
+  .infoItemIcon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .infoItemContent strong {
+    font-size: 14px;
+  }
+
+  .infoItemContent span,
+  .infoItemContent a {
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   4K
+   ========================================================= */
+
+@media (min-width: 2560px) {
+  .hero {
+    padding: 165px 0 140px;
+  }
+
+  .heroGrid {
+    gap: 155px;
+  }
+
+  .heroContent h1 {
+    font-size: 120px;
+  }
+
+  .heroContent p {
+    max-width: 1050px;
+
+    font-size: 21px;
+  }
+
+  .heroVisual {
+    min-height: 850px;
+  }
+
+  .contactOrb {
+    width: 720px;
+  }
+
+  .contactCard {
+    width: 545px;
+
+    padding: 34px;
+
+    border-radius: 36px;
+  }
+
+  .contactAvatar {
+    width: 140px;
+    height: 140px;
+
+    font-size: 75px;
+  }
+
+  .contactCard h3 {
+    font-size: 29px;
+  }
+
+  .contactSubtitle {
+    font-size: 10px;
+  }
+
+  .contactMiniRows > div {
+    padding: 15px;
+
+    font-size: 12px;
+  }
+
+  .contactSection {
+    padding: 180px 0 190px;
+  }
+
+  .contactGrid {
+    gap: 60px;
+  }
+
+  .sectionTitle {
+    font-size: 84px;
+  }
+
+  .sectionSubtitle {
+    font-size: 15px;
+  }
+
+  .formContainer
+    :global(.form-card),
+  .infoCard {
+    padding: 54px;
+
+    border-radius: 35px;
+  }
+
+  .formContainer
+    :global(.form-card h2),
+  .infoHeader h2 {
+    font-size: 49px;
+  }
+
+  .formContainer
+    :global(.form-card p),
+  .infoDescription {
+    font-size: 15px;
+  }
+
+  .formContainer
+    :global(.form-card input),
+  .formContainer
+    :global(.form-card select) {
+    height: 60px;
+
+    font-size: 14px;
+  }
+
+  .formContainer
+    :global(.form-card textarea) {
+    min-height: 195px;
+
+    font-size: 14px;
+  }
+
+  .infoItem {
+    gap: 17px;
+
+    padding: 23px 0;
+  }
+
+  .infoItemIcon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .infoItemContent strong {
+    font-size: 17px;
+  }
+
+  .infoItemContent span,
+  .infoItemContent a {
+    font-size: 14px;
+  }
+
+  .infoFooter {
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   8K
+   ========================================================= */
+
+@media (min-width: 3840px) {
+  .hero {
+    padding: 220px 0 185px;
+  }
+
+  .heroGrid {
+    gap: 190px;
+  }
+
+  .heroContent h1 {
+    font-size: 155px;
+  }
+
+  .heroContent p {
+    max-width: 1350px;
+
+    font-size: 25px;
+  }
+
+  .heroVisual {
+    min-height: 1100px;
+  }
+
+  .contactOrb {
+    width: 900px;
+  }
+
+  .contactCard {
+    width: 680px;
+
+    padding: 43px;
+
+    border-radius: 42px;
+  }
+
+  .contactAvatar {
+    width: 180px;
+    height: 180px;
+
+    font-size: 96px;
+  }
+
+  .contactCard h3 {
+    font-size: 37px;
+  }
+
+  .contactSubtitle {
+    font-size: 13px;
+  }
+
+  .contactMiniRows > div {
+    padding: 19px;
+
+    font-size: 16px;
+  }
+
+  .contactCardFooter {
+    font-size: 12px;
+  }
+
+  .contactSection {
+    padding: 235px 0 245px;
+  }
+
+  .contactGrid {
+    gap: 85px;
+  }
+
+  .sectionTitle {
+    font-size: 109px;
+  }
+
+  .sectionSubtitle {
+    font-size: 20px;
+  }
+
+  .formContainer
+    :global(.form-card),
+  .infoCard {
+    padding: 70px;
+
+    border-radius: 42px;
+  }
+
+  .formContainer
+    :global(.form-card h2),
+  .infoHeader h2 {
+    font-size: 63px;
+  }
+
+  .formContainer
+    :global(.form-card p),
+  .infoDescription {
+    font-size: 20px;
+  }
+
+  .formContainer
+    :global(.form-card label) {
+    font-size: 16px;
+  }
+
+  .formContainer
+    :global(.form-card input),
+  .formContainer
+    :global(.form-card select) {
+    height: 72px;
+
+    padding-inline: 22px;
+
+    font-size: 17px;
+
+    border-radius: 17px;
+  }
+
+  .formContainer
+    :global(.form-card textarea) {
+    min-height: 245px;
+
+    padding: 20px;
+
+    font-size: 17px;
+
+    border-radius: 17px;
+  }
+
+  .formContainer
+    :global(.form-card button) {
+    min-height: 74px;
+
+    font-size: 17px;
+  }
+
+  .infoItem {
+    gap: 22px;
+
+    padding: 30px 0;
+  }
+
+  .infoItemIcon {
+    width: 80px;
+    height: 80px;
+
+    border-radius: 20px;
+  }
+
+  .infoItemContent strong {
+    font-size: 21px;
+  }
+
+  .infoItemContent span,
+  .infoItemContent a {
+    font-size: 17px;
+  }
+
+  .infoFooter {
+    font-size: 15px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .heroPaw,
+  .contactOrb,
+  .contactCard,
+  .floatingChip {
+    animation: none;
+  }
+
+  .formContainer
+    :global(.form-card),
+  .infoCard,
+  .infoItemIcon {
+    transition: none;
+  }
+}

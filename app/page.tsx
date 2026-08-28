@@ -26,6 +26,8 @@ import {
   Footprints,
   Dumbbell,
   ChevronLeft,
+  LucideVideo,
+  CirclePlay,
 } from "lucide-react";
 
 import styles from "./page.module.css";
@@ -553,6 +555,158 @@ function SectionLabel({
   );
 }
 
+
+
+const homeTestimonials = [
+  {
+    name: "Arun Negi",
+    text:
+      "PetCard brings the important parts of pet care together in one place. The overall experience feels simple, clear, and useful for everyday routines.",
+  },
+  {
+    name: "Amber Fatima",
+    text:
+      "Keeping identity, health information, reminders, and memories connected makes pet care feel much more organized and easier to manage.",
+  },
+  {
+    name: "Shailesh Kumar",
+    text:
+      "The idea combines practical pet information with a playful experience that fits naturally into the day-to-day needs of pet parents.",
+  },
+  {
+    name: "Harshrajsinh Vaghela",
+    text:
+      "A digital pet identity makes sense when profile details, records, care routines, and important information all need to stay easy to access.",
+  },
+  {
+    name: "Sivam Bansal",
+    text:
+      "The concept is clean and convenient, connecting pet information, reminders, memories, and rewards in one experience.",
+  },
+];
+
+const homeFaqs = [
+  [
+    "What is PetCard?",
+    "PetCard is a digital pet information platform designed to help pet parents keep important details about their pets organized and accessible.",
+  ],
+  [
+    "What information can I keep in PetCard?",
+    "You can organize relevant pet information such as profile details, health information, vaccination records, reminders and other useful notes, depending on the features available in the app.",
+  ],
+  [
+    "Can I manage multiple pets?",
+    "Yes, PetCard is designed to support pet parents who have more than one pet.",
+  ],
+  [
+    "Can I set reminders?",
+    "PetCard can help you keep track of important pet-related tasks and reminders.",
+  ],
+];
+
+function HomeTestimonialsPreview() {
+  const slides = [...homeTestimonials, ...homeTestimonials];
+
+  return (
+    <section className={`${styles.section} ${styles.homeTestimonials}`} id="testimonials">
+      <div className={styles.container}>
+        <div className={`${styles.sectionHeading} ${styles.center}`}>
+          <div className={styles.eyebrow}>Testimonials</div>
+          <h2 className={styles.sectionTitle}>
+            Loved for the little things.{" "}
+            <span>Built for everyday care.</span>
+          </h2>
+          <p className={styles.sectionSubtitle}>
+            Sample testimonial content for the website. Replace with approved
+            customer feedback before production.
+          </p>
+        </div>
+
+        <div className={styles.homeTestimonialsViewport}>
+          <div className={styles.homeTestimonialsTrack}>
+            {slides.map((item, index) => (
+              <article
+                className={styles.homeTestimonialCard}
+                key={`${item.name}-${index}`}
+              >
+                <div className={styles.homeTestimonialTop}>
+                  <span className={styles.homeQuote}>“</span>
+                  <span className={styles.homeStars}>★★★★★</span>
+                </div>
+
+                <p>{item.text}</p>
+
+                <div className={styles.homeTestimonialAuthor}>
+                  <span>
+                    {item.name
+                      .split(" ")
+                      .map((word) => word[0])
+                      .join("")
+                      .slice(0, 2)}
+                  </span>
+
+                  <div>
+                    <b>{item.name}</b>
+                    <small>Sample Pet Parent</small>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.homePreviewLinkWrap}>
+          <Link href="/testimonials" className="btn btn-outline">
+            View All Testimonials
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HomeFaqPreview() {
+  return (
+    <section className={`${styles.section} ${styles.soft}`} id="faq">
+      <div className={styles.container}>
+        <div className={styles.homeFaqGrid}>
+          <div className={styles.homeFaqIntro}>
+            <div className={styles.eyebrow}>FAQ</div>
+
+            <h2 className={styles.sectionTitle}>
+              Questions?{" "}
+              <span>We&apos;ve got answers.</span>
+            </h2>
+
+            <p className={styles.sectionSubtitle}>
+              Find answers to common questions about PetCard and its
+              promotional website.
+            </p>
+
+            <Link href="/faq" className="btn btn-outline">
+              View All FAQs
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+
+          <div className={styles.homeFaqList}>
+            {homeFaqs.map(([question, answer]) => (
+              <details className={styles.homeFaqItem} key={question}>
+                <summary>
+                  <span>{question}</span>
+                  <ChevronRight size={18} />
+                </summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -565,7 +719,7 @@ export default function Home() {
           className={`${styles.homeHeroGrid} ${styles.container}`}
         >
           <div className={styles.homeHeroCopy}>
-            
+
 
             <h1>
               One Identity. A Lifetime of Care.{" "}
@@ -584,15 +738,23 @@ export default function Home() {
                 className="btn btn-primary"
               >
                 Download the App
-                <ArrowRight size={17} />
+                <img
+                  src="/images/paw-white.png"
+                  width={37}
+                  height={37}
+                  alt=""
+                />
               </Link>
 
               <Link
                 href="#how-it-works"
                 className="btn btn-outline"
               >
-                How It Works
-                <ArrowRight size={16} />
+                <CirclePlay
+  size={24}
+/>
+                Watch Video
+                
               </Link>
             </div>
 
@@ -647,6 +809,7 @@ export default function Home() {
       </section>
 
 
+
       {/* =====================================================
           INTRO
           ===================================================== */}
@@ -659,7 +822,7 @@ export default function Home() {
           <div
             className={`${styles.sectionHeading} ${styles.center}`}
           >
-          
+
 
             <h2 className={styles.sectionTitle}>
               More than a pet care app.
@@ -703,6 +866,181 @@ export default function Home() {
                 </article>
               )
             )}
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* =====================================================
+    WHY CHOOSE US
+    ===================================================== */}
+
+      <section
+        className={`${styles.section} ${styles.whySection}`}
+        id="why-choose-us"
+      >
+        <div className={styles.container}>
+          <div
+            className={`${styles.sectionHeading} ${styles.center}`}
+          >
+
+
+            <h2 className={styles.sectionTitle}>
+              Built around{" "}
+              <span>better pet care.</span>
+            </h2>
+
+            <p className={styles.sectionSubtitle}>
+              Everything your pet needs, thoughtfully brought
+              together in one simple and playful experience.
+            </p>
+          </div>
+
+          <div className={styles.whyGrid}>
+            {/* =================================================
+          LEFT CARD
+          ================================================= */}
+
+            <article
+              className={`${styles.whyCard} ${styles.whyCardLeft}`}
+            >
+              <div className={styles.whyCardTop}>
+                <div className={styles.whyCardIcon}>
+                  <img
+                    src="/images/paw.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </div>
+
+              </div>
+
+              <h3>Everything in One Place</h3>
+
+              <p>
+                From your pet&apos;s identity and health records
+                to daily care, reminders, and memories—keep
+                everything together.
+              </p>
+
+              <div className={styles.whyCardFooter}>
+                <span>🪪 PET CARD</span>
+                <ArrowRight size={17} />
+              </div>
+
+              <div className={styles.whyCardPaw}>
+                <img
+                  src="/images/paw.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </div>
+
+              <div className={`${styles.whyPet} ${styles.whyPetLeft}`}>
+                <Image
+                  src="/images/coco2.png"
+                  alt="Coco"
+                  fill
+                  sizes="(max-width: 768px) 180px, 240px"
+                />
+              </div>
+            </article>
+
+            {/* =================================================
+          CENTER CARD
+          ================================================= */}
+
+            <article
+              className={`${styles.whyCard} ${styles.whyCardCenter}`}
+            >
+              <div className={styles.whyCardTop}>
+                <div className={styles.whyCardIcon}>
+                  <img
+                    src="/images/paw.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </div>
+
+              </div>
+
+              <h3>Made for Everyday Care</h3>
+
+              <p>
+                Stay on top of feeding, walks, training,
+                grooming, and other important routines with ease.
+              </p>
+
+              <div className={styles.whyCardFooter}>
+                <span>🐾 DAILY CARE</span>
+                <ArrowRight size={17} />
+              </div>
+
+              <div className={styles.whyCardPaw}>
+                <img
+                  src="/images/paw.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </div>
+
+              <div className={`${styles.whyPet} ${styles.whyPetCenter}`}>
+                <Image
+                  src="/images/zuzu2.png"
+                  alt="Zuzu"
+                  fill
+                  sizes="(max-width: 768px) 180px, 240px"
+                />
+              </div>
+            </article>
+
+            {/* =================================================
+          RIGHT CARD
+          ================================================= */}
+
+            <article
+              className={`${styles.whyCard} ${styles.whyCardRight}`}
+            >
+              <div className={styles.whyCardTop}>
+                <div className={styles.whyCardIcon}>
+                  <img
+                    src="/images/paw.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </div>
+              </div>
+
+              <h3>Care That Feels Fun</h3>
+
+              <p>
+                Build streaks, earn PawPoints, unlock rewards,
+                and make caring for your pet a fun journey.
+              </p>
+
+              <div className={styles.whyCardFooter}>
+                <span>⭐ REWARDS</span>
+                <ArrowRight size={17} />
+              </div>
+
+              <div className={styles.whyCardPaw}>
+                <img
+                  src="/images/paw.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </div>
+
+              <div className={`${styles.whyPet} ${styles.whyPetRight}`}>
+                <Image
+                  src="/images/huchiko2.png"
+                  alt="Huchiko"
+                  fill
+                  sizes="(max-width: 768px) 180px, 240px"
+                />
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -769,7 +1107,7 @@ export default function Home() {
             <div
               className={`${styles.identityFloatChip} ${styles.chipTwo}`}
             >
-              
+
               Emergency ready
             </div>
           </div>
@@ -807,12 +1145,18 @@ export default function Home() {
               className="btn btn-primary"
             >
               Create Your Pet&apos;s Card
-              <ArrowRight size={17} />
+              <img
+                src="/images/paw-white.png"
+                width={37}
+                height={37}
+                alt=""
+              />
             </Link>
 
           </div>
         </div>
       </section>
+
 
 
       {/* =====================================================
@@ -827,7 +1171,7 @@ export default function Home() {
           <div
             className={`${styles.sectionHeading} ${styles.center}`}
           >
-          
+
             <h2 className={styles.sectionTitle}>
               Simple steps.{" "}
               <span>A happier pet.</span>
@@ -876,102 +1220,6 @@ export default function Home() {
       </section>
 
 
-      {/* =====================================================
-          DAILY CARE
-          ===================================================== */}
-
-      <section
-        className={`${styles.section} ${styles.soft}`}
-        id="daily-care"
-      >
-        <div
-          className={`${styles.container} ${styles.careGrid}`}
-        >
-          <div className={styles.careCopy}>
-           
-            <h2 className={styles.sectionTitle}>
-              Care made easy.{" "}
-              <span>Every single day.</span>
-            </h2>
-
-            <p className={styles.sectionSubtitle}>
-              Complete your pet&apos;s daily activities, stay on
-              top of their routine, and never forget the little
-              things that matter.
-            </p>
-
-            <div className={styles.careFeatureList}>
-              {[
-                ["🍽", "Feeding", "Keep meal routines on track."],
-                ["💧", "Water", "Build healthy hydration habits."],
-                ["🚶", "Walk", "Never miss their daily movement."],
-                ["🎓", "Training", "Turn practice into progress."],
-                ["✨", "Grooming", "Keep grooming routines visible."],
-                ["💊", "Medicine", "Remember important medication."],
-              ].map(([emoji, title, text]) => (
-                <div
-                  className={styles.careFeature}
-                  key={title}
-                >
-                  <span>{emoji}</span>
-
-                  <div>
-                    <b>{title}</b>
-                    <small>{text}</small>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <Link
-              href="/features"
-              className="btn btn-primary"
-            >
-              Explore Daily Care
-              <ArrowRight size={17} />
-            </Link>
-          </div>
-
-          <div className={styles.dashboardShowcase}>
-            <div className={styles.dashboardPanel}>
-              <div className={styles.dashboardHead}>
-                <span>Today&apos;s Care</span>
-                <b>3 / 5 Completed</b>
-              </div>
-
-              {careItems.map(
-                ([Icon, title, time, done]) => (
-                  <div
-                    className={styles.dashboardRow}
-                    key={title}
-                  >
-                    <span className={styles.dashboardIcon}>
-                      <Icon size={18} />
-                    </span>
-
-                    <span>
-                      <b>{title}</b>
-                      <small>{time}</small>
-                    </span>
-
-                    <span
-                      className={`${styles.dashboardCheck} ${done ? styles.done : ""
-                        }`}
-                    >
-                      {done ? <Check size={13} /> : ""}
-                    </span>
-                  </div>
-                )
-              )}
-
-              <div className={styles.dashboardProgress}>
-                <span style={{ width: "62%" }} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
 
       {/* =====================================================
           REWARDS
@@ -1004,7 +1252,7 @@ export default function Home() {
           </div>
 
           <div className={styles.gameCopy}>
-           
+
             <h2 className={styles.sectionTitle}>
               The more you care,{" "}
               <span>the more you unlock.</span>
@@ -1042,313 +1290,6 @@ export default function Home() {
       </section>
 
 
-      {/* =====================================================
-    CUSTOMIZATION
-    ===================================================== */}
-
-      <section
-        className={`${styles.section} ${styles.soft}`}
-        id="customization"
-      >
-        <div className={styles.container}>
-          <div
-            className={`${styles.sectionHeading} ${styles.center}`}
-          >
-           
-            <h2 className={styles.sectionTitle}>
-              Unlock a world made{" "}
-              <span>for your pet.</span>
-            </h2>
-
-            <p className={styles.sectionSubtitle}>
-              Earn rewards and make your pet&apos;s digital world
-              feel uniquely theirs.
-            </p>
-          </div>
-
-          {/* ================= PET CAROUSEL ================= */}
-
-          <PetCarousel />
-
-        </div>
-      </section>
-
-
-      {/* =====================================================
-          RECORDS
-          ===================================================== */}
-
-      <section
-        className={styles.section}
-        id="records"
-      >
-        <div
-          className={`${styles.container} ${styles.recordsGrid}`}
-        >
-          <div className={styles.recordsCopy}>
-          
-            <h2 className={styles.sectionTitle}>
-              Important information.{" "}
-              <span>Always within reach.</span>
-            </h2>
-
-            <p className={styles.sectionSubtitle}>
-              Keep health information, documents and progress
-              together instead of searching through scattered
-              files.
-            </p>
-
-            <div className={styles.recordTabs}>
-              <div
-                className={`${styles.recordTab} ${styles.active}`}
-              >
-                <HeartPulse size={17} />
-
-                <span>
-                  <b>Health</b>
-                  <small>
-                    Vaccinations · Medicines · Vet visits
-                  </small>
-                </span>
-              </div>
-
-              <div className={styles.recordTab}>
-                <FileHeart size={17} />
-
-                <span>
-                  <b>Documents</b>
-                  <small>
-                    Prescriptions · Reports · Insurance
-                  </small>
-                </span>
-              </div>
-
-              <div className={styles.recordTab}>
-                <Award size={17} />
-
-                <span>
-                  <b>Progress</b>
-                  <small>
-                    Weight · Growth · Health updates
-                  </small>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.recordsPanel}>
-            <div className={styles.recordsPanelHead}>
-              <span>
-                <Stethoscope size={17} />
-                Bruno&apos;s Health
-              </span>
-
-              <ChevronRight size={17} />
-            </div>
-
-            {[
-              "Vaccination",
-              "Deworming",
-              "Medicines",
-              "Vet Visits",
-              "Weight Progress",
-            ].map((item, index) => (
-              <div
-                className={styles.recordRow}
-                key={item}
-              >
-                <span className={styles.recordRowIcon}>
-                  {index < 3 ? (
-                    <Check size={13} />
-                  ) : (
-                    "↗"
-                  )}
-                </span>
-
-                <span>
-                  <b>{item}</b>
-
-                  <small>
-                    {index < 3
-                      ? "Up to date"
-                      : index === 3
-                        ? "Last visit · 12 Jun"
-                        : "8.4 kg · +0.3 kg"}
-                  </small>
-                </span>
-
-                <ChevronRight size={15} />
-              </div>
-            ))}
-
-            <div className={styles.recordSecure}>
-              <LockKeyhole size={14} />
-              Your pet&apos;s information stays organized and
-              protected.
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* =====================================================
-          EMERGENCY
-          ===================================================== */}
-
-      <section
-        className={`${styles.section} ${styles.soft}`}
-        id="emergency"
-      >
-        <div
-          className={`${styles.container} ${styles.emergencyGrid}`}
-        >
-          <div className={styles.emergencyCard}>
-            <div className={styles.emergencyTop}>
-              <span>🚨 EMERGENCY CARD</span>
-              <ShieldAlert size={20} />
-            </div>
-
-            <div className={styles.emergencyProfile}>
-              <div className={styles.emergencyAvatar}>
-                <Image
-                  src="/images/home/home-dog.png"
-                  alt="Bruno"
-                  fill
-                  sizes="66px"
-                />
-              </div>
-
-              <div>
-                <strong>Bruno</strong>
-                <small>
-                  Golden Retriever · Blood Group: DEA 1.1 +
-                </small>
-              </div>
-            </div>
-
-            <div className={styles.emergencyData}>
-              <span>
-                <b>Allergies</b>
-                None known
-              </span>
-
-              <span>
-                <b>Emergency Contact</b>
-                +91 98765 43210
-              </span>
-
-              <span>
-                <b>Current Medication</b>
-                None
-              </span>
-
-              <span>
-                <b>Vet</b>
-                Happy Paws Clinic
-              </span>
-            </div>
-
-            <div className={styles.emergencyActions}>
-              <button>Download</button>
-              <button>Share</button>
-              <button>Update</button>
-            </div>
-          </div>
-
-          <div className={styles.emergencyCopy}>
-         
-
-            <h2 className={styles.sectionTitle}>
-              Important information matters most{" "}
-              <span>when you need it quickly.</span>
-            </h2>
-
-            <p className={styles.sectionSubtitle}>
-              Keep guardian contacts, allergies, medical
-              conditions, medications and vet information ready
-              in one reliable card.
-            </p>
-
-            <div className={styles.trustPoints}>
-              <span>
-                <ShieldAlert size={16} />
-                Critical details at a glance
-              </span>
-
-              <span>
-                <QrCode size={16} />
-                Easy to share
-              </span>
-
-              <span>
-                <CircleCheck size={16} />
-                Simple to update
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* =====================================================
-          GUARDIANS
-          ===================================================== */}
-
-      <section
-        className={styles.section}
-        id="guardians"
-      >
-        <div className={styles.container}>
-          <div
-            className={`${styles.sectionHeading} ${styles.center}`}
-          >
-           
-            <h2 className={styles.sectionTitle}>
-              Care is better{" "}
-              <span>when it&apos;s shared.</span>
-            </h2>
-
-            <p className={styles.sectionSubtitle}>
-              Invite another guardian while keeping permission
-              and access under your control.
-            </p>
-          </div>
-
-          <div className={styles.guardianFlow}>
-            {[
-              ["01", "Main Guardian", "Creates PET CARD", "👤"],
-              ["02", "Second Guardian", "Scans QR", "📱"],
-              ["03", "Request Access", "Sends request", "🤝"],
-              ["04", "Approve", "Main guardian approves", "✅"],
-              ["05", "Care Together", "Shared pet journey", "🧡"],
-            ].map(([num, title, text, icon], index) => (
-              <div
-                className={styles.guardianStep}
-                key={num}
-              >
-                <div className={styles.guardianIcon}>
-                  {icon}
-                </div>
-
-                <span>{num}</span>
-
-                <b>{title}</b>
-
-                <small>{text}</small>
-
-                {index < 4 && (
-                  <ArrowRight
-                    className={styles.guardianArrow}
-                    size={17}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
 
       {/* =====================================================
           MEMORIES
@@ -1362,7 +1303,7 @@ export default function Home() {
           className={`${styles.container} ${styles.memoriesGrid}`}
         >
           <div className={styles.memoriesCopy}>
-           
+
             <h2 className={styles.sectionTitle}>
               Some moments deserve more than your{" "}
               <span>camera roll.</span>
@@ -1395,7 +1336,12 @@ export default function Home() {
               className="btn btn-outline"
             >
               Explore Memories
-              <ArrowRight size={16} />
+              <img
+                src="/images/paw.png"
+                width={17}
+                height={17}
+                alt=""
+              />
             </Link>
           </div>
 
@@ -1455,6 +1401,7 @@ export default function Home() {
       </section>
 
 
+
       {/* =====================================================
           AI
           ===================================================== */}
@@ -1501,7 +1448,7 @@ export default function Home() {
           </div>
 
           <div className={styles.knowCopy}>
-          
+
             <h2 className={styles.sectionTitle}>
               Personalized care,{" "}
               <span>made for your pet.</span>
@@ -1528,7 +1475,7 @@ export default function Home() {
 
             <div className={styles.aiChat}>
               <div className={styles.aiChatHead}>
-                
+
 
                 <div>
                   <b>Ask PET CARD AI</b>
@@ -1553,388 +1500,10 @@ export default function Home() {
       </section>
 
 
-      {/* =====================================================
-          ECOSYSTEM
-          ===================================================== */}
 
-      <section
-        className={`${styles.section} ${styles.soft}`}
-        id="features"
-      >
-        <div className={styles.container}>
-          <div
-            className={`${styles.sectionHeading} ${styles.center}`}
-          >
-          
-            <h2 className={styles.sectionTitle}>
-              One app.{" "}
-              <span>One pet world.</span>
-            </h2>
+        <HomeTestimonialsPreview />
 
-            <p className={styles.sectionSubtitle}>
-              Everything connects around your pet&apos;s digital
-              identity.
-            </p>
-          </div>
-
-          <div className={styles.ecosystemVisual}>
-            <div
-              className={`${styles.ecosystemOrbit} ${styles.orbitA}`}
-            />
-
-            <div
-              className={`${styles.ecosystemOrbit} ${styles.orbitB}`}
-            />
-
-<div className={styles.ecosystemPaws} aria-hidden="true">
-  <img
-    src="/images/paw.png"
-    alt=""
-    className={`${styles.ecoPaw} ${styles.ecoPaw1}`}
-  />
-  <img
-    src="/images/paw.png"
-    alt=""
-    className={`${styles.ecoPaw} ${styles.ecoPaw2}`}
-  />
-  <img
-    src="/images/paw.png"
-    alt=""
-    className={`${styles.ecoPaw} ${styles.ecoPaw3}`}
-  />
-  <img
-    src="/images/paw.png"
-    alt=""
-    className={`${styles.ecoPaw} ${styles.ecoPaw4}`}
-  />
-  <img
-    src="/images/paw.png"
-    alt=""
-    className={`${styles.ecoPaw} ${styles.ecoPaw5}`}
-  />
-  <img
-    src="/images/paw.png"
-    alt=""
-    className={`${styles.ecoPaw} ${styles.ecoPaw6}`}
-  />
-  <img
-    src="/images/paw.png"
-    alt=""
-    className={`${styles.ecoPaw} ${styles.ecoPaw7}`}
-  />
-  <img
-    src="/images/paw.png"
-    alt=""
-    className={`${styles.ecoPaw} ${styles.ecoPaw8}`}
-  />
-</div>
-            <div className={styles.ecosystemCenter}>
-              <img
-                src="/images/brand/dog.png"
-                width={150}
-                height={125}
-                alt="PetCard dog"
-                className={styles.ecosystemDog}
-              />
-
-              <b>
-                <span>PET</span> <em>CARD</em>
-              </b>
-            </div>
-            {ecosystem.map(([title, text], index) => (
-              <div
-                className={`${styles.ecoNode} ${styles[`ecoNode${index + 1}` as keyof typeof styles]
-                  }`}
-                key={title}
-              >
-                <span>
-                  {
-                    [
-                      "🏠",
-                      "📅",
-                      "🔥",
-                      "⭐",
-                      "🎁",
-                      "🚨",
-                      "👥",
-                      "📸",
-                    ][index]
-                  }
-                </span>
-
-                <b>{title}</b>
-                <small>{text}</small>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-{/* =====================================================
-    WHY CHOOSE US
-    ===================================================== */}
-
-<section
-  className={`${styles.section} ${styles.whySection}`}
-  id="why-choose-us"
->
-  <div className={styles.container}>
-    <div
-      className={`${styles.sectionHeading} ${styles.center}`}
-    >
-     
-
-      <h2 className={styles.sectionTitle}>
-        Built around{" "}
-        <span>better pet care.</span>
-      </h2>
-
-      <p className={styles.sectionSubtitle}>
-        Everything your pet needs, thoughtfully brought
-        together in one simple and playful experience.
-      </p>
-    </div>
-
-    <div className={styles.whyGrid}>
-      {/* =================================================
-          LEFT CARD
-          ================================================= */}
-
-      <article
-        className={`${styles.whyCard} ${styles.whyCardLeft}`}
-      >
-        <div className={styles.whyCardTop}>
-          <div className={styles.whyCardIcon}>
-            <img
-              src="/images/paw.png"
-              alt=""
-              aria-hidden="true"
-            />
-          </div>
-
-        </div>
-
-        <h3>Everything in One Place</h3>
-
-        <p>
-          From your pet&apos;s identity and health records
-          to daily care, reminders, and memories—keep
-          everything together.
-        </p>
-
-        <div className={styles.whyCardFooter}>
-          <span>🪪 PET CARD</span>
-          <ArrowRight size={17} />
-        </div>
-
-        <div className={styles.whyCardPaw}>
-          <img
-            src="/images/paw.png"
-            alt=""
-            aria-hidden="true"
-          />
-        </div>
-
-        <div className={`${styles.whyPet} ${styles.whyPetLeft}`}>
-          <Image
-            src="/images/coco2.png"
-            alt="Coco"
-            fill
-            sizes="(max-width: 768px) 180px, 240px"
-          />
-        </div>
-      </article>
-
-      {/* =================================================
-          CENTER CARD
-          ================================================= */}
-
-      <article
-        className={`${styles.whyCard} ${styles.whyCardCenter}`}
-      >
-        <div className={styles.whyCardTop}>
-          <div className={styles.whyCardIcon}>
-            <img
-              src="/images/paw.png"
-              alt=""
-              aria-hidden="true"
-            />
-          </div>
-
-        </div>
-
-        <h3>Made for Everyday Care</h3>
-
-        <p>
-          Stay on top of feeding, walks, training,
-          grooming, and other important routines with ease.
-        </p>
-
-        <div className={styles.whyCardFooter}>
-          <span>🐾 DAILY CARE</span>
-          <ArrowRight size={17} />
-        </div>
-
-        <div className={styles.whyCardPaw}>
-          <img
-            src="/images/paw.png"
-            alt=""
-            aria-hidden="true"
-          />
-        </div>
-
-        <div className={`${styles.whyPet} ${styles.whyPetCenter}`}>
-          <Image
-            src="/images/zuzu2.png"
-            alt="Zuzu"
-            fill
-            sizes="(max-width: 768px) 180px, 240px"
-          />
-        </div>
-      </article>
-
-      {/* =================================================
-          RIGHT CARD
-          ================================================= */}
-
-      <article
-        className={`${styles.whyCard} ${styles.whyCardRight}`}
-      >
-        <div className={styles.whyCardTop}>
-          <div className={styles.whyCardIcon}>
-            <img
-              src="/images/paw.png"
-              alt=""
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-
-        <h3>Care That Feels Fun</h3>
-
-        <p>
-          Build streaks, earn PawPoints, unlock rewards,
-          and make caring for your pet a fun journey.
-        </p>
-
-        <div className={styles.whyCardFooter}>
-          <span>⭐ REWARDS</span>
-          <ArrowRight size={17} />
-        </div>
-
-        <div className={styles.whyCardPaw}>
-          <img
-            src="/images/paw.png"
-            alt=""
-            aria-hidden="true"
-          />
-        </div>
-
-        <div className={`${styles.whyPet} ${styles.whyPetRight}`}>
-          <Image
-            src="/images/huchiko2.png"
-            alt="Huchiko"
-            fill
-            sizes="(max-width: 768px) 180px, 240px"
-          />
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-      {/* =====================================================
-          ABOUT
-          ===================================================== */}
-
-      <section
-        className={styles.section}
-        id="about-us"
-      >
-        <div
-          className={`${styles.container} ${styles.aboutHomeCard}`}
-        >
-          <div className={styles.aboutHomeCopy}>
-        
-            <h2 className={styles.sectionTitle}>
-              Built for the love behind{" "}
-              <span>every little paw.</span>
-            </h2>
-
-            <p>
-              PET CARD was created with a simple belief: pets
-              are family. Their identity, health, routines,
-              memories and milestones deserve a place of their
-              own.
-            </p>
-
-            <div className={styles.missionGrid}>
-              <div>
-                <b>Our Mission</b>
-                <span>
-                  Make pet care simpler, more organized and more
-                  enjoyable.
-                </span>
-              </div>
-
-              <div>
-                <b>Our Vision</b>
-                <span>
-                  A future where every pet has a digital
-                  identity and every guardian has better tools to
-                  care for them.
-                </span>
-              </div>
-            </div>
-
-            <Link
-              href="/about"
-              className="btn btn-primary"
-            >
-              Our Story
-              <ArrowRight size={17} />
-            </Link>
-          </div>
-
-          <div className={styles.aboutHomePets}>
-            <div
-              className={`${styles.aboutPet} ${styles.aboutDog}`}
-            >
-              <Image
-                src="/images/about/dog.png"
-                alt="Dog"
-                fill
-                sizes="(max-width: 768px) 42vw, (max-width: 1200px) 230px, 270px"
-              />
-            </div>
-
-            <div
-              className={`${styles.aboutPet} ${styles.aboutCat}`}
-            >
-              <Image
-                src="/images/about/cat.png"
-                alt="Cat"
-                fill
-                sizes="(max-width: 768px) 32vw, (max-width: 1200px) 190px, 220px"
-              />
-            </div>
-
-            <div
-              className={`${styles.aboutPet} ${styles.aboutRabbit}`}
-            >
-              <Image
-                src="/images/about/rabbit.png"
-                alt="Rabbit"
-                fill
-                sizes="(max-width: 768px) 32vw, (max-width: 1200px) 190px, 220px"
-              />
-            </div>
-
-          </div>
-        </div>
-      </section>
-
+        <HomeFaqPreview />
 
       {/* =====================================================
           FINAL DOWNLOAD
@@ -1949,7 +1518,7 @@ export default function Home() {
           className={`${styles.container} ${styles.finalDownloadCard}`}
         >
           <div className={styles.finalCopy}>
-          
+
             <h2>
               Care today.{" "}
               <span>Stronger bond tomorrow.</span>
@@ -2014,6 +1583,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
     </>
   );
 }
