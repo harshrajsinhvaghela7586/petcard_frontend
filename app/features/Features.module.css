@@ -1,0 +1,1764 @@
+/* =========================================================
+   FEATURES PAGE
+   ========================================================= */
+
+.page {
+  width: 100%;
+  overflow: hidden;
+}
+
+.container {
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+
+  padding: 82px 0 72px;
+
+  background:
+    radial-gradient(
+      circle at 74% 45%,
+      rgba(255, 155, 47, 0.18),
+      transparent 29%
+    ),
+    linear-gradient(
+      135deg,
+      #fffdfb 0%,
+      #fff7ed 55%,
+      #ffead2 100%
+    );
+}
+
+.heroGlow {
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  right: -130px;
+  top: -180px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 122, 0, 0.16),
+      transparent 69%
+    );
+
+  filter: blur(8px);
+}
+
+.heroPaw {
+  position: absolute;
+
+  color: rgba(255, 122, 0, 0.08);
+
+  pointer-events: none;
+
+  animation:
+    featuresPawFloat 5s ease-in-out infinite;
+}
+
+.heroPawOne {
+  top: 12%;
+  left: 4%;
+
+  transform: rotate(-20deg);
+}
+
+.heroPawTwo {
+  right: 6%;
+  bottom: 13%;
+
+  animation-delay: -2.2s;
+
+  transform: rotate(22deg);
+}
+
+@keyframes featuresPawFloat {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -9px;
+  }
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+
+  align-items: center;
+
+  gap: 55px;
+}
+
+.heroContent {
+  max-width: 670px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--orange);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.heroContent h1 {
+  max-width: 700px;
+
+  margin: 15px 0 17px;
+
+  color: var(--text);
+
+  font-size: clamp(48px, 5.5vw, 76px);
+  line-height: 1.01;
+
+  letter-spacing: -0.045em;
+}
+
+.heroContent h1 span {
+  color: var(--orange);
+}
+
+.heroContent p {
+  max-width: 620px;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 11px;
+
+  margin-top: 28px;
+}
+
+/* =========================================================
+   HERO VISUAL
+   ========================================================= */
+
+.heroVisual {
+  position: relative;
+
+  min-height: 470px;
+
+  display: grid;
+  place-items: center;
+}
+
+.heroOrb {
+  position: absolute;
+
+  width: min(420px, 100%);
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 45% 40%,
+      #ffd79f 0%,
+      #ffad3d 48%,
+      #ff8b00 100%
+    );
+
+  box-shadow:
+    0 0 0 8px rgba(255, 122, 0, 0.055),
+    0 0 0 18px rgba(255, 122, 0, 0.03),
+    0 0 55px rgba(255, 122, 0, 0.24);
+
+  animation:
+    heroOrbPulse 4.5s ease-in-out infinite;
+}
+
+@keyframes heroOrbPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.025);
+  }
+}
+
+.heroPetCard {
+  position: relative;
+  z-index: 3;
+
+  width: min(310px, 74vw);
+
+  padding: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 25px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  box-shadow:
+    0 28px 65px rgba(56, 27, 14, 0.15),
+    0 0 30px rgba(255, 122, 0, 0.08);
+
+  animation:
+    heroCardFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroCardFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.heroCardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #8e7f74;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.heroCardTop svg {
+  color: var(--orange);
+}
+
+.heroAvatar {
+  display: grid;
+  place-items: center;
+
+  width: 78px;
+  height: 78px;
+
+  margin: 19px auto 9px;
+
+  border-radius: 50%;
+
+  color: var(--orange);
+
+  background: #fff0dc;
+}
+
+.heroPetCard h3 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 20px;
+  text-align: center;
+}
+
+.heroBreed {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #978980;
+
+  font-size: 8px;
+
+  text-align: center;
+}
+
+.heroFeatureRows {
+  display: grid;
+
+  gap: 7px;
+
+  margin-top: 18px;
+}
+
+.heroFeatureRows > div {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 9px;
+
+  border-radius: 10px;
+
+  background: #fff8f1;
+
+  color: var(--orange);
+
+  font-size: 9px;
+}
+
+.heroFeatureRows > div > span {
+  color: var(--text);
+}
+
+.heroFeatureRows svg:last-child {
+  color: #62b66a;
+}
+
+.heroPetCardBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 13px;
+  padding-top: 12px;
+
+  border-top: 1px solid #efe6de;
+
+  color: #87776d;
+
+  font-size: 8px;
+}
+
+.heroPetCardBottom svg {
+  color: var(--orange);
+}
+
+.floatingCard {
+  position: absolute;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #eadfd6;
+  border-radius: 13px;
+
+  background: #fff;
+
+  box-shadow:
+    0 14px 30px rgba(56, 27, 14, 0.09);
+
+  color: var(--orange);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  animation:
+    floatingCard 4s ease-in-out infinite;
+}
+
+.floatOne {
+  top: 14%;
+  left: 1%;
+}
+
+.floatTwo {
+  right: 0;
+  top: 25%;
+
+  animation-delay: -1.2s;
+}
+
+.floatThree {
+  left: 5%;
+  bottom: 14%;
+
+  animation-delay: -2.2s;
+}
+
+@keyframes floatingCard {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* =========================================================
+   OVERVIEW
+   ========================================================= */
+
+.overview {
+  position: relative;
+
+  padding: 22px 0;
+
+  background: #fffdf9;
+
+  border-bottom: 1px solid #f0e7df;
+}
+
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 12px;
+}
+
+.overviewCard {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 16px 18px;
+
+  border: 1px solid #eadfd6;
+  border-radius: 15px;
+
+  background: #fff;
+
+  box-shadow:
+    0 10px 25px rgba(56, 27, 14, 0.035);
+}
+
+.overviewCard strong {
+  color: var(--orange);
+
+  font-size: 23px;
+}
+
+.overviewCard span {
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   FEATURE SECTION
+   ========================================================= */
+
+.featureSection {
+  padding: 90px 0 105px;
+
+  background: #fffdf9;
+}
+
+.sectionHeading {
+  max-width: 760px;
+
+  margin-bottom: 46px;
+}
+
+.sectionHeading h2 {
+  margin: 10px 0 13px;
+
+  color: var(--text);
+
+  font-size: clamp(38px, 4vw, 58px);
+  line-height: 1.02;
+
+  letter-spacing: -0.04em;
+}
+
+.sectionHeading h2 span {
+  color: var(--orange);
+}
+
+.sectionHeading p {
+  max-width: 690px;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   CATEGORIES
+   ========================================================= */
+
+.categoryList {
+  display: grid;
+  gap: 28px;
+}
+
+.category {
+  padding: 28px;
+
+  border: 1px solid #eadfd6;
+  border-radius: 29px;
+
+  background: #fff;
+
+  box-shadow:
+    0 18px 42px rgba(56, 27, 14, 0.045);
+}
+
+.categoryHeader {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+
+  align-items: center;
+
+  gap: 30px;
+
+  padding-bottom: 23px;
+
+  border-bottom: 1px solid #f0e7df;
+}
+
+.categoryHeadingLeft {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.categoryIcon {
+  display: grid;
+  place-items: center;
+
+  width: 56px;
+  height: 56px;
+
+  flex-shrink: 0;
+
+  border-radius: 16px;
+
+  color: var(--orange);
+  background: var(--orange-soft);
+}
+
+.categoryNumber {
+  margin-bottom: 3px;
+
+  color: #bdada1;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+}
+
+.category h3 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+.categoryHeader > p {
+  max-width: 510px;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.75;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 12px;
+
+  padding-top: 22px;
+}
+
+.featureCard {
+  position: relative;
+  isolation: isolate;
+
+  min-height: 175px;
+
+  padding: 18px;
+
+  overflow: hidden;
+
+  border: 1px solid #eee4db;
+  border-radius: 18px;
+
+  background: #fffdfb;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-7px);
+
+  border-color: #ffb46b;
+
+  background: #fff;
+
+  box-shadow:
+    0 0 8px rgba(255, 122, 0, 0.18),
+    0 0 22px rgba(255, 155, 47, 0.12),
+    0 20px 40px rgba(56, 27, 14, 0.08);
+}
+
+.featureCardTop {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.featureIcon {
+  display: grid;
+  place-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 13px;
+
+  color: var(--orange);
+
+  background: var(--orange-soft);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.featureCard:hover .featureIcon {
+  transform: scale(1.06) rotate(-3deg);
+
+  background: #ffe5c8;
+}
+
+.featureArrow {
+  color: #c8b7aa;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.featureCard:hover .featureArrow {
+  color: var(--orange);
+
+  transform: translateX(4px);
+}
+
+.featureCard h4 {
+  position: relative;
+  z-index: 2;
+
+  margin: 17px 0 7px;
+
+  color: var(--text);
+
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.featureCard p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 300px;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.65;
+}
+
+.featureCardGlow {
+  position: absolute;
+
+  width: 120px;
+  height: 120px;
+
+  right: -40px;
+  bottom: -50px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 155, 47, 0.1),
+      transparent 70%
+    );
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+}
+
+.featureCard:hover .featureCardGlow {
+  opacity: 1;
+}
+
+/* =========================================================
+   EXPERIENCE
+   ========================================================= */
+
+.experienceSection {
+  padding: 10px 0 90px;
+
+  background: #fffdf9;
+}
+
+.experienceCard {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+
+  align-items: center;
+
+  gap: 50px;
+
+  padding: 50px;
+
+  overflow: hidden;
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      125deg,
+      #fff2de,
+      #ffdfb4
+    );
+
+  box-shadow:
+    0 22px 55px rgba(56, 27, 14, 0.06);
+}
+
+.experienceVisual {
+  position: relative;
+
+  min-height: 330px;
+
+  display: grid;
+  place-items: center;
+}
+
+.experienceCircle {
+  display: grid;
+  place-items: center;
+
+  width: 220px;
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  color: var(--orange);
+
+  background:
+    radial-gradient(
+      circle,
+      #fff6e8,
+      #ffd7a1
+    );
+
+  border: 2px solid rgba(255, 122, 0, 0.7);
+
+  box-shadow:
+    0 0 0 8px rgba(255, 122, 0, 0.06),
+    0 0 35px rgba(255, 122, 0, 0.18);
+}
+
+.experienceChip {
+  position: absolute;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 9px 12px;
+
+  border: 1px solid #ead5bf;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  color: var(--orange);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  box-shadow:
+    0 10px 22px rgba(56, 27, 14, 0.08);
+
+  animation:
+    floatingCard 4.5s ease-in-out infinite;
+}
+
+.chipOne {
+  top: 11%;
+  left: 2%;
+}
+
+.chipTwo {
+  right: 1%;
+  top: 30%;
+
+  animation-delay: -1.3s;
+}
+
+.chipThree {
+  bottom: 12%;
+  left: 10%;
+
+  animation-delay: -2.3s;
+}
+
+.experienceCopy h2 {
+  max-width: 640px;
+
+  margin: 11px 0 13px;
+
+  color: var(--text);
+
+  font-size: clamp(32px, 3.6vw, 52px);
+  line-height: 1.03;
+
+  letter-spacing: -0.04em;
+}
+
+.experienceCopy h2 span {
+  color: var(--orange);
+}
+
+.experienceCopy > p {
+  max-width: 610px;
+
+  margin: 0;
+
+  color: #725f52;
+
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.experiencePoints {
+  display: grid;
+
+  gap: 9px;
+
+  margin-top: 24px;
+}
+
+.experiencePoints span {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: #67564b;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.experiencePoints svg {
+  color: var(--orange);
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .container {
+    width: min(100% - 40px, 960px);
+  }
+
+  .hero .container {
+    grid-template-columns: 1fr 0.9fr;
+
+    gap: 30px;
+  }
+
+  .heroContent h1 {
+    font-size: clamp(44px, 5vw, 62px);
+  }
+
+  .heroVisual {
+    min-height: 410px;
+  }
+
+  .heroOrb {
+    width: 360px;
+  }
+
+  .heroPetCard {
+    width: 280px;
+  }
+
+  .featureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .categoryHeader {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+  .categoryHeader > p {
+    max-width: 650px;
+  }
+
+  .experienceCard {
+    gap: 35px;
+
+    padding: 35px;
+  }
+}
+
+/* =========================================================
+   SMALL TABLET / MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+
+  .hero {
+    padding: 65px 0 60px;
+  }
+
+  .hero .container {
+    grid-template-columns: 1fr;
+  }
+
+  .heroContent {
+    max-width: 700px;
+
+    margin-inline: auto;
+
+    text-align: center;
+  }
+
+  .heroContent h1 {
+    margin-inline: auto;
+
+    font-size: clamp(40px, 9vw, 58px);
+  }
+
+  .heroContent p {
+    margin-inline: auto;
+
+    font-size: 12px;
+  }
+
+  .heroActions {
+    justify-content: center;
+  }
+
+  .heroVisual {
+    min-height: 390px;
+
+    margin-top: 15px;
+  }
+
+  .overviewGrid {
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+  .overviewCard {
+    justify-content: center;
+  }
+
+  .featureSection {
+    padding: 70px 0 80px;
+  }
+
+  .sectionHeading {
+    margin-inline: auto;
+
+    text-align: center;
+  }
+
+  .sectionHeading .eyebrow {
+    justify-content: center;
+  }
+
+  .category {
+    padding: 20px;
+
+    border-radius: 22px;
+  }
+
+  .categoryHeadingLeft {
+    align-items: flex-start;
+  }
+
+  .category h3 {
+    font-size: 21px;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .experienceCard {
+    grid-template-columns: 1fr;
+
+    padding: 28px 22px;
+
+    gap: 10px;
+  }
+
+  .experienceVisual {
+    min-height: 290px;
+  }
+
+  .experienceCopy {
+    text-align: center;
+  }
+
+  .experienceCopy > p {
+    margin-inline: auto;
+  }
+
+  .experiencePoints {
+    justify-items: center;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 28px);
+  }
+
+  .hero {
+    padding: 48px 0 45px;
+  }
+
+  .heroContent h1 {
+    font-size: 35px;
+  }
+
+  .heroContent p {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+
+  .heroVisual {
+    min-height: 330px;
+  }
+
+  .heroOrb {
+    width: 300px;
+  }
+
+  .heroPetCard {
+    width: 245px;
+
+    padding: 15px;
+
+    border-radius: 20px;
+  }
+
+  .heroAvatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .heroPetCard h3 {
+    font-size: 17px;
+  }
+
+  .heroFeatureRows {
+    gap: 5px;
+
+    margin-top: 14px;
+  }
+
+  .heroFeatureRows > div {
+    padding: 8px;
+
+    font-size: 8px;
+  }
+
+  .floatingCard {
+    padding: 8px 9px;
+
+    font-size: 7px;
+  }
+
+  .floatOne {
+    top: 11%;
+    left: 0;
+  }
+
+  .floatTwo {
+    right: 0;
+    top: 29%;
+  }
+
+  .floatThree {
+    left: 0;
+    bottom: 11%;
+  }
+
+  .sectionHeading h2 {
+    font-size: 32px;
+  }
+
+  .sectionHeading p {
+    font-size: 10px;
+  }
+
+  .category {
+    padding: 16px;
+
+    border-radius: 19px;
+  }
+
+  .categoryIcon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .category h3 {
+    font-size: 18px;
+  }
+
+  .categoryHeader > p {
+    font-size: 9px;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+  .featureCard {
+    min-height: 150px;
+
+    padding: 15px;
+  }
+
+  .featureCard h4 {
+    font-size: 12px;
+  }
+
+  .featureCard p {
+    font-size: 9px;
+  }
+
+  .experienceSection {
+    padding-bottom: 60px;
+  }
+
+  .experienceVisual {
+    min-height: 250px;
+  }
+
+  .experienceCircle {
+    width: 170px;
+  }
+
+  .experienceChip {
+    font-size: 7px;
+  }
+
+  .experienceCopy h2 {
+    font-size: 30px;
+  }
+
+  .experienceCopy > p {
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 360px) {
+  .heroContent h1 {
+    font-size: 31px;
+  }
+
+  .heroVisual {
+    min-height: 300px;
+  }
+
+  .heroOrb {
+    width: 275px;
+  }
+
+  .heroPetCard {
+    width: 225px;
+  }
+
+  .floatingCard {
+    transform: scale(0.9);
+  }
+
+  .category h3 {
+    font-size: 17px;
+  }
+}
+
+/* =========================================================
+   LARGE LAPTOP
+   ========================================================= */
+
+@media (min-width: 1440px) {
+  .container {
+    width: min(1320px, calc(100% - 80px));
+  }
+
+  .hero {
+    padding: 110px 0 90px;
+  }
+
+  .heroContent h1 {
+    font-size: 84px;
+  }
+
+  .heroContent p {
+    max-width: 720px;
+
+    font-size: 16px;
+  }
+
+  .heroVisual {
+    min-height: 520px;
+  }
+
+  .heroOrb {
+    width: 460px;
+  }
+
+  .heroPetCard {
+    width: 335px;
+  }
+
+  .featureSection {
+    padding: 115px 0 125px;
+  }
+
+  .category {
+    padding: 34px;
+  }
+
+  .category h3 {
+    font-size: 28px;
+  }
+
+  .categoryHeader > p {
+    font-size: 12px;
+  }
+
+  .featureCard {
+    min-height: 190px;
+
+    padding: 21px;
+  }
+
+  .featureCard h4 {
+    font-size: 14px;
+  }
+
+  .featureCard p {
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   2K
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .container {
+    width: min(1500px, calc(100% - 120px));
+  }
+
+  .hero {
+    padding: 135px 0 110px;
+  }
+
+  .heroContent h1 {
+    font-size: 100px;
+  }
+
+  .heroContent p {
+    max-width: 850px;
+
+    font-size: 18px;
+  }
+
+  .heroVisual {
+    min-height: 620px;
+  }
+
+  .heroOrb {
+    width: 530px;
+  }
+
+  .heroPetCard {
+    width: 390px;
+
+    padding: 23px;
+  }
+
+  .heroAvatar {
+    width: 92px;
+    height: 92px;
+  }
+
+  .heroPetCard h3 {
+    font-size: 24px;
+  }
+
+  .heroFeatureRows > div {
+    padding: 12px;
+
+    font-size: 10px;
+  }
+
+  .overview {
+    padding: 30px 0;
+  }
+
+  .overviewCard {
+    padding: 21px;
+  }
+
+  .overviewCard strong {
+    font-size: 30px;
+  }
+
+  .overviewCard span {
+    font-size: 11px;
+  }
+
+  .featureSection {
+    padding: 145px 0 155px;
+  }
+
+  .sectionHeading h2 {
+    font-size: 68px;
+  }
+
+  .sectionHeading p {
+    font-size: 14px;
+  }
+
+  .category {
+    padding: 38px;
+  }
+
+  .categoryIcon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .category h3 {
+    font-size: 32px;
+  }
+
+  .categoryHeader > p {
+    font-size: 14px;
+  }
+
+  .featureGrid {
+    gap: 15px;
+  }
+
+  .featureCard {
+    min-height: 215px;
+
+    padding: 25px;
+  }
+
+  .featureIcon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .featureCard h4 {
+    font-size: 16px;
+  }
+
+  .featureCard p {
+    font-size: 12px;
+  }
+
+  .experienceCard {
+    padding: 65px;
+  }
+
+  .experienceCircle {
+    width: 270px;
+  }
+
+  .experienceCopy h2 {
+    font-size: 60px;
+  }
+
+  .experienceCopy > p {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   4K / VERY LARGE
+   ========================================================= */
+
+@media (min-width: 2560px) {
+  .container {
+    width: min(1780px, calc(100% - 200px));
+  }
+
+  .hero {
+    padding: 165px 0 135px;
+  }
+
+  .heroContent h1 {
+    font-size: 118px;
+  }
+
+  .heroContent p {
+    max-width: 980px;
+
+    font-size: 20px;
+  }
+
+  .heroVisual {
+    min-height: 760px;
+  }
+
+  .heroOrb {
+    width: 640px;
+  }
+
+  .heroPetCard {
+    width: 455px;
+
+    padding: 27px;
+
+    border-radius: 31px;
+  }
+
+  .heroCardTop {
+    font-size: 11px;
+  }
+
+  .heroAvatar {
+    width: 108px;
+    height: 108px;
+  }
+
+  .heroPetCard h3 {
+    font-size: 28px;
+  }
+
+  .heroBreed {
+    font-size: 10px;
+  }
+
+  .heroFeatureRows > div {
+    padding: 14px;
+
+    font-size: 12px;
+  }
+
+  .featureSection {
+    padding: 170px 0 185px;
+  }
+
+  .sectionHeading h2 {
+    font-size: 82px;
+  }
+
+  .sectionHeading p {
+    font-size: 16px;
+  }
+
+  .category {
+    padding: 46px;
+
+    border-radius: 36px;
+  }
+
+  .categoryIcon {
+    width: 74px;
+    height: 74px;
+
+    border-radius: 21px;
+  }
+
+  .category h3 {
+    font-size: 38px;
+  }
+
+  .categoryHeader > p {
+    max-width: 680px;
+
+    font-size: 16px;
+  }
+
+  .featureGrid {
+    gap: 18px;
+
+    padding-top: 30px;
+  }
+
+  .featureCard {
+    min-height: 250px;
+
+    padding: 30px;
+
+    border-radius: 23px;
+  }
+
+  .featureIcon {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 16px;
+  }
+
+  .featureCard h4 {
+    margin-top: 22px;
+
+    font-size: 19px;
+  }
+
+  .featureCard p {
+    max-width: 450px;
+
+    font-size: 14px;
+  }
+
+  .experienceSection {
+    padding-bottom: 120px;
+  }
+
+  .experienceCard {
+    padding: 85px;
+  }
+
+  .experienceVisual {
+    min-height: 430px;
+  }
+
+  .experienceCircle {
+    width: 330px;
+  }
+
+  .experienceCopy h2 {
+    font-size: 72px;
+  }
+
+  .experienceCopy > p {
+    font-size: 16px;
+  }
+
+  .experiencePoints span {
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   8K / ULTRA-WIDE
+   ========================================================= */
+
+@media (min-width: 3840px) {
+  .container {
+    width: min(2300px, calc(100% - 300px));
+  }
+
+  .hero {
+    padding: 210px 0 170px;
+  }
+
+  .hero .container {
+    grid-template-columns: 1fr 0.95fr;
+
+    gap: 90px;
+  }
+
+  .heroContent h1 {
+    font-size: 145px;
+  }
+
+  .heroContent p {
+    max-width: 1100px;
+
+    font-size: 24px;
+  }
+
+  .heroVisual {
+    min-height: 930px;
+  }
+
+  .heroOrb {
+    width: 820px;
+  }
+
+  .heroPetCard {
+    width: 570px;
+
+    padding: 34px;
+
+    border-radius: 38px;
+  }
+
+  .heroAvatar {
+    width: 138px;
+    height: 138px;
+  }
+
+  .heroPetCard h3 {
+    font-size: 35px;
+  }
+
+  .heroFeatureRows {
+    gap: 10px;
+  }
+
+  .heroFeatureRows > div {
+    padding: 17px;
+
+    font-size: 15px;
+  }
+
+  .featureSection {
+    padding: 220px 0 230px;
+  }
+
+  .sectionHeading {
+    max-width: 1000px;
+  }
+
+  .sectionHeading h2 {
+    font-size: 105px;
+  }
+
+  .sectionHeading p {
+    font-size: 20px;
+  }
+
+  .category {
+    padding: 58px;
+  }
+
+  .category h3 {
+    font-size: 46px;
+  }
+
+  .categoryHeader > p {
+    font-size: 19px;
+  }
+
+  .featureCard {
+    min-height: 320px;
+
+    padding: 38px;
+
+    border-radius: 28px;
+  }
+
+  .featureIcon {
+    width: 76px;
+    height: 76px;
+
+    border-radius: 20px;
+  }
+
+  .featureCard h4 {
+    font-size: 23px;
+  }
+
+  .featureCard p {
+    font-size: 17px;
+  }
+
+  .experienceCard {
+    padding: 110px;
+  }
+
+  .experienceCircle {
+    width: 420px;
+  }
+
+  .experienceCopy h2 {
+    font-size: 92px;
+  }
+
+  .experienceCopy > p {
+    font-size: 20px;
+  }
+
+  .experiencePoints span {
+    font-size: 15px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .heroPaw,
+  .heroOrb,
+  .heroPetCard,
+  .floatingCard,
+  .experienceChip {
+    animation: none;
+  }
+
+  .featureCard {
+    transition: none;
+  }
+}

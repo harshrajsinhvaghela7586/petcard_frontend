@@ -5,13 +5,12 @@ import Link from "next/link";
 import {
   ArrowRight,
   CalendarCheck,
-  Compass,
-  Gift,
+  ShieldAlert,
+  Users,
+  Trophy,
   Heart,
   IdCard,
   PawPrint,
-  ShieldCheck,
-  Sparkles,
   UserRound,
 } from "lucide-react";
 
@@ -23,50 +22,50 @@ const steps = [
     number: "01",
     title: "Create Your Profile",
     description:
-      "Tell us about yourself and your pet parent journey.",
+      "Create your PetCard account and tell us a little about yourself.",
     icon: UserRound,
   },
   {
     number: "02",
     title: "Add Your Pet",
     description:
-      "Add your pet's details and create an adorable profile.",
+      "Add your pet's details and create their personalized profile.",
     icon: PawPrint,
   },
   {
     number: "03",
     title: "Create Their PET CARD",
     description:
-      "Give your pet their own unique digital identity.",
+      "Give your pet their own unique digital identity with PET CARD and QR access.",
     icon: IdCard,
   },
   {
     number: "04",
     title: "Care Every Day",
     description:
-      "Track daily routines and build healthy habits together.",
+      "Track daily tasks, routines, reminders and healthy care habits together.",
     icon: CalendarCheck,
   },
   {
     number: "05",
-    title: "Earn & Grow",
+    title: "Stay Healthy & Safe",
     description:
-      "Earn PawPoints, build streaks, unlock perks and level up.",
-    icon: Gift,
+      "Keep health records, vaccinations and emergency information organized and ready.",
+    icon: ShieldAlert,
   },
   {
     number: "06",
-    title: "Unlock & Customize",
+    title: "Share & Grow Together",
     description:
-      "Use rewards to unlock fun items and customize your pet.",
-    icon: Sparkles,
+      "Connect trusted guardians, save memories and follow your pet's progress.",
+    icon: Users,
   },
   {
     number: "07",
-    title: "Explore More",
+    title: "Earn, Learn & Have Fun",
     description:
-      "Discover memories, reminders, news and more in one place.",
-    icon: Compass,
+      "Build streaks, earn PawPoints, unlock rewards and explore smarter pet care.",
+    icon: Trophy,
   },
 ];
 const orbitSteps = [
@@ -74,74 +73,68 @@ const orbitSteps = [
     number: "01",
     title: "Create Your Profile",
     description:
-      "Tell us about yourself and your pet parent journey.",
+      "Create your PetCard account and tell us a little about yourself.",
     icon: UserRound,
     className: "stepOne",
     image:
       "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=300&q=80",
   },
-
   {
     number: "02",
     title: "Add Your Pet",
     description:
-      "Add your pet's details or choose an adorable avatar.",
+      "Add your pet's details and create their personalized profile.",
     icon: PawPrint,
     className: "stepTwo",
     image:
       "https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=300&q=80",
   },
-
   {
     number: "03",
     title: "Create Their PET CARD",
     description:
-      "Give your pet their own unique digital identity.",
+      "Give your pet their own unique digital identity with PET CARD and QR access.",
     icon: IdCard,
     className: "stepThree",
     image:
       "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=300&q=80",
   },
-
   {
     number: "04",
     title: "Care Every Day",
     description:
-      "Track daily routines and build healthy habits together.",
+      "Track daily tasks, routines, reminders and healthy care habits together.",
     icon: CalendarCheck,
     className: "stepFour",
     image:
       "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=300&q=80",
   },
-
   {
     number: "05",
-    title: "Earn & Grow",
+    title: "Stay Healthy & Safe",
     description:
-      "Earn PawPoints, build streaks, unlock badges and level up.",
-    icon: Gift,
+      "Keep health records, vaccinations and emergency information organized and ready.",
+    icon: ShieldAlert,
     className: "stepFive",
     image:
       "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=300&q=80",
   },
-
   {
     number: "06",
-    title: "Unlock & Customize",
+    title: "Share & Grow Together",
     description:
-      "Use rewards to unlock fun items and customize your pet.",
-    icon: Sparkles,
+      "Connect trusted guardians, save memories and follow your pet's progress.",
+    icon: Users,
     className: "stepSix",
     image:
       "https://images.unsplash.com/photo-1598133894008-61f7f2f6e8a6?auto=format&fit=crop&w=300&q=80",
   },
-
   {
     number: "07",
-    title: "Explore More",
+    title: "Earn, Learn & Have Fun",
     description:
-      "Discover memories, reminders, news and more in one place.",
-    icon: Compass,
+      "Build streaks, earn PawPoints, unlock rewards and explore smarter pet care.",
+    icon: Trophy,
     className: "stepSeven",
     image:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80",
