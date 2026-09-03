@@ -2043,3 +2043,883 @@
     transition: none;
   }
 }
+
+/* =========================================================
+   BLOG SCROLL REVEAL SYSTEM
+   ========================================================= */
+
+.revealSection {
+  opacity: 0;
+
+  transform:
+    translateY(55px);
+
+  transition:
+    opacity 0.85s ease,
+    transform 0.9s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.isVisible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* =========================================================
+   HERO ANIMATION
+   ========================================================= */
+
+.hero .blogBadge,
+.hero h1,
+.hero p,
+.hero .searchBar,
+.heroDog,
+.heroCat,
+.heroPet {
+  opacity: 0;
+}
+
+.hero .blogBadge {
+  transform:
+    translateY(-20px);
+}
+
+.hero h1 {
+  transform:
+    translateY(-35px);
+}
+
+.hero p {
+  transform:
+    translateY(20px);
+}
+
+.hero .searchBar {
+  transform:
+    translateY(20px);
+}
+
+.heroDog {
+  transform:
+    translateY(55px)
+    scale(0.9);
+}
+
+.heroCat {
+  transform:
+    translate(35px, -25px)
+    scale(0.8);
+}
+
+.heroPet {
+  transform:
+    translate(-30px, 35px)
+    scale(0.85);
+}
+
+.isVisible.hero
+.blogBadge {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  transition:
+    opacity 0.6s ease 0.1s,
+    transform 0.65s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      )
+      0.1s;
+}
+
+.isVisible.hero h1 {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  transition:
+    opacity 0.8s ease 0.18s,
+    transform 0.85s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      )
+      0.18s;
+}
+
+.isVisible.hero p {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  transition:
+    opacity 0.65s ease 0.35s,
+    transform 0.7s ease 0.35s;
+}
+
+.isVisible.hero .searchBar {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  transition:
+    opacity 0.65s ease 0.48s,
+    transform 0.7s ease 0.48s;
+}
+
+.isVisible.hero .heroDog {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    scale(1);
+
+  transition:
+    opacity 0.9s ease 0.18s,
+    transform 1s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ) 0.18s;
+}
+
+.isVisible.hero .heroCat {
+  opacity: 1;
+
+  transform:
+    translate(0, 0)
+    scale(1);
+
+  transition:
+    opacity 0.75s ease 0.38s,
+    transform 0.8s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      )
+      0.38s;
+}
+
+.isVisible.hero .heroPet {
+  opacity: 1;
+
+  transform:
+    translate(0, 0)
+    scale(1);
+
+  transition:
+    opacity 0.75s ease 0.52s,
+    transform 0.8s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      )
+      0.52s;
+}
+
+
+/* =========================================================
+   HERO PET FLOAT
+   ========================================================= */
+
+.isVisible .heroDog {
+  animation:
+    blogDogFloat
+    5s
+    ease-in-out
+    1.25s
+    infinite;
+}
+
+@keyframes blogDogFloat {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+
+/* =========================================================
+   CATEGORIES
+   ========================================================= */
+
+.categoriesSection.revealSection
+.categories,
+.categoriesSection.revealSection
+.shareStory {
+  opacity: 0;
+}
+
+.categoriesSection.revealSection
+.categories {
+  transform:
+    translateX(-30px);
+}
+
+.categoriesSection.revealSection
+.shareStory {
+  transform:
+    translateX(35px);
+}
+
+.isVisible.categoriesSection
+.categories,
+.isVisible.categoriesSection
+.shareStory {
+  opacity: 1;
+
+  transform:
+    translateX(0);
+
+  transition:
+    opacity 0.75s ease 0.1s,
+    transform 0.8s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      )
+      0.1s;
+}
+
+.isVisible.categoriesSection
+.categoryButton {
+  animation:
+    categoryPop
+    0.55s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    both;
+}
+
+.isVisible.categoriesSection
+.categoryButton:nth-child(1) {
+  animation-delay: 0.15s;
+}
+
+.isVisible.categoriesSection
+.categoryButton:nth-child(2) {
+  animation-delay: 0.22s;
+}
+
+.isVisible.categoriesSection
+.categoryButton:nth-child(3) {
+  animation-delay: 0.29s;
+}
+
+.isVisible.categoriesSection
+.categoryButton:nth-child(4) {
+  animation-delay: 0.36s;
+}
+
+.isVisible.categoriesSection
+.categoryButton:nth-child(5) {
+  animation-delay: 0.43s;
+}
+
+.isVisible.categoriesSection
+.categoryButton:nth-child(6) {
+  animation-delay: 0.50s;
+}
+
+.isVisible.categoriesSection
+.categoryButton:nth-child(7) {
+  animation-delay: 0.57s;
+}
+
+@keyframes categoryPop {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(18px)
+      scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   FEATURED SECTION
+   ========================================================= */
+
+.featuredSection.revealSection
+.sectionLabel,
+.featuredSection.revealSection
+.featuredCard,
+.featuredSection.revealSection
+.popularColumn {
+  opacity: 0;
+}
+
+.featuredSection.revealSection
+.sectionLabel {
+  transform:
+    translateY(20px);
+}
+
+.featuredSection.revealSection
+.featuredCard {
+  transform:
+    translateX(-35px)
+    scale(0.97);
+}
+
+.featuredSection.revealSection
+.popularColumn {
+  transform:
+    translateX(35px);
+}
+
+.isVisible.featuredSection
+.sectionLabel {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.isVisible.featuredSection
+.featuredCard {
+  opacity: 1;
+
+  transform:
+    translateX(0)
+    scale(1);
+
+  transition:
+    opacity 0.8s ease 0.15s,
+    transform 0.9s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      )
+      0.15s;
+}
+
+.isVisible.featuredSection
+.popularColumn {
+  opacity: 1;
+
+  transform:
+    translateX(0);
+
+  transition:
+    opacity 0.8s ease 0.28s,
+    transform 0.85s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      )
+      0.28s;
+}
+
+
+/* =========================================================
+   POPULAR POSTS STAGGER
+   ========================================================= */
+
+.isVisible.featuredSection
+.popularPost {
+  animation:
+    popularReveal
+    0.6s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    both;
+}
+
+.isVisible.featuredSection
+.popularPost:nth-child(1) {
+  animation-delay: 0.42s;
+}
+
+.isVisible.featuredSection
+.popularPost:nth-child(2) {
+  animation-delay: 0.51s;
+}
+
+.isVisible.featuredSection
+.popularPost:nth-child(3) {
+  animation-delay: 0.60s;
+}
+
+.isVisible.featuredSection
+.popularPost:nth-child(4) {
+  animation-delay: 0.69s;
+}
+
+@keyframes popularReveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* =========================================================
+   STORY BANNER
+   ========================================================= */
+
+.storySection.revealSection
+.storyBanner {
+  opacity: 0;
+
+  transform:
+    translateY(40px)
+    scale(0.97);
+}
+
+.isVisible.storySection
+.storyBanner {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    scale(1);
+
+  transition:
+    opacity 0.85s ease,
+    transform 0.9s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
+}
+
+.isVisible.storySection
+.storyPet {
+  animation:
+    storyPetIn
+    0.8s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    0.25s
+    both;
+}
+
+.isVisible.storySection
+.storyCopy {
+  animation:
+    storyCopyIn
+    0.75s
+    ease
+    0.35s
+    both;
+}
+
+.isVisible.storySection
+.polaroid:nth-child(1) {
+  animation:
+    polaroidIn
+    0.7s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    0.42s
+    both;
+}
+
+.isVisible.storySection
+.polaroid:nth-child(2) {
+  animation:
+    polaroidIn
+    0.7s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    0.52s
+    both;
+}
+
+.isVisible.storySection
+.polaroid:nth-child(3) {
+  animation:
+    polaroidIn
+    0.7s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    0.62s
+    both;
+}
+
+@keyframes storyPetIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(-40px)
+      scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0)
+      scale(1);
+  }
+}
+
+@keyframes storyCopyIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+@keyframes polaroidIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(35px)
+      rotate(0deg)
+      scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   FRESH READS
+   ========================================================= */
+
+.readsSection.revealSection
+.readsHeading {
+  opacity: 0;
+
+  transform:
+    translateY(25px);
+}
+
+.isVisible.readsSection
+.readsHeading {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  transition:
+    opacity 0.7s ease 0.05s,
+    transform 0.7s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      )
+      0.05s;
+}
+
+.isVisible.readsSection
+.readCard {
+  opacity: 0;
+
+  animation:
+    readCardReveal
+    0.75s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    both;
+}
+
+.isVisible.readsSection
+.readCard:nth-child(1) {
+  animation-delay: 0.20s;
+}
+
+.isVisible.readsSection
+.readCard:nth-child(2) {
+  animation-delay: 0.32s;
+}
+
+.isVisible.readsSection
+.readCard:nth-child(3) {
+  animation-delay: 0.44s;
+}
+
+@keyframes readCardReveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(35px)
+      scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   NEWSLETTER
+   ========================================================= */
+
+.newsletterSection.revealSection
+.newsletter {
+  opacity: 0;
+
+  transform:
+    translateY(40px)
+    scale(0.97);
+}
+
+.isVisible.newsletterSection
+.newsletter {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    scale(1);
+
+  transition:
+    opacity 0.85s ease,
+    transform 0.9s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
+}
+
+.isVisible.newsletterSection
+.newsletterPet {
+  animation:
+    newsletterPetIn
+    0.8s
+    ease
+    0.25s
+    both;
+}
+
+.isVisible.newsletterSection
+.newsletterCopy {
+  animation:
+    newsletterCopyIn
+    0.75s
+    ease
+    0.35s
+    both;
+}
+
+.isVisible.newsletterSection
+.newsletterForm {
+  animation:
+    newsletterFormIn
+    0.75s
+    ease
+    0.45s
+    both;
+}
+
+@keyframes newsletterPetIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(-35px)
+      scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0)
+      scale(1);
+  }
+}
+
+@keyframes newsletterCopyIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+@keyframes newsletterFormIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(35px)
+      scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .revealSection {
+    transform:
+      translateY(30px);
+  }
+
+  .heroDog {
+    transform:
+      translateY(35px)
+      scale(0.92);
+  }
+
+  .heroCat {
+    transform:
+      translate(20px, -15px)
+      scale(0.88);
+  }
+
+  .heroPet {
+    transform:
+      translate(-15px, 20px)
+      scale(0.9);
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .revealSection,
+  .hero .blogBadge,
+  .hero h1,
+  .hero p,
+  .hero .searchBar,
+  .heroDog,
+  .heroCat,
+  .heroPet,
+  .categories,
+  .shareStory,
+  .featuredSection .sectionLabel,
+  .featuredSection .featuredCard,
+  .featuredSection .popularColumn,
+  .storyBanner,
+  .readsHeading,
+  .newsletter {
+    opacity: 1 !important;
+
+    transform: none !important;
+
+    animation: none !important;
+
+    transition: none !important;
+  }
+}

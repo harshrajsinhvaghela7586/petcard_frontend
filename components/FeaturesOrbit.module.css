@@ -1,0 +1,841 @@
+/* =========================================================
+   PETCARD — FEATURES ORBIT (Refined & Optimized)
+   ========================================================= */
+
+.page {
+  width: 100%;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #fffaf5;
+  color: #211914;
+}
+
+.featuresSection {
+  position: relative;
+  min-height: auto;
+  padding: clamp(42px, 5vw, 92px) 24px clamp(80px, 7vw, 160px);
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 47%, rgba(255, 198, 130, 0.22), transparent 27%),
+    radial-gradient(circle at 12% 16%, rgba(255, 122, 0, 0.08), transparent 24%),
+    radial-gradient(circle at 88% 82%, rgba(255, 173, 86, 0.08), transparent 26%),
+    linear-gradient(180deg, #fffdfb 0%, #fffaf5 100%);
+}
+
+.featuresSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.34;
+  background-image:
+    radial-gradient(circle, rgba(255, 122, 0, 0.075) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+}
+
+.ambientGlow {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: min(72vw, 1050px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 145, 42, 0.09), transparent 68%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.heading {
+  position: relative;
+  z-index: 20;
+   width: min(1400px, calc(100% - 40px));
+  margin-inline: auto;
+  text-align: center;
+}
+
+
+.heading h1 {
+  margin: 0;
+  color: #211914;
+  font-size: clamp(34px, 4.3vw, 78px);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+
+}
+
+.heading h1 span {
+  color: #ff7a00;
+  
+}
+
+
+
+.heading p {
+  width: min(1180px, 100%);
+  margin: 17px auto 150px;
+  color: #796d64;
+  font: 600 clamp(12px, 0.9vw, 15px);
+}
+
+/* =========================================================
+   ORBIT STAGE
+   ========================================================= */
+
+.orbitStage {
+  position: relative;
+  width: min(100%, 1780px);
+  height: clamp(880px, 68vw, 1370px);
+  margin: clamp(35px, 4vw, 65px) auto 0;
+
+  overflow: visible;
+
+  --orbit-size: clamp(620px, 59vw, 1080px);
+  --card-width: clamp(210px, 14vw, 310px);
+  --card-height: clamp(235px, 16vw, 330px); /* Increased card height */
+  --radius: calc(var(--orbit-size) / 2);
+}
+
+.orbitBackdrop {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.orbitRingOuter,
+.orbitRingMiddle,
+.orbitRingInner {
+  position: absolute;
+  border-radius: 50%;
+  transform: translateZ(0);
+}
+
+.orbitRingOuter {
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  border: 1px dashed rgba(255, 122, 0, 0.32);
+  box-shadow:
+    0 0 50px rgba(255, 122, 0, 0.055),
+    inset 0 0 50px rgba(255, 122, 0, 0.025);
+  animation: ringRotate 32s linear infinite;
+}
+
+.orbitRingMiddle {
+  width: calc(var(--orbit-size) * 0.72);
+  height: calc(var(--orbit-size) * 0.72);
+  border: 1px dashed rgba(255, 122, 0, 0.19);
+  animation: ringRotateReverse 25s linear infinite;
+}
+
+.orbitRingInner {
+  width: calc(var(--orbit-size) * 0.48);
+  height: calc(var(--orbit-size) * 0.48);
+  border: 1px solid rgba(255, 122, 0, 0.08);
+  box-shadow: 0 0 40px rgba(255, 122, 0, 0.07);
+}
+
+.orbitDot {
+  position: absolute;
+  width: clamp(6px, 0.45vw, 10px);
+  height: clamp(6px, 0.45vw, 10px);
+  border-radius: 50%;
+  background: #ff7a00;
+  box-shadow:
+    0 0 0 6px rgba(255, 122, 0, 0.08),
+    0 0 20px rgba(255, 122, 0, 0.55);
+  animation: dotPulse 2.6s ease-in-out infinite;
+}
+
+.orbitDotTop {
+  top: calc(50% - var(--orbit-size) / 2);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.orbitDotRight {
+  top: 50%;
+  right: calc(50% - var(--orbit-size) / 2);
+  transform: translate(50%, -50%);
+  animation-delay: -0.65s;
+}
+
+.orbitDotBottom {
+  bottom: calc(50% - var(--orbit-size) / 2);
+  left: 50%;
+  transform: translate(-50%, 50%);
+  animation-delay: -1.3s;
+}
+
+.orbitDotLeft {
+  top: 50%;
+  left: calc(50% - var(--orbit-size) / 2);
+  transform: translate(-50%, -50%);
+  animation-delay: -1.95s;
+}
+
+/* =========================================================
+   ROTATING SYSTEM
+   ========================================================= */
+
+.orbitSystem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 5;
+  transform: translate3d(0, 0, 0);
+  animation: systemRotate 42s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.featureCard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--card-width);
+  height: var(--card-height);
+  transform:
+    translate3d(-50%, -50%, 0)
+    rotate(var(--angle))
+    translateY(calc(-1 * var(--radius)));
+  transform-origin: center;
+  pointer-events: auto;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.featureCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: clamp(16px, 1.2vw, 25px);
+  overflow: hidden;
+  border: 1px solid rgba(232, 220, 210, 0.95);
+  border-radius: clamp(20px, 1.45vw, 30px);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow:
+    0 20px 48px rgba(55, 30, 17, 0.08),
+    0 0 26px rgba(255, 122, 0, 0.035);
+  text-align: left;
+  animation: cardCounterRotate 42s linear infinite;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.featureCardInner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.62),
+    transparent 35%,
+    transparent 68%,
+    rgba(255, 224, 192, 0.22)
+  );
+}
+
+.featureCardInner:hover {
+  border-color: rgba(255, 168, 87, 0.9);
+  box-shadow:
+    0 28px 62px rgba(55, 30, 17, 0.14),
+    0 0 40px rgba(255, 122, 0, 0.14);
+  transform: translateY(-7px) scale(1.025);
+}
+
+.cardTop {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.iconBox {
+  display: grid;
+  place-items: center;
+  width: clamp(43px, 3vw, 62px);
+  height: clamp(43px, 3vw, 62px);
+  flex: 0 0 auto;
+  border-radius: clamp(13px, 0.9vw, 18px);
+  color: #ff7a00;
+  background: #fff0dd;
+  box-shadow: inset 0 0 0 1px rgba(255, 122, 0, 0.07);
+}
+
+.cardNumber {
+  display: grid;
+  place-items: center;
+  width: clamp(30px, 2.15vw, 43px);
+  height: clamp(30px, 2.15vw, 43px);
+  flex: 0 0 auto;
+  border-radius: 50%;
+  color: #fff;
+  background: #ff7a00;
+  box-shadow: 0 8px 18px rgba(255, 122, 0, 0.23);
+  font: 800 clamp(10px, 0.72vw, 14px)/1 var(--font-tagline, Inter, sans-serif);
+}
+
+.featureCardInner h2 {
+  position: relative;
+  z-index: 2;
+  margin: clamp(12px, 1vw, 18px) 0 0;
+  color: #261c17;
+  font: 800 clamp(14px, 1.02vw, 20px)/1.2 var(--font-tagline, Inter, sans-serif);
+  letter-spacing: -0.2px;
+}
+
+.featureCardInner ul {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 10px;
+  margin: clamp(8px, 0.75vw, 14px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.featureCardInner li {
+  min-width: 0;
+  color: #756961;
+  font: 600 clamp(9px, 0.64vw, 13px)/1.25 var(--font-tagline, Inter, sans-serif);
+}
+
+.featureCardInner li::before {
+  content: "•";
+  margin-right: 5px;
+  color: #ff9a3d;
+}
+
+.cardShine {
+  position: absolute;
+  right: -35px;
+  bottom: -55px;
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 177, 91, 0.18), transparent 70%);
+  filter: blur(4px);
+}
+
+/* =========================================================
+   8 EQUAL POSITIONS
+   ========================================================= */
+
+.orbitOne   { --angle: 0deg; }
+.orbitTwo   { --angle: 45deg; }
+.orbitThree { --angle: 90deg; }
+.orbitFour  { --angle: 135deg; }
+.orbitFive  { --angle: 180deg; }
+.orbitSix   { --angle: 225deg; }
+.orbitSeven { --angle: 270deg; }
+.orbitEight { --angle: 315deg; }
+
+/* =========================================================
+   STATIC CENTER CORE
+   ========================================================= */
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 15;
+  width: clamp(180px, 18vw, 315px);
+  height: clamp(180px, 18vw, 315px);
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.centerHalo {
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 155, 47, 0.30) 0%,
+      rgba(255, 184, 101, 0.14) 42%,
+      rgba(255, 122, 0, 0.06) 58%,
+      transparent 72%
+    );
+
+  filter: blur(10px);
+
+  animation:
+    haloPulse
+    3.5s
+    ease-in-out
+    infinite alternate;
+
+  pointer-events: none;
+}
+
+.centerCore {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  border: clamp(2px, 0.2vw, 4px) solid #ff7a00;
+  border-radius: 50%;
+
+  color: #ff7a00;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      #fffefb 0%,
+      #fff5e7 56%,
+      #ffe8c8 100%
+    );
+
+  box-shadow:
+    0 0 0 7px rgba(255, 122, 0, 0.07),
+    0 0 0 16px rgba(255, 122, 0, 0.035),
+    0 0 32px rgba(255, 122, 0, 0.40),
+    0 0 75px rgba(255, 122, 0, 0.18),
+    0 20px 55px rgba(56, 27, 14, 0.10);
+
+  animation:
+    centerPulse
+    4.5s
+    ease-in-out
+    infinite;
+}
+
+.centerCore > svg {
+  width: clamp(31px, 3vw, 52px);
+  height: auto;
+  margin-bottom: clamp(6px, 0.6vw, 11px);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+ color: #16110e;
+   font-family: var(--font-brand);
+
+  font-size: 38px;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  letter-spacing: -1px;
+}
+
+.brand strong {
+ color: var(--orange);
+
+  font-weight: 700;
+}
+
+.centerCore small {
+  margin-top: clamp(6px, 0.55vw, 10px);
+  color: #89786c;
+  font: 700 clamp(8px, 0.62vw, 12px)/1.2 var(--font-tagline, Inter, sans-serif);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bottomHint {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  margin: clamp(5px, 1vw, 18px) auto 0;
+  padding: 9px 14px;
+  border: 1px solid rgba(255, 122, 0, 0.1);
+  border-radius: 999px;
+  color: #88776c;
+  background: rgba(255, 255, 255, 0.65);
+  font: 600 clamp(9px, 0.65vw, 12px)/1.25 var(--font-tagline, Inter, sans-serif);
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes systemRotate {
+  from { transform: translate3d(0, 0, 0) rotate(0deg); }
+  to { transform: translate3d(0, 0, 0) rotate(360deg); }
+}
+
+@keyframes cardCounterRotate {
+  from { transform: rotate(calc(-1 * var(--angle))); }
+  to { transform: rotate(calc(-1 * var(--angle) - 360deg)); }
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ringRotateReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes centerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.018); }
+}
+
+@keyframes haloPulse {
+  0%, 100% { opacity: 0.7; transform: scale(0.96); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* =========================================================
+   RESPONSIVE LAYOUTS (2K, 4K, 8K, TABLET, PHONE)
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .featuresSection { padding-inline: 40px; }
+  .orbitStage {
+    --orbit-size: min(58vw, 1180px);
+    --card-width: clamp(270px, 12.6vw, 340px);
+    --card-height: clamp(270px, 14.5vw, 355px);
+    height: min(60vw, 1250px);
+  }
+
+}
+
+@media (min-width: 2560px) {
+  .orbitStage {
+    --orbit-size: min(60vw, 1450px);
+    --card-width: clamp(310px, 12.2vw, 390px);
+    --card-height: clamp(310px, 14vw, 400px);
+    height: min(61vw, 1500px);
+  }
+  .heading { width: min(900px, 100%); }
+}
+
+@media (min-width: 3840px) {
+  .orbitStage {
+    --orbit-size: min(61vw, 1900px);
+    --card-width: clamp(380px, 11.8vw, 500px);
+    --card-height: clamp(370px, 13.6vw, 490px);
+    height: min(63vw, 1950px);
+  }
+  .featuresSection { padding-top: 105px; }
+}
+
+@media (max-width: 1100px) {
+  .featuresSection { padding-inline: 18px; }
+  .orbitStage {
+    height: clamp(610px, 82vw, 880px);
+    --orbit-size: clamp(550px, 81vw, 800px);
+    --card-width: clamp(175px, 22vw, 240px);
+    --card-height: clamp(200px, 25vw, 270px);
+  }
+  .centerImage{
+  width: 76px;
+  height: 76px;
+}
+.brand{font-size:22px;}
+  .featureCardInner { padding: clamp(13px, 1.8vw, 20px); border-radius: 20px; }
+  .featureCardInner ul { gap: 4px 8px; }
+  .featureCardInner li { font-size: clamp(8px, 1.08vw, 11px); }
+  .center { width: clamp(155px, 20vw, 205px); height: clamp(155px, 20vw, 205px); }
+}
+
+@media (max-width: 768px) {
+  .featuresSection { min-height: auto; padding-top: 34px; }
+  .heading h1 { font-size: clamp(33px, 8vw, 48px); }
+  .heading p { max-width: 520px; font-size: 11px; }
+  .orbitStage {
+    height: clamp(570px, 118vw, 760px);
+    margin-top: 25px;
+    --orbit-size: clamp(520px, 122vw, 720px);
+    --card-width: clamp(152px, 30vw, 212px);
+    --card-height: clamp(188px, 36vw, 240px);
+  }
+  .orbitRingMiddle { width: calc(var(--orbit-size) * 0.7); height: calc(var(--orbit-size) * 0.7); }
+  .orbitRingInner { width: calc(var(--orbit-size) * 0.46); height: calc(var(--orbit-size) * 0.46); }
+  .featureCardInner { padding: 12px; border-radius: 17px; }
+  .iconBox { width: 36px; height: 36px; border-radius: 10px; }
+  .iconBox svg { width: 18px; height: 18px; }
+  .cardNumber { width: 26px; height: 26px; font-size: 9px; }
+  .featureCardInner h2 { margin-top: 8px; font-size: 12px; }
+  .featureCardInner ul { margin-top: 6px; gap: 2px 6px; }
+  .featureCardInner li { font-size: 7.5px; line-height: 1.2; }
+  .center { width: clamp(132px, 25vw, 175px); height: clamp(132px, 25vw, 175px); }
+  .brand { font-size: clamp(18px, 4vw, 26px); }
+  .centerCore small { font-size: 7px; }
+  .bottomHint { max-width: 340px; text-align: center; white-space: normal; border-radius: 16px; }
+}
+
+@media (max-width: 520px) {
+  .featuresSection {
+    padding-inline: 0;
+    padding-top: 24px;
+    padding-bottom: 45px;
+    overflow: hidden;
+  }
+
+  .heading {
+    width: 100%;
+    padding-inline: 12px;
+  }
+
+  .heading h1 {
+    font-size: clamp(28px, 8.5vw, 37px);
+  }
+
+  .heading p {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-inline: 4px;
+    font-size: 9.5px;
+    line-height: 1.5;
+  }
+
+  .orbitStage {
+    width: 100%;
+    max-width: 100%;
+    height: clamp(500px, 128vw, 610px);
+    margin: 18px auto 0;
+    transform: none;
+
+    /*
+      IMPORTANT:
+      Orbit + card width together stay inside phone viewport.
+    */
+    --orbit-size: min(70vw, 300px);
+    --card-width: min(27vw, 116px);
+    --card-height: clamp(165px, 40vw, 190px);
+    --radius: calc(var(--orbit-size) / 2);
+  }
+
+  .orbitRingOuter {
+    border-style: solid;
+    border-color: rgba(255, 122, 0, 0.24);
+  }
+
+  .orbitRingMiddle {
+    border-color: rgba(255, 122, 0, 0.12);
+  }
+
+  .featureCardInner {
+    padding: 9px;
+    border-radius: 14px;
+  }
+
+  .iconBox {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .iconBox svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .cardNumber {
+    width: 22px;
+    height: 22px;
+    font-size: 8px;
+  }
+
+  .featureCardInner h2 {
+    margin-top: 6px;
+    font-size: 9.5px;
+    line-height: 1.15;
+  }
+
+  .featureCardInner ul {
+    margin-top: 5px;
+    gap: 2px 4px;
+  }
+
+  .featureCardInner li {
+    font-size: 6.2px;
+    line-height: 1.15;
+  }
+
+  .featureCardInner li::before {
+    margin-right: 2px;
+  }
+
+  .center {
+    width: 108px;
+    height: 108px;
+  }
+
+  .centerDog {
+    width: 54px;
+    max-width: 56%;
+  }
+
+  .brand {
+    font-size: 16px;
+    letter-spacing: -0.5px;
+  }
+.orbitStage {
+    width: 100vw;
+    max-width: none;
+
+    /*
+      Bigger orbit = cards edges ki taraf jayenge
+    */
+    height: 620px;
+    margin-top: 20px;
+
+    --orbit-size: 390px;
+    --card-width: 102px;
+    --card-height: 170px;
+    --radius: calc(var(--orbit-size) / 2);
+  }
+
+  /* Center smaller */
+  .center {
+    width: 92px;
+    height: 92px;
+  }
+
+  .centerDog {
+    width: 46px;
+  }
+.centerImage{
+  width: 46px;
+  height: 46px;
+}
+  .brand {
+    font-size: 13px;
+    letter-spacing: -0.4px;
+  }
+
+  /* Card spacing */
+  .featureCardInner {
+    padding: 8px;
+    border-radius: 13px;
+  }
+
+  .iconBox {
+    width: 29px;
+    height: 29px;
+    border-radius: 8px;
+  }
+
+  .iconBox svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cardNumber {
+    width: 21px;
+    height: 21px;
+    font-size: 7px;
+  }
+
+  .featureCardInner h2 {
+    margin-top: 6px;
+    font-size: 9px;
+    line-height: 1.15;
+  }
+
+  .featureCardInner ul {
+    margin-top: 5px;
+    gap: 2px 4px;
+  }
+
+  .featureCardInner li {
+    font-size: 6px;
+    line-height: 1.15;
+  }
+
+  .bottomHint {
+    margin-top: 4px;
+    padding: 7px 9px;
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 360px) {
+  .orbitStage {
+    height: 560px;
+
+    --orbit-size: 350px;
+    --card-width: 100px;
+    --card-height: 165px;
+  }
+
+  .center {
+    width: 82px;
+    height: 82px;
+  }
+
+  .centerDog {
+    width: 40px;
+  }
+
+  .brand {
+    font-size: 12px;
+  }
+
+  .featureCardInner {
+    padding: 7px;
+  }
+
+  .featureCardInner h2 {
+    font-size: 8px;
+  }
+
+  .featureCardInner li {
+    font-size: 5.5px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .orbitSystem,
+  .featureCardInner,
+  .orbitRingOuter,
+  .orbitRingMiddle,
+  .centerCore,
+  .centerHalo,
+  .orbitDot {
+    animation: none !important;
+  }
+  .featureCardInner { transition: none; }
+}

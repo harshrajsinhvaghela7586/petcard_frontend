@@ -64,10 +64,7 @@ export default function Contact() {
         <div className="container">
           <div className={styles.heroGrid}>
             <div className={styles.heroContent}>
-              <div className={styles.eyebrow}>
-                <Mail size={14} />
-                Contact Us
-              </div>
+             
 
               <h1>
                 We&apos;d love to{" "}
@@ -186,9 +183,7 @@ export default function Contact() {
             {/* FORM */}
 
             <div className={styles.formWrap}>
-              <div className={styles.sectionLabel}>
-                Send a Message
-              </div>
+             
 
               <h2 className={styles.sectionTitle}>
                 Tell us{" "}

@@ -437,3 +437,372 @@
     transition: none;
   }
 }
+
+/* =========================================================
+   CTA PET IMAGE
+   ADD ONLY
+   ========================================================= */
+
+.ctaPet {
+  position: absolute;
+
+  left: 70%;
+  top: 50%;
+
+  z-index: 2;
+
+  width: 170px;
+  height: 170px;
+
+  display: grid;
+  place-items: center;
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+
+  opacity: 0;
+}
+
+.ctaPetGlow {
+  position: absolute;
+
+  width: 145px;
+  height: 145px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 184, 102, 0.32) 0%,
+      rgba(255, 155, 47, 0.14) 42%,
+      transparent 72%
+    );
+
+  filter: blur(2px);
+}
+
+.ctaPet img {
+  position: relative;
+  z-index: 2;
+
+  width: 150px;
+  height: 150px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   CTA ENTRANCE ANIMATION
+   ========================================================= */
+
+.isVisible .cta {
+  overflow: hidden;
+}
+
+.isVisible .ctaPet {
+  animation:
+    ctaPetReveal
+    0.9s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    0.12s
+    both;
+}
+
+@keyframes ctaPetReveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translate(
+        -50%,
+        calc(-50% + 22px)
+      )
+      scale(0.82);
+
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      scale(1);
+
+    filter: blur(0);
+  }
+}
+
+
+/* =========================================================
+   EXISTING CONTENT / BUTTON REVEAL
+   ========================================================= */
+
+.isVisible .content {
+  animation:
+    ctaContentReveal
+    0.75s
+    ease
+    0.08s
+    both;
+}
+
+.isVisible .button {
+  animation:
+    ctaButtonReveal
+    0.7s
+    ease
+    0.2s
+    both;
+}
+
+@keyframes ctaContentReveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(-18px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0);
+  }
+}
+
+@keyframes ctaButtonReveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(18px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0);
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+  .ctaPet {
+    position: relative;
+
+    left: auto;
+    top: auto;
+
+    width: 145px;
+    height: 145px;
+
+    margin:
+      2px auto 0;
+
+    transform: none;
+
+    order: 2;
+  }
+
+  .ctaPetGlow {
+    width: 125px;
+    height: 125px;
+  }
+
+  .ctaPet img {
+    width: 128px;
+    height: 128px;
+  }
+
+  .isVisible .ctaPet {
+    animation:
+      ctaPetMobileReveal
+      0.85s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      )
+      0.1s
+      both;
+  }
+
+  @keyframes ctaPetMobileReveal {
+    from {
+      opacity: 0;
+
+      transform:
+        translateY(20px)
+        scale(0.82);
+
+      filter: blur(5px);
+    }
+
+    to {
+      opacity: 1;
+
+      transform:
+        translateY(0)
+        scale(1);
+
+      filter: blur(0);
+    }
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .ctaPet {
+    width: 125px;
+    height: 125px;
+
+    margin-top: 0;
+  }
+
+  .ctaPetGlow {
+    width: 110px;
+    height: 110px;
+  }
+
+  .ctaPet img {
+    width: 112px;
+    height: 112px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .ctaPet {
+    width: 110px;
+    height: 110px;
+  }
+
+  .ctaPetGlow {
+    width: 96px;
+    height: 96px;
+  }
+
+  .ctaPet img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+
+/* =========================================================
+   LARGE SCREENS
+   ========================================================= */
+
+@media (min-width: 1600px) {
+  .ctaPet {
+    width: 205px;
+    height: 205px;
+  }
+
+  .ctaPetGlow {
+    width: 180px;
+    height: 180px;
+  }
+
+  .ctaPet img {
+    width: 185px;
+    height: 185px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .ctaPet {
+    width: 240px;
+    height: 240px;
+  }
+
+  .ctaPetGlow {
+    width: 215px;
+    height: 215px;
+  }
+
+  .ctaPet img {
+    width: 215px;
+    height: 215px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .ctaPet {
+    width: 290px;
+    height: 290px;
+  }
+
+  .ctaPetGlow {
+    width: 260px;
+    height: 260px;
+  }
+
+  .ctaPet img {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+@media (min-width: 3840px) {
+  .ctaPet {
+    width: 370px;
+    height: 370px;
+  }
+
+  .ctaPetGlow {
+    width: 330px;
+    height: 330px;
+  }
+
+  .ctaPet img {
+    width: 330px;
+    height: 330px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .ctaPet,
+  .content,
+  .button {
+    animation: none !important;
+  }
+
+  .ctaPet {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
