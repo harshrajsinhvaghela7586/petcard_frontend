@@ -1,0 +1,559 @@
+/* =========================================================
+   LAUNCH BANNER
+   ========================================================= */
+
+.banner {
+  position: relative;
+
+  width: 100%;
+
+  z-index: 100;
+
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      198,
+      135,
+      0.45
+    );
+
+  background:
+    linear-gradient(
+      90deg,
+      #fff8ef 0%,
+      #fff4e7 45%,
+      #fff9f2 100%
+    );
+
+  box-shadow:
+    0 4px 18px
+      rgba(
+        56,
+        27,
+        14,
+        0.035
+      );
+}
+
+.inner {
+  width:
+    min(
+      100%,
+      1500px
+    );
+
+  min-height: 64px;
+
+  margin-inline: auto;
+
+  padding:
+    10px 24px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 24px;
+}
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.message {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  min-width: 0;
+
+  color:
+    #6f5d53;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+}
+
+.messageIcon {
+  display: grid;
+
+  place-items: center;
+
+  width: 31px;
+  height: 31px;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  color:
+    var(--orange);
+
+  background:
+    rgba(
+      255,
+      122,
+      0,
+      0.08
+    );
+}
+
+.message strong {
+  color:
+    #a96735;
+
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+.messageText {
+  color:
+    #776a63;
+
+  font-size: 14px;
+}
+
+.separator {
+  width: 1px;
+  height: 18px;
+
+  margin-inline: 4px;
+
+  background:
+    #dccfc5;
+
+  opacity: 0.7;
+}
+
+.stayTuned {
+  color:
+    #5f5149;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.heart {
+  color:
+    var(--orange);
+
+  opacity: 0.75;
+
+  animation:
+    heartBeat
+    2.7s
+    ease-in-out
+    infinite;
+}
+
+@keyframes heartBeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.14);
+  }
+}
+
+
+/* =========================================================
+   NOTIFY FORM
+   ========================================================= */
+
+.notifyForm {
+  display: flex;
+
+  align-items: center;
+
+  flex-shrink: 0;
+
+  gap: 7px;
+
+  padding: 4px;
+
+  border:
+    1px solid
+    #eadcd1;
+
+  border-radius: 12px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.78
+    );
+
+  box-shadow:
+    0 4px 13px
+      rgba(
+        56,
+        27,
+        14,
+        0.04
+      );
+}
+
+.inputWrap {
+  min-width: 0;
+}
+
+.inputWrap input {
+  width: 175px;
+
+  height: 36px;
+
+  padding:
+    0 10px;
+
+  border: 0;
+
+  outline: 0;
+
+  color:
+    var(--text);
+
+  background:
+    transparent;
+
+  font-family:
+    inherit;
+
+  font-size: 14px;
+}
+
+.inputWrap input::placeholder {
+  color:
+    #a1958d;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .inner {
+    gap: 15px;
+
+    padding-inline: 18px;
+  }
+
+  .messageText {
+    display: none;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .inputWrap input {
+    width: 150px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .inner {
+    min-height: auto;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 9px;
+
+    padding:
+      10px 14px;
+  }
+
+  .message {
+    justify-content:
+      center;
+
+    width: 100%;
+
+    text-align: center;
+  }
+
+  .messageIcon {
+    width: 27px;
+    height: 27px;
+  }
+
+  .message strong {
+    font-size: 9px;
+  }
+
+  .messageText {
+    display: inline;
+
+    width: 100%;
+
+    color:
+      #81736b;
+
+    font-size: 8px;
+  }
+
+  .stayTuned {
+    font-size: 8px;
+  }
+
+  .heart {
+    width: 14px;
+    height: 14px;
+  }
+
+  .notifyForm {
+    width: 100%;
+  }
+
+  .inputWrap {
+    flex: 1;
+  }
+
+  .inputWrap input {
+    width: 100%;
+
+    height: 34px;
+  }
+
+  .notifyButton {
+    min-width: 96px;
+
+    height: 34px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .message strong {
+    font-size: 8px;
+  }
+
+  .messageText {
+    font-size: 7px;
+  }
+
+  .stayTuned {
+    font-size: 7px;
+  }
+
+  .inputWrap input {
+    font-size: 8px;
+  }
+
+  .notifyButton {
+    min-width: 88px;
+
+    padding-inline: 9px;
+
+    font-size: 8px;
+  }
+}
+
+
+/* =========================================================
+   2K
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .inner {
+    width:
+      min(
+        100%,
+        1750px
+      );
+
+    min-height: 74px;
+
+    padding-inline: 30px;
+  }
+
+  .message {
+    font-size: 12px;
+  }
+
+  .message strong {
+    font-size: 12px;
+  }
+
+  .messageText {
+    font-size: 11px;
+  }
+
+  .inputWrap input {
+    width: 215px;
+
+    height: 42px;
+
+    font-size: 10px;
+  }
+
+  .notifyButton {
+    min-width: 125px;
+
+    height: 42px;
+
+    font-size: 10px;
+  }
+}
+
+
+/* =========================================================
+   4K
+   ========================================================= */
+
+@media (min-width: 2560px) {
+  .inner {
+    width:
+      min(
+        100%,
+        2200px
+      );
+
+    min-height: 86px;
+
+    padding-inline: 40px;
+  }
+
+  .message {
+    gap: 12px;
+
+    font-size: 14px;
+  }
+
+  .messageIcon {
+    width: 39px;
+    height: 39px;
+
+    border-radius: 12px;
+  }
+
+  .message strong {
+    font-size: 14px;
+  }
+
+  .messageText {
+    font-size: 13px;
+  }
+
+  .stayTuned {
+    font-size: 13px;
+  }
+
+  .inputWrap input {
+    width: 270px;
+
+    height: 49px;
+
+    font-size: 12px;
+  }
+
+  .notifyButton {
+    min-width: 145px;
+
+    height: 49px;
+
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   8K
+   ========================================================= */
+
+@media (min-width: 3840px) {
+  .inner {
+    width:
+      min(
+        100%,
+        3000px
+      );
+
+    min-height: 110px;
+
+    padding-inline: 55px;
+  }
+
+  .message {
+    gap: 15px;
+
+    font-size: 17px;
+  }
+
+  .messageIcon {
+    width: 49px;
+    height: 49px;
+
+    border-radius: 15px;
+  }
+
+  .message strong {
+    font-size: 17px;
+  }
+
+  .messageText {
+    font-size: 16px;
+  }
+
+  .stayTuned {
+    font-size: 16px;
+  }
+
+  .inputWrap input {
+    width: 350px;
+
+    height: 62px;
+
+    font-size: 15px;
+  }
+
+  .notifyButton {
+    min-width: 175px;
+
+    height: 62px;
+
+    border-radius: 13px;
+
+    font-size: 15px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .heart {
+    animation: none;
+  }
+
+  .notifyButton {
+    transition: none;
+  }
+}

@@ -32,6 +32,11 @@ import {
 
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
+import PetRewardsSlider from "../components/PetReawardsSlider";
+import JourneySteps from "../components/home/JourneySteps/JourneySteps";
+import FeaturesOrbit from "../components/FeaturesOrbit";
+import PetWorldPage from "../components/home/PetWorld/PetWorld";
+
 
 type IconComponent = typeof PawPrint;
 
@@ -112,18 +117,18 @@ const storeBadges = (
       </span>
     </div>
 
-    <div className={styles.storeBadge}>
-      <img
-        src="/images/google-play.png"
-        alt="Google Play"
-        className={styles.storeIconImage}
-      />
+    <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
+  <img
+    src="/images/google-play.png"
+    alt="Google Play"
+    className={styles.storeIconImage}
+  />
 
-      <span className={styles.storeText}>
-        <small>GET IT ON</small>
-        <b>Google Play</b>
-      </span>
-    </div>
+  <span className={styles.storeText}>
+    <small>GET IT ON</small>
+    <b>Google Play</b>
+  </span>
+</div>
   </>
 );
 
@@ -543,20 +548,6 @@ function PhoneMockup({
   );
 }
 
-function SectionLabel({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <div className={styles.eyebrow}>
-      {children}
-    </div>
-  );
-}
-
-
-
 const homeTestimonials = [
   {
     name: "Arun Negi",
@@ -611,7 +602,6 @@ function HomeTestimonialsPreview() {
     <section className={`${styles.section} ${styles.homeTestimonials}`} id="testimonials">
       <div className={styles.container}>
         <div className={`${styles.sectionHeading} ${styles.center}`}>
-          <div className={styles.eyebrow}>Testimonials</div>
           <h2 className={styles.sectionTitle}>
             Loved for the little things.{" "}
             <span>Built for everyday care.</span>
@@ -656,9 +646,9 @@ function HomeTestimonialsPreview() {
         </div>
 
         <div className={styles.homePreviewLinkWrap}>
-          <Link href="/testimonials" className="btn btn-outline">
+          <Link href="/testimonials" className="btn btn-primary">
             View All Testimonials
-            <ArrowRight size={16} />
+            
           </Link>
         </div>
       </div>
@@ -672,7 +662,6 @@ function HomeFaqPreview() {
       <div className={styles.container}>
         <div className={styles.homeFaqGrid}>
           <div className={styles.homeFaqIntro}>
-            <div className={styles.eyebrow}>FAQ</div>
 
             <h2 className={styles.sectionTitle}>
               Questions?{" "}
@@ -684,9 +673,9 @@ function HomeFaqPreview() {
               promotional website.
             </p>
 
-            <Link href="/faq" className="btn btn-outline">
+            <Link href="/faq" className="btn btn-primary">
               View All FAQs
-              <ArrowRight size={16} />
+             
             </Link>
           </div>
 
@@ -706,15 +695,91 @@ function HomeFaqPreview() {
     </section>
   );
 }
+function HomeScrollAnimations() {
+  useEffect(() => {
+    const selector = [
+      `.${styles.homeReveal}`,
+      `.${styles.whyReveal}`,
+      `.${styles.homeTestimonials}`,
+      "#faq",
+      "#know-ai",
+    ].join(",");
+
+    const sections =
+      document.querySelectorAll<HTMLElement>(
+        selector
+      );
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reducedMotion) {
+      sections.forEach((section) => {
+        section.classList.add(
+          styles.homeRevealVisible
+        );
+      });
+
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          if (
+            entry.target.classList.contains(
+              styles.whyReveal
+            )
+          ) {
+            entry.target.classList.add(
+              styles.whyAnimated
+            );
+          } else {
+            entry.target.classList.add(
+              styles.homeRevealVisible
+            );
+          }
+
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin:
+          "0px 0px -60px 0px",
+      }
+    );
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return null;
+}
+
 
 export default function Home() {
+
   return (
     <>
+      <HomeScrollAnimations />
+
       {/* =====================================================
           HERO
           ===================================================== */}
 
-      <section className={styles.homeHero}>
+      <section
+        className={styles.homeHero}
+        data-home-reveal="hero"
+      >
         <div
           className={`${styles.homeHeroGrid} ${styles.container}`}
         >
@@ -751,10 +816,10 @@ export default function Home() {
                 className="btn btn-outline"
               >
                 <CirclePlay
-  size={24}
-/>
+                  size={24}
+                />
                 Watch Video
-                
+
               </Link>
             </div>
 
@@ -810,65 +875,7 @@ export default function Home() {
 
 
 
-      {/* =====================================================
-          INTRO
-          ===================================================== */}
 
-      <section
-        className={`${styles.section}`}
-        id="what-is-pet-card"
-      >
-        <div className={styles.container}>
-          <div
-            className={`${styles.sectionHeading} ${styles.center}`}
-          >
-
-
-            <h2 className={styles.sectionTitle}>
-              More than a pet care app.
-            </h2>
-
-            <p className={styles.sectionSubtitle}>
-              PET CARD is your pet&apos;s digital companion — a
-              place to create their identity, manage everyday
-              care, keep important records safe, celebrate
-              memories, and make caring for them more fun.
-            </p>
-          </div>
-
-          <div className={styles.highlightGrid}>
-            {highlights.map(
-              ({ icon: Icon, title, text }, index) => (
-                <article
-                  className={styles.highlightCard}
-                  key={title}
-                  style={
-                    {
-                      "--delay": `${index * 70}ms`,
-                    } as React.CSSProperties
-                  }
-                >
-                  <div className={styles.highlightIcon}>
-                    <Icon size={24} />
-                  </div>
-
-                  <span className={styles.highlightNumber}>
-                    0{index + 1}
-                  </span>
-
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-
-                  <ArrowRight
-                    className={styles.highlightArrow}
-                    size={17}
-                  />
-                </article>
-              )
-            )}
-          </div>
-        </div>
-      </section>
 
 
 
@@ -877,7 +884,7 @@ export default function Home() {
     ===================================================== */}
 
       <section
-        className={`${styles.section} ${styles.whySection}`}
+        className={`${styles.section} ${styles.whySection} ${styles.whyReveal}`}
         id="why-choose-us"
       >
         <div className={styles.container}>
@@ -1051,8 +1058,9 @@ export default function Home() {
           ===================================================== */}
 
       <section
-        className={`${styles.section} ${styles.soft}`}
+        className={`${styles.section} ${styles.soft} ${styles.homeReveal}`}
         id="digital-pet-card"
+        data-home-reveal="identity"
       >
         <div
           className={`${styles.container} ${styles.identityGrid}`}
@@ -1157,432 +1165,75 @@ export default function Home() {
         </div>
       </section>
 
+      <JourneySteps />
 
 
-      {/* =====================================================
-          HOW IT WORKS
-          ===================================================== */}
-
-      <section
-        className={styles.section}
-        id="how-it-works"
-      >
-        <div className={styles.container}>
-          <div
-            className={`${styles.sectionHeading} ${styles.center}`}
-          >
-
-            <h2 className={styles.sectionTitle}>
-              Simple steps.{" "}
-              <span>A happier pet.</span>
-            </h2>
-
-            <p className={styles.sectionSubtitle}>
-              A playful journey from creating a profile to
-              building better everyday care habits.
-            </p>
-          </div>
-
-          <div className={styles.journeyTrack}>
-            <div className={styles.journeyLine} />
-
-            {journey.map(
-              ([number, title, text, avatar], index) => (
-                <article
-                  className={styles.journeyStep}
-                  key={number}
-                >
-                  <div className={styles.journeyAvatar}>
-                    {index === 1 ? (
-                      <Image
-                        src="/images/home/home-dog.png"
-                        alt={title}
-                        fill
-                        sizes="86px"
-                      />
-                    ) : (
-                      avatar
-                    )}
-                  </div>
-
-                  <span className={styles.journeyNumber}>
-                    {number}
-                  </span>
-
-                  <h3>{title}</h3>
-
-                  <p>{text}</p>
-                </article>
-              )
-            )}
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* =====================================================
-          REWARDS
-          ===================================================== */}
-
-      <section
-        className={`${styles.section} ${styles.gameSection}`}
-        id="rewards"
-      >
-        <div
-          className={`${styles.container} ${styles.gameGrid}`}
-        >
-          <div className={styles.gamePhoneWrap}>
-            <PhoneMockup
-              type="reward"
-              className={styles.gamePhone}
-            />
-
-            <div
-              className={`${styles.gameBubble} ${styles.bubbleOne}`}
-            >
-              🔥 7 day streak!
-            </div>
-
-            <div
-              className={`${styles.gameBubble} ${styles.bubbleTwo}`}
-            >
-              +20 PawPoints ⭐
-            </div>
-          </div>
-
-          <div className={styles.gameCopy}>
-
-            <h2 className={styles.sectionTitle}>
-              The more you care,{" "}
-              <span>the more you unlock.</span>
-            </h2>
-
-            <p className={styles.sectionSubtitle}>
-              Make everyday care rewarding. Build streaks,
-              collect PawPoints, level up and unlock fun ways
-              to customize your pet.
-            </p>
-
-            <div className={styles.gameStats}>
-              <div>
-                <strong>🔥 7</strong>
-                <span>Day Streak</span>
-              </div>
-
-              <div>
-                <strong>⭐ 240</strong>
-                <span>PawPoints</span>
-              </div>
-
-              <div>
-                <strong>🏆 4</strong>
-                <span>Level</span>
-              </div>
-
-              <div>
-                <strong>🎖 12</strong>
-                <span>Achievements</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* =====================================================
-          MEMORIES
-          ===================================================== */}
-
-      <section
-        className={`${styles.section} ${styles.soft}`}
-        id="memories"
-      >
-        <div
-          className={`${styles.container} ${styles.memoriesGrid}`}
-        >
-          <div className={styles.memoriesCopy}>
-
-            <h2 className={styles.sectionTitle}>
-              Some moments deserve more than your{" "}
-              <span>camera roll.</span>
-            </h2>
-
-            <p className={styles.sectionSubtitle}>
-              Save the first day home, birthdays, adventures,
-              achievements and everyday moments in one beautiful
-              place.
-            </p>
-
-            <div className={styles.memoryList}>
-              {[
-                "Photos",
-                "Videos",
-                "Captions",
-                "Stories",
-                "Albums",
-                "Milestones",
-              ].map((item) => (
-                <span key={item}>
-                  <ImageIcon size={15} />
-                  {item}
-                </span>
-              ))}
-            </div>
-
-            <Link
-              href="#download-app"
-              className="btn btn-outline"
-            >
-              Explore Memories
-              <img
-                src="/images/paw.png"
-                width={17}
-                height={17}
-                alt=""
-              />
-            </Link>
-          </div>
-
-          <div className={styles.memoryBoard}>
-            <div
-              className={`${styles.memoryNote} ${styles.noteOne}`}
-            >
-              First day home 🧡
-            </div>
-
-            <div
-              className={`${styles.memoryPhoto} ${styles.photoMain}`}
-            >
-              <Image
-                src="/images/home/home-dog.png"
-                alt="Pet memory"
-                fill
-                sizes="270px"
-              />
-
-              <span>Bruno&apos;s first adventure</span>
-            </div>
-
-            <div
-              className={`${styles.memoryPhoto} ${styles.photoCat}`}
-            >
-              <Image
-                src="/images/home/home-cat.png"
-                alt="Cat memory"
-                fill
-                sizes="150px"
-              />
-
-              <span>Best nap buddy</span>
-            </div>
-
-            <div
-              className={`${styles.memoryPhoto} ${styles.photoRabbit}`}
-            >
-              <Image
-                src="/images/home/home-rabbit.png"
-                alt="Rabbit memory"
-                fill
-                sizes="130px"
-              />
-
-              <span>Little moments</span>
-            </div>
-
-            <div
-              className={`${styles.memoryNote} ${styles.noteTwo}`}
-            >
-              🏆 First achievement!
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* =====================================================
-          AI
-          ===================================================== */}
-
-      <section
-        className={styles.section}
-        id="know-ai"
-      >
-        <div
-          className={`${styles.container} ${styles.knowGrid}`}
-        >
-          <div className={styles.knowPetStage}>
-            <div className={styles.knowGlow} />
-
-            <div className={styles.knowPet}>
-              <Image
-                src="/images/home/home-dog.png"
-                alt="Bruno"
-                fill
-              />
-            </div>
-
-            <div
-              className={`${styles.knowCard} ${styles.knowCardTop}`}
-            >
-              <Sparkles size={16} />
-
-              <div>
-                <b>Know Bruno</b>
-                <small>Personalized care</small>
-              </div>
-            </div>
-
-            <div
-              className={`${styles.knowCard} ${styles.knowCardBottom}`}
-            >
-              <span>🤖</span>
-
-              <div>
-                <b>PET CARD AI</b>
-                <small>Ask anything about Bruno</small>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.knowCopy}>
-
-            <h2 className={styles.sectionTitle}>
-              Personalized care,{" "}
-              <span>made for your pet.</span>
-            </h2>
-
-            <p className={styles.sectionSubtitle}>
-              Get a pet-specific view across nutrition,
-              grooming, training, wellness, safety and daily
-              care.
-            </p>
-
-            <div className={styles.knowTopics}>
-              {[
-                "🍽 Food & Nutrition",
-                "✨ Grooming",
-                "🎓 Training",
-                "🩺 Wellness",
-                "🛡 Safety",
-                "🐾 Daily Care",
-              ].map((item) => (
-                <span key={item}>{item}</span>
-              ))}
-            </div>
-
-            <div className={styles.aiChat}>
-              <div className={styles.aiChatHead}>
-
-
-                <div>
-                  <b>Ask PET CARD AI</b>
-                  <small>Personalized assistant</small>
-                </div>
-
-                <span className={styles.onlineDot} />
-              </div>
-
-              <div className={styles.aiQuestion}>
-                How often should Bruno be groomed?
-              </div>
-
-              <div className={styles.aiAnswer}>
-                For a Golden Retriever like Bruno, regular
-                brushing helps manage shedding and keeps his
-                coat healthy. 🐶
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
-        <HomeTestimonialsPreview />
-
-        <HomeFaqPreview />
-
-      {/* =====================================================
-          FINAL DOWNLOAD
-          SAME APP STORE / GOOGLE PLAY BADGES AS TOP
-          ===================================================== */}
-
-      <section
-        className={styles.finalDownload}
-        id="download-app"
-      >
-        <div
-          className={`${styles.container} ${styles.finalDownloadCard}`}
-        >
-          <div className={styles.finalCopy}>
-
-            <h2>
-              Care today.{" "}
-              <span>Stronger bond tomorrow.</span>
-            </h2>
-
-            <p>
-              Create their PET CARD, build better care habits,
-              save every memory, and enjoy the journey together.
-            </p>
-
-            {/* SAME BADGES AS HERO */}
-            <div className={styles.finalButtons}>
-              {storeBadges}
-            </div>
-          </div>
-
-          <div className={styles.finalPets}>
-            <div
-              className={`${styles.finalPet} ${styles.finalDog}`}
-            >
-              <Image
-                src="/images/about/dog.png"
-                alt="Dog"
-                fill
-                sizes="260px"
-              />
-            </div>
-
-            <div
-              className={`${styles.finalPet} ${styles.finalCat}`}
-            >
-              <Image
-                src="/images/about/cat.png"
-                alt="Cat"
-                fill
-                sizes="160px"
-              />
-            </div>
-
-            <div
-              className={`${styles.finalPet} ${styles.finalRabbit}`}
-            >
-              <Image
-                src="/images/about/rabbit.png"
-                alt="Rabbit"
-                fill
-                sizes="140px"
-              />
-            </div>
-
-            <span
-              className={`${styles.finalSpark} ${styles.sparkOne}`}
-            >
-              ✦
-            </span>
-
-            <span
-              className={`${styles.finalSpark} ${styles.sparkTwo}`}
-            >
-              ♡
-            </span>
-          </div>
-        </div>
-      </section>
+      <FeaturesOrbit />
+
+<PetWorldPage/>
+
+      
+
+
+
+     <PetRewardsSlider/>
+
+
+
+      <HomeTestimonialsPreview />
+
+      <HomeFaqPreview />
+
+{/* =====================================================
+    FINAL DOWNLOAD
+    ===================================================== */}
+
+<section
+  className={`${styles.finalDownload} ${styles.homeReveal}`}
+  id="download-app"
+  data-home-reveal="download"
+>
+  <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
+
+    {/* ================= PETS ================= */}
+
+    <div className={styles.finalPets}>
+      <Image
+        src="/images/pets.png"
+        alt="PETCARD pets"
+        fill
+        priority
+       
+        className={styles.finalPetsImage}
+      />
+    </div>
+
+
+    {/* ================= COPY ================= */}
+
+    <div className={styles.finalCopy}>
+
+      <h2>
+        Start your pet&apos;s amazing journey today!
+      </h2>
+
+      <p>
+        Download PETCARD and make every day better
+        <br className={styles.desktopBreak} />
+        for you and your pet.
+      </p>
+
+    </div>
+
+
+    {/* ================= STORE BADGES ================= */}
+
+    <div className={styles.finalButtons}>
+      {storeBadges}
+    </div>
+
+  </div>
+</section>
 
     </>
   );

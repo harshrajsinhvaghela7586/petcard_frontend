@@ -1,0 +1,947 @@
+/* =========================================================
+   PET REWARDS SLIDER
+   ========================================================= */
+
+.section {
+  width: 100%;
+  padding: clamp(64px, 7vw, 135px) 0 clamp(72px, 8vw, 150px);
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.container {
+  width: min(1480px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.heading {
+  margin: 0 auto clamp(28px, 3.5vw, 52px);
+  text-align: center;
+}
+
+.heading h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(32px, 4vw, 64px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.heading h2 span {
+  color: var(--orange);
+}
+
+.heading p {
+  max-width: 620px;
+  margin: 13px auto 0;
+  color: var(--muted);
+  font-family: var(--font-tagline);
+  font-size: clamp(11px, 0.9vw, 15px);
+  line-height: 1.7;
+}
+
+/* =========================================================
+   SLIDER
+   ========================================================= */
+
+.slider {
+  position: relative;
+  width: 100%;
+  min-height: clamp(320px, 30vw, 440px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.track {
+  position: relative;
+  width: 100%;
+  height: clamp(300px, 28vw, 410px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: clamp(260px, 24vw, 390px);
+  height: clamp(275px, 22vw, 355px);
+
+  border: 1px solid rgba(232, 224, 218, 0.85);
+  border-radius: clamp(22px, 1.8vw, 31px);
+
+  background: linear-gradient(
+    180deg,
+    #e8b586 0%,
+    #fffaf6 100%
+  );
+
+  box-shadow:
+    0 16px 35px rgba(56, 27, 14, 0.055);
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.72);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.55s ease,
+    visibility 0.55s ease,
+    box-shadow 0.45s ease;
+
+  will-change: transform, opacity;
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 24px 22px 22px;
+
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.cardInner::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: -90px;
+  right: -40px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 155, 47, 0.12),
+    transparent 68%
+  );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   ACTIVE CARD
+   ========================================================= */
+
+.card.active {
+  z-index: 5;
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+
+  border-color: #ffd39f;
+
+  background: linear-gradient(
+    145deg,
+    #fff8ea 0%,
+    #fff3df 100%
+  );
+
+  box-shadow:
+    0 22px 45px rgba(255, 154, 46, 0.14),
+    0 0 0 2px rgba(255, 172, 94, 0.12);
+}
+
+.card.active:hover {
+  box-shadow:
+    0 25px 52px rgba(255, 154, 46, 0.18),
+    0 0 20px rgba(255, 155, 47, 0.18);
+}
+
+/* =========================================================
+   SIDE CARDS
+   ========================================================= */
+
+.card.left,
+.card.right {
+  z-index: 2;
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.84);
+
+  box-shadow:
+    0 12px 28px rgba(56, 27, 14, 0.045);
+}
+
+.card.left {
+  transform:
+    translate(
+      calc(-50% - clamp(285px, 29.8vw, 430px)),
+      -50%
+    )
+    scale(0.84);
+}
+
+.card.right {
+  transform:
+    translate(
+      calc(-50% + clamp(285px, 29.8vw, 430px)),
+      -50%
+    )
+    scale(0.84);
+}
+
+.card.left:hover,
+.card.right:hover {
+  box-shadow:
+    0 15px 32px rgba(56, 27, 14, 0.08);
+}
+
+/* =========================================================
+   HIDDEN CARDS
+   ========================================================= */
+
+.card.hidden-left {
+  transform:
+    translate(
+      calc(-50% - 700px),
+      -50%
+    )
+    scale(0.68);
+}
+
+.card.hidden-right {
+  transform:
+    translate(
+      calc(-50% + 700px),
+      -50%
+    )
+    scale(0.68);
+}
+
+/* =========================================================
+   PAW DECORATION
+   ========================================================= */
+
+.pawDecoration {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+
+  color: var(--orange);
+  opacity: 0.08;
+
+  transform: rotate(14deg);
+  pointer-events: none;
+}
+
+.card.active .pawDecoration {
+  opacity: 0.13;
+}
+
+/* =========================================================
+   PET IMAGE
+   ========================================================= */
+
+.petImage {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(53px, 4.7vw, 88px);
+
+  width: clamp(185px, 18.75vw, 270px);
+  height: clamp(155px, 15.3vw, 220px);
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  transform: translateX(-50%);
+}
+
+.petImage img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  filter: drop-shadow(
+    0 13px 12px rgba(56, 27, 14, 0.08)
+  );
+
+  user-select: none;
+  pointer-events: none;
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .petImage img {
+  transform: scale(1.035);
+}
+
+.card.active .petImage img {
+  transform: scale(1.04);
+}
+
+/* =========================================================
+   CARD TEXT
+   ========================================================= */
+
+.card h3 {
+  position: relative;
+  z-index: 2;
+
+  margin: 0 0 8px;
+
+  color: var(--text);
+  font-size: clamp(16px, 1.4vw, 21px);
+  font-weight: 700;
+}
+
+.badge {
+  position: relative;
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 9px;
+
+  border: 1px solid #ebdfd4;
+  border-radius: 999px;
+
+  color: #89776b;
+  background: rgba(255, 255, 255, 0.85);
+
+  font-size: clamp(7px, 0.6vw, 9px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.badge svg {
+  flex: 0 0 auto;
+  color: var(--orange);
+}
+
+.subtitle {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 5px;
+
+  color: #a09087;
+  font-size: clamp(7px, 0.6vw, 9px);
+  line-height: 1.3;
+}
+
+/* =========================================================
+   ARROWS
+   ========================================================= */
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+
+  display: grid;
+  place-items: center;
+
+  width: clamp(36px, 3vw, 50px);
+  height: clamp(36px, 3vw, 50px);
+
+  padding: 0;
+
+  border: 1px solid #eadfd6;
+  border-radius: 50%;
+
+  color: #8c786b;
+  background: rgba(255, 255, 255, 0.92);
+
+  box-shadow:
+    0 7px 18px rgba(56, 27, 14, 0.08);
+
+  transform: translateY(-50%);
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  cursor: pointer;
+}
+
+.arrow:hover {
+  color: var(--orange);
+  border-color: #ffc27f;
+
+  box-shadow:
+    0 0 12px rgba(255, 122, 0, 0.18),
+    0 10px 24px rgba(56, 27, 14, 0.08);
+
+  transform:
+    translateY(-50%)
+    scale(1.06);
+}
+
+.arrow:active {
+  transform:
+    translateY(-50%)
+    scale(0.94);
+}
+
+.arrowLeft {
+  left: 0;
+}
+
+.arrowRight {
+  right: 0;
+}
+
+/* =========================================================
+   DOTS
+   ========================================================= */
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+  margin-top: 13px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: #dfd3ca;
+
+  transition:
+    width 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+
+  cursor: pointer;
+}
+
+.dot:hover {
+  transform: scale(1.25);
+  background: #cbbab0;
+}
+
+.dotActive {
+  width: 22px;
+  background: var(--orange);
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .container {
+    width: min(100% - 36px, 900px);
+  }
+
+  .slider {
+    min-height: 330px;
+  }
+
+  .track {
+    height: 320px;
+  }
+
+  .card {
+    width: 300px;
+    height: 295px;
+  }
+
+  .card.left {
+    transform:
+      translate(
+        calc(-50% - 225px),
+        -50%
+      )
+      scale(0.72);
+  }
+
+  .card.right {
+    transform:
+      translate(
+        calc(-50% + 225px),
+        -50%
+      )
+      scale(0.72);
+  }
+
+  .petImage {
+    width: 210px;
+    height: 175px;
+    bottom: 57px;
+  }
+
+  .arrowLeft {
+    left: 4px;
+  }
+
+  .arrowRight {
+    right: 4px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+  .section {
+    padding: 60px 0 70px;
+  }
+
+  .container {
+    width: calc(100% - 28px);
+  }
+
+  .heading {
+    margin-bottom: 25px;
+  }
+
+  .heading h2 {
+    font-size: clamp(29px, 8vw, 32px);
+    letter-spacing: -0.04em;
+  }
+
+  .heading p {
+    max-width: 360px;
+    font-size: 10px;
+  }
+
+  .slider {
+    min-height: 330px;
+  }
+
+  .track {
+    height: 315px;
+  }
+
+  .card {
+    width: min(285px, 76vw);
+    height: 290px;
+    border-radius: 22px;
+  }
+
+  .card.left {
+    transform:
+      translate(
+        calc(-50% - 175px),
+        -50%
+      )
+      scale(0.67);
+  }
+
+  .card.right {
+    transform:
+      translate(
+        calc(-50% + 175px),
+        -50%
+      )
+      scale(0.67);
+  }
+
+  .card.left,
+  .card.right {
+    opacity: 0.35;
+  }
+
+  .petImage {
+    width: 205px;
+    height: 170px;
+    bottom: 75px;
+  }
+
+  .card h3 {
+    font-size: 17px;
+  }
+
+  .arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .arrowLeft {
+    left: -2px;
+  }
+
+  .arrowRight {
+    right: -2px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 430px) {
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .heading h2 {
+    font-size: 29px;
+  }
+
+  .heading p {
+    max-width: 320px;
+    font-size: 9px;
+  }
+
+  .track {
+    height: 300px;
+  }
+
+  .card {
+    width: 260px;
+    height: 275px;
+  }
+
+  .card.left {
+    transform:
+      translate(
+        calc(-50% - 145px),
+        -50%
+      )
+      scale(0.62);
+  }
+
+  .card.right {
+    transform:
+      translate(
+        calc(-50% + 145px),
+        -50%
+      )
+      scale(0.62);
+  }
+
+  .petImage {
+    width: 185px;
+    height: 155px;
+    bottom: 83px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .badge {
+    font-size: 7px;
+  }
+
+  .subtitle {
+    font-size: 7px;
+  }
+}
+
+/* =========================================================
+   2K
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .container {
+    width: min(1750px, calc(100% - 100px));
+  }
+
+  .section {
+    padding-block: 135px 150px;
+  }
+
+  .heading h2 {
+    font-size: 78px;
+  }
+
+  .heading p {
+    font-size: 18px;
+  }
+
+  .slider {
+    min-height: 530px;
+  }
+
+  .track {
+    height: 495px;
+  }
+
+  .card {
+    width: 470px;
+    height: 420px;
+    border-radius: 31px;
+  }
+
+  .card.left {
+    transform:
+      translate(
+        calc(-50% - 505px),
+        -50%
+      )
+      scale(0.84);
+  }
+
+  .card.right {
+    transform:
+      translate(
+        calc(-50% + 505px),
+        -50%
+      )
+      scale(0.84);
+  }
+
+  .petImage {
+    width: 325px;
+    height: 270px;
+    bottom: 78px;
+  }
+
+  .card h3 {
+    font-size: 25px;
+  }
+
+  .badge {
+    font-size: 11px;
+  }
+
+  .subtitle {
+    font-size: 10px;
+  }
+
+  .arrow {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* =========================================================
+   4K
+   ========================================================= */
+
+@media (min-width: 2560px) {
+  .container {
+    width: min(2200px, calc(100% - 140px));
+  }
+
+  .section {
+    padding-block: 170px 190px;
+  }
+
+  .heading h2 {
+    font-size: 100px;
+  }
+
+  .heading p {
+    font-size: 22px;
+  }
+
+  .slider {
+    min-height: 650px;
+  }
+
+  .track {
+    height: 600px;
+  }
+
+  .card {
+    width: 580px;
+    height: 505px;
+    border-radius: 38px;
+  }
+
+  .card.left {
+    transform:
+      translate(
+        calc(-50% - 635px),
+        -50%
+      )
+      scale(0.86);
+  }
+
+  .card.right {
+    transform:
+      translate(
+        calc(-50% + 635px),
+        -50%
+      )
+      scale(0.86);
+  }
+
+  .petImage {
+    width: 420px;
+    height: 345px;
+    bottom: 92px;
+  }
+
+  .card h3 {
+    font-size: 31px;
+  }
+
+  .badge {
+    font-size: 13px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .arrow {
+    width: 58px;
+    height: 58px;
+  }
+}
+
+/* =========================================================
+   8K
+   ========================================================= */
+
+@media (min-width: 3840px) {
+  .container {
+    width: min(3000px, calc(100% - 220px));
+  }
+
+  .section {
+    padding-block: 240px 260px;
+  }
+
+  .heading {
+    margin-bottom: 75px;
+  }
+
+  .heading h2 {
+    font-size: 135px;
+  }
+
+  .heading p {
+    font-size: 29px;
+  }
+
+  .slider {
+    min-height: 900px;
+  }
+
+  .track {
+    height: 830px;
+  }
+
+  .card {
+    width: 790px;
+    height: 700px;
+    border-radius: 52px;
+  }
+
+  .card.left {
+    transform:
+      translate(
+        calc(-50% - 860px),
+        -50%
+      )
+      scale(0.86);
+  }
+
+  .card.right {
+    transform:
+      translate(
+        calc(-50% + 860px),
+        -50%
+      )
+      scale(0.86);
+  }
+
+  .petImage {
+    width: 560px;
+    height: 460px;
+    bottom: 120px;
+  }
+
+  .card h3 {
+    font-size: 42px;
+  }
+
+  .badge {
+    font-size: 17px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .arrow {
+    width: 72px;
+    height: 72px;
+  }
+
+  .dots {
+    gap: 10px;
+    margin-top: 25px;
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .dotActive {
+    width: 32px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.arrow:focus-visible,
+.dot:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .petImage img,
+  .arrow,
+  .dot {
+    transition: none !important;
+  }
+}
