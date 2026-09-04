@@ -185,69 +185,236 @@
 .footerSocials {
   display: flex;
   align-items: center;
-  gap: 22px;
-  margin-top: 34px;
-  
+  gap: clamp(14px, 1.2vw, 24px);
+  margin-top: clamp(24px, 2vw, 34px);
 }
 
 .socialLink {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  width: 32px;
-  height: 32px;
+  width: clamp(42px, 2.8vw, 52px);
+  height: clamp(42px, 2.8vw, 52px);
 
-  background: transparent;
+  flex-shrink: 0;
+
+  background: #fff;
   border-radius: 50%;
+
   text-decoration: none;
 
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
+
   transition:
-    color 0.22s ease,
-    background 0.22s ease,
-    transform 0.22s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
+
+.socialLink svg {
+  display: block;
+
+  width: clamp(20px, 1.35vw, 25px);
+  height: clamp(20px, 1.35vw, 25px);
+}
+
+
+/* =========================================================
+   INSTAGRAM
+   ========================================================= */
 
 .socialLink.instagram {
-  color: transparent !important;
-  background: transparent;
+  color: #e1306c;
 }
 
-.socialLink.instagram svg {
-  display: block;
-  width: 20px;
-  height: 20px;
-  overflow: visible;
-}
 
-.socialLink.instagram:hover {
-  background: transparent;
-  transform: translateY(-3px);
-}
-/* FACEBOOK */
+/* =========================================================
+   FACEBOOK
+   ========================================================= */
+
 .socialLink.facebook {
-  color: #1877f2 !important;
+  color: #1877f2;
 }
 
 .socialLink.facebook svg {
-  color: #1877f2 !important;
-  stroke: #1877f2 !important;
+  fill: currentColor;
 }
 
-/* LINKEDIN */
+
+/* =========================================================
+   LINKEDIN
+   ========================================================= */
+
 .socialLink.linkedin {
-  color: #0a66c2 !important;
+  color: #0a66c2;
 }
 
 .socialLink.linkedin svg {
-  color: #0a66c2 !important;
-  stroke: #0a66c2 !important;
+  fill: currentColor;
 }
 
-/* HOVER */
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
 .socialLink:hover {
   transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .footerSocials {
+    justify-content: center;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .socialLink {
+    width: 40px;
+    height: 40px;
+  }
+
+  .socialLink svg {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .socialLink {
+    width: 42px;
+    height: 42px;
+  }
+
+  .socialLink svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+/* =========================================================
+   2K
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .socialLink {
+    width: 46px;
+    height: 46px;
+  }
+
+  .socialLink svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+
+/* =========================================================
+   4K
+   ========================================================= */
+
+@media (min-width: 2560px) {
+  .socialLink {
+    width: 54px;
+    height: 54px;
+  }
+
+  .socialLink svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+
+/* =========================================================
+   8K
+   ========================================================= */
+
+@media (min-width: 5120px) {
+  .socialLink {
+    width: 64px;
+    height: 64px;
+  }
+
+  .socialLink svg {
+    width: 31px;
+    height: 31px;
+  }
+}
+.footerPets {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    position: relative;
+  }
+
+  .footerPets {
+    display: block;
+
+    position: absolute;
+    right: 12px;
+    bottom: 58px;
+
+    width: 90px;
+    height: auto;
+
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+.footerPets {
+  display: none;
+}
+
+@media (max-width: 468px) {
+  .footerPets {
+    display: block;
+    position: absolute;
+    right: 32px;
+    bottom: 70px;
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .footerPets {
+    display: block;
+    position: absolute;
+    right: 32px;
+    bottom: 70px;
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 2;
+  }
+}
 
 /* =========================================================
    FOOTER COLUMNS

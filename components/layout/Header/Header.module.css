@@ -755,18 +755,44 @@
    TABLET
    <= 950
    ========================================================= */
+/* =========================================================
+   TABLET / MOBILE MENU
+   <= 950px
+   ========================================================= */
 
 @media (max-width: 950px) {
-  .headerInner {
-    min-height: 74px;
 
+  /* ---------------------------------------------------------
+     HEADER
+     --------------------------------------------------------- */
+
+  .siteHeader {
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+
+    width: 100%;
+
+    overflow: visible;
+  }
+
+  .headerInner {
     position: relative;
 
+    min-height: 74px;
+    height: 74px;
+
     display: flex;
+    align-items: center;
     justify-content: center;
 
     padding-inline: 52px;
   }
+
+
+  /* ---------------------------------------------------------
+     BRAND
+     --------------------------------------------------------- */
 
   .headerBrand {
     position: absolute;
@@ -774,47 +800,108 @@
     left: 50%;
     top: 50%;
 
+    display: flex;
+    align-items: center;
+
+    width: max-content;
+    max-width: calc(100% - 110px);
+
+    margin: 0;
+
     transform: translate(-50%, -50%);
 
-    justify-self: auto;
+    z-index: 2;
 
-    max-width: calc(100% - 110px);
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
   }
 
   .headerBrand:hover {
     transform: translate(-50%, -50%);
   }
 
+
   .headerDogLogo {
     width: 52px;
     height: 52px;
+
+    flex: 0 0 auto;
+
+    object-fit: contain;
   }
+
 
   .brandName {
     font-size: 29px;
   }
 
+
   .brandTagline {
     display: none;
   }
+
+
+  /* ---------------------------------------------------------
+     DESKTOP ELEMENTS
+     --------------------------------------------------------- */
 
   .desktopNav,
   .headerActions {
     display: none;
   }
 
+
+  /* ---------------------------------------------------------
+     HAMBURGER / CLOSE BUTTON
+     --------------------------------------------------------- */
+
   .mobileMenu {
     display: flex;
+
+    position: absolute;
+
+    right: 0;
+    top: 50%;
+
+    width: 42px;
+    height: 42px;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    transform: translateY(-50%);
+
+    z-index: 20;
   }
+
+
+  /* ---------------------------------------------------------
+     MOBILE OVERLAY
+
+     IMPORTANT:
+     It starts AFTER the fixed menu header.
+     --------------------------------------------------------- */
 
   .mobileNavOverlay {
     position: fixed;
-    inset: 74px 0 0;
-    z-index: 999;
+
+    top: 74px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    z-index: 1000;
 
     display: block;
 
     pointer-events: none;
+
     opacity: 0;
     visibility: hidden;
 
@@ -830,17 +917,26 @@
       visibility 0.25s ease;
   }
 
+
   .mobileNavOverlay.show {
     pointer-events: auto;
+
     opacity: 1;
     visibility: visible;
 
     overflow-y: auto;
+
     overscroll-behavior: contain;
   }
 
-  
+
+  /* ---------------------------------------------------------
+     MENU CARD
+     --------------------------------------------------------- */
+
   .mobileNav {
+    position: relative;
+
     width: min(430px, calc(100% - 28px));
 
     margin: 12px auto 24px;
@@ -848,6 +944,7 @@
     padding: 18px;
 
     border: 1px solid #eadfd6;
+
     border-radius: 22px;
 
     background: rgba(255, 255, 255, 0.98);
@@ -856,14 +953,25 @@
       0 25px 60px rgba(56, 27, 14, 0.18),
       0 5px 15px rgba(56, 27, 14, 0.06);
 
-    transform: translateY(-12px) scale(0.98);
+    transform:
+      translateY(-12px)
+      scale(0.98);
 
-    transition: transform 0.25s ease;
+    transition:
+      transform 0.25s ease;
   }
+
 
   .mobileNavOverlay.show .mobileNav {
-    transform: translateY(0) scale(1);
+    transform:
+      translateY(0)
+      scale(1);
   }
+
+
+  /* ---------------------------------------------------------
+     MENU TITLE
+     --------------------------------------------------------- */
 
   .mobileNavLabel {
     padding: 3px 10px 12px;
@@ -878,6 +986,11 @@
     text-transform: uppercase;
   }
 
+
+  /* ---------------------------------------------------------
+     MENU LINKS
+     --------------------------------------------------------- */
+
   .mobileNavLink {
     display: flex;
 
@@ -885,6 +998,7 @@
     justify-content: space-between;
 
     width: 100%;
+
     min-height: 52px;
 
     padding: 0 13px;
@@ -897,6 +1011,7 @@
     font-weight: 800;
 
     opacity: 0;
+
     transform: translateX(-8px);
 
     transition:
@@ -904,15 +1019,24 @@
       background 0.2s ease;
   }
 
+
   .mobileNavOverlay.show .mobileNavLink {
-    animation: mobileNavIn 0.35s ease forwards;
+    animation:
+      mobileNavIn 0.35s ease forwards;
   }
+
 
   .mobileNavLink:hover,
   .mobileNavLink.active {
     color: var(--orange);
+
     background: var(--orange-soft);
   }
+
+
+  /* ---------------------------------------------------------
+     DOWNLOAD BUTTON
+     --------------------------------------------------------- */
 
   .mobileDownload {
     width: 100%;
@@ -921,8 +1045,40 @@
 
     margin-top: 12px;
   }
-}
 
+
+  /* ---------------------------------------------------------
+     MENU OPEN STATE
+
+     DO NOT HIDE BRAND.
+     Header stays above menu.
+     --------------------------------------------------------- */
+
+  .siteHeader.menuIsOpen {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 1100;
+  }
+
+
+  .siteHeader.menuIsOpen .headerBrand {
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+  .siteHeader.menuIsOpen .mobileMenu {
+    opacity: 1;
+    visibility: visible;
+
+    z-index: 1200;
+  }
+}
 /* =========================================================
    MOBILE
    481 - 760
@@ -956,28 +1112,49 @@
    SMALL MOBILE
    <= 480
    ========================================================= */
+/* =========================================================
+   SMALL MOBILE
+   <= 480px
+   ========================================================= */
 
 @media (max-width: 480px) {
+
   .siteHeader {
     height: 68px;
+    min-height: 68px;
   }
 
+
   .headerInner {
+    height: 68px;
     min-height: 68px;
 
     padding-inline: 48px;
   }
 
+
   .headerBrand {
+    left: 50%;
+    top: 50%;
+
     gap: 7px;
 
     max-width: calc(100% - 92px);
+
+    transform: translate(-50%, -50%);
   }
+
+
+  .headerBrand:hover {
+    transform: translate(-50%, -50%);
+  }
+
 
   .headerDogLogo {
     width: 45px;
     height: 45px;
   }
+
 
   .brandName {
     font-size: 24px;
@@ -985,18 +1162,26 @@
     letter-spacing: -0.8px;
   }
 
+
   .mobileMenu {
     right: 6px;
+    top: 50%;
 
     width: 40px;
     height: 40px;
 
     border-radius: 10px;
+
+    transform: translateY(-50%);
   }
 
+
+  /* MENU MUST START BELOW 68px HEADER */
+
   .mobileNavOverlay {
-    inset: 68px 0 0;
+    top: 68px;
   }
+
 
   .mobileNav {
     width: calc(100% - 20px);
@@ -1008,6 +1193,7 @@
     border-radius: 19px;
   }
 
+
   .mobileNavLink {
     min-height: 49px;
 
@@ -1015,6 +1201,7 @@
 
     font-size: 14px;
   }
+
 
   .mobileDownload {
     min-height: 48px;
@@ -1027,22 +1214,35 @@
    VERY SMALL MOBILE
    <= 360
    ========================================================= */
-
 @media (max-width: 360px) {
+
   .headerInner {
     padding-inline: 43px;
   }
 
+
   .headerBrand {
+    left: 50%;
+    top: 50%;
+
     gap: 5px;
 
     max-width: calc(100% - 82px);
+
+    transform: translate(-50%, -50%);
   }
+
+
+  .headerBrand:hover {
+    transform: translate(-50%, -50%);
+  }
+
 
   .headerDogLogo {
     width: 40px;
     height: 40px;
   }
+
 
   .brandName {
     font-size: 21px;
@@ -1050,13 +1250,17 @@
     letter-spacing: -0.6px;
   }
 
+
   .mobileMenu {
     right: 4px;
 
     width: 38px;
     height: 38px;
+
+    transform: translateY(-50%);
   }
 }
+
 
 /* =========================================================
    REDUCED MOTION

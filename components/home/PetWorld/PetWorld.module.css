@@ -1032,6 +1032,11 @@
       20px 17px;
   }
 
+  .featureCard.orange .petFrame{
+    left:200px;
+    top:30px;
+  }
+ 
   .cardCopy h2 {
     max-width: 250px;
 
@@ -1072,12 +1077,12 @@
   }
 
   .petFrame {
-    width: 165px;
-    height: 165px;
+    width: 185px;
+    height: 195px;
   }
 
   .rewardList {
-    width: 235px;
+    width: 295px;
     height: 135px;
 top:-20px;
     right: -2px;

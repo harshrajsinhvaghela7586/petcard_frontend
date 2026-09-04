@@ -4,9 +4,6 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 import {
-  ArrowRight,
-  CalendarDays,
-  ChevronRight,
   Clock3,
   Heart,
   Search,
@@ -313,7 +310,11 @@ export default function Blogs() {
 
                 <Link href="/contact">
                   Share Your Story
-                  <ArrowRight size={15} />
+                 <img
+                 src="/images/paw-white.png"
+                 width={20}
+                 height={20}
+                 />
                 </Link>
               </div>
             </div>
@@ -423,7 +424,11 @@ export default function Blogs() {
                       }
                       aria-label="Read featured article"
                     >
-                      <ArrowRight size={17} />
+                      <img
+                 src="/images/paw-white.png"
+                 width={20}
+                 height={20}
+                 />
                     </Link>
                   </div>
                 </div>
@@ -533,7 +538,11 @@ export default function Blogs() {
 
               <Link href="/contact">
                 Share Your Story
-                <ArrowRight size={16} />
+               <img
+                 src="/images/paw-white.png"
+                 width={20}
+                 height={20}
+                 />
               </Link>
             </div>
 
@@ -732,7 +741,11 @@ export default function Blogs() {
 
               <button type="submit">
                 Subscribe
-                <ArrowRight size={17} />
+               <img
+                 src="/images/paw-white.png"
+                 width={20}
+                 height={20}
+                 />
               </button>
             </form>
 

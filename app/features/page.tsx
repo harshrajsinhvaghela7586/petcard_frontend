@@ -79,7 +79,7 @@ const sections: SectionData[] = [
     description:
       "Give your pet a digital identity that keeps them safe, connected, and protected — everywhere, every time.",
     icon: ShieldCheck,
-    image: "/images/huchiko2.png",
+    image: "/images/slider/huchiko.png",
     items: [
       {
         title: "Digital PetCard",
@@ -508,6 +508,100 @@ export default function FeaturesPage() {
     Record<string, HTMLElement | null>
   >({});
 
+const overviewRailRef =
+  useRef<HTMLDivElement | null>(null);
+
+const overviewHoverRef =
+  useRef(false);
+
+useEffect(() => {
+  const rail = overviewRailRef.current;
+
+  if (!rail || sections.length <= 1) {
+    return;
+  }
+
+  let animationFrame = 0;
+  let previousTime = performance.now();
+
+  const railStyles =
+    window.getComputedStyle(rail);
+
+  const gap =
+    parseFloat(
+      railStyles.columnGap ||
+      railStyles.gap ||
+      "0"
+    );
+
+  const firstSet = Array.from(
+    rail.children
+  ).slice(0, sections.length);
+
+  const loopWidth =
+    firstSet.reduce(
+      (total, child, index) => {
+        const width =
+          (child as HTMLElement)
+            .getBoundingClientRect()
+            .width;
+
+        return (
+          total +
+          width +
+          (index <
+          firstSet.length - 1
+            ? gap
+            : 0)
+        );
+      },
+      0
+    );
+
+  const speed = 55;
+
+  const animate = (time: number) => {
+    const delta =
+      Math.min(
+        time - previousTime,
+        32
+      );
+
+    previousTime = time;
+
+    if (
+      !overviewHoverRef.current &&
+      !document.hidden
+    ) {
+      rail.scrollLeft +=
+        (speed * delta) / 1000;
+
+      if (
+        loopWidth > 0 &&
+        rail.scrollLeft >= loopWidth
+      ) {
+        rail.scrollLeft -= loopWidth;
+      }
+    }
+
+    animationFrame =
+      window.requestAnimationFrame(
+        animate
+      );
+  };
+
+  animationFrame =
+    window.requestAnimationFrame(
+      animate
+    );
+
+  return () => {
+    window.cancelAnimationFrame(
+      animationFrame
+    );
+  };
+}, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -575,7 +669,11 @@ export default function FeaturesPage() {
                   onClick={() => scrollToFeature("01")}
                 >
                   Explore Features
-                  <ArrowRight size={17} />
+                  <img
+                  src="/images/paw-white.png"
+                  width={30}
+                  height={30}
+                  />
                 </button>
 
                 <a
@@ -707,32 +805,52 @@ export default function FeaturesPage() {
             </p>
           </div>
 
-          <div className={styles.overviewRail}>
-            {sections.map((section) => {
-              const Icon = section.icon;
+         <div
+  ref={overviewRailRef}
+  className={styles.overviewRail}
+ 
+ 
+>
+  {[...sections, ...sections].map(
+    (section, index) => {
+      const Icon = section.icon;
 
-              return (
-                <button
-                  type="button"
-                  key={section.number}
-                  className={styles.overviewItem}
-                  onClick={() => scrollToFeature(section.number)}
-                >
-                  <span className={styles.overviewNo}>
-                    {section.number}
-                  </span>
+      return (
+        <button
+          type="button"
+          key={`${section.number}-${index}`}
+          className={styles.overviewItem}
+          onClick={() =>
+            scrollToFeature(
+              section.number
+            )
+          }
+          aria-label={`Go to ${section.eyebrow}`}
+        >
+          <div className={styles.overviewTop}>
+            <span className={styles.overviewNo}>
+              {section.number}
+            </span>
 
-                  <IconBox icon={Icon} />
-
-                  <span className={styles.overviewLabel}>
-                    {section.eyebrow}
-                  </span>
-
-                  <ChevronRight size={15} />
-                </button>
-              );
-            })}
+            <span className={styles.overviewIcon}>
+              <IconBox icon={Icon} />
+            </span>
           </div>
+
+          <div className={styles.overviewBottom}>
+            <span className={styles.overviewLabel}>
+              {section.eyebrow}
+            </span>
+
+            <span className={styles.overviewArrow}>
+              <ChevronRight size={18} />
+            </span>
+          </div>
+        </button>
+      );
+    }
+  )}
+</div>
         </div>
       </section>
 
@@ -760,12 +878,20 @@ export default function FeaturesPage() {
                 {sections[0].description}
               </p>
 
-              <FeatureItemCarousel
-                items={sections[0].items}
-                visible={visible.includes("01")}
-                large
-                className={styles.identityCarousel}
-              />
+ <div className={styles.identityBottomCard}>
+                <div className={styles.identityShield}>
+                  <ShieldCheck size={25} />
+                </div>
+
+                <div>
+                  <strong>Safety is love in action.</strong>
+                  <p>
+                    Because they can&apos;t speak for themselves,
+                    we make sure someone can.
+                  </p>
+                </div>
+              </div>
+              
             </div>
 
             <div className={styles.identityCenter}>
@@ -783,7 +909,7 @@ export default function FeaturesPage() {
                 <div className={styles.idProfile}>
                   <div className={styles.idProfileImage}>
                     <Image
-                      src="/images/huchiko2.png"
+                      src="/images/slider/huchiko.png"
                       alt="Pet profile"
                       fill
                       sizes="50px"
@@ -841,7 +967,7 @@ export default function FeaturesPage() {
 
               <div className={styles.identityPet}>
                 <Image
-                  src={sections[0].image ?? "/images/huchiko2.png"}
+                  src={sections[0].image ?? "/images/slider/huchiko.png"}
                   alt="Pet"
                   fill
                   sizes="180px"
@@ -856,19 +982,12 @@ export default function FeaturesPage() {
             </div>
 
             <div className={styles.identityRight}>
-              <div className={styles.identityBottomCard}>
-                <div className={styles.identityShield}>
-                  <ShieldCheck size={25} />
-                </div>
-
-                <div>
-                  <strong>Safety is love in action.</strong>
-                  <p>
-                    Because they can&apos;t speak for themselves,
-                    we make sure someone can.
-                  </p>
-                </div>
-              </div>
+             <FeatureItemCarousel
+                items={sections[0].items}
+                visible={visible.includes("01")}
+                large
+                className={styles.identityCarousel}
+              />
             </div>
           </div>
         </div>
@@ -904,10 +1023,7 @@ export default function FeaturesPage() {
                 className={styles.dailyCarousel}
               />
 
-              <button type="button" className="btn btn-primary">
-                Explore Daily Care
-                <ArrowRight size={15} />
-              </button>
+            
             </div>
 
             <div className={styles.dailyPhoneWrap}>
@@ -921,7 +1037,7 @@ export default function FeaturesPage() {
                 <div className={styles.dailyProfile}>
                   <div className={styles.dailyPetImage}>
                     <Image
-                      src="/images/home/home-dog.png"
+                      src="/images/slider/browny.png"
                       alt="Milo"
                       fill
                       sizes="42px"
@@ -1001,7 +1117,7 @@ export default function FeaturesPage() {
 
               <div className={styles.dailyPet}>
                 <Image
-                  src="/images/home/home-dog.png"
+                  src="/images/slider/browny.png"
                   alt="Pet"
                   fill
                   sizes="150px"
@@ -1173,17 +1289,7 @@ export default function FeaturesPage() {
                 className={styles.healthCarousel}
               />
 
-              <div className={styles.healthTip}>
-                <HeartPulse size={18} />
-
-                <div>
-                  <strong>A healthy pet is a happy pet.</strong>
-                  <p>
-                    Track, prevent, and protect — because they
-                    deserve the best care.
-                  </p>
-                </div>
-              </div>
+              
             </div>
 
             <div className={styles.healthPhoneWrap}>
@@ -1199,7 +1305,7 @@ export default function FeaturesPage() {
                 <div className={styles.healthPet}>
                   <div className={styles.healthPetImage}>
                     <Image
-                      src="/images/home/home-cat.png"
+                      src="/images/slider/kiki.png"
                       alt="Milo"
                       fill
                       sizes="42px"
@@ -1278,7 +1384,7 @@ export default function FeaturesPage() {
 
               <div className={styles.healthCat}>
                 <Image
-                  src="/images/home/home-cat.png"
+                  src="/images/slider/kiki.png"
                   alt="Pet"
                   fill
                   sizes="120px"
@@ -1526,12 +1632,16 @@ export default function FeaturesPage() {
 
                   <button type="button">
                     Explore Breed Info
-                    <ArrowRight size={13} />
+                      <img
+                  src="/images/paw-white.png"
+                  width={20}
+                  height={20}
+                  />
                   </button>
                 </div>
 
                 <Image
-                  src="/images/home/home-dog.png"
+                  src="/images/slider/cupid.png"
                   alt="Dog"
                   width={170}
                   height={170}
@@ -1595,7 +1705,7 @@ export default function FeaturesPage() {
 
               <div className={styles.smartCat}>
                 <Image
-                  src="/images/home/home-cat.png"
+                  src="/images/slider/waffle.png"
                   alt="Cat"
                   fill
                   sizes="130px"
@@ -1666,14 +1776,14 @@ export default function FeaturesPage() {
               <div className={styles.photoGrid}>
                 {[
                   "/images/reward/coco.png",
-                  "/images/reward/home-dog.png",
+                  "/images/slider/huchiko.png",
                   "/images/reward/huchiko.png",
-                  "/images/reward/oreo.png",
+                  "/images/slider/noir.png",
                   "/images/reward/zuzu.png",
-                  "/images/reward/toffee.png",
-                  "/images/home/home-dog.png",
-                  "/images/home/home-cat.png",
-                  "/images/home/home-rabbit.png",
+                  "/images/slider/waffle.png",
+                  "/images/slider/kiki.png",
+                  "/images/slider/cupid.png",
+                  "/images/slider/oreo.png",
                 ].map((src, index) => (
                   <div className={styles.photoTile} key={src + index}>
                     <Image
@@ -1941,7 +2051,7 @@ export default function FeaturesPage() {
 
               <div className={styles.rewardPet}>
                 <Image
-                  src="/images/reward/home-dog.png"
+                  src="/images/slider/huchiko.png"
                   alt="Happy pet"
                   fill
                   sizes="130px"
@@ -2147,7 +2257,7 @@ export default function FeaturesPage() {
 
                   <div className={styles.petmojiCharacter}>
                     <Image
-                      src="/images/reward/home-dog.png"
+                      src="/images/slider/huchiko.png"
                       alt="Petmoji"
                       fill
                       sizes="155px"
@@ -2235,11 +2345,11 @@ export default function FeaturesPage() {
 
                 <div className={styles.avatarRow}>
                   {[
-                    "/images/reward/home-dog.png",
-                    "/images/home/home-dog.png",
-                    "/images/home/home-cat.png",
-                    "/images/reward/toffee.png",
-                    "/images/reward/huchiko.png",
+                    "/images/slider/huchiko.png",
+                    "/images/huchiko2.png",
+                    "/images/slider/kiki.png",
+                    "/images/slider/noir.png",
+                    "/images/slider/oreo.png",
                   ].map((src, index) => (
                     <button
                       type="button"
@@ -2276,10 +2386,10 @@ export default function FeaturesPage() {
                 <div className={styles.previewGrid}>
                   <div className={styles.previewLarge}>
                     <Image
-                      src="/images/reward/home-dog.png"
+                      src="/images/slider/cupid.png"
                       alt="Petmoji preview"
                       fill
-                      sizes="210px"
+                      sizes="200px"
                     />
 
                     <span className={styles.previewSticker}>
@@ -2290,7 +2400,7 @@ export default function FeaturesPage() {
                   <div className={styles.previewSmallGrid}>
                     <div>
                       <Image
-                        src="/images/home/home-dog.png"
+                        src="/images/slider/waffle.png"
                         alt="Preview"
                         fill
                         sizes="100px"
@@ -2299,7 +2409,7 @@ export default function FeaturesPage() {
 
                     <div>
                       <Image
-                        src="/images/reward/toffee.png"
+                        src="/images/zuzu2.png"
                         alt="Preview"
                         fill
                         sizes="100px"
@@ -2744,7 +2854,11 @@ export default function FeaturesPage() {
               className="btn btn-primary"
             >
               Explore PetCard
-              <ArrowRight size={17} />
+               <img
+                  src="/images/paw-white.png"
+                  width={30}
+                  height={30}
+                  />
             </Link>
           </div>
         </div>
@@ -2885,7 +2999,7 @@ function FeatureItemCarousel({
 
     const interval = window.setInterval(() => {
       setActiveIndex((current) => (current + 1) % total);
-    }, 3000);
+    }, 2000);
 
     return () => {
       window.clearInterval(interval);
@@ -2979,9 +3093,7 @@ function FeatureItemCarousel({
               </span>
 
               <span className={styles.miniCarouselContent}>
-                <span className={styles.miniCarouselMeta}>
-                  FEATURE {String(index + 1).padStart(2, "0")}
-                </span>
+                
 
                 <strong>{item.title}</strong>
 
