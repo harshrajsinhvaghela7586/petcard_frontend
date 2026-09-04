@@ -64,6 +64,7 @@ export default function Header() {
   const headerClass = [
     styles.siteHeader,
     scrolled ? styles.isScrolled : "",
+      menuOpen ? styles.menuIsOpen : "",
   ]
     .filter(Boolean)
     .join(" ");
