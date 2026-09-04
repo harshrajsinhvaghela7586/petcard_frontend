@@ -548,33 +548,6 @@ function PhoneMockup({
   );
 }
 
-const homeTestimonials = [
-  {
-    name: "Arun Negi",
-    text:
-      "PetCard brings the important parts of pet care together in one place. The overall experience feels simple, clear, and useful for everyday routines.",
-  },
-  {
-    name: "Amber Fatima",
-    text:
-      "Keeping identity, health information, reminders, and memories connected makes pet care feel much more organized and easier to manage.",
-  },
-  {
-    name: "Shailesh Kumar",
-    text:
-      "The idea combines practical pet information with a playful experience that fits naturally into the day-to-day needs of pet parents.",
-  },
-  {
-    name: "Harshrajsinh Vaghela",
-    text:
-      "A digital pet identity makes sense when profile details, records, care routines, and important information all need to stay easy to access.",
-  },
-  {
-    name: "Sivam Bansal",
-    text:
-      "The concept is clean and convenient, connecting pet information, reminders, memories, and rewards in one experience.",
-  },
-];
 
 const homeFaqs = [
   [
@@ -595,17 +568,55 @@ const homeFaqs = [
   ],
 ];
 
+const homeTestimonials = [
+  {
+    name: "Arun Negi",
+    text:
+      "PetCard brings the important parts of pet care together in one place. The overall experience feels simple, clear, and useful for everyday routines.",
+  },
+  {
+    name: "Shailesh Kumar",
+    text:
+      "The idea combines practical pet information with a playful experience that fits naturally into the day-to-day needs of pet parents.",
+  },
+  {
+    name: "Harshrajsinh Vaghela",
+    text:
+      "A digital pet identity makes sense when profile details, records, care routines, and important information all need to stay easy to access.",
+  },
+  {
+    name: "Sivam Bansal",
+    text:
+      "The concept is clean and convenient, connecting pet information, reminders, memories, and rewards in one experience.",
+  },
+];
+
 function HomeTestimonialsPreview() {
   const slides = [...homeTestimonials, ...homeTestimonials];
 
+  const getAuthorImage = (name: string) => {
+    const imageMap: Record<string, string> = {
+      "Arun Negi": "/images/testimonials/arun.png",
+      "Shailesh Kumar": "/images/testimonials/shailesh.jpeg",
+      "Harshrajsinh Vaghela": "/images/testimonials/harshraj.png",
+      "Sivam Bansal": "/images/testimonials/shivam.png",
+    };
+
+    return imageMap[name];
+  };
+
   return (
-    <section className={`${styles.section} ${styles.homeTestimonials}`} id="testimonials">
+    <section
+      className={`${styles.section} ${styles.homeTestimonials}`}
+      id="testimonials"
+    >
       <div className={styles.container}>
         <div className={`${styles.sectionHeading} ${styles.center}`}>
           <h2 className={styles.sectionTitle}>
             Loved for the little things.{" "}
             <span>Built for everyday care.</span>
           </h2>
+
           <p className={styles.sectionSubtitle}>
             Sample testimonial content for the website. Replace with approved
             customer feedback before production.
@@ -627,17 +638,26 @@ function HomeTestimonialsPreview() {
                 <p>{item.text}</p>
 
                 <div className={styles.homeTestimonialAuthor}>
-                  <span>
-                    {item.name
-                      .split(" ")
-                      .map((word) => word[0])
-                      .join("")
-                      .slice(0, 2)}
+                  <span className={styles.homeTestimonialAvatar}>
+                    {getAuthorImage(item.name) ? (
+                      <Image
+                        src={getAuthorImage(item.name)}
+                        alt={item.name}
+                        width={48}
+                        height={48}
+                      />
+                    ) : (
+                      item.name
+                        .split(" ")
+                        .map((word) => word[0])
+                        .join("")
+                        .slice(0, 2)
+                    )}
                   </span>
 
                   <div>
                     <b>{item.name}</b>
-                    <small>Sample Pet Parent</small>
+                    <small>Pet Parent</small>
                   </div>
                 </div>
               </article>
@@ -648,7 +668,6 @@ function HomeTestimonialsPreview() {
         <div className={styles.homePreviewLinkWrap}>
           <Link href="/testimonials" className="btn btn-primary">
             View All Testimonials
-            
           </Link>
         </div>
       </div>

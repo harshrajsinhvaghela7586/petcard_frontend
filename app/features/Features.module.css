@@ -1038,7 +1038,7 @@
     var(--text);
 
   background:
-    #fff;
+    var(--soft);
 
   text-align:
     left;
@@ -1116,7 +1116,7 @@
     #ffc58d;
 
   background:
-    #fffefa;
+    var(--accent-soft);
 
   box-shadow:
     0 0 12px
@@ -1348,7 +1348,7 @@
     #9c8e84;
 
   background:
-    #fff;
+    var(--accent-soft);
 
   transition:
     transform
@@ -6867,84 +6867,63 @@
   font-weight: 800;
 }
 
-
 /* =========================================================
    FINAL CTA
    ========================================================= */
 
 .finalSection {
-  padding:
-    0
-    0
-    120px;
-
-  background:
-    #fffdf9;
+  padding: 0 0 90px;
+  background: #fffdf9;
 }
 
 .finalCard {
   position: relative;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
-  gap: 35px;
+  gap: 30px;
 
-  min-height:
-    300px;
+  /* Compact desktop height */
+  min-height: 250px;
 
-  overflow:
-    hidden;
+  overflow: hidden;
 
-  padding:
-    55px
-    70px;
+  padding: 40px 60px;
 
-  border:
-    1px
-    solid
-    rgba(255,194,127,.75);
+  border: 1px solid rgba(255, 194, 127, 0.75);
+  border-radius: 30px;
 
-  border-radius:
-    34px;
-
-  background:
-    linear-gradient(
-      120deg,
-      #fff8f0,
-      #fff1df,
-      #fffaf5
-    );
+  background: linear-gradient(
+    120deg,
+    #fff8f0,
+    #fff1df,
+    #fffaf5
+  );
 
   box-shadow:
-    0 22px
-    58px
-    rgba(56,27,14,.065);
+    0 20px 50px rgba(56, 27, 14, 0.065);
 }
 
 .finalGlow {
   position: absolute;
 
-  width: 460px;
-  height: 460px;
+  width: 360px;
+  height: 360px;
 
-  right: -120px;
+  right: -100px;
   top: 50%;
 
   border-radius: 50%;
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,155,47,.25),
-      transparent 70%
-    );
+  background: radial-gradient(
+    circle,
+    rgba(255, 155, 47, 0.23),
+    transparent 70%
+  );
 
-  transform:
-    translateY(-50%);
+  transform: translateY(-50%);
 
   animation:
     finalGlow 5s
@@ -6957,7 +6936,7 @@
   from {
     transform:
       translateY(-50%)
-      scale(.93);
+      scale(0.93);
   }
 
   to {
@@ -6966,7 +6945,10 @@
       scale(1.07);
   }
 }
-
+.featureCTA{
+height: 200px;
+width: 290px;
+}
 .finalPaw {
   position: absolute;
 
@@ -6975,47 +6957,43 @@
 
   color: var(--accent);
 
-  opacity: .055;
+  opacity: 0.055;
 
   transform: rotate(-15deg);
 }
 
 .finalCard > div:nth-child(4) {
   position: relative;
-
   z-index: 2;
 }
 
 .finalCard h2 {
   margin:
-    10px
+    5px
     0
-    9px;
+    8px;
 
-  max-width: 780px;
+  max-width: 700px;
 
   font-size:
     clamp(
-      38px,
-      4.1vw,
-      63px
+      36px,
+      3.8vw,
+      60px
     );
 
-  line-height:
-    1.02;
+  line-height: 1.02;
 
-  letter-spacing:
-    -.055em;
+  letter-spacing: -0.055em;
 }
 
 .finalCard h2 span {
   display: block;
-
   color: var(--accent);
 }
 
 .finalCard p {
-  max-width: 630px;
+  max-width: 600px;
 
   margin: 0;
 
@@ -7023,15 +7001,235 @@
 
   font-size: 11px;
 
-  line-height: 1.75;
+  line-height: 1.65;
 }
 
 .finalCard > a {
   position: relative;
-
   z-index: 4;
 
   flex-shrink: 0;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .finalCard {
+    min-height: 230px;
+
+    padding: 35px 45px;
+
+    gap: 25px;
+
+    border-radius: 28px;
+  }
+
+  .finalCard h2 {
+    font-size: clamp(32px, 5vw, 50px);
+    
+  }
+
+  .finalCard p {
+    font-size: 10px;
+  }
+
+  .finalGlow {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .finalSection {
+    padding-bottom: 60px;
+  }
+
+  .finalCard {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    min-height: auto;
+
+    padding:
+      32px
+      24px;
+
+    border-radius: 25px;
+  }
+
+  .finalCard > a {
+    width: 100%;
+  }
+
+  .finalCard h2 {
+    font-size: 32px;
+  }
+
+  .finalCard p {
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .finalCard {
+    padding:
+      28px
+      20px;
+  }
+
+  .finalCard h2 {
+    font-size: 30px;
+  }
+}
+
+
+/* =========================================================
+   LARGE LAPTOP
+   1440px+
+   ========================================================= */
+
+@media (min-width: 1440px) {
+  .finalCard {
+    min-height: 250px;
+
+    padding:
+      40px
+      60px;
+
+    border-radius: 30px;
+  }
+
+  .finalCard h2 {
+    font-size: 60px;
+  }
+
+  .finalCard p {
+    font-size: 11px;
+  }
+
+  .finalGlow {
+    width: 360px;
+    height: 360px;
+  }
+}
+
+
+/* =========================================================
+   2K
+   1920px+
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .finalCard {
+    min-height: 280px;
+
+    padding:
+      50px
+      75px;
+
+    border-radius: 34px;
+
+    gap: 40px;
+  }
+
+  .finalCard h2 {
+    font-size: 72px;
+    
+  }
+
+  .finalCard p {
+    max-width: 680px;
+    font-size: 13px;
+  }
+
+  .finalGlow {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+
+/* =========================================================
+   4K
+   2560px+
+   ========================================================= */
+
+@media (min-width: 2560px) {
+  .finalCard {
+    min-height: 330px;
+
+    padding:
+      60px
+      90px;
+
+    border-radius: 40px;
+
+    gap: 55px;
+  }
+
+  .finalCard h2 {
+    font-size: 88px;
+  }
+
+  .finalCard p {
+    max-width: 760px;
+    font-size: 16px;
+  }
+
+  .finalGlow {
+    width: 450px;
+    height: 450px;
+  }
+}
+
+
+/* =========================================================
+   8K
+   3840px+
+   ========================================================= */
+
+@media (min-width: 3840px) {
+  .finalCard {
+    min-height: 430px;
+
+    padding:
+      80px
+      120px;
+
+    border-radius: 50px;
+
+    gap: 70px;
+  }
+
+  .finalCard h2 {
+    font-size: 120px;
+  }
+
+  .finalCard p {
+    max-width: 1000px;
+    font-size: 22px;
+  }
+
+  .finalGlow {
+    width: 560px;
+    height: 560px;
+
+    right: -150px;
+  }
 }
 
 
@@ -8021,6 +8219,8 @@
     font-size: 27px;
   }
 }
+
+
 
 /* =========================================================
    FEATURE ITEM CAROUSEL
@@ -9622,5 +9822,194 @@
   .storeBadge,
   .storeIconImage {
     transition: none !important;
+  }
+}
+
+/* =========================================================
+   FINAL CTA — COMPACT DESKTOP OVERRIDE
+   Keep mobile layout unchanged
+   ========================================================= */
+
+@media (min-width: 761px) {
+
+  .finalSection {
+    padding-bottom: 80px;
+  }
+
+  .finalCard {
+    min-height: 220px !important;
+    height: 220px;
+
+    padding: 32px 55px !important;
+
+    gap: 30px;
+
+    border-radius: 28px;
+  }
+
+  .finalCard h2 {
+    margin: 0 0 7px;
+
+    font-size: clamp(42px, 3.7vw, 58px) !important;
+    line-height: 0.98;
+  }
+
+  .finalCard p {
+    max-width: 650px;
+
+    font-size: 11px !important;
+    line-height: 1.5;
+  }
+
+  .finalGlow {
+    width: 320px;
+    height: 320px;
+
+    right: -90px;
+  }
+
+  .finalPaw {
+    right: -15px;
+    bottom: -60px;
+  }
+}
+
+
+/* =========================================================
+   LARGE LAPTOP — 1440px+
+   ========================================================= */
+
+@media (min-width: 1440px) {
+
+  .finalCard {
+    min-height: 220px !important;
+    height: 220px;
+
+    padding: 32px 60px !important;
+  }
+
+  .finalCard h2 {
+    font-size: 58px !important;
+  }
+
+  .finalCard p {
+    font-size: 11px !important;
+  }
+}
+
+
+/* =========================================================
+   2K — 1920px+
+   ========================================================= */
+
+@media (min-width: 1920px) {
+
+  .finalCard {
+    min-height: 240px !important;
+    height: 240px;
+
+    padding: 38px 70px !important;
+
+    border-radius: 32px;
+  }
+
+  .finalCard h2 {
+    font-size: 68px !important;
+  }
+
+  .finalCard p {
+    max-width: 700px;
+
+    font-size: 12px !important;
+  }
+
+  .finalGlow {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+
+/* =========================================================
+   4K — 2560px+
+   ========================================================= */
+
+@media (min-width: 2560px) {
+
+  .finalCard {
+    min-height: 280px !important;
+    height: 280px;
+
+    padding: 45px 85px !important;
+
+    border-radius: 36px;
+
+    gap: 45px;
+  }
+
+  .finalCard h2 {
+    font-size: 82px !important;
+  }
+
+  .finalCard p {
+    max-width: 800px;
+
+    font-size: 14px !important;
+  }
+
+  .finalGlow {
+    width: 400px;
+    height: 400px;
+
+    right: -110px;
+  }
+}
+
+
+/* =========================================================
+   8K — 3840px+
+   ========================================================= */
+
+@media (min-width: 3840px) {
+
+  .finalCard {
+    min-height: 340px !important;
+    height: 340px;
+
+    padding: 55px 105px !important;
+
+    border-radius: 44px;
+
+    gap: 60px;
+  }
+
+  .finalCard h2 {
+    font-size: 105px !important;
+  }
+
+  .finalCard p {
+    max-width: 1000px;
+
+    font-size: 19px !important;
+  }
+
+  .finalGlow {
+    width: 480px;
+    height: 480px;
+
+    right: -130px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE — DO NOT CHANGE EXISTING DESIGN
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .finalCard {
+    height: auto;
+    min-height: auto !important;
   }
 }

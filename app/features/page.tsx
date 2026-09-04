@@ -508,99 +508,99 @@ export default function FeaturesPage() {
     Record<string, HTMLElement | null>
   >({});
 
-const overviewRailRef =
-  useRef<HTMLDivElement | null>(null);
+  const overviewRailRef =
+    useRef<HTMLDivElement | null>(null);
 
-const overviewHoverRef =
-  useRef(false);
+  const overviewHoverRef =
+    useRef(false);
 
-useEffect(() => {
-  const rail = overviewRailRef.current;
+  useEffect(() => {
+    const rail = overviewRailRef.current;
 
-  if (!rail || sections.length <= 1) {
-    return;
-  }
+    if (!rail || sections.length <= 1) {
+      return;
+    }
 
-  let animationFrame = 0;
-  let previousTime = performance.now();
+    let animationFrame = 0;
+    let previousTime = performance.now();
 
-  const railStyles =
-    window.getComputedStyle(rail);
+    const railStyles =
+      window.getComputedStyle(rail);
 
-  const gap =
-    parseFloat(
-      railStyles.columnGap ||
-      railStyles.gap ||
-      "0"
-    );
-
-  const firstSet = Array.from(
-    rail.children
-  ).slice(0, sections.length);
-
-  const loopWidth =
-    firstSet.reduce(
-      (total, child, index) => {
-        const width =
-          (child as HTMLElement)
-            .getBoundingClientRect()
-            .width;
-
-        return (
-          total +
-          width +
-          (index <
-          firstSet.length - 1
-            ? gap
-            : 0)
-        );
-      },
-      0
-    );
-
-  const speed = 55;
-
-  const animate = (time: number) => {
-    const delta =
-      Math.min(
-        time - previousTime,
-        32
+    const gap =
+      parseFloat(
+        railStyles.columnGap ||
+        railStyles.gap ||
+        "0"
       );
 
-    previousTime = time;
+    const firstSet = Array.from(
+      rail.children
+    ).slice(0, sections.length);
 
-    if (
-      !overviewHoverRef.current &&
-      !document.hidden
-    ) {
-      rail.scrollLeft +=
-        (speed * delta) / 1000;
+    const loopWidth =
+      firstSet.reduce(
+        (total, child, index) => {
+          const width =
+            (child as HTMLElement)
+              .getBoundingClientRect()
+              .width;
+
+          return (
+            total +
+            width +
+            (index <
+              firstSet.length - 1
+              ? gap
+              : 0)
+          );
+        },
+        0
+      );
+
+    const speed = 55;
+
+    const animate = (time: number) => {
+      const delta =
+        Math.min(
+          time - previousTime,
+          32
+        );
+
+      previousTime = time;
 
       if (
-        loopWidth > 0 &&
-        rail.scrollLeft >= loopWidth
+        !overviewHoverRef.current &&
+        !document.hidden
       ) {
-        rail.scrollLeft -= loopWidth;
+        rail.scrollLeft +=
+          (speed * delta) / 1000;
+
+        if (
+          loopWidth > 0 &&
+          rail.scrollLeft >= loopWidth
+        ) {
+          rail.scrollLeft -= loopWidth;
+        }
       }
-    }
+
+      animationFrame =
+        window.requestAnimationFrame(
+          animate
+        );
+    };
 
     animationFrame =
       window.requestAnimationFrame(
         animate
       );
-  };
 
-  animationFrame =
-    window.requestAnimationFrame(
-      animate
-    );
-
-  return () => {
-    window.cancelAnimationFrame(
-      animationFrame
-    );
-  };
-}, []);
+    return () => {
+      window.cancelAnimationFrame(
+        animationFrame
+      );
+    };
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -670,9 +670,9 @@ useEffect(() => {
                 >
                   Explore Features
                   <img
-                  src="/images/paw-white.png"
-                  width={30}
-                  height={30}
+                    src="/images/paw-white.png"
+                    width={30}
+                    height={30}
                   />
                 </button>
 
@@ -805,52 +805,52 @@ useEffect(() => {
             </p>
           </div>
 
-         <div
-  ref={overviewRailRef}
-  className={styles.overviewRail}
- 
- 
->
-  {[...sections, ...sections].map(
-    (section, index) => {
-      const Icon = section.icon;
+          <div
+            ref={overviewRailRef}
+            className={styles.overviewRail}
 
-      return (
-        <button
-          type="button"
-          key={`${section.number}-${index}`}
-          className={styles.overviewItem}
-          onClick={() =>
-            scrollToFeature(
-              section.number
-            )
-          }
-          aria-label={`Go to ${section.eyebrow}`}
-        >
-          <div className={styles.overviewTop}>
-            <span className={styles.overviewNo}>
-              {section.number}
-            </span>
 
-            <span className={styles.overviewIcon}>
-              <IconBox icon={Icon} />
-            </span>
+          >
+            {[...sections, ...sections].map(
+              (section, index) => {
+                const Icon = section.icon;
+
+                return (
+                  <button
+                    type="button"
+                    key={`${section.number}-${index}`}
+                    className={styles.overviewItem}
+                    onClick={() =>
+                      scrollToFeature(
+                        section.number
+                      )
+                    }
+                    aria-label={`Go to ${section.eyebrow}`}
+                  >
+                    <div className={styles.overviewTop}>
+                      <span className={styles.overviewNo}>
+                        {section.number}
+                      </span>
+
+                      <span className={styles.overviewIcon}>
+                        <IconBox icon={Icon} />
+                      </span>
+                    </div>
+
+                    <div className={styles.overviewBottom}>
+                      <span className={styles.overviewLabel}>
+                        {section.eyebrow}
+                      </span>
+
+                      <span className={styles.overviewArrow}>
+                        <ChevronRight size={18} />
+                      </span>
+                    </div>
+                  </button>
+                );
+              }
+            )}
           </div>
-
-          <div className={styles.overviewBottom}>
-            <span className={styles.overviewLabel}>
-              {section.eyebrow}
-            </span>
-
-            <span className={styles.overviewArrow}>
-              <ChevronRight size={18} />
-            </span>
-          </div>
-        </button>
-      );
-    }
-  )}
-</div>
         </div>
       </section>
 
@@ -878,7 +878,7 @@ useEffect(() => {
                 {sections[0].description}
               </p>
 
- <div className={styles.identityBottomCard}>
+              <div className={styles.identityBottomCard}>
                 <div className={styles.identityShield}>
                   <ShieldCheck size={25} />
                 </div>
@@ -891,7 +891,7 @@ useEffect(() => {
                   </p>
                 </div>
               </div>
-              
+
             </div>
 
             <div className={styles.identityCenter}>
@@ -982,7 +982,7 @@ useEffect(() => {
             </div>
 
             <div className={styles.identityRight}>
-             <FeatureItemCarousel
+              <FeatureItemCarousel
                 items={sections[0].items}
                 visible={visible.includes("01")}
                 large
@@ -1023,7 +1023,7 @@ useEffect(() => {
                 className={styles.dailyCarousel}
               />
 
-            
+
             </div>
 
             <div className={styles.dailyPhoneWrap}>
@@ -1289,7 +1289,7 @@ useEffect(() => {
                 className={styles.healthCarousel}
               />
 
-              
+
             </div>
 
             <div className={styles.healthPhoneWrap}>
@@ -1632,11 +1632,11 @@ useEffect(() => {
 
                   <button type="button">
                     Explore Breed Info
-                      <img
-                  src="/images/paw-white.png"
-                  width={20}
-                  height={20}
-                  />
+                    <img
+                      src="/images/paw-white.png"
+                      width={20}
+                      height={20}
+                    />
                   </button>
                 </div>
 
@@ -2823,46 +2823,59 @@ useEffect(() => {
           FINAL CTA
           ===================================================== */}
 
-      <section className={styles.finalSection}>
-        <div className={styles.container}>
-          <div className={styles.finalCard}>
-            <div className={styles.finalGlow} />
 
-            <div className={styles.finalPaw}>
-              <PawPrint
-                size={170}
-                fill="currentColor"
-              />
-            </div>
+      <div className={styles.container}>
+  <div className={styles.finalCard}>
+    <div className={styles.finalGlow} />
 
-            <div>
+    <div className={styles.finalPaw}>
+      <PawPrint
+        size={170}
+        fill="currentColor"
+      />
+    </div>
 
+    {/* LEFT IMAGE */}
+    <div className={styles.finalImageWrap}>
+      <img
+        src="/images/footer/pets.png"
+        width={200}
+        height={120}
+        alt=""
+        className={styles.featureCTA}
+      />
+    </div>
 
-              <h2>
-                More than features.
-                <span>It&apos;s their whole world.</span>
-              </h2>
+    {/* CENTER CONTENT */}
+    <div className={styles.finalContent}>
+      <h2>
+        More than features.
+        <span>It&apos;s their whole world.</span>
+      </h2>
 
-              <p>
-                Identity, care, health, memories, rewards and smart
-                tools — thoughtfully connected around the pet you love.
-              </p>
-            </div>
+      <p>
+        Identity, care, health, memories, rewards and smart
+        tools — thoughtfully connected around the pet you love.
+      </p>
+    </div>
 
-            <Link
-              href="/"
-              className="btn btn-primary"
-            >
-              Explore PetCard
-               <img
-                  src="/images/paw-white.png"
-                  width={30}
-                  height={30}
-                  />
-            </Link>
-          </div>
-        </div>
-      </section>
+    {/* RIGHT BUTTON */}
+    <Link
+      href="/"
+      className={`btn btn-primary ${styles.finalButton}`}
+    >
+      Explore PetCard
+
+      <img
+        src="/images/paw-white.png"
+        width={30}
+        height={30}
+        alt=""
+      />
+    </Link>
+  </div>
+</div>
+
     </main>
   );
 }
@@ -3059,8 +3072,8 @@ function FeatureItemCarousel({
               key={item.title}
               type="button"
               className={`${styles.miniCarouselCard} ${isActive
-                  ? styles.miniCarouselCardActive
-                  : ""
+                ? styles.miniCarouselCardActive
+                : ""
                 } ${isPrevious
                   ? styles.miniCarouselCardPrevious
                   : ""
@@ -3093,7 +3106,7 @@ function FeatureItemCarousel({
               </span>
 
               <span className={styles.miniCarouselContent}>
-                
+
 
                 <strong>{item.title}</strong>
 

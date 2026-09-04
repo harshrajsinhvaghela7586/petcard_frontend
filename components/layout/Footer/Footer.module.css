@@ -1,24 +1,16 @@
 /* =========================================================
    PETCARD FOOTER
-   Premium / Responsive
-   Desktop • Laptop • Tablet • Mobile • 2K • 4K • 8K
+   Responsive:
+   Mobile • Tablet • Laptop • 2K • 4K • 8K
    ========================================================= */
 
 .footer {
   position: relative;
-
   width: 100%;
-
   margin: 0;
-
-  padding:
-    78px 0
-    28px;
-
+  padding: 78px 0 28px;
   background: #fff;
-
   color: #111;
-
   overflow: hidden;
 }
 
@@ -28,31 +20,39 @@
    ========================================================= */
 
 .footer :global(.container) {
-  width: min(
-    calc(100% - 64px),
-    1720px
-  );
-
+  position: relative;
+  width: min(calc(100% - 64px), 1720px);
   margin-inline: auto;
 }
 
 
 /* =========================================================
    MAIN GRID
+   Desktop:
+   Brand | Explore | Pet World | Legal
    ========================================================= */
 
 .footerGrid {
   display: grid;
 
+  /*
+    Keep the three navigation columns close together.
+    Brand gets most of the available space.
+  */
   grid-template-columns:
-    minmax(420px, 1.7fr)
-    minmax(150px, 0.75fr)
-    minmax(150px, 0.75fr)
-    minmax(150px, 0.75fr);
+    minmax(380px, 1.65fr)
+    minmax(120px, 0.55fr)
+    minmax(140px, 0.65fr)
+    minmax(120px, 0.55fr);
 
-  column-gap: 80px;
+  column-gap: 34px;
 
   align-items: start;
+
+  /*
+    Reserve space on the right for pets image.
+  */
+  width: calc(100% - 230px);
 }
 
 
@@ -71,15 +71,12 @@
 
 .footerBrand {
   display: inline-flex;
-
   align-items: center;
-
   gap: 13px;
 
   text-decoration: none;
 
-  transition:
-    transform 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 .footerBrand:hover {
@@ -107,38 +104,29 @@
 
 .footerBrandText {
   display: flex;
-
   flex-direction: column;
-
   gap: 4px;
 
   min-width: 0;
 }
 
-
 .footerBrandName {
-
   font-size: 38px;
-
   font-weight: 700;
 
   line-height: 0.95;
-
   letter-spacing: -1.5px;
 
   white-space: nowrap;
 }
 
-
 .footerPet {
   color: #000;
 }
 
-
 .footerCard {
   color: var(--orange);
 }
-
 
 .footerTagline {
   font-family: var(--font-tagline);
@@ -146,7 +134,6 @@
   color: #111;
 
   font-size: 8px;
-
   font-weight: 800;
 
   line-height: 1;
@@ -162,21 +149,16 @@
 .footerDescription {
   width: min(100%, 560px);
 
-  margin:
-    34px 0 0;
+  margin: 34px 0 0;
 
   color: #111;
 
   font-size: 16px;
+  font-weight: 400;
 
   line-height: 1.8;
-
-  font-weight: 400;
 }
 
-/* =========================================================
-   SOCIALS
-   ========================================================= */
 
 /* =========================================================
    SOCIALS
@@ -185,7 +167,9 @@
 .footerSocials {
   display: flex;
   align-items: center;
+
   gap: clamp(14px, 1.2vw, 24px);
+
   margin-top: clamp(24px, 2vw, 34px);
 }
 
@@ -200,6 +184,7 @@
   flex-shrink: 0;
 
   background: #fff;
+
   border-radius: 50%;
 
   text-decoration: none;
@@ -257,7 +242,7 @@
 
 
 /* =========================================================
-   HOVER
+   SOCIAL HOVER
    ========================================================= */
 
 .socialLink:hover {
@@ -270,151 +255,28 @@
 
 
 /* =========================================================
-   MOBILE
+   PETS IMAGE
+   Desktop / Laptop / Tablet
    ========================================================= */
 
-@media (max-width: 767px) {
-  .footerSocials {
-    justify-content: center;
-    gap: 14px;
-    margin-top: 24px;
-  }
-
-  .socialLink {
-    width: 40px;
-    height: 40px;
-  }
-
-  .socialLink svg {
-    width: 19px;
-    height: 19px;
-  }
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (min-width: 768px) and (max-width: 1199px) {
-  .socialLink {
-    width: 42px;
-    height: 42px;
-  }
-
-  .socialLink svg {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-
-/* =========================================================
-   2K
-   ========================================================= */
-
-@media (min-width: 1920px) {
-  .socialLink {
-    width: 46px;
-    height: 46px;
-  }
-
-  .socialLink svg {
-    width: 22px;
-    height: 22px;
-  }
-}
-
-
-/* =========================================================
-   4K
-   ========================================================= */
-
-@media (min-width: 2560px) {
-  .socialLink {
-    width: 54px;
-    height: 54px;
-  }
-
-  .socialLink svg {
-    width: 26px;
-    height: 26px;
-  }
-}
-
-
-/* =========================================================
-   8K
-   ========================================================= */
-
-@media (min-width: 5120px) {
-  .socialLink {
-    width: 64px;
-    height: 64px;
-  }
-
-  .socialLink svg {
-    width: 31px;
-    height: 31px;
-  }
-}
 .footerPets {
-  display: none;
+  position: absolute;
+
+  top: 38px;
+  right: 0;
+
+  display: block;
+
+  width: clamp(150px, 13vw, 260px);
+  height: auto;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+  z-index: 2;
 }
 
-@media (max-width: 767px) {
-  .footer {
-    position: relative;
-  }
-
-  .footerPets {
-    display: block;
-
-    position: absolute;
-    right: 12px;
-    bottom: 58px;
-
-    width: 90px;
-    height: auto;
-
-    object-fit: contain;
-    pointer-events: none;
-    z-index: 2;
-  }
-}
-.footerPets {
-  display: none;
-}
-
-@media (max-width: 468px) {
-  .footerPets {
-    display: block;
-    position: absolute;
-    right: 32px;
-    bottom: 70px;
-    width: 180px;
-    height: auto;
-    object-fit: contain;
-    pointer-events: none;
-    z-index: 2;
-  }
-}
-
-
-
-@media (max-width: 768px) {
-  .footerPets {
-    display: block;
-    position: absolute;
-    right: 32px;
-    bottom: 70px;
-    width: 180px;
-    height: auto;
-    object-fit: contain;
-    pointer-events: none;
-    z-index: 2;
-  }
-}
 
 /* =========================================================
    FOOTER COLUMNS
@@ -424,15 +286,12 @@
   min-width: 0;
 }
 
-
 .footerColumn h4 {
   margin: 3px 0 22px;
 
   color: #111;
 
-
   font-size: 16px;
-
   font-weight: 700;
 
   line-height: 1.2;
@@ -445,18 +304,14 @@
 
 .footerLinks {
   display: flex;
-
   flex-direction: column;
-
   align-items: flex-start;
 
   gap: 14px;
 }
 
-
 .footerLinks a {
   display: inline-flex;
-
   align-items: center;
 
   width: fit-content;
@@ -464,7 +319,6 @@
   color: var(--orange);
 
   font-size: 15px;
-
   font-weight: 400;
 
   line-height: 1.35;
@@ -476,12 +330,10 @@
     transform 0.2s ease;
 }
 
-
 .footerLinks a:hover {
   color: #e96800;
 
-  transform:
-    translateX(4px);
+  transform: translateX(4px);
 }
 
 
@@ -493,23 +345,24 @@
   position: relative;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
-  width: 100%;
+  width: 100vw;
 
-  min-height: 54px;
+  min-height: 55px;
 
-  margin-top: 72px;
+  margin-top: 78px;
+  margin-bottom: -28px;
 
-  padding:
-    0 70px;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  padding: 0 80px;
 
   border: 0;
 
-  border-radius:
-    18px 18px 0 0;
+  border-radius: 18px 18px 0 0;
 
   background:
     linear-gradient(
@@ -522,7 +375,6 @@
   color: #fff;
 
   font-size: 13px;
-
   font-weight: 500;
 
   line-height: 1;
@@ -530,31 +382,28 @@
   overflow: hidden;
 
   box-shadow:
-    0 -4px 18px
-    rgba(255, 122, 0, 0.08);
+    0 -4px 18px rgba(255, 122, 0, 0.08);
+
+  z-index: 5;
 }
 
 
 /* =========================================================
-   LEFT + RIGHT CONTENT
+   COPYRIGHT CONTENT
    ========================================================= */
 
 .copyright > span {
   display: inline-flex;
-
   align-items: center;
 }
 
 
-/* =========================================================
-   RIGHT TEXT
-   ========================================================= */
+/* Right text */
 
 .copyright > span:last-child {
   position: absolute;
 
-  right: 20px;
-
+  right: 24px;
   top: 50%;
 
   transform: translateY(-50%);
@@ -566,7 +415,7 @@
 
 
 /* =========================================================
-   PAW IMAGE
+   PAW
    ========================================================= */
 
 .copyImage {
@@ -582,789 +431,50 @@
   vertical-align: middle;
 }
 
-
-/* =========================================================
-   PAW ON LEFT
-   Since TSX has only text on left, create paw with pseudo
-   ========================================================= */
-
 .copyright::before {
   content: "✣";
 
   position: absolute;
 
-  left: 24px;
-
+  left: 25px;
   top: 50%;
 
-  transform:
-    translateY(-50%);
+  transform: translateY(-50%);
 
   color: #fff;
 
-  font-size: 19px;
+  font-size: 20px;
 
   line-height: 1;
 }
 
 
 /* =========================================================
-   DESKTOP
-   ========================================================= */
-
-@media (min-width: 1101px) {
-
-  .copyright {
-    min-height: 55px;
-
-    margin-top: 78px;
-
-    padding-inline: 80px;
-
-    border-radius:
-      18px 18px 0 0;
-
-    font-size: 13px;
-  }
-
-  .copyright::before {
-    left: 25px;
-
-    font-size: 20px;
-  }
-
-  .copyright > span:last-child {
-    right: 24px;
-  }
-}
-
-
-/* =========================================================
-   2K
-   ========================================================= */
-
-@media (min-width: 1920px) {
-
-  .copyright {
-    min-height: 62px;
-
-    margin-top: 90px;
-
-    padding-inline: 95px;
-
-    border-radius:
-      21px 21px 0 0;
-
-    font-size: 15px;
-  }
-
-  .copyright::before {
-    left: 30px;
-
-    font-size: 22px;
-  }
-
-  .copyright > span:last-child {
-    right: 30px;
-  }
-
-  .copyImage {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-
-/* =========================================================
-   4K
-   ========================================================= */
-
-@media (min-width: 2560px) {
-
-  .copyright {
-    min-height: 76px;
-
-    margin-top: 110px;
-
-    padding-inline: 120px;
-
-    border-radius:
-      25px 25px 0 0;
-
-    font-size: 18px;
-  }
-
-  .copyright::before {
-    left: 38px;
-
-    font-size: 27px;
-  }
-
-  .copyright > span:last-child {
-    right: 38px;
-  }
-
-  .copyImage {
-    width: 24px;
-    height: 24px;
-
-    margin-left: 8px;
-  }
-}
-
-
-/* =========================================================
-   8K
-   ========================================================= */
-
-@media (min-width: 3840px) {
-
-  .copyright {
-    min-height: 96px;
-
-    margin-top: 145px;
-
-    padding-inline: 160px;
-
-    border-radius:
-      32px 32px 0 0;
-
-    font-size: 23px;
-  }
-
-  .copyright::before {
-    left: 50px;
-
-    font-size: 34px;
-  }
-
-  .copyright > span:last-child {
-    right: 50px;
-  }
-
-  .copyImage {
-    width: 30px;
-    height: 30px;
-
-    margin-left: 10px;
-  }
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (min-width: 769px) and (max-width: 1100px) {
-
-  .copyright {
-    min-height: 48px;
-
-    margin-top: 58px;
-
-    padding-inline: 55px;
-
-    border-radius:
-      15px 15px 0 0;
-
-    font-size: 11px;
-  }
-
-  .copyright::before {
-    left: 19px;
-
-    font-size: 17px;
-  }
-
-  .copyright > span:last-child {
-    right: 19px;
-  }
-
-  .copyImage {
-    width: 15px;
-    height: 15px;
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 768px) {
-
-  .copyright {
-    flex-direction: row;
-
-    justify-content: center;
-
-    width: 100%;
-
-    min-height: 48px;
-
-    margin-top: 48px;
-
-    padding:
-      0 48px;
-
-    border-radius:
-      14px 14px 0 0;
-
-    font-size: 9px;
-
-    text-align: center;
-  }
-.copyright {
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center !important;
-    padding: 0 45px !important;
-  }
-
-  .copyright > span:first-child {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-  .copyright::before {
-    left: 14px;
-
-    font-size: 15px;
-  }
-
-  .copyright > span:last-child {
-    right: 14px;
-
-    font-size: 0;
-  }
-
-  .copyright > span:last-child .copyImage {
-    display: none;
-  }
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 480px) {
-
-  .copyright {
-    min-height: 44px;
-
-    margin-top: 40px;
-
-    padding:
-      0 38px;
-
-    border-radius:
-      12px 12px 0 0;
-
-    font-size: 8px;
-  }
-
-  .copyright::before {
-    left: 11px;
-
-    font-size: 13px;
-  }
-
-  .copyright > span:last-child {
-    right: 11px;
-  }
-
-  .copyright > span:last-child .copyImage {
-    width: 13px;
-    height: 13px;
-  }
-}
-
-
-/* =========================================================
-   VERY SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 360px) {
-
-  .copyright {
-    min-height: 40px;
-
-    margin-top: 34px;
-
-    padding:
-      0 32px;
-
-    border-radius:
-      10px 10px 0 0;
-
-    font-size: 7px;
-  }
-
-  .copyright::before {
-    left: 9px;
-
-    font-size: 11px;
-  }
-
-  .copyright > span:last-child {
-    right: 9px;
-  }
-
-  .copyright > span:last-child .copyImage {
-    width: 11px;
-    height: 11px;
-  }
-}
-/* =========================================================
-   COPYRIGHT — ALWAYS FLUSH TO FOOTER BOTTOM
-   ========================================================= */
-
-.copyright {
-  position: relative;
-
-  width: 100vw;
-  margin-top: 72px;
-  margin-bottom: -28px;
-
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-
-  border-radius: 18px 18px 0 0;
-
-  z-index: 5;
-}
-
-
-/* =========================================================
-   DESKTOP
-   ========================================================= */
-
-@media (min-width: 1101px) {
-  .copyright {
-    margin-top: 78px;
-    margin-bottom: -28px;
-  }
-}
-
-
-/* =========================================================
-   2K
-   ========================================================= */
-
-@media (min-width: 1920px) {
-  .copyright {
-    margin-top: 90px;
-    margin-bottom: -35px;
-
-    border-radius: 21px 21px 0 0;
-  }
-}
-
-
-/* =========================================================
-   4K
-   ========================================================= */
-
-@media (min-width: 2560px) {
-  .copyright {
-    margin-top: 110px;
-    margin-bottom: -45px;
-
-    border-radius: 25px 25px 0 0;
-  }
-}
-
-
-/* =========================================================
-   8K
-   ========================================================= */
-
-@media (min-width: 3840px) {
-  .copyright {
-    margin-top: 145px;
-    margin-bottom: -60px;
-
-    border-radius: 32px 32px 0 0;
-  }
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (min-width: 769px) and (max-width: 1100px) {
-  .copyright {
-    margin-top: 58px;
-    margin-bottom: -22px;
-
-    border-radius: 15px 15px 0 0;
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 768px) {
-  .copyright {
-    width: 100vw;
-
-    margin-top: 48px;
-    margin-bottom: -20px;
-
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-
-    border-radius: 14px 14px 0 0;
-  }
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 480px) {
-  .copyright {
-    margin-top: 40px;
-    margin-bottom: -18px;
-
-    border-radius: 12px 12px 0 0;
-  }
-}
-
-
-/* =========================================================
-   VERY SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 360px) {
-  .copyright {
-    margin-top: 34px;
-    margin-bottom: -16px;
-
-    border-radius: 10px 10px 0 0;
-  }
-}
-/* =========================================================
-   1920+
-   2K
-   ========================================================= */
-
-@media (min-width: 1920px) {
-
-  .footer {
-    padding:
-      95px 0
-      35px;
-  }
-
-  .footer :global(.container) {
-    width: min(
-      calc(100% - 100px),
-      1800px
-    );
-  }
-
-  .footerGrid {
-    grid-template-columns:
-      minmax(500px, 1.75fr)
-      minmax(170px, 0.75fr)
-      minmax(170px, 0.75fr)
-      minmax(170px, 0.75fr);
-
-    column-gap: 95px;
-  }
-
-  .footerDogLogo {
-    width: 84px;
-    height: 84px;
-  }
-
-  .footerBrand {
-    gap: 15px;
-  }
-
-  .footerBrandName {
-    font-size: 42px;
-  }
-
-  .footerTagline {
-    font-size: 9px;
-  }
-
-  .footerDescription {
-    max-width: 590px;
-
-    margin-top: 38px;
-
-    font-size: 17px;
-  }
-
-  .footerSocials {
-    margin-top: 38px;
-
-    gap: 25px;
-  }
-
-  .socialLink {
-    width: 35px;
-    height: 35px;
-  }
-
-  .footerColumn h4 {
-    font-size: 17px;
-
-    margin-bottom: 24px;
-  }
-
-  .footerLinks {
-    gap: 16px;
-  }
-
-  .footerLinks a {
-    font-size: 16px;
-  }
-
-  .copyright {
-    margin-top: 120px;
-
-    padding-top: 25px;
-
-    font-size: 14px;
-  }
-}
-
-
-/* =========================================================
-   4K
-   ========================================================= */
-
-@media (min-width: 2560px) {
-
-  .footer {
-    padding:
-      120px 0
-      45px;
-  }
-
-  .footer :global(.container) {
-    width: min(
-      calc(100% - 140px),
-      2400px
-    );
-  }
-
-  .footerGrid {
-    grid-template-columns:
-      minmax(650px, 1.8fr)
-      minmax(220px, 0.7fr)
-      minmax(220px, 0.7fr)
-      minmax(220px, 0.7fr);
-
-    column-gap: 125px;
-  }
-
-  .footerDogLogo {
-    width: 105px;
-    height: 105px;
-  }
-
-  .footerBrand {
-    gap: 19px;
-  }
-
-  .footerBrandName {
-    font-size: 52px;
-
-    letter-spacing: -2px;
-  }
-
-  .footerTagline {
-    font-size: 11px;
-  }
-
-  .footerDescription {
-    max-width: 720px;
-
-    margin-top: 48px;
-
-    font-size: 21px;
-
-    line-height: 1.8;
-  }
-
-  .footerSocials {
-    margin-top: 45px;
-
-    gap: 30px;
-  }
-
-  .socialLink {
-    width: 42px;
-    height: 42px;
-  }
-
-  .footerColumn h4 {
-    margin-top: 5px;
-
-    margin-bottom: 30px;
-
-    font-size: 21px;
-  }
-
-  .footerLinks {
-    gap: 20px;
-  }
-
-  .footerLinks a {
-    font-size: 19px;
-  }
-
-  .copyright {
-    margin-top: 145px;
-
-    padding-top: 30px;
-
-    font-size: 17px;
-  }
-
-  .copyImage {
-    width: 21px;
-    height: 21px;
-  }
-}
-
-
-/* =========================================================
-   8K
-   ========================================================= */
-
-@media (min-width: 3840px) {
-
-  .footer {
-    padding:
-      165px 0
-      60px;
-  }
-
-  .footer :global(.container) {
-    width: min(
-      calc(100% - 220px),
-      3400px
-    );
-  }
-
-  .footerGrid {
-    grid-template-columns:
-      minmax(850px, 1.8fr)
-      minmax(300px, 0.7fr)
-      minmax(300px, 0.7fr)
-      minmax(300px, 0.7fr);
-
-    column-gap: 170px;
-  }
-
-  .footerDogLogo {
-    width: 140px;
-    height: 140px;
-  }
-
-  .footerBrand {
-    gap: 25px;
-  }
-
-  .footerBrandName {
-    font-size: 70px;
-
-    letter-spacing: -3px;
-  }
-
-  .footerTagline {
-    font-size: 14px;
-  }
-
-  .footerDescription {
-    max-width: 900px;
-
-    margin-top: 65px;
-
-    font-size: 27px;
-
-    line-height: 1.8;
-  }
-
-  .footerSocials {
-    margin-top: 60px;
-
-    gap: 38px;
-  }
-
-  .socialLink {
-    width: 54px;
-    height: 54px;
-  }
-
-  .footerColumn h4 {
-    margin-bottom: 38px;
-
-    font-size: 27px;
-  }
-
-  .footerLinks {
-    gap: 27px;
-  }
-
-  .footerLinks a {
-    font-size: 25px;
-  }
-
-  .copyright {
-    margin-top: 190px;
-
-    padding-top: 38px;
-
-    font-size: 22px;
-  }
-
-  .copyImage {
-    width: 27px;
-    height: 27px;
-  }
-}
-
-
-/* =========================================================
    LAPTOP
-   1101 - 1439
+   1101px – 1439px
+   Specifically good for your Vivobook M1603QA
    ========================================================= */
 
 @media (min-width: 1101px) and (max-width: 1439px) {
 
   .footer {
-    padding:
-      62px 0
-      24px;
+    padding: 62px 0 24px;
   }
 
   .footer :global(.container) {
-    width: min(
-      calc(100% - 50px),
-      1250px
-    );
+    width: min(calc(100% - 50px), 1300px);
   }
 
   .footerGrid {
     grid-template-columns:
-      minmax(320px, 1.6fr)
-      minmax(120px, 0.75fr)
-      minmax(120px, 0.75fr)
-      minmax(120px, 0.75fr);
+      minmax(320px, 1.55fr)
+      minmax(105px, 0.55fr)
+      minmax(120px, 0.65fr)
+      minmax(105px, 0.55fr);
 
-    column-gap: 38px;
+    column-gap: 28px;
+
+    width: calc(100% - 190px);
   }
 
   .footerDogLogo {
@@ -1390,10 +500,12 @@
     margin-top: 25px;
 
     font-size: 12px;
+    line-height: 1.7;
   }
 
   .footerSocials {
     margin-top: 22px;
+    gap: 16px;
   }
 
   .socialLink {
@@ -1401,10 +513,16 @@
     height: 30px;
   }
 
-  .footerColumn h4 {
-    font-size: 13px;
+  .socialLink svg {
+    width: 19px;
+    height: 19px;
+  }
 
+  .footerColumn h4 {
+    margin-top: 3px;
     margin-bottom: 17px;
+
+    font-size: 13px;
   }
 
   .footerLinks {
@@ -1415,44 +533,63 @@
     font-size: 11px;
   }
 
-  .copyright {
-    margin-top: 65px;
+  .footerPets {
+    top: 42px;
+    right: 0;
 
-    padding-top: 18px;
+    width: 165px;
+  }
+
+  .copyright {
+    min-height: 52px;
+
+    margin-top: 65px;
+    margin-bottom: -24px;
+
+    padding-inline: 60px;
 
     font-size: 10px;
+  }
+
+  .copyright::before {
+    left: 20px;
+    font-size: 17px;
+  }
+
+  .copyright > span:last-child {
+    right: 20px;
   }
 }
 
 
 /* =========================================================
-   TABLET
-   769 - 1100
+   TABLET LANDSCAPE
+   769px – 1100px
+
+   IMPORTANT:
+   Mobile <= 768px remains untouched.
    ========================================================= */
 
 @media (min-width: 769px) and (max-width: 1100px) {
 
   .footer {
-    padding:
-      55px 0
-      22px;
+    padding: 55px 0 22px;
   }
 
   .footer :global(.container) {
-    width: min(
-      calc(100% - 42px),
-      920px
-    );
+    width: min(calc(100% - 42px), 960px);
   }
 
   .footerGrid {
     grid-template-columns:
-      minmax(260px, 1.5fr)
-      minmax(110px, 0.8fr)
-      minmax(110px, 0.8fr)
-      minmax(110px, 0.8fr);
+      minmax(250px, 1.5fr)
+      minmax(90px, 0.55fr)
+      minmax(100px, 0.6fr)
+      minmax(90px, 0.55fr);
 
-    column-gap: 25px;
+    column-gap: 20px;
+
+    width: calc(100% - 150px);
   }
 
   .footerDogLogo {
@@ -1493,10 +630,15 @@
     height: 29px;
   }
 
-  .footerColumn h4 {
-    font-size: 11px;
+  .socialLink svg {
+    width: 18px;
+    height: 18px;
+  }
 
+  .footerColumn h4 {
     margin-bottom: 14px;
+
+    font-size: 11px;
   }
 
   .footerLinks {
@@ -1507,27 +649,408 @@
     font-size: 9px;
   }
 
-  .copyright {
-    margin-top: 50px;
+  .footerPets {
+    top: 45px;
+    right: 0;
 
-    padding-top: 16px;
+    width: 125px;
+  }
+
+  .copyright {
+    min-height: 48px;
+
+    margin-top: 58px;
+    margin-bottom: -22px;
+
+    padding-inline: 55px;
 
     font-size: 9px;
+  }
+
+  .copyright::before {
+    left: 19px;
+    font-size: 17px;
+  }
+
+  .copyright > span:last-child {
+    right: 19px;
   }
 }
 
 
 /* =========================================================
-   TABLET PORTRAIT
-   <= 768
+   2K
+   1920px+
+   ========================================================= */
+
+@media (min-width: 1920px) {
+
+  .footer {
+    padding: 95px 0 35px;
+  }
+
+  .footer :global(.container) {
+    width: min(calc(100% - 100px), 1800px);
+  }
+
+  .footerGrid {
+    grid-template-columns:
+      minmax(500px, 1.6fr)
+      minmax(150px, 0.55fr)
+      minmax(165px, 0.65fr)
+      minmax(150px, 0.55fr);
+
+    column-gap: 42px;
+
+    width: calc(100% - 280px);
+  }
+
+  .footerDogLogo {
+    width: 84px;
+    height: 84px;
+  }
+
+  .footerBrand {
+    gap: 15px;
+  }
+
+  .footerBrandName {
+    font-size: 42px;
+  }
+
+  .footerTagline {
+    font-size: 9px;
+  }
+
+  .footerDescription {
+    max-width: 590px;
+
+    margin-top: 38px;
+
+    font-size: 17px;
+  }
+
+  .footerSocials {
+    margin-top: 38px;
+
+    gap: 22px;
+  }
+
+  .socialLink {
+    width: 42px;
+    height: 42px;
+  }
+
+  .socialLink svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .footerColumn h4 {
+    margin-bottom: 24px;
+
+    font-size: 17px;
+  }
+
+  .footerLinks {
+    gap: 14px;
+  }
+
+  .footerLinks a {
+    font-size: 16px;
+  }
+
+  .footerPets {
+    top: 48px;
+    right: 0;
+
+    width: 230px;
+  }
+
+  .copyright {
+    min-height: 62px;
+
+    margin-top: 90px;
+    margin-bottom: -35px;
+
+    padding-inline: 95px;
+
+    font-size: 15px;
+  }
+
+  .copyright::before {
+    left: 30px;
+    font-size: 22px;
+  }
+
+  .copyright > span:last-child {
+    right: 30px;
+  }
+
+  .copyImage {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+/* =========================================================
+   4K
+   2560px+
+   ========================================================= */
+
+@media (min-width: 2560px) {
+
+  .footer {
+    padding: 120px 0 45px;
+  }
+
+  .footer :global(.container) {
+    width: min(calc(100% - 140px), 2400px);
+  }
+
+  .footerGrid {
+    grid-template-columns:
+      minmax(650px, 1.65fr)
+      minmax(190px, 0.55fr)
+      minmax(210px, 0.65fr)
+      minmax(190px, 0.55fr);
+
+    column-gap: 55px;
+
+    width: calc(100% - 370px);
+  }
+
+  .footerDogLogo {
+    width: 105px;
+    height: 105px;
+  }
+
+  .footerBrand {
+    gap: 19px;
+  }
+
+  .footerBrandName {
+    font-size: 52px;
+
+    letter-spacing: -2px;
+  }
+
+  .footerTagline {
+    font-size: 11px;
+  }
+
+  .footerDescription {
+    max-width: 720px;
+
+    margin-top: 48px;
+
+    font-size: 21px;
+
+    line-height: 1.8;
+  }
+
+  .footerSocials {
+    margin-top: 45px;
+
+    gap: 28px;
+  }
+
+  .socialLink {
+    width: 50px;
+    height: 50px;
+  }
+
+  .socialLink svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .footerColumn h4 {
+    margin-top: 5px;
+    margin-bottom: 30px;
+
+    font-size: 21px;
+  }
+
+  .footerLinks {
+    gap: 18px;
+  }
+
+  .footerLinks a {
+    font-size: 19px;
+  }
+
+  .footerPets {
+    top: 62px;
+    right: 0;
+
+    width: 310px;
+  }
+
+  .copyright {
+    min-height: 76px;
+
+    margin-top: 110px;
+    margin-bottom: -45px;
+
+    padding-inline: 120px;
+
+    font-size: 18px;
+  }
+
+  .copyright::before {
+    left: 38px;
+    font-size: 27px;
+  }
+
+  .copyright > span:last-child {
+    right: 38px;
+  }
+
+  .copyImage {
+    width: 24px;
+    height: 24px;
+
+    margin-left: 8px;
+  }
+}
+
+
+/* =========================================================
+   8K
+   3840px+
+   ========================================================= */
+
+@media (min-width: 3840px) {
+
+  .footer {
+    padding: 165px 0 60px;
+  }
+
+  .footer :global(.container) {
+    width: min(calc(100% - 220px), 3400px);
+  }
+
+  .footerGrid {
+    grid-template-columns:
+      minmax(850px, 1.7fr)
+      minmax(270px, 0.55fr)
+      minmax(290px, 0.65fr)
+      minmax(270px, 0.55fr);
+
+    column-gap: 70px;
+
+    width: calc(100% - 500px);
+  }
+
+  .footerDogLogo {
+    width: 140px;
+    height: 140px;
+  }
+
+  .footerBrand {
+    gap: 25px;
+  }
+
+  .footerBrandName {
+    font-size: 70px;
+
+    letter-spacing: -3px;
+  }
+
+  .footerTagline {
+    font-size: 14px;
+  }
+
+  .footerDescription {
+    max-width: 900px;
+
+    margin-top: 65px;
+
+    font-size: 27px;
+
+    line-height: 1.8;
+  }
+
+  .footerSocials {
+    margin-top: 60px;
+
+    gap: 38px;
+  }
+
+  .socialLink {
+    width: 64px;
+    height: 64px;
+  }
+
+  .socialLink svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .footerColumn h4 {
+    margin-bottom: 38px;
+
+    font-size: 27px;
+  }
+
+  .footerLinks {
+    gap: 25px;
+  }
+
+  .footerLinks a {
+    font-size: 25px;
+  }
+
+  .footerPets {
+    top: 82px;
+    right: 0;
+
+    width: 420px;
+  }
+
+  .copyright {
+    min-height: 96px;
+
+    margin-top: 145px;
+    margin-bottom: -60px;
+
+    padding-inline: 160px;
+
+    font-size: 23px;
+  }
+
+  .copyright::before {
+    left: 50px;
+    font-size: 34px;
+  }
+
+  .copyright > span:last-child {
+    right: 50px;
+  }
+
+  .copyImage {
+    width: 30px;
+    height: 30px;
+
+    margin-left: 10px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   <= 768px
+   KEEPING YOUR EXISTING MOBILE DESIGN
    ========================================================= */
 
 @media (max-width: 768px) {
 
   .footer {
-    padding:
-      52px 0
-      20px;
+    position: relative;
+
+    padding: 52px 0 20px;
   }
 
   .footer :global(.container) {
@@ -1535,12 +1058,11 @@
   }
 
   .footerGrid {
-    grid-template-columns:
-      1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
-    gap:
-      42px
-      28px;
+    gap: 42px 28px;
+
+    width: 100%;
   }
 
   .footerBrandColumn {
@@ -1575,6 +1097,8 @@
   }
 
   .footerSocials {
+    justify-content: center;
+
     margin-top: 20px;
 
     gap: 16px;
@@ -1583,6 +1107,11 @@
   .socialLink {
     width: 31px;
     height: 31px;
+  }
+
+  .socialLink svg {
+    width: 19px;
+    height: 19px;
   }
 
   .footerColumn h4 {
@@ -1599,39 +1128,89 @@
     font-size: 11px;
   }
 
+  /*
+    Mobile pets image — your existing mobile positioning.
+  */
+  .footerPets {
+    display: block;
+
+    position: absolute;
+
+    right: 32px;
+    bottom: 70px;
+
+    top: auto;
+
+    width: 180px;
+    height: auto;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    z-index: 2;
+  }
+
   .copyright {
-    flex-direction: column;
+    flex-direction: row;
 
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
 
-    justify-content: flex-start;
+    width: 100vw;
 
-    gap: 8px;
+    min-height: 48px;
 
-    margin-top: 55px;
+    margin-top: 48px;
+    margin-bottom: -20px;
 
-    padding-top: 18px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
 
-    font-size: 10px;
+    padding: 0 45px;
+
+    border-radius: 14px 14px 0 0;
+
+    font-size: 9px;
+
+    text-align: center;
+  }
+
+  .copyright > span:first-child {
+    width: 100%;
+
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .copyright::before {
+    left: 14px;
+
+    font-size: 15px;
   }
 
   .copyright > span:last-child {
-    justify-content: flex-start;
+    right: 14px;
+
+    font-size: 0;
+  }
+
+  .copyright > span:last-child .copyImage {
+    display: none;
   }
 }
 
 
 /* =========================================================
    SMALL MOBILE
-   <= 480
+   <= 480px
    ========================================================= */
 
 @media (max-width: 480px) {
 
   .footer {
-    padding:
-      42px 0
-      18px;
+    padding: 42px 0 18px;
   }
 
   .footer :global(.container) {
@@ -1639,12 +1218,11 @@
   }
 
   .footerGrid {
-    grid-template-columns:
-      1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
-    gap:
-      34px
-      20px;
+    gap: 34px 20px;
+
+    width: 100%;
   }
 
   .footerDogLogo {
@@ -1701,34 +1279,47 @@
     line-height: 1.4;
   }
 
+  .footerPets {
+    right: 32px;
+    bottom: 70px;
+
+    width: 180px;
+  }
+
   .copyright {
-    gap: 6px;
+    min-height: 44px;
 
-    margin-top: 42px;
+    margin-top: 40px;
+    margin-bottom: -18px;
 
-    padding-top: 15px;
+    padding: 0 38px;
+
+    border-radius: 12px 12px 0 0;
 
     font-size: 8.5px;
   }
 
-  .copyImage {
-    width: 14px;
-    height: 14px;
+  .copyright::before {
+    left: 11px;
+
+    font-size: 13px;
+  }
+
+  .copyright > span:last-child {
+    right: 11px;
   }
 }
 
 
 /* =========================================================
    VERY SMALL MOBILE
-   <= 360
+   <= 360px
    ========================================================= */
 
 @media (max-width: 360px) {
 
   .footer {
-    padding:
-      36px 0
-      16px;
+    padding: 36px 0 16px;
   }
 
   .footer :global(.container) {
@@ -1736,9 +1327,7 @@
   }
 
   .footerGrid {
-    gap:
-      29px
-      15px;
+    gap: 29px 15px;
   }
 
   .footerDogLogo {
@@ -1787,10 +1376,34 @@
     font-size: 8px;
   }
 
+  .footerPets {
+    right: 32px;
+    bottom: 70px;
+
+    width: 180px;
+  }
+
   .copyright {
-    margin-top: 36px;
+    min-height: 40px;
+
+    margin-top: 34px;
+    margin-bottom: -16px;
+
+    padding: 0 32px;
+
+    border-radius: 10px 10px 0 0;
 
     font-size: 7.5px;
+  }
+
+  .copyright::before {
+    left: 9px;
+
+    font-size: 11px;
+  }
+
+  .copyright > span:last-child {
+    right: 9px;
   }
 }
 

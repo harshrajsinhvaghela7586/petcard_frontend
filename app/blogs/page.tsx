@@ -103,7 +103,7 @@ const freshReads = [
    HERO PETS
    ========================================================= */
 
-const heroDog = "/images/about/dog.png";
+const heroDog = "/images/huchiko2.png";
 const heroCat = "/images/about/cat.png";
 const heroPet = "/images/about/rabbit.png";
 
@@ -231,24 +231,12 @@ export default function Blogs() {
 
               <div className={styles.heroDog}>
                 <img
-                  src={heroDog}
+                  src="/images/footer/pets.png"
                   alt="Golden retriever"
                 />
               </div>
 
-              <div className={styles.heroCat}>
-                <img
-                  src={heroCat}
-                  alt="Cat"
-                />
-              </div>
-
-              <div className={styles.heroPet}>
-                <img
-                  src={heroPet}
-                  alt="Happy pet"
-                />
-              </div>
+             
             </div>
           </div>
         </div>
@@ -294,7 +282,7 @@ export default function Blogs() {
                 }
               >
                 <img
-                  src={heroDog}
+                  src="/images/slider/huchiko.png"
                   alt="Pet"
                 />
               </div>
