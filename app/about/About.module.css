@@ -614,7 +614,7 @@
 
   border-radius: 20px;
 
-  background: #fff;
+  background: var(--soft);
 
   text-align: center;
 
@@ -790,68 +790,47 @@
 }
 
 
+
 /* =========================================================
    JOURNEY GRID
    ========================================================= */
 
 .journey {
   display: grid;
-
-  grid-template-columns:
-    repeat(
-      4,
-      minmax(0, 1fr)
-    );
-
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
+  width: 100%;
 }
 
 
 /* =========================================================
    JOURNEY CARD
+   ONLY THE CARD ITSELF ANIMATES
    ========================================================= */
 
 .journeyCard {
   position: relative;
-
   isolation: isolate;
 
+  min-width: 0;
   min-height: 350px;
 
   overflow: hidden;
 
-  padding:
-    26px 22px
-    0;
+  padding: 26px 22px 0;
 
-  border:
-    1px solid rgba(
-      56,
-      27,
-      14,
-      0.08
-    );
-
+  border: 1px solid rgba(56, 27, 14, 0.08);
   border-radius: 32px;
 
-  background:
-    #ffc17f;
-
   opacity: 0;
+  transform: translateX(-70px);
 
-  transform:
-    translateY(45px);
+  will-change: transform, opacity;
 
   transition:
-    opacity 0.7s ease,
-    transform 0.8s
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      ),
-    box-shadow 0.35s ease;
+    opacity 0.78s ease,
+    transform 0.88s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease;
 }
 
 
@@ -859,32 +838,45 @@
    CARD COLORS
    ========================================================= */
 
-/* 01 */
-
 .journeyCard:nth-child(1) {
-  background:
-    #ffc17f;
+  background: #ffc17f;
 }
-
-/* 02 */
 
 .journeyCard:nth-child(2) {
-  background:
-    #74401f;
+  background: #74401f;
 }
-
-/* 03 */
 
 .journeyCard:nth-child(3) {
-  background:
-    #ffdfc1;
+  background: #ffdfc1;
 }
 
-/* 04 */
+.journeyCard:nth-child(4) {
+  background: #fff0db;
+}
+
+
+/* =========================================================
+   INITIAL POSITIONS
+   1 → LEFT
+   2 → CENTER
+   3 → RIGHT
+   4 → LEFT
+   ========================================================= */
+
+.journeyCard:nth-child(1) {
+  transform: translateX(-70px);
+}
+
+.journeyCard:nth-child(2) {
+  transform: translateY(50px) scale(0.94);
+}
+
+.journeyCard:nth-child(3) {
+  transform: translateX(70px);
+}
 
 .journeyCard:nth-child(4) {
-  background:
-    #fff0db;
+  transform: translateX(-70px);
 }
 
 
@@ -894,29 +886,23 @@
 
 .isVisible .journeyCard {
   opacity: 1;
-
-  transform:
-    translateY(0);
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
-.isVisible
-.journeyCard:nth-child(1) {
-  transition-delay: 0.08s;
+.isVisible .journeyCard:nth-child(1) {
+  transition-delay: 0.05s;
 }
 
-.isVisible
-.journeyCard:nth-child(2) {
-  transition-delay: 0.18s;
+.isVisible .journeyCard:nth-child(2) {
+  transition-delay: 0.17s;
 }
 
-.isVisible
-.journeyCard:nth-child(3) {
-  transition-delay: 0.28s;
+.isVisible .journeyCard:nth-child(3) {
+  transition-delay: 0.29s;
 }
 
-.isVisible
-.journeyCard:nth-child(4) {
-  transition-delay: 0.38s;
+.isVisible .journeyCard:nth-child(4) {
+  transition-delay: 0.41s;
 }
 
 
@@ -924,46 +910,25 @@
    CARD HOVER
    ========================================================= */
 
-.journeyCard:hover {
-  transform:
-    translateY(-6px);
+.isVisible .journeyCard:hover {
+  transform: translateY(-6px);
 
   box-shadow:
-    0 0 8px
-      rgba(
-        255,
-        122,
-        0,
-        0.18
-      ),
-    0 0 24px
-      rgba(
-        255,
-        155,
-        47,
-        0.15
-      ),
-    0 20px 42px
-      rgba(
-        56,
-        27,
-        14,
-        0.10
-      );
+    0 0 8px rgba(255, 122, 0, 0.18),
+    0 0 24px rgba(255, 155, 47, 0.14),
+    0 20px 42px rgba(56, 27, 14, 0.10);
 }
 
 
 /* =========================================================
-   NUMBER
+   NUMBER — STATIC
    ========================================================= */
 
 .journeyNumber {
   position: relative;
-
-  z-index: 10;
+  z-index: 8;
 
   display: grid;
-
   place-items: center;
 
   width: 38px;
@@ -972,199 +937,78 @@
   border-radius: 50%;
 
   color: #fff;
-
-  background:
-    var(--orange);
+  background: var(--orange);
 
   font-size: 9px;
-
   font-weight: 800;
 
   box-shadow:
-    0 8px 20px
-      rgba(
-        56,
-        27,
-        14,
-        0.12
-      );
-
-  opacity: 0;
-
-  transform:
-    scale(0.6);
-}
-
-.isVisible
-.journeyNumber {
-  opacity: 1;
-
-  transform:
-    scale(1);
-
-  transition:
-    opacity 0.45s ease 0.55s,
-    transform 0.55s
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      )
-      0.55s;
+    0 8px 20px rgba(56, 27, 14, 0.12);
 }
 
 
 /* =========================================================
-   CONTENT
+   CONTENT — STATIC
    ========================================================= */
 
 .journeyContent {
   position: relative;
-
-  z-index: 10;
+  z-index: 8;
 
   max-width: 88%;
-
   margin-top: 18px;
-
-  opacity: 0;
-
-  transform:
-    translateY(-24px);
-}
-
-.isVisible
-.journeyContent {
-  opacity: 1;
-
-  transform:
-    translateY(0);
-
-  transition:
-    opacity 0.7s ease 0.65s,
-    transform 0.75s
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      )
-      0.65s;
-}
-
-.isVisible
-.journeyCard:nth-child(2)
-.journeyContent {
-  transition-delay: 0.77s;
-}
-
-.isVisible
-.journeyCard:nth-child(3)
-.journeyContent {
-  transition-delay: 0.89s;
-}
-
-.isVisible
-.journeyCard:nth-child(4)
-.journeyContent {
-  transition-delay: 1.01s;
-}
-
-
-/* =========================================================
-   HEADINGS
-   ========================================================= */
-
-/* Card 01 */
-
-.journeyCard:nth-child(1)
-.journeyContent h3 {
-  color:
-    #ec0872;
-}
-
-/* Card 02 */
-
-.journeyCard:nth-child(2)
-.journeyContent h3 {
-  color:
-    #f6bd7e;
-}
-
-/* Card 03 */
-
-.journeyCard:nth-child(3)
-.journeyContent h3 {
-  color:
-    #ff6700;
-}
-
-/* Card 04 */
-
-.journeyCard:nth-child(4)
-.journeyContent h3 {
-  color:
-    var(--orange);
 }
 
 .journeyCard h3 {
-  margin:
-    -10 0 8px;
+  margin: 0 0 8px;
 
   font-size: 19px;
-
   line-height: 1.18;
-
-  letter-spacing:
-    -0.3px;
+  letter-spacing: -0.3px;
 }
 
 .journeyCard p {
   margin: 0;
 
   font-size: 10px;
-
   line-height: 1.7;
 }
 
 
 /* =========================================================
-   PARAGRAPH COLORS
+   TEXT COLORS
    ========================================================= */
 
-.journeyCard:nth-child(1)
-.journeyContent p {
-  color:
-    #ed0873;
+.journeyCard:nth-child(1) .journeyContent h3,
+.journeyCard:nth-child(1) .journeyContent p {
+  color: #ec0872;
 }
 
-.journeyCard:nth-child(2)
-.journeyContent p {
-  color:
-    #f4bc80;
+.journeyCard:nth-child(2) .journeyContent h3,
+.journeyCard:nth-child(2) .journeyContent p {
+  color: #f6bd7e;
 }
 
-.journeyCard:nth-child(3)
-.journeyContent p {
-  color:
-    #ff6700;
+.journeyCard:nth-child(3) .journeyContent h3,
+.journeyCard:nth-child(3) .journeyContent p {
+  color: #ff6700;
 }
 
-.journeyCard:nth-child(4)
-.journeyContent p {
-  color:
-    var(--muted);
+.journeyCard:nth-child(4) .journeyContent h3 {
+  color: var(--orange);
+}
+
+.journeyCard:nth-child(4) .journeyContent p {
+  color: var(--muted);
 }
 
 
 /* =========================================================
-   PAW BACKGROUND
+   BACKGROUND PAW — STATIC
    ========================================================= */
 
 .journeyPaw {
   position: absolute;
-
   z-index: 2;
 
   top: 20px;
@@ -1179,68 +1023,48 @@
 
   pointer-events: none;
 
-  filter:
-    none;
-
-  transform:
-    rotate(-12deg);
+  transform: rotate(-12deg);
 }
 
-.journeyCard:nth-child(1)
-.journeyPaw {
+.journeyCard:nth-child(1) .journeyPaw {
   opacity: 0.13;
 }
 
-.journeyCard:nth-child(2)
-.journeyPaw {
+.journeyCard:nth-child(2) .journeyPaw {
   opacity: 0.12;
 }
 
-.journeyCard:nth-child(3)
-.journeyPaw {
+.journeyCard:nth-child(3) .journeyPaw {
   opacity: 0.11;
 }
 
-.journeyCard:nth-child(4)
-.journeyPaw {
+.journeyCard:nth-child(4) .journeyPaw {
   opacity: 0.08;
 }
 
+
 /* =========================================================
-   PET IMAGE - NORMAL POSITION
+   PET IMAGE — STATIC
+   ALL FOUR USE THE SAME SIZE AT EACH BREAKPOINT
    ========================================================= */
 
 .journeySticker {
   position: absolute;
-
   z-index: 5;
+
+  bottom: 8px;
+
+  width: 210px;
+  height: 210px;
+
+  opacity: 1;
 
   pointer-events: none;
 
-  opacity: 0;
-
-  /*
-   * Image card ke bottom se properly visible rahegi.
-   */
-  bottom: 12px;
-
-  transform:
-    translateY(45px)
-    scale(0.88);
-
-  transform-origin: bottom center;
-
   filter:
     drop-shadow(
-      0 14px 16px
-      rgba(56, 27, 14, 0.10)
+      0 14px 16px rgba(56, 27, 14, 0.10)
     );
-
-  transition:
-    opacity 0.75s ease,
-    transform 0.9s
-      cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.25s ease;
 }
 
 .journeyStickerImage {
@@ -1255,113 +1079,30 @@
 
 
 /* =========================================================
-   CARD 01 - COCO
+   PET IMAGE POSITIONS
    ========================================================= */
 
-.journeyCard:nth-child(1)
-.journeySticker {
-  width: 210px;
-  height: 210px;
-
+.journeyCard:nth-child(1) .journeySticker,
+.journeyCard:nth-child(3) .journeySticker {
   left: 0;
-  bottom: 10px;
 }
 
-
-/* =========================================================
-   CARD 02 - ZUZU
-   ========================================================= */
-
-.journeyCard:nth-child(2)
-.journeySticker {
-  width: 215px;
-  height: 215px;
-
+.journeyCard:nth-child(2) .journeySticker,
+.journeyCard:nth-child(4) .journeySticker {
   right: 0;
-  bottom: 10px;
 }
 
 
 /* =========================================================
-   CARD 03 - HUCHIKO
+   PET IMAGE HOVER
    ========================================================= */
 
-.journeyCard:nth-child(3)
-.journeySticker {
-  width: 210px;
-  height: 210px;
-
-  left: 2px;
-  bottom: 10px;
-}
-
-
-/* =========================================================
-   CARD 04
-   ========================================================= */
-
-.journeyCard:nth-child(4)
-.journeySticker {
-  width: 125px;
-  height: 125px;
-
-  right: 7px;
-  bottom: 10px;
-}
-
-
-/* =========================================================
-   SECTION ENTRY
-   ========================================================= */
-
-.isVisible
-.journeySticker {
-  opacity: 1;
-
-  transform:
-    translateY(0)
-    scale(1);
-
-  transition:
-    opacity 0.75s ease 0.95s,
-    transform 0.95s
-      cubic-bezier(0.22, 1, 0.36, 1)
-      0.95s;
-}
-
-.isVisible
-.journeyCard:nth-child(2)
-.journeySticker {
-  transition-delay: 1.07s;
-}
-
-.isVisible
-.journeyCard:nth-child(3)
-.journeySticker {
-  transition-delay: 1.19s;
-}
-
-.isVisible
-.journeyCard:nth-child(4)
-.journeySticker {
-  transition-delay: 1.31s;
-}
-
-
-/* =========================================================
-   HOVER
-   ONLY SCALE
-   ========================================================= */
-
-.journeyCard:hover
-.journeySticker:hover {
-  transform:
-    scale(1.2);
+.journeyCard:hover .journeySticker {
+  transform: scale(1.04);
 
   filter:
     drop-shadow(
-      0 18px 20px
-      rgba(56, 27, 14, 0.14)
+      0 18px 20px rgba(56, 27, 14, 0.14)
     );
 
   transition:
@@ -1371,223 +1112,11 @@
 
 
 /* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 1100px) {
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 175px;
-    height: 175px;
-
-    bottom: 9px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 110px;
-    height: 110px;
-
-    bottom: 9px;
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 700px) {
-  .journeySticker {
-    bottom: 9px;
-  }
-
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 165px;
-    height: 165px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 480px) {
-  .journeySticker {
-    bottom: 8px;
-  }
-
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 145px;
-    height: 145px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 88px;
-    height: 88px;
-  }
-}
-
-
-/* =========================================================
-   VERY SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 360px) {
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 130px;
-    height: 130px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 78px;
-    height: 78px;
-  }
-}
-
-
-/* =========================================================
-   LARGE LAPTOP
-   ========================================================= */
-
-@media (min-width: 1440px) {
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 195px;
-    height: 195px;
-
-    bottom: 11px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 130px;
-    height: 130px;
-
-    bottom: 11px;
-  }
-}
-
-
-/* =========================================================
-   2K
-   ========================================================= */
-
-@media (min-width: 1920px) {
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 225px;
-    height: 225px;
-
-    bottom: 13px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 150px;
-    height: 150px;
-
-    bottom: 13px;
-  }
-}
-
-
-/* =========================================================
-   4K
-   ========================================================= */
-
-@media (min-width: 2560px) {
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 260px;
-    height: 260px;
-
-    bottom: 15px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 170px;
-    height: 170px;
-
-    bottom: 15px;
-  }
-}
-
-
-/* =========================================================
-   8K
-   ========================================================= */
-
-@media (min-width: 3840px) {
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 325px;
-    height: 325px;
-
-    bottom: 18px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 210px;
-    height: 210px;
-
-    bottom: 18px;
-  }
-}
-
-/* =========================================================
-   CARD SHINE
+   SHINE — STATIC
    ========================================================= */
 
 .journeyShine {
   position: absolute;
-
   z-index: 1;
 
   width: 130px;
@@ -1601,33 +1130,382 @@
   background:
     radial-gradient(
       circle,
-      rgba(
-        255,
-        255,
-        255,
-        0.22
-      ),
+      rgba(255, 255, 255, 0.22),
       transparent 70%
     );
 
-  opacity: 0;
+  opacity: 0.45;
 
   pointer-events: none;
 }
 
-.isVisible
-.journeyShine {
-  opacity: 0.45;
 
-  transition:
-    opacity 0.7s ease 0.7s;
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .journey {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+  .journeyCard {
+    min-height: 320px;
+    padding: 24px 20px 0;
+    border-radius: 28px;
+  }
+
+  .journeyCard .journeySticker {
+    width: 175px;
+    height: 175px;
+    bottom: 8px;
+  }
+
+  .journeyCard h3 {
+    font-size: 17px;
+  }
+
+  .journeyCard p {
+    font-size: 9px;
+  }
+
+  .journeyPaw {
+    width: 72px;
+    height: 72px;
+  }
 }
 
-.journeyCard:hover
-.journeyShine {
-  opacity: 0.7;
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+  .journey {
+    gap: 14px;
+  }
+
+  .journeyCard {
+    min-height: 300px;
+  }
+
+  .journeyCard .journeySticker {
+    width: 160px;
+    height: 160px;
+  }
 }
 
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .journey {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .journeyCard {
+    min-height: 280px;
+    padding: 22px 18px 0;
+    border-radius: 25px;
+  }
+
+  .journeyContent {
+    max-width: 72%;
+  }
+
+  .journeyCard h3 {
+    font-size: 17px;
+  }
+
+  .journeyCard p {
+    font-size: 9px;
+  }
+
+  .journeyPaw {
+    width: 66px;
+    height: 66px;
+    top: 17px;
+    right: 13px;
+  }
+
+  .journeyCard .journeySticker {
+    width: 165px;
+    height: 165px;
+    bottom: 0;
+  }
+
+  .journeyCard:nth-child(1) {
+    transform: translateX(-45px);
+  }
+
+  .journeyCard:nth-child(2) {
+    transform: translateY(30px) scale(0.95);
+  }
+
+  .journeyCard:nth-child(3) {
+    transform: translateX(45px);
+  }
+
+  .journeyCard:nth-child(4) {
+    transform: translateX(-45px);
+  }
+
+  .isVisible .journeyCard {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .journeyCard {
+    min-height: 255px;
+    padding: 19px 16px 0;
+    border-radius: 22px;
+  }
+
+  .journeyNumber {
+    width: 32px;
+    height: 32px;
+    font-size: 8px;
+  }
+
+  .journeyContent {
+    max-width: 70%;
+    margin-top: 15px;
+  }
+
+  .journeyCard h3 {
+    font-size: 15px;
+  }
+
+  .journeyCard p {
+    font-size: 8px;
+  }
+
+  .journeyPaw {
+    width: 58px;
+    height: 58px;
+  }
+
+  .journeyCard .journeySticker {
+    width: 145px;
+    height: 145px;
+    bottom: 0;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 360px) {
+  .journeyCard {
+    min-height: 240px;
+  }
+
+  .journeyContent {
+    max-width: 67%;
+  }
+
+  .journeyCard h3 {
+    font-size: 14px;
+  }
+
+  .journeyCard p {
+    font-size: 7px;
+  }
+
+  .journeyCard .journeySticker {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+
+/* =========================================================
+   LARGE LAPTOP
+   ========================================================= */
+
+@media (min-width: 1440px) {
+  .journey {
+    gap: 20px;
+  }
+
+  .journeyCard {
+    min-height: 355px;
+    padding: 29px 25px 0;
+    border-radius: 30px;
+  }
+
+  .journeyCard h3 {
+    font-size: 20px;
+  }
+
+  .journeyCard p {
+    font-size: 11px;
+  }
+
+  .journeyPaw {
+    width: 82px;
+    height: 82px;
+  }
+
+  .journeyCard .journeySticker {
+    width: 195px;
+    height: 195px;
+    bottom: 10px;
+  }
+}
+
+
+/* =========================================================
+   2K
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .journey {
+    gap: 24px;
+  }
+
+  .journeyCard {
+    min-height: 395px;
+    padding: 34px 30px 0;
+    border-radius: 32px;
+  }
+
+  .journeyNumber {
+    width: 44px;
+    height: 44px;
+    font-size: 10px;
+  }
+
+  .journeyContent {
+    max-width: 76%;
+    margin-top: 20px;
+  }
+
+  .journeyCard h3 {
+    font-size: 23px;
+  }
+
+  .journeyCard p {
+    font-size: 13px;
+  }
+
+  .journeyPaw {
+    width: 96px;
+    height: 96px;
+  }
+
+  .journeyCard .journeySticker {
+    width: 225px;
+    height: 225px;
+    bottom: 13px;
+  }
+}
+
+
+/* =========================================================
+   4K
+   ========================================================= */
+
+@media (min-width: 2560px) {
+  .journey {
+    gap: 30px;
+  }
+
+  .journeyCard {
+    min-height: 455px;
+    padding: 42px 36px 0;
+    border-radius: 36px;
+  }
+
+  .journeyNumber {
+    width: 50px;
+    height: 50px;
+    font-size: 12px;
+  }
+
+  .journeyContent {
+    max-width: 76%;
+    margin-top: 23px;
+  }
+
+  .journeyCard h3 {
+    font-size: 27px;
+  }
+
+  .journeyCard p {
+    font-size: 15px;
+  }
+
+  .journeyPaw {
+    width: 115px;
+    height: 115px;
+  }
+
+  .journeyCard .journeySticker {
+    width: 260px;
+    height: 260px;
+    bottom: 15px;
+  }
+}
+
+
+/* =========================================================
+   8K
+   ========================================================= */
+
+@media (min-width: 3840px) {
+  .journey {
+    gap: 40px;
+  }
+
+  .journeyCard {
+    min-height: 550px;
+    padding: 50px 44px 0;
+    border-radius: 42px;
+  }
+
+  .journeyNumber {
+    width: 62px;
+    height: 62px;
+    font-size: 15px;
+  }
+
+  .journeyContent {
+    max-width: 76%;
+    margin-top: 26px;
+  }
+
+  .journeyCard h3 {
+    font-size: 34px;
+  }
+
+  .journeyCard p {
+    font-size: 19px;
+  }
+
+  .journeyPaw {
+    width: 140px;
+    height: 140px;
+  }
+
+  .journeyCard .journeySticker {
+    width: 325px;
+    height: 325px;
+    bottom: 18px;
+  }
+}
 
 /* =========================================================
    STORY QUOTE
@@ -2270,6 +2148,7 @@
 }
 
 
+
 /* =========================================================
    TABLET
    ========================================================= */
@@ -2283,35 +2162,6 @@
     gap: 35px;
   }
 
-  .journey {
-    grid-template-columns:
-      repeat(
-        2,
-        minmax(0, 1fr)
-      );
-
-    gap: 15px;
-  }
-
-  .journeyCard {
-    min-height: 320px;
-  }
-
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 175px;
-    height: 175px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 110px;
-    height: 110px;
-  }
 
   .missionCard {
     gap: 35px;
@@ -2443,61 +2293,6 @@
       -1.1px;
   }
 
-  .journey {
-    grid-template-columns: 1fr;
-
-    gap: 14px;
-  }
-
-  .journeyCard {
-    min-height: 280px;
-
-    padding:
-      22px 18px
-      0;
-
-    border-radius: 25px;
-  }
-
-  .journeyContent {
-    max-width: 72%;
-  }
-
-  .journeyCard h3 {
-    font-size: 17px;
-  }
-
-  .journeyCard p {
-    font-size: 9px;
-  }
-
-  .journeyPaw {
-    width: 66px;
-    height: 66px;
-
-    top: 17px;
-    right: 13px;
-  }
-
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 165px;
-    height: 165px;
-
-    bottom: 0;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 100px;
-    height: 100px;
-
-    bottom: 0;
-  }
 
   .storyQuote {
     padding: 20px;
@@ -2655,57 +2450,6 @@
     font-size: 29px;
   }
 
-  .journeyCard {
-    min-height: 255px;
-
-    padding:
-      19px 16px
-      0;
-
-    border-radius: 22px;
-  }
-
-  .journeyNumber {
-    width: 32px;
-    height: 32px;
-
-    font-size: 8px;
-  }
-
-  .journeyContent {
-    max-width: 70%;
-
-    margin-top: 15px;
-  }
-
-  .journeyCard h3 {
-    font-size: 15px;
-  }
-
-  .journeyCard p {
-    font-size: 8px;
-  }
-
-  .journeyPaw {
-    width: 58px;
-    height: 58px;
-  }
-
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 145px;
-    height: 145px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 88px;
-    height: 88px;
-  }
 
   .storyQuote {
     padding: 17px;
@@ -2813,37 +2557,6 @@
     width: 250px;
   }
 
-  .journeyCard {
-    min-height: 235px;
-  }
-
-  .journeyContent {
-    max-width: 67%;
-  }
-
-  .journeyCard h3 {
-    font-size: 14px;
-  }
-
-  .journeyCard p {
-    font-size: 7px;
-  }
-
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 130px;
-    height: 130px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 78px;
-    height: 78px;
-  }
 }
 
 
@@ -2882,48 +2595,6 @@
     width: 385px;
   }
 
-  .journey {
-    gap: 20px;
-  }
-
-  .journeyCard {
-    min-height: 355px;
-
-    padding:
-      29px 25px
-      0;
-
-    border-radius: 30px;
-  }
-
-  .journeyCard h3 {
-    font-size: 20px;
-  }
-
-  .journeyCard p {
-    font-size: 11px;
-  }
-
-  .journeyPaw {
-    width: 82px;
-    height: 82px;
-  }
-
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 195px;
-    height: 195px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 130px;
-    height: 130px;
-  }
 }
 
 
@@ -2932,61 +2603,6 @@
    ========================================================= */
 
 @media (min-width: 1920px) {
-  .journey {
-    gap: 24px;
-  }
-
-  .journeyCard {
-    min-height: 395px;
-
-    padding:
-      34px 30px
-      0;
-
-    border-radius: 30px;
-  }
-
-  .journeyNumber {
-    width: 44px;
-    height: 44px;
-
-    font-size: 10px;
-  }
-
-  .journeyContent {
-    max-width: 76%;
-
-    margin-top: 20px;
-  }
-
-  .journeyCard h3 {
-    font-size: 23px;
-  }
-
-  .journeyCard p {
-    font-size: 13px;
-  }
-
-  .journeyPaw {
-    width: 96px;
-    height: 96px;
-  }
-
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 225px;
-    height: 225px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 150px;
-    height: 150px;
-  }
 }
 
 
@@ -2995,59 +2611,6 @@
    ========================================================= */
 
 @media (min-width: 2560px) {
-  .journey {
-    gap: 30px;
-  }
-
-  .journeyCard {
-    min-height: 455px;
-
-    padding:
-      42px 36px
-      0;
-
-    border-radius: 34px;
-  }
-
-  .journeyNumber {
-    width: 50px;
-    height: 50px;
-
-    font-size: 12px;
-  }
-
-  .journeyContent {
-    margin-top: 23px;
-  }
-
-  .journeyCard h3 {
-    font-size: 27px;
-  }
-
-  .journeyCard p {
-    font-size: 15px;
-  }
-
-  .journeyPaw {
-    width: 115px;
-    height: 115px;
-  }
-
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 260px;
-    height: 260px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 170px;
-    height: 170px;
-  }
 }
 
 
@@ -3056,55 +2619,6 @@
    ========================================================= */
 
 @media (min-width: 3840px) {
-  .journey {
-    gap: 40px;
-  }
-
-  .journeyCard {
-    min-height: 550px;
-
-    padding:
-      50px 44px
-      0;
-
-    border-radius: 40px;
-  }
-
-  .journeyNumber {
-    width: 62px;
-    height: 62px;
-
-    font-size: 15px;
-  }
-
-  .journeyCard h3 {
-    font-size: 34px;
-  }
-
-  .journeyCard p {
-    font-size: 19px;
-  }
-
-  .journeyPaw {
-    width: 140px;
-    height: 140px;
-  }
-
-  .journeyCard:nth-child(1)
-  .journeySticker,
-  .journeyCard:nth-child(2)
-  .journeySticker,
-  .journeyCard:nth-child(3)
-  .journeySticker {
-    width: 325px;
-    height: 325px;
-  }
-
-  .journeyCard:nth-child(4)
-  .journeySticker {
-    width: 210px;
-    height: 210px;
-  }
 }
 
 
@@ -3121,11 +2635,6 @@
   .heroVisual,
   .stat,
   .storyIntro,
-  .journeyCard,
-  .journeyNumber,
-  .journeyContent,
-  .journeyPaw,
-  .journeySticker,
   .storyQuote,
   .missionCard,
   .missionVisual,

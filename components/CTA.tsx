@@ -72,7 +72,7 @@ export default function CTA({
             <div className={styles.ctaPetGlow} />
 
             <img
-              src="/images/reward/huchiko.png"
+              src="/images/footer/pets.png"
               alt=""
               width={150}
               height={150}
@@ -90,11 +90,11 @@ export default function CTA({
 
           {/* Existing button */}
           <Link
-            className={`btn btn-dark ${styles.button}`}
+            className={`btn btn-outline ${styles.button}`}
             href="#download-app"
           >
             Download Our App
-            <ArrowRight size={17} />
+            <img src="/images/paw.png" width={20}/>
           </Link>
         </div>
       </div>

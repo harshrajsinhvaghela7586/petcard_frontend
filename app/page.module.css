@@ -7101,6 +7101,7 @@ height: 250px;
     opacity: 1;
   }
 }
+
 /* =========================================================
    HOMEPAGE ARCHITECTURE / RESPONSIVE OVERRIDES
    ========================================================= */
@@ -7281,6 +7282,7 @@ height: 250px;
 }
 
 .homeFaqItem[open] {
+  background: var(--soft);
   border-color: #ffb46b;
   box-shadow:
     0 0 9px rgba(255, 122, 0, 0.13),

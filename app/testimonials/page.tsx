@@ -10,35 +10,28 @@ import styles from "./Testimonials.module.css";
 const testimonials = [
   {
     name: "Arun Negi",
-    role: "Sample Pet Parent",
+    role: "Pet Parent",
     rating: 5,
     text:
       "PetCard brings the important parts of pet care together in one place. The overall experience feels simple, clear, and genuinely useful for everyday routines.",
   },
   {
-    name: "Amber Fatima",
-    role: "Sample Pet Parent",
-    rating: 5,
-    text:
-      "The idea of keeping identity, health information, reminders, and memories connected makes pet care feel much more organized and easier to manage.",
-  },
-  {
     name: "Shailesh Kumar",
-    role: "Sample Pet Parent",
+    role: "Pet Parent",
     rating: 5,
     text:
       "I like the way PetCard combines practical information with a more playful experience. It feels designed around the real day-to-day needs of pet parents.",
   },
   {
     name: "Harshrajsinh Vaghela",
-    role: "Sample Pet Parent",
+    role: "Pet Parent",
     rating: 5,
     text:
       "A digital pet identity makes a lot of sense when profile details, records, care routines, and important information all need to stay easy to access.",
   },
   {
-    name: "Sivam Bansal",
-    role: "Sample Pet Parent",
+    name: "Shivam Bansal",
+    role: "Pet Parent",
     rating: 5,
     text:
       "The concept is clean and convenient. Having pet information, reminders, memories, and rewards connected in one experience can make everyday care more engaging.",
