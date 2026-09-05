@@ -400,11 +400,12 @@
   }
 
   .content h2 {
-    font-size: 76px;
+    font-size: 60px;
+    max-width: 750px;
   }
 
   .content p {
-    max-width: 850px;
+    max-width: 750px;
 
     font-size: 20px;
   }
@@ -421,6 +422,7 @@
 
     right: -150px;
   }
+  
 }
 
 /* =========================================================
@@ -606,6 +608,8 @@
    ========================================================= */
 
 @media (max-width: 800px) {
+
+  
   .ctaPet {
     position: relative;
 
@@ -669,7 +673,19 @@
     }
   }
 }
-
+/* Tablet + smaller screens */
+@media (min-width: 801px) and (max-width: 1024px) {
+  .content h2 {
+    font-size: 32px;
+    max-width: 200px;
+  }
+  .content p{
+    max-width: 200px;
+  }
+  .ctaPet img{
+    left:-160;
+  }
+}
 
 /* =========================================================
    MOBILE
@@ -690,7 +706,7 @@
 
   .ctaPet img {
     width: 282px;
-    height: 112px;
+    height: 132px;
   }
 }
 
@@ -769,6 +785,10 @@
   .ctaPet img {
     width: 260px;
     height: 260px;
+    left:-20;
+  }
+  .button{
+    right:-40;
   }
 }
 
