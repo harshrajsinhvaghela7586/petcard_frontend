@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowRight,
   Heart,
@@ -5,45 +7,100 @@ import {
   Star,
 } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import styles from "./Testimonials.module.css";
 
-const testimonials = [
-  {
-    name: "Arun Negi",
-    role: "Pet Parent",
-    rating: 5,
-    text:
-      "PetCard brings the important parts of pet care together in one place. The overall experience feels simple, clear, and genuinely useful for everyday routines.",
-  },
-  {
-    name: "Shailesh Kumar",
-    role: "Pet Parent",
-    rating: 5,
-    text:
-      "I like the way PetCard combines practical information with a more playful experience. It feels designed around the real day-to-day needs of pet parents.",
-  },
-  {
-    name: "Harshrajsinh Vaghela",
-    role: "Pet Parent",
-    rating: 5,
-    text:
-      "A digital pet identity makes a lot of sense when profile details, records, care routines, and important information all need to stay easy to access.",
-  },
-  {
-    name: "Shivam Bansal",
-    role: "Pet Parent",
-    rating: 5,
-    text:
-      "The concept is clean and convenient. Having pet information, reminders, memories, and rewards connected in one experience can make everyday care more engaging.",
-  },
-];
+interface Testimonial {
+  _id: string;
+  name: string;
+  role: string;
+  rating: number;
+  text: string;
+  photo?: string;
+  isActive: boolean;
+}
 
-const loopedTestimonials = [
-  ...testimonials,
-  ...testimonials,
-];
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await fetch(`${API_URL}/testimonials`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch testimonials");
+        }
+
+        const data = await response.json();
+
+        const testimonialList = Array.isArray(data)
+          ? data
+          : Array.isArray(data.testimonials)
+            ? data.testimonials
+            : [];
+
+        const activeTestimonials = testimonialList.filter(
+          (item: Testimonial) => item.isActive === true
+        );
+
+        setTestimonials(activeTestimonials);
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+        setTestimonials([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
+  /*
+   * Infinite slider ke liye testimonials ko duplicate kar rahe hain.
+   * Agar 1-2 testimonials hon tab bhi animation smoothly chalega.
+   */
+  const loopedTestimonials = [
+    ...testimonials,
+    ...testimonials,
+  ];
+
+  // Backend ke local uploaded photo ko full URL me convert karega
+  const getImageUrl = (photo?: string) => {
+    if (!photo) return "";
+
+    if (photo.startsWith("http")) {
+      return photo;
+    }
+
+    return `${API_URL.replace("/api", "")}${photo}`;
+  };
+
+  // Initials fallback
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase();
+  };
+
+  // Average rating calculate
+  const averageRating =
+    testimonials.length > 0
+      ? (
+        testimonials.reduce(
+          (sum, item) => sum + item.rating,
+          0
+        ) / testimonials.length
+      ).toFixed(1)
+      : "0.0";
+
   return (
     <main className={styles.page}>
       {/* =====================================================
@@ -55,10 +112,7 @@ export default function Testimonials() {
 
         <div className={styles.container}>
           <div className={styles.heroContent}>
-            <div className={styles.eyebrow}>
-              <Heart size={14} fill="currentColor" />
-              Pet Parent Voices
-            </div>
+            
 
             <h1>
               Good care feels better{" "}
@@ -66,15 +120,16 @@ export default function Testimonials() {
             </h1>
 
             <p>
-              A few sample perspectives showing how PetCard can fit into
-              everyday pet care, organization, and the little moments that
-              matter.
+              A few perspectives from pet parents showing how
+              PetCard can fit into everyday pet care, organization,
+              and the little moments that matter.
             </p>
           </div>
 
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
-              <strong>5.0</strong>
+              <strong>{averageRating}</strong>
+
               <div className={styles.heroStars}>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <Star
@@ -84,12 +139,21 @@ export default function Testimonials() {
                   />
                 ))}
               </div>
-              <span>Sample rating</span>
+
+              <span>
+                {testimonials.length > 0
+                  ? "Average rating"
+                  : "No ratings yet"}
+              </span>
             </div>
 
             <div className={styles.heroStat}>
-              <strong>∞</strong>
-              <span>Stories that keep moving</span>
+              <strong>{testimonials.length}</strong>
+              <span>
+                {testimonials.length === 1
+                  ? "Pet Parent Story"
+                  : "Pet Parent Stories"}
+              </span>
             </div>
 
             <div className={styles.heroStat}>
@@ -107,10 +171,7 @@ export default function Testimonials() {
       <section className={styles.testimonialSection}>
         <div className={styles.container}>
           <div className={styles.sectionHeading}>
-            <div className={styles.eyebrow}>
-              <Quote size={14} />
-              Testimonials
-            </div>
+           
 
             <h2>
               Why Pet Parents{" "}
@@ -118,110 +179,98 @@ export default function Testimonials() {
             </h2>
 
             <p>
-              Sample testimonial content for the website design. Replace with
-              approved customer feedback before production.
+              See what pet parents have to say about the
+              PetCard experience.
             </p>
           </div>
 
-          <div className={styles.sliderViewport}>
-            <div className={styles.sliderTrack}>
-              {loopedTestimonials.map((item, index) => (
-                <article
-                  className={styles.testimonialCard}
-                  key={`${item.name}-${index}`}
-                >
-                  <div className={styles.cardTop}>
-                    <div className={styles.quoteIcon}>
-                      <Quote
-                        size={18}
-                        fill="currentColor"
-                      />
-                    </div>
+          {/* Loading */}
+          {loading && (
+            <div className={styles.emptyState}>
+              <p>Loading testimonials...</p>
+            </div>
+          )}
 
-                    <div className={styles.rating}>
-                      {Array.from({
-                        length: item.rating,
-                      }).map((_, starIndex) => (
-                        <Star
-                          key={starIndex}
-                          size={13}
+          {/* No testimonials */}
+          {!loading && testimonials.length === 0 && (
+            <div className={styles.emptyState}>
+              <Quote size={28} />
+
+              <h3>No testimonials yet</h3>
+
+              <p>
+                Customer testimonials will appear here once
+                they are added from the admin panel.
+              </p>
+            </div>
+          )}
+
+          {/* Testimonials */}
+          {!loading && testimonials.length > 0 && (
+            <div className={styles.sliderViewport}>
+              <div className={styles.sliderTrack}>
+                {loopedTestimonials.map((item, index) => {
+                  const imageUrl = getImageUrl(item.photo);
+
+                  return (
+                    <article
+                      className={styles.testimonialCard}
+                      key={`${item._id}-${index}`}
+                    >
+                      <div className={styles.cardTop}>
+                        <div className={styles.quoteIcon}>
+                          <Quote
+                            size={18}
+                            fill="currentColor"
+                          />
+                        </div>
+
+                        <div className={styles.rating}>
+                          {Array.from({
+                            length: item.rating,
+                          }).map((_, starIndex) => (
+                            <Star
+                              key={starIndex}
+                              size={13}
+                              fill="currentColor"
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      <p className={styles.testimonialText}>
+                        “{item.text}”
+                      </p>
+
+                      <div className={styles.cardBottom}>
+                        <div className={styles.avatar}>
+                          {imageUrl ? (
+                            <img
+                              src={imageUrl}
+                              alt={item.name}
+                            />
+                          ) : (
+                            getInitials(item.name)
+                          )}
+                        </div>
+
+                        <div className={styles.author}>
+                          <strong>{item.name}</strong>
+                          <span>{item.role}</span>
+                        </div>
+
+                        <Heart
+                          className={styles.authorHeart}
+                          size={17}
                           fill="currentColor"
                         />
-                      ))}
-                    </div>
-                  </div>
-
-                  <p className={styles.testimonialText}>
-                    “{item.text}”
-                  </p>
-
-                  <div className={styles.cardBottom}>
-                    <div className={styles.avatar}>
-                      {item.name
-                        .split(" ")
-                        .map((word) => word[0])
-                        .join("")
-                        .slice(0, 2)}
-                    </div>
-
-                    <div className={styles.author}>
-                      <strong>{item.name}</strong>
-                      <span>{item.role}</span>
-                    </div>
-
-                    <Heart
-                      className={styles.authorHeart}
-                      size={17}
-                      fill="currentColor"
-                    />
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* =====================================================
-          FEATURE STRIP
-          ===================================================== */}
-
-      <section className={styles.featureSection}>
-        <div className={styles.container}>
-          <div className={styles.featureGrid}>
-            <div className={styles.featureItem}>
-              <div className={styles.featureIcon}>🪪</div>
-              <div>
-                <strong>Digital Identity</strong>
-                <span>One profile for your pet.</span>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             </div>
-
-            <div className={styles.featureItem}>
-              <div className={styles.featureIcon}>🐾</div>
-              <div>
-                <strong>Everyday Care</strong>
-                <span>Simple routines and reminders.</span>
-              </div>
-            </div>
-
-            <div className={styles.featureItem}>
-              <div className={styles.featureIcon}>🩺</div>
-              <div>
-                <strong>Health & Records</strong>
-                <span>Important information at hand.</span>
-              </div>
-            </div>
-
-            <div className={styles.featureItem}>
-              <div className={styles.featureIcon}>⭐</div>
-              <div>
-                <strong>Rewards & Memories</strong>
-                <span>Make caring more memorable.</span>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </section>
 
@@ -243,16 +292,18 @@ export default function Testimonials() {
               </h2>
 
               <p>
-                Keep identity, care, health, memories, and rewards together
-                with PetCard.
+                Keep identity, care, health, memories, and
+                rewards together with PetCard.
               </p>
             </div>
+
 
             <Link
               href="/#download-app"
               className="btn btn-primary"
             >
               Explore PetCard
+
               <img
                 src="/images/paw-white.png"
                 width={37}
@@ -260,6 +311,9 @@ export default function Testimonials() {
                 alt=""
               />
             </Link>
+            <img src="/images/footer/pets.png"
+height={200}
+width={200}/>
           </div>
         </div>
       </section>

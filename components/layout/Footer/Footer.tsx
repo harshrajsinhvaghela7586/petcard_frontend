@@ -8,22 +8,20 @@ const exploreLinks = [
   ["How It Works", "/how-it-works"],
   ["Features", "/features"],
   ["About Us", "/about"],
+  ["Blogs", "/blogs"],
   ["Download App", "#download-app"],
 ] as const;
 
 const petWorldLinks = [
-  ["Daily Care", "/features"],
-  ["Health & Records", "/features"],
-  ["Memories", "/features"],
-  ["Rewards & Fun", "/features"],
+
   ["FAQ", "/faq"],
+  ["Contact Us", "/contact"],
 ] as const;
 
 const legalLinks = [
   ["Privacy Policy", "/privacy"],
   ["Terms & Conditions", "/terms"],
-  ["Contact Us", "/contact"],
-  ["Get Started", "/auth"],
+ 
 ] as const;
 
 export default function Footer() {
@@ -102,13 +100,13 @@ export default function Footer() {
           <FooterColumn title="Explore" links={exploreLinks} showArrow />
 
           {/* Pet World */}
-          <FooterColumn title="Pet World" links={petWorldLinks} />
+          <FooterColumn title="Support" links={petWorldLinks} />
 
           {/* Legal */}
           <FooterColumn title="Legal" links={legalLinks} />
         </div>
 <img
-  src="/images/footer/pets.png"
+  src="/images/footer.png"
   alt=""
   className={styles.footerPets}
 />

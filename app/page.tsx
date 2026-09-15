@@ -118,17 +118,17 @@ const storeBadges = (
     </div>
 
     <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
-  <img
-    src="/images/google-play.png"
-    alt="Google Play"
-    className={styles.storeIconImage}
-  />
+      <img
+        src="/images/google-play.png"
+        alt="Google Play"
+        className={styles.storeIconImage}
+      />
 
-  <span className={styles.storeText}>
-    <small>GET IT ON</small>
-    <b>Google Play</b>
-  </span>
-</div>
+      <span className={styles.storeText}>
+        <small>GET IT ON</small>
+        <b>Google Play</b>
+      </span>
+    </div>
   </>
 );
 
@@ -549,60 +549,79 @@ function PhoneMockup({
 }
 
 
-const homeFaqs = [
-  [
-    "What is PetCard?",
-    "PetCard is a digital pet information platform designed to help pet parents keep important details about their pets organized and accessible.",
-  ],
-  [
-    "What information can I keep in PetCard?",
-    "You can organize relevant pet information such as profile details, health information, vaccination records, reminders and other useful notes, depending on the features available in the app.",
-  ],
-  [
-    "Can I manage multiple pets?",
-    "Yes, PetCard is designed to support pet parents who have more than one pet.",
-  ],
-  [
-    "Can I set reminders?",
-    "PetCard can help you keep track of important pet-related tasks and reminders.",
-  ],
-];
+interface Testimonial {
+  _id: string;
+  name: string;
+  role: string;
+  rating: number;
+  text: string;
+  photo?: string;
+  isActive: boolean;
+}
 
-const homeTestimonials = [
-  {
-    name: "Arun Negi",
-    text:
-      "PetCard brings the important parts of pet care together in one place. The overall experience feels simple, clear, and useful for everyday routines.",
-  },
-  {
-    name: "Shailesh Kumar",
-    text:
-      "The idea combines practical pet information with a playful experience that fits naturally into the day-to-day needs of pet parents.",
-  },
-  {
-    name: "Harshrajsinh Vaghela",
-    text:
-      "A digital pet identity makes sense when profile details, records, care routines, and important information all need to stay easy to access.",
-  },
-  {
-    name: "Sivam Bansal",
-    text:
-      "The concept is clean and convenient, connecting pet information, reminders, memories, and rewards in one experience.",
-  },
-];
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "http://localhost:5000/api";
 
 function HomeTestimonialsPreview() {
-  const slides = [...homeTestimonials, ...homeTestimonials];
+  const [testimonials, setTestimonials] =
+    useState<Testimonial[]>([]);
 
-  const getAuthorImage = (name: string) => {
-    const imageMap: Record<string, string> = {
-      "Arun Negi": "/images/testimonials/arun.png",
-      "Shailesh Kumar": "/images/testimonials/shailesh.jpeg",
-      "Harshrajsinh Vaghela": "/images/testimonials/harshraj.png",
-      "Sivam Bansal": "/images/testimonials/shivam.png",
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await fetch(
+          `${API_URL}/testimonials`
+        );
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          setTestimonials(
+            data.testimonials || []
+          );
+        }
+      } catch (error) {
+        console.error(
+          "Failed to fetch testimonials:",
+          error
+        );
+      } finally {
+        setLoading(false);
+      }
     };
 
-    return imageMap[name];
+    fetchTestimonials();
+  }, []);
+
+  if (loading) {
+    return null;
+  }
+
+  if (testimonials.length === 0) {
+    return null;
+  }
+
+  const slides = [
+    ...testimonials,
+    ...testimonials,
+  ];
+
+  const getImageUrl = (
+    photo?: string
+  ) => {
+    if (!photo) return "";
+
+    if (photo.startsWith("http")) {
+      return photo;
+    }
+
+    return `${API_URL.replace(
+      "/api",
+      ""
+    )}${photo}`;
   };
 
   return (
@@ -611,62 +630,161 @@ function HomeTestimonialsPreview() {
       id="testimonials"
     >
       <div className={styles.container}>
-        <div className={`${styles.sectionHeading} ${styles.center}`}>
-          <h2 className={styles.sectionTitle}>
+        <div
+          className={`${styles.sectionHeading} ${styles.center}`}
+        >
+          <h2
+            className={
+              styles.sectionTitle
+            }
+          >
             Loved for the little things.{" "}
-            <span>Built for everyday care.</span>
+            <span>
+              Built for everyday care.
+            </span>
           </h2>
 
-          <p className={styles.sectionSubtitle}>
-            Sample testimonial content for the website. Replace with approved
-            customer feedback before production.
+          <p
+            className={
+              styles.sectionSubtitle
+            }
+          >
+            Hear from pet parents about
+            their experience with PetCard.
           </p>
         </div>
 
-        <div className={styles.homeTestimonialsViewport}>
-          <div className={styles.homeTestimonialsTrack}>
-            {slides.map((item, index) => (
-              <article
-                className={styles.homeTestimonialCard}
-                key={`${item.name}-${index}`}
-              >
-                <div className={styles.homeTestimonialTop}>
-                  <span className={styles.homeQuote}>“</span>
-                  <span className={styles.homeStars}>★★★★★</span>
-                </div>
+        <div
+          className={
+            styles.homeTestimonialsViewport
+          }
+        >
+          <div
+            className={
+              styles.homeTestimonialsTrack
+            }
+          >
+            {slides.map(
+              (item, index) => {
+                const imageUrl =
+                  getImageUrl(
+                    item.photo
+                  );
 
-                <p>{item.text}</p>
+                return (
+                  <article
+                    className={
+                      styles.homeTestimonialCard
+                    }
+                    key={`${item._id}-${index}`}
+                  >
+                    <div
+                      className={
+                        styles.homeTestimonialTop
+                      }
+                    >
+                      <span
+                        className={
+                          styles.homeQuote
+                        }
+                      >
+                        “
+                      </span>
 
-                <div className={styles.homeTestimonialAuthor}>
-                  <span className={styles.homeTestimonialAvatar}>
-                    {getAuthorImage(item.name) ? (
-                      <Image
-                        src={getAuthorImage(item.name)}
-                        alt={item.name}
-                        width={48}
-                        height={48}
-                      />
-                    ) : (
-                      item.name
-                        .split(" ")
-                        .map((word) => word[0])
-                        .join("")
-                        .slice(0, 2)
-                    )}
-                  </span>
+                      <span
+                        className={
+                          styles.homeStars
+                        }
+                      >
+                        {"★".repeat(
+                          item.rating
+                        )}
+                      </span>
+                    </div>
 
-                  <div>
-                    <b>{item.name}</b>
-                    <small>Pet Parent</small>
-                  </div>
-                </div>
-              </article>
-            ))}
+                    <p>
+                      {
+                        item.text
+                      }
+                    </p>
+
+                    <div
+                      className={
+                        styles.homeTestimonialAuthor
+                      }
+                    >
+                      <span
+                        className={
+                          styles.homeTestimonialAvatar
+                        }
+                      >
+                        {imageUrl ? (
+                          <Image
+                            src={
+                              imageUrl
+                            }
+                            alt={
+                              item.name
+                            }
+                            width={
+                              48
+                            }
+                            height={
+                              48
+                            }
+                            unoptimized
+                          />
+                        ) : (
+                          item.name
+                            .split(
+                              " "
+                            )
+                            .map(
+                              (
+                                word
+                              ) =>
+                                word[0]
+                            )
+                            .join(
+                              ""
+                            )
+                            .slice(
+                              0,
+                              2
+                            )
+                        )}
+                      </span>
+
+                      <div>
+                        <b>
+                          {
+                            item.name
+                          }
+                        </b>
+
+                        <small>
+                          {
+                            item.role
+                          }
+                        </small>
+                      </div>
+                    </div>
+                  </article>
+                );
+              }
+            )}
           </div>
         </div>
 
-        <div className={styles.homePreviewLinkWrap}>
-          <Link href="/testimonials" className="btn btn-primary">
+        <div
+          className={
+            styles.homePreviewLinkWrap
+          }
+        >
+          <Link
+            href="/testimonials"
+            className="btn btn-primary"
+          >
             View All Testimonials
           </Link>
         </div>
@@ -675,45 +793,118 @@ function HomeTestimonialsPreview() {
   );
 }
 
+interface FAQ {
+  _id: string;
+  question: string;
+  answer: string;
+  isActive: boolean;
+}
+
 function HomeFaqPreview() {
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const response = await fetch(`${API_URL}/faqs`, {
+          method: "GET",
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch FAQs: ${response.status}`
+          );
+        }
+
+        const data = await response.json();
+
+        console.log("FAQ API Response:", data);
+
+        // Backend array ya { faqs: [] } dono handle karega
+        const faqList = Array.isArray(data)
+          ? data
+          : Array.isArray(data.faqs)
+            ? data.faqs
+            : [];
+
+        const activeFaqs = faqList
+          .filter((item: FAQ) => item.isActive === true)
+          .slice(0, 5);
+
+        setFaqs(activeFaqs);
+
+        setFaqs(activeFaqs);
+      } catch (error) {
+        console.error("Error fetching FAQs:", error);
+        setFaqs([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFaqs();
+  }, []);
+
   return (
-    <section className={`${styles.section} ${styles.soft}`} id="faq">
+    <section
+      className={`${styles.section} ${styles.soft}`}
+      id="faq"
+    >
       <div className={styles.container}>
         <div className={styles.homeFaqGrid}>
           <div className={styles.homeFaqIntro}>
-
             <h2 className={styles.sectionTitle}>
               Questions?{" "}
               <span>We&apos;ve got answers.</span>
             </h2>
 
             <p className={styles.sectionSubtitle}>
-              Find answers to common questions about PetCard and its
-              promotional website.
+              Find answers to common questions about PetCard
+              and its promotional website.
             </p>
 
-            <Link href="/faq" className="btn btn-primary">
+            <Link
+              href="/faq"
+              className="btn btn-primary"
+            >
               View All FAQs
-             
             </Link>
           </div>
 
           <div className={styles.homeFaqList}>
-            {homeFaqs.map(([question, answer]) => (
-              <details className={styles.homeFaqItem} key={question}>
-                <summary>
-                  <span>{question}</span>
-                  <ChevronRight size={18} />
-                </summary>
-                <p>{answer}</p>
-              </details>
-            ))}
+            {loading && (
+              <p>Loading FAQs...</p>
+            )}
+
+            {!loading && faqs.length === 0 && (
+              <p>No FAQs available.</p>
+            )}
+
+            {!loading &&
+              faqs.map((item) => (
+                <details
+                  className={styles.homeFaqItem}
+                  key={item._id}
+                >
+                  <summary>
+                    <span>{item.question}</span>
+                    <ChevronRight size={18} />
+                  </summary>
+
+                  <p>{item.answer}</p>
+                </details>
+              ))}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+
+
 function HomeScrollAnimations() {
   useEffect(() => {
     const selector = [
@@ -812,7 +1003,7 @@ export default function Home() {
 
             <p>
               PET CARD helps you manage your pet&apos;s identity,
-              daily care, health records, memories, and more —
+              daily care, health records, memories, and more
               all in one fun and personalized place.
             </p>
 
@@ -946,12 +1137,12 @@ export default function Home() {
 
               <p>
                 From your pet&apos;s identity and health records
-                to daily care, reminders, and memories—keep
+                to daily care, reminders, and memories keep
                 everything together.
               </p>
 
               <div className={styles.whyCardFooter}>
-                <span>🪪 PET CARD</span>
+                <span>PET CARD</span>
                 <ArrowRight size={17} />
               </div>
 
@@ -999,7 +1190,7 @@ export default function Home() {
               </p>
 
               <div className={styles.whyCardFooter}>
-                <span>🐾 DAILY CARE</span>
+                <span>DAILY CARE</span>
                 <ArrowRight size={17} />
               </div>
 
@@ -1046,7 +1237,7 @@ export default function Home() {
               </p>
 
               <div className={styles.whyCardFooter}>
-                <span>⭐ REWARDS</span>
+                <span>REWARDS</span>
                 <ArrowRight size={17} />
               </div>
 
@@ -1189,13 +1380,13 @@ export default function Home() {
 
       <FeaturesOrbit />
 
-<PetWorldPage/>
-
-      
+      <PetWorldPage />
 
 
 
-     <PetRewardsSlider/>
+
+
+      <PetRewardsSlider />
 
 
 
@@ -1203,56 +1394,56 @@ export default function Home() {
 
       <HomeFaqPreview />
 
-{/* =====================================================
+      {/* =====================================================
     FINAL DOWNLOAD
     ===================================================== */}
 
-<section
-  className={`${styles.finalDownload} ${styles.homeReveal}`}
-  id="download-app"
-  data-home-reveal="download"
->
-  <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
+      <section
+        className={`${styles.finalDownload} ${styles.homeReveal}`}
+        id="download-app"
+        data-home-reveal="download"
+      >
+        <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
 
-    {/* ================= PETS ================= */}
+          {/* ================= PETS ================= */}
 
-    <div className={styles.finalPets}>
-      <Image
-        src="/images/pets.png"
-        alt="PETCARD pets"
-        fill
-        priority
-       
-        className={styles.finalPetsImage}
-      />
-    </div>
+          <div className={styles.finalPets}>
+            <Image
+              src="/images/pets.png"
+              alt="PETCARD pets"
+              fill
+              priority
 
-
-    {/* ================= COPY ================= */}
-
-    <div className={styles.finalCopy}>
-
-      <h2>
-        Start your pet&apos;s amazing journey today!
-      </h2>
-
-      <p>
-        Download PETCARD and make every day better
-        <br className={styles.desktopBreak} />
-        for you and your pet.
-      </p>
-
-    </div>
+              className={styles.finalPetsImage}
+            />
+          </div>
 
 
-    {/* ================= STORE BADGES ================= */}
+          {/* ================= COPY ================= */}
 
-    <div className={styles.finalButtons}>
-      {storeBadges}
-    </div>
+          <div className={styles.finalCopy}>
 
-  </div>
-</section>
+            <h2>
+              Start your pet&apos;s amazing journey today!
+            </h2>
+
+            <p>
+              Download PETCARD and make every day better
+              <br className={styles.desktopBreak} />
+              for you and your pet.
+            </p>
+
+          </div>
+
+
+          {/* ================= STORE BADGES ================= */}
+
+          <div className={styles.finalButtons}>
+            {storeBadges}
+          </div>
+
+        </div>
+      </section>
 
     </>
   );

@@ -9897,7 +9897,7 @@ overflow: visible;
   }
 
   .finalDownloadCard {
-    width: calc(100% - 100px);
+    width: calc(100% - 750px);
 
     height: 145px;
     min-height: 145px;
@@ -9925,12 +9925,7 @@ overflow: visible;
       scale(1.22);
   }
 
-  .finalDownloadCard:hover {
-    transform:
-      translateX(60px)
-      translateY(-15px)
-      scale(1.25);
-  }
+  
 
   .finalCopy {
     transform: translateX(35px);
@@ -9941,7 +9936,8 @@ overflow: visible;
   }
 
   .finalCopy p {
-    font-size: 13px;
+    font-size: 14px;
+    transform: translateX(150px);
   }
 
   .finalButtons {
@@ -10003,12 +9999,7 @@ overflow: visible;
       scale(1.24);
   }
 
-  .finalDownloadCard:hover {
-    transform:
-      translateX(70px)
-      translateY(-18px)
-      scale(1.27);
-  }
+ 
 
   .finalCopy {
     transform: translateX(45px);

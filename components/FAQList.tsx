@@ -1,87 +1,97 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import styles from "./FAQList.module.css";
+interface FAQ {
+  _id: string;
+  question: string;
+  answer: string;
+  isActive: boolean;
+}
 
-const faqs = [
-  [
-    "What is PetCard?",
-    "PetCard is a digital pet information platform designed to help pet parents keep important details about their pets organized and accessible.",
-  ],
-  [
-    "What information can I keep in PetCard?",
-    "You can organize relevant pet information such as profile details, health information, vaccination records, reminders and other useful notes, depending on the features available in the app.",
-  ],
-  [
-    "Can I manage multiple pets?",
-    "Yes, PetCard is designed to support pet parents who have more than one pet.",
-  ],
-  [
-    "Can I set reminders?",
-    "PetCard can help you keep track of important pet-related tasks and reminders.",
-  ],
-  [
-    "Is my information secure?",
-    "PetCard is designed with privacy and responsible handling of user information in mind. Final privacy details should be updated from the official product policy before launch.",
-  ],
-  [
-    "Will PetCard be available on Android and iOS?",
-    "The mobile app is currently under development. Store links can be added here once the app is officially launched.",
-  ],
-  [
-    "How can I contact PetCard?",
-    "Use the Contact Us page to reach the PetCard team through the official contact details provided there.",
-  ],
-  [
-    "Can I share feedback or suggest a feature?",
-    "Yes. Pet parents can use the contact channel to share feedback and product suggestions.",
-  ],
-];
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
 export default function FAQList() {
-  const [open, setOpen] = useState<number>(0);
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const toggleFAQ = (index: number) => {
-    setOpen((current) => (current === index ? -1 : index));
-  };
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const response = await fetch(`${API_URL}/faqs`, {
+          method: "GET",
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch FAQs: ${response.status}`
+          );
+        }
+
+        const data = await response.json();
+
+        console.log("FAQ API Response:", data);
+
+        const faqList = Array.isArray(data)
+          ? data
+          : Array.isArray(data.faqs)
+            ? data.faqs
+            : [];
+
+        // All active FAQs — no slice here
+        const activeFaqs = faqList.filter(
+          (item: FAQ) => item.isActive === true
+        );
+
+        setFaqs(activeFaqs);
+      } catch (error) {
+        console.error("Error fetching FAQs:", error);
+        setFaqs([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFaqs();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className={styles.state}>
+        <p>Loading FAQs...</p>
+      </div>
+    );
+  }
+
+  if (faqs.length === 0) {
+    return (
+      <div className={styles.state}>
+        <p>No FAQs available at the moment.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="faq-list">
-      {faqs.map(([question, answer], index) => {
-        const isOpen = open === index;
+    <div className={styles.list}>
+      {faqs.map((faq) => (
+        <details
+          className={styles.item}
+          key={faq._id}
+        >
+          <summary>
+            <span>{faq.question}</span>
 
-        return (
-          <div
-            className={`faq-item ${isOpen ? "is-open" : ""}`}
-            key={question}
-          >
-            <button
-              type="button"
-              className="faq-q"
-              onClick={() => toggleFAQ(index)}
-              aria-expanded={isOpen}
-            >
-              <span>{question}</span>
+            <ChevronRight size={19} />
+          </summary>
 
-              <span className="faq-icon">
-                <ChevronDown
-                  size={18}
-                  strokeWidth={2.2}
-                />
-              </span>
-            </button>
-
-            <div
-              className="faq-answer-wrap"
-              aria-hidden={!isOpen}
-            >
-              <div className="faq-a">
-                {answer}
-              </div>
-            </div>
+          <div className={styles.answer}>
+            <p>{faq.answer}</p>
           </div>
-        );
-      })}
+        </details>
+      ))}
     </div>
   );
 }

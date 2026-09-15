@@ -83,6 +83,37 @@ const journey = [
   },
 ];
 
+
+const storeBadges = (
+  <>
+    <div className={styles.storeBadge}>
+      <img
+        src="/images/apple-logo.png"
+        alt="Apple"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>Download on the</small>
+        <b>App Store</b>
+      </span>
+    </div>
+
+    <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
+      <img
+        src="/images/google-play.png"
+        alt="Google Play"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>GET IT ON</small>
+        <b>Google Play</b>
+      </span>
+    </div>
+  </>
+);
+
 export default function About() {
   useEffect(() => {
     const sections =
@@ -173,7 +204,7 @@ export default function About() {
         <div className="container">
           <div className={styles.heroGrid}>
             <div className={styles.heroContent}>
-             
+
               <h1 className={styles.heroTitle}>
                 It all started with a dog named{" "}
                 <span>Brownie.</span>
@@ -196,7 +227,7 @@ export default function About() {
                   className="btn btn-primary"
                 >
                   Read Our Story
-                 
+
                 </a>
 
                 <a
@@ -293,9 +324,8 @@ export default function About() {
             {stats.map(
               ({ title, text }, index) => (
                 <article
-                  className={`${styles.stat} ${
-                    styles[`stat${index + 1}`]
-                  }`}
+                  className={`${styles.stat} ${styles[`stat${index + 1}`]
+                    }`}
                   key={`${title}-${text}`}
                 >
                   <strong>{title}</strong>
@@ -318,7 +348,7 @@ export default function About() {
         <div className="container">
           <div className={styles.storyIntro}>
             <div>
-             
+
 
               <h2
                 className={
@@ -348,53 +378,106 @@ export default function About() {
                 text,
                 image,
                 alt,
-              }) => (
+              }, index) => (
                 <article
-                  className={styles.journeyCard}
+                  className={`${styles.journeyCard} ${styles[`journeyCard${index + 1}`]
+                    }`}
                   key={number}
+                  style={
+                    {
+                      "--journey-index": index,
+                    } as React.CSSProperties
+                  }
                 >
-                  <Image
-                    className={styles.journeyPaw}
-                    src="/images/paw.png"
-                    alt=""
-                    width={82}
-                    height={82}
-                    aria-hidden="true"
-                  />
+                  {/* =================================================
+            TOP
+        ================================================= */}
 
-                
+                  <div className={styles.journeyTop}>
 
-                  <div
-                    className={
-                      styles.journeyContent
-                    }
-                  >
+
+                    <div className={styles.journeyPaw}>
+                      <Image
+                        src="/images/paw.png"
+                        alt=""
+                        width={82}
+                        height={82}
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </div>
+
+
+                  {/* =================================================
+            CONTENT
+        ================================================= */}
+
+                  <div className={styles.journeyContent}>
                     <h3>{title}</h3>
+
                     <p>{text}</p>
                   </div>
 
-                  <div
-                    className={
-                      styles.journeySticker
-                    }
-                  >
+
+                  {/* =================================================
+            STICKER
+        ================================================= */}
+
+                  <div className={styles.journeySticker}>
                     <Image
                       src={image}
                       alt={alt}
                       width={230}
                       height={230}
-                      className={
-                        styles.journeyStickerImage
-                      }
+                      className={styles.journeyStickerImage}
                     />
                   </div>
 
+
+                  {/* =================================================
+            BACKGROUND PAW
+        ================================================= */}
+
                   <div
-                    className={
-                      styles.journeyShine
-                    }
+                    className={styles.journeyBackgroundPaw}
+                    aria-hidden="true"
+                  >
+                    <Image
+                      src="/images/paw.png"
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
+                  </div>
+
+
+                  {/* =================================================
+            SHINE
+        ================================================= */}
+
+                  <div
+                    className={styles.journeyShine}
                     aria-hidden="true"
                   />
+
+
+                  {/* =================================================
+            FOOTER
+        ================================================= */}
+
+                  <div className={styles.journeyFooter}>
+                    <span>
+                      {index === 0 && "EXPLORE MORE"}
+                      {index === 1 && "READ THE STORY"}
+                      {index === 2 && "DISCOVER MORE"}
+                      {index === 3 && "VIEW PETCARD"}
+                    </span>
+
+                    <div className={styles.journeyFooterRight}>
+
+                      <ArrowRight size={17} />
+                    </div>
+                  </div>
                 </article>
               )
             )}
@@ -487,7 +570,7 @@ export default function About() {
                 styles.missionContent
               }
             >
-             
+
 
               <h2
                 className={
@@ -591,7 +674,7 @@ export default function About() {
                 styles.closingContent
               }
             >
-              
+
 
               <h2>
                 Because behind every lost pet is a
@@ -610,10 +693,56 @@ export default function About() {
         </div>
       </section>
 
-      <CTA
-        title="Give every pet a better way home."
-        text="Build a recognisable digital identity and keep the details that matter close when you need them."
-      />
+    
+
+       {/* =====================================================
+    FINAL DOWNLOAD
+    ===================================================== */}
+
+      <section
+        className={`${styles.finalDownload} ${styles.homeReveal}`}
+        id="download-app"
+        data-home-reveal="download"
+      >
+        <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
+
+          {/* ================= PETS ================= */}
+
+          <div className={styles.finalPets}>
+            <Image
+              src="/images/AboutFooter.png"
+              alt="PETCARD pets"
+              fill
+              priority
+
+              className={styles.finalPetsImage}
+            />
+          </div>
+
+
+          {/* ================= COPY ================= */}
+
+          <div className={styles.finalCopy}>
+
+            <h2>
+            Give every pet a better way home.
+            </h2>
+
+            <p>
+            Build a recognisable digital identity and keep the details that matter close when you need them.
+            </p>
+
+          </div>
+
+
+          {/* ================= STORE BADGES ================= */}
+
+          <div className={styles.finalButtons}>
+            {storeBadges}
+          </div>
+
+        </div>
+      </section>
     </>
   );
 }

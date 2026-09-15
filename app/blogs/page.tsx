@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   Clock3,
@@ -11,10 +11,24 @@ import {
 } from "lucide-react";
 
 import styles from "./Blogs.module.css";
+import Image from "next/image";
+
+/* =========================================================
+   API
+========================================================= */
+
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "http://localhost:5000/api";
+
+const BACKEND_URL = API_URL.replace(
+  /\/api\/?$/,
+  ""
+);
 
 /* =========================================================
    CATEGORIES
-   ========================================================= */
+========================================================= */
 
 const categories = [
   { icon: "🐾", title: "All Posts" },
@@ -27,91 +41,311 @@ const categories = [
 ];
 
 /* =========================================================
-   POPULAR POSTS
-   ========================================================= */
+   BLOG TYPE
+========================================================= */
 
-const popularPosts = [
-  {
-    image: "/images/reward/home-dog.png",
-    title: "How Often Should You Bathe Your Dog?",
-    readTime: "4 min read",
-    slug: "how-often-should-you-bathe-your-dog",
-  },
-  {
-    image: "/images/reward/zuzu.png",
-    title: "Understanding Your Cat's Body Language",
-    readTime: "6 min read",
-    slug: "understanding-your-cats-body-language",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=85",
-    title: "Easy Homemade Meals Your Pet Will Love",
-    readTime: "5 min read",
-    slug: "easy-homemade-meals-your-pet-will-love",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=700&q=85",
-    title: "Fun Indoor Games to Keep Pets Active at Home",
-    readTime: "4 min read",
-    slug: "fun-indoor-games-to-keep-pets-active-at-home",
-  },
-];
+interface Blog {
+  _id: string;
 
-/* =========================================================
-   FRESH READS
-   ========================================================= */
+  title: string;
+  slug: string;
+  category: string;
+  excerpt: string;
 
-const freshReads = [
-  {
-    category: "STORY",
-    image:
-      "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=85",
-    title: "A Bond Like No Other: Milo's Forever Home",
-    description:
-      "A heartwarming rescue story about trust, patience and finding a forever family.",
-    readTime: "3 min read",
-    likes: "1.2K",
-    slug: "a-bond-like-no-other-milos-forever-home",
-  },
-  {
-    category: "HEALTH",
-    image:
-      "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=900&q=85",
-    title: "Vaccination Guide: What Every Pet Parent Should Know",
-    description:
-      "Keep your furry friend protected with the right vaccination routine.",
-    readTime: "6 min read",
-    likes: "980",
-    slug: "vaccination-guide-what-every-pet-parent-should-know",
-  },
-  {
-    category: "TRAINING",
-    image:
-      "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=85",
-    title: "5 Positive Reinforcement Tips That Actually Work",
-    description:
-      "Train with patience, consistency and rewards your pet understands.",
-    readTime: "4 min read",
-    likes: "760",
-    slug: "5-positive-reinforcement-tips-that-actually-work",
-  },
-];
+  author: string;
+  readTime: string;
+  date: string;
+
+  image?: string;
+
+  intro?: string;
+
+  sections?: {
+    heading: string;
+    paragraphs: string[];
+  }[];
+
+  takeaways?: string[];
+
+  note?: string;
+
+  isFeatured: boolean;
+  isPopular: boolean;
+  isActive: boolean;
+
+  likes?: number;
+  views?: number;
+
+  createdAt: string;
+  updatedAt?: string;
+}
 
 /* =========================================================
    HERO PETS
-   ========================================================= */
+========================================================= */
 
 const heroDog = "/images/huchiko2.png";
 const heroCat = "/images/about/cat.png";
 const heroPet = "/images/about/rabbit.png";
 
 /* =========================================================
+   IMAGE URL HELPER
+========================================================= */
+
+const getImageUrl = (image?: string) => {
+  if (!image) {
+    return "";
+  }
+
+  if (
+    image.startsWith("http://") ||
+    image.startsWith("https://")
+  ) {
+    return image;
+  }
+
+  return `${BACKEND_URL}${image}`;
+};
+
+/* =========================================================
+   DATE HELPER
+========================================================= */
+
+const storeBadges = (
+  <>
+    <div className={styles.storeBadge}>
+      <img
+        src="/images/apple-logo.png"
+        alt="Apple"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>Download on the</small>
+        <b>App Store</b>
+      </span>
+    </div>
+
+    <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
+      <img
+        src="/images/google-play.png"
+        alt="Google Play"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>GET IT ON</small>
+        <b>Google Play</b>
+      </span>
+    </div>
+  </>
+);
+
+const getBlogDate = (blog: Blog) => {
+  if (blog.date) {
+    const date = new Date(blog.date);
+
+    if (!Number.isNaN(date.getTime())) {
+      return date.getTime();
+    }
+  }
+
+  if (blog.createdAt) {
+    const date = new Date(blog.createdAt);
+
+    if (!Number.isNaN(date.getTime())) {
+      return date.getTime();
+    }
+  }
+
+  return 0;
+};
+
+/* =========================================================
+   DISPLAY CATEGORY
+========================================================= */
+
+const getCategoryLabel = (
+  category?: string
+) => {
+  if (!category) {
+    return "";
+  }
+
+  return category.toUpperCase();
+};
+
+/* =========================================================
    BLOG PAGE
-   ========================================================= */
+========================================================= */
 
 export default function Blogs() {
+  const [blogs, setBlogs] = useState<Blog[]>(
+    []
+  );
+
+  const [loading, setLoading] =
+    useState(true);
+
+  /* =====================================================
+     FETCH BLOGS
+  ===================================================== */
+
+  useEffect(() => {
+    const controller =
+      new AbortController();
+
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+
+        const response = await fetch(
+          `${API_URL}/blogs`,
+          {
+            method: "GET",
+            signal: controller.signal,
+            cache: "no-store",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "Failed to fetch blogs."
+          );
+        }
+
+        const data =
+          await response.json();
+
+        /*
+         * Backend normally returns:
+         * {
+         *   success: true,
+         *   blogs: [...]
+         * }
+         *
+         * This also safely handles
+         * direct array response.
+         */
+
+        const blogList: Blog[] =
+          Array.isArray(data)
+            ? data
+            : Array.isArray(data?.blogs)
+            ? data.blogs
+            : [];
+
+        /*
+         * Only active blogs should be visible
+         * on public website.
+         *
+         * If backend already filters active blogs,
+         * this simply keeps them unchanged.
+         */
+
+        const activeBlogs =
+          blogList.filter(
+            (blog) =>
+              blog.isActive !== false
+          );
+
+        setBlogs(activeBlogs);
+      } catch (error) {
+        if (
+          error instanceof DOMException &&
+          error.name === "AbortError"
+        ) {
+          return;
+        }
+
+        console.error(
+          "Failed to fetch blogs:",
+          error
+        );
+
+        setBlogs([]);
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchBlogs();
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+  /* =====================================================
+     FEATURED BLOG
+     
+     DB:
+     isFeatured = true
+     
+     Only one should exist because admin
+     already limits Featured to 1.
+  ===================================================== */
+
+  const featuredBlog =
+    useMemo(() => {
+      return (
+        blogs.find(
+          (blog) =>
+            blog.isFeatured === true
+        ) || null
+      );
+    }, [blogs]);
+
+  /* =====================================================
+     POPULAR BLOGS
+     
+     DB:
+     isPopular = true
+     
+     Maximum 4 are allowed from admin.
+  ===================================================== */
+
+  const popularBlogs =
+    useMemo(() => {
+      return blogs
+        .filter(
+          (blog) =>
+            blog.isPopular === true
+        )
+        .sort(
+          (a, b) =>
+            getBlogDate(b) -
+            getBlogDate(a)
+        )
+        .slice(0, 4);
+    }, [blogs]);
+
+  /* =====================================================
+     FRESH READS
+     
+     Latest active blogs based on:
+     1. date
+     2. createdAt fallback
+     
+     Featured/Popular status does not matter here.
+  ===================================================== */
+const freshReads = useMemo(() => {
+    return [...blogs]
+        .filter((blog) => blog.isFeatured === false && blog.isPopular === false)
+        .sort(
+            (a, b) =>
+                getBlogDate(b) -
+                getBlogDate(a)
+        )
+        .slice(0, 3);
+}, [blogs]);
+
+  /* =====================================================
+     SCROLL REVEAL
+  ===================================================== */
+
   useEffect(() => {
     const sections =
       document.querySelectorAll<HTMLElement>(
@@ -137,7 +371,11 @@ export default function Blogs() {
       new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
+            if (
+              !entry.isIntersecting
+            ) {
+              return;
+            }
 
             entry.target.classList.add(
               styles.isVisible
@@ -177,7 +415,9 @@ export default function Blogs() {
 
         <div className="container">
           <div className={styles.heroGrid}>
-            <div className={styles.heroContent}>
+            <div
+              className={styles.heroContent}
+            >
               <h1>
                 Stories, tips & love
                 <br />
@@ -188,13 +428,17 @@ export default function Blogs() {
               </h1>
 
               <p>
-                Helpful tips, heartwarming stories,
-                and expert advice to help you care
-                better and love stronger.
+                Helpful tips,
+                heartwarming stories,
+                and expert advice to
+                help you care better
+                and love stronger.
               </p>
 
               <form
-                className={styles.searchBar}
+                className={
+                  styles.searchBar
+                }
                 onSubmit={(event) =>
                   event.preventDefault()
                 }
@@ -214,29 +458,19 @@ export default function Blogs() {
               </form>
             </div>
 
-            <div className={styles.heroPets}>
-              <div
-                className={styles.heroPawOne}
-                aria-hidden="true"
-              >
-                🐾
-              </div>
+            <div
+              className={styles.heroPets}
+            >
+             
 
               <div
-                className={styles.heroPawTwo}
-                aria-hidden="true"
+                className={styles.heroDog}
               >
-                ✦
-              </div>
-
-              <div className={styles.heroDog}>
                 <img
-                  src="/images/footer/pets.png"
+                  src="/images/BlogHero.png"
                   alt="Golden retriever"
                 />
               </div>
-
-             
             </div>
           </div>
         </div>
@@ -250,12 +484,22 @@ export default function Blogs() {
         className={`${styles.categoriesSection} ${styles.revealSection}`}
       >
         <div className="container">
-          <div className={styles.categoryLayout}>
-            <div className={styles.categories}>
+          <div
+            className={
+              styles.categoryLayout
+            }
+          >
+            <div
+              className={
+                styles.categories
+              }
+            >
               {categories.map(
                 (category, index) => (
                   <button
-                    key={category.title}
+                    key={
+                      category.title
+                    }
                     type="button"
                     className={`${styles.categoryButton} ${
                       index === 0
@@ -263,19 +507,22 @@ export default function Blogs() {
                         : ""
                     }`}
                   >
-                    <span>
-                      {category.icon}
-                    </span>
-
+                   
                     <small>
-                      {category.title}
+                      {
+                        category.title
+                      }
                     </small>
                   </button>
                 )
               )}
             </div>
 
-            <div className={styles.shareStory}>
+            <div
+              className={
+                styles.shareStory
+              }
+            >
               <div
                 className={
                   styles.shareStoryPet
@@ -293,16 +540,18 @@ export default function Blogs() {
                 </strong>
 
                 <span>
-                  We&apos;d love to feature you!
+                  We&apos;d love to
+                  feature you!
                 </span>
 
-                <Link href="/contact">
+                <Link href="/contact" className="btn btn-primary">
                   Share Your Story
-                 <img
-                 src="/images/paw-white.png"
-                 width={20}
-                 height={20}
-                 />
+                  <img
+                    src="/images/paw-white.png"
+                    width={20}
+                    height={20}
+                    alt=""
+                  />
                 </Link>
               </div>
             </div>
@@ -318,110 +567,231 @@ export default function Blogs() {
         className={`${styles.featuredSection} ${styles.revealSection}`}
       >
         <div className="container">
-          <div className={styles.featuredGrid}>
-            <div className={styles.featuredColumn}>
-              <div className={styles.sectionLabel}>
-                <Star
-                  size={13}
-                  fill="currentColor"
-                />
+          <div
+            className={
+              styles.featuredGrid
+            }
+          >
+            {/* =================================================
+                FEATURED ARTICLE
+            ================================================= */}
+
+            <div
+              className={
+                styles.featuredColumn
+              }
+            >
+              <div
+                className={
+                  styles.sectionLabel
+                }
+              >
+              
 
                 FEATURED ARTICLE
               </div>
 
-              <article
-                className={
-                  styles.featuredCard
-                }
-              >
-                <div
+              {featuredBlog ? (
+                <article
                   className={
-                    styles.featuredImage
+                    styles.featuredCard
                   }
-                >
-                  <img
-                    src="/images/reward/huchiko.png"
-                    alt="Dog enjoying the outdoors"
-                  />
-
-                  <span>
-                    CARE TIPS
-                  </span>
-                </div>
-
-                <div
-                  className={
-                    styles.featuredContent
-                  }
+                  
                 >
                   <div
                     className={
-                      styles.articleTop
+                      styles.featuredImage
                     }
+                    
                   >
-                    <span>
-                      CARE TIPS
-                    </span>
+                    {featuredBlog.image ? (
+                      <img
+                        src={getImageUrl(
+                          featuredBlog.image
+                        )}
+                        alt={
+                          featuredBlog.title
+                        }
+                      />
+                    ) : (
+                      <img
+                        src="/images/brand/dog.png"
+                        alt={
+                          featuredBlog.title
+                        }
+                      />
+                    )}
 
                     <span>
-                      <Clock3 size={13} />
-                      5 min read
+                      {getCategoryLabel(
+                        featuredBlog.category
+                      )}
                     </span>
                   </div>
 
-                  <h2>
-                    10 Daily Habits That Make
-                    Your Dog Happier &
-                    Healthier
-                  </h2>
-
-                  <p>
-                    Small changes, big impact!
-                    Simple daily habits that build
-                    a stronger bond and a healthier
-                    life for your pup.
-                  </p>
-
                   <div
                     className={
-                      styles.authorRow
+                      styles.featuredContent
                     }
                   >
                     <div
                       className={
-                        styles.authorAvatar
+                        styles.articleTop
                       }
                     >
-                      A
-                    </div>
-
-                    <div>
-                      <strong>
-                        Pet Care Expert
-                      </strong>
+                      <span>
+                        {getCategoryLabel(
+                          featuredBlog.category
+                        )}
+                      </span>
 
                       <span>
-                        PetCard Journal
+                        <Clock3
+                          size={13}
+                        />
+
+                        {
+                          featuredBlog.readTime
+                        }
                       </span>
                     </div>
 
-                    <Link
-                      href="/blogs/10-daily-habits-that-make-your-dog-happier-healthier"
-                      className={
-                        styles.circleArrow
+                    <h2>
+                      {
+                        featuredBlog.title
                       }
-                      aria-label="Read featured article"
+                    </h2>
+
+                    <p>
+                      {
+                        featuredBlog.excerpt
+                      }
+                    </p>
+
+                    <div
+                      className={
+                        styles.authorRow
+                      }
                     >
-                      <img
-                 src="/images/paw-white.png"
-                 width={20}
-                 height={20}
-                 />
-                    </Link>
+                      <div
+                        className={
+                          styles.authorAvatar
+                        }
+                      >
+                        {featuredBlog.author
+                          ?.charAt(0)
+                          .toUpperCase() ||
+                          "P"}
+                      </div>
+
+                      <div>
+                        <strong>
+                          {
+                            featuredBlog.author
+                          }
+                        </strong>
+
+                        <span>
+                          PetCard Journal
+                        </span>
+                      </div>
+
+                      <Link
+                        href={`/blogs/${featuredBlog.slug}`}
+                        className={
+                          styles.circleArrow
+                        }
+                        aria-label="Read featured article"
+                      >
+                        <img
+                          src="/images/paw.png"
+                          width={20}
+                          height={20}
+                          alt=""
+                        />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              ) : (
+                <article
+                  className={
+                    styles.featuredCard
+                  }
+                >
+                  <div
+                    className={
+                      styles.featuredImage
+                    }
+                  >
+                    <img
+                      src="/images/brand/dog.png"
+                      alt="Featured blog"
+                    />
+
+                    <span>
+                      PETCARD
+                    </span>
+                  </div>
+
+                  <div
+                    className={
+                      styles.featuredContent
+                    }
+                  >
+                    <div
+                      className={
+                        styles.articleTop
+                      }
+                    >
+                      <span>
+                        FEATURED ARTICLE
+                      </span>
+                    </div>
+
+                    <h2>
+                      {loading
+                        ? "Loading featured article..."
+                        : "No featured article yet"}
+                    </h2>
+
+                    <p>
+                      {loading
+                        ? "Please wait while we load the latest PetCard articles."
+                        : "A featured article will appear here once it is selected from the admin panel."}
+                    </p>
+
+                    <div
+                      className={
+                        styles.authorRow
+                      }
+                    >
+                      <div
+                        className={
+                          styles.authorAvatar
+                        }
+                      >
+                        P
+                      </div>
+
+                      <div>
+                        <strong>
+                          PetCard Journal
+                        </strong>
+
+                        <span>
+                          PetCard
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              )}
             </div>
+
+            {/* =================================================
+                POPULAR POSTS
+            ================================================= */}
 
             <aside
               className={
@@ -434,7 +804,7 @@ export default function Blogs() {
                 }
               >
                 <h2>
-                  <span>🔥</span>
+                 
                   Popular Posts
                 </h2>
               </div>
@@ -444,44 +814,110 @@ export default function Blogs() {
                   styles.popularList
                 }
               >
-                {popularPosts.map(
-                  (post) => (
-                    <Link
-                      href={`/blogs/${post.slug}`}
-                      className={
-                        styles.popularPost
-                      }
-                      key={post.title}
-                    >
-                      <div
+                {popularBlogs.length >
+                0 ? (
+                  popularBlogs.map(
+                    (post) => (
+                      <Link
+                        href={`/blogs/${post.slug}`}
                         className={
-                          styles.popularImage
+                          styles.popularPost
                         }
+                        key={post._id}
                       >
-                        <img
-                          src={post.image}
-                          alt={post.title}
-                        />
-                      </div>
+                        <div
+                          className={
+                            styles.popularImage
+                          }
+                        >
+                          {post.image ? (
+                            <img
+                              src={getImageUrl(
+                                post.image
+                              )}
+                              alt={
+                                post.title
+                              }
+                            />
+                          ) : (
+                            <img
+                              src="/images/brand/dog.png"
+                              alt={
+                                post.title
+                              }
+                            />
+                          )}
+                        </div>
 
-                      <div
-                        className={
-                          styles.popularContent
-                        }
-                      >
-                        <h3>
-                          {post.title}
-                        </h3>
+                        <div
+                          className={
+                            styles.popularContent
+                          }
+                        >
+                          <h3>
+                            {post.title}
+                          </h3>
 
-                        <span>
-                          <Clock3 size={12} />
-                          {post.readTime}
-                          <b>•</b>
-                          🐾
-                        </span>
-                      </div>
-                    </Link>
+                          <span>
+                            <Clock3
+                              size={12}
+                            />
+
+                            {
+                              post.readTime
+                            }
+
+                            <b>•</b>
+
+                            🐾
+                          </span>
+                        </div>
+                      </Link>
+                    )
                   )
+                ) : (
+                  <div
+                    className={
+                      styles.popularPost
+                    }
+                  >
+                    <div
+                      className={
+                        styles.popularImage
+                      }
+                    >
+                      <img
+                        src="/images/brand/dog.png"
+                        alt="PetCard"
+                      />
+                    </div>
+
+                    <div
+                      className={
+                        styles.popularContent
+                      }
+                    >
+                      <h3>
+                        {loading
+                          ? "Loading popular posts..."
+                          : "No popular posts yet"}
+                      </h3>
+
+                      <span>
+                        <Clock3
+                          size={12}
+                        />
+
+                        {loading
+                          ? "Please wait"
+                          : "Select popular blogs from admin"}
+
+                        <b>•</b>
+
+                        🐾
+                      </span>
+                    </div>
+                  </div>
                 )}
               </div>
             </aside>
@@ -497,14 +933,18 @@ export default function Blogs() {
         className={`${styles.storySection} ${styles.revealSection}`}
       >
         <div className="container">
-          <div className={styles.storyBanner}>
+          <div
+            className={
+              styles.storyBanner
+            }
+          >
             <div
               className={
                 styles.storyPet
               }
             >
               <img
-                src={heroDog}
+                src="/images/blogContent.png"
                 alt="Happy pet"
               />
             </div>
@@ -515,22 +955,26 @@ export default function Blogs() {
               }
             >
               <strong>
-                Share your pet&apos;s story!
+                Share your pet&apos;s
+                story!
               </strong>
 
               <p>
-                Every pet has a unique story.
+                Every pet has a unique
+                story.
                 <br />
-                We&apos;d love to feature yours.
+                We&apos;d love to feature
+                yours.
               </p>
 
-              <Link href="/contact">
+              <Link href="/contact" className="btn btn-primary">
                 Share Your Story
-               <img
-                 src="/images/paw-white.png"
-                 width={20}
-                 height={20}
-                 />
+                <img
+                  src="/images/paw-white.png"
+                  width={25}
+                  height={25}
+                  alt=""
+                />
               </Link>
             </div>
 
@@ -603,7 +1047,8 @@ export default function Blogs() {
           >
             <div>
               <h2>
-                Fresh Reads for Pet Parents
+                Fresh Reads for Pet
+                Parents
               </h2>
             </div>
           </div>
@@ -613,106 +1058,276 @@ export default function Blogs() {
               styles.readsGrid
             }
           >
-            {freshReads.map(
-              (post) => (
-                <Link
-                  href={`/blogs/${post.slug}`}
-                  className={
-                    styles.readCard
-                  }
-                  key={post.title}
-                >
-                  <div
+            {freshReads.length > 0 ? (
+              freshReads.map(
+                (post) => (
+                  <Link
+                    href={`/blogs/${post.slug}`}
                     className={
-                      styles.readImage
+                      styles.readCard
                     }
+                    key={post._id}
                   >
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                    />
+                    <div
+                      className={
+                        styles.readImage
+                      }
+                    >
+                      {post.image ? (
+                        <img
+                          src={getImageUrl(
+                            post.image
+                          )}
+                          alt={
+                            post.title
+                          }
+                        />
+                      ) : (
+                        <img
+                          src="/images/brand/dog.png"
+                          alt={
+                            post.title
+                          }
+                        />
+                      )}
 
-                    <span>
-                      {post.category}
-                    </span>
-                  </div>
-
-                  <div
-                    className={
-                      styles.readContent
-                    }
-                  >
-                    <h3>
-                      {post.title}
-                    </h3>
-
-                    <p>
-                      {post.description}
-                    </p>
+                      <span>
+                        {getCategoryLabel(
+                          post.category
+                        )}
+                      </span>
+                    </div>
 
                     <div
                       className={
-                        styles.readFooter
+                        styles.readContent
                       }
                     >
-                      <span>
-                        <Clock3 size={13} />
-                        {post.readTime}
-                      </span>
+                      <h3>
+                        {post.title}
+                      </h3>
+
+                      <p>
+                        {post.excerpt}
+                      </p>
+
+                      <div
+                        className={
+                          styles.readFooter
+                        }
+                      >
+                        <span>
+                          <Clock3
+                            size={13}
+                          />
+
+                          {
+                            post.readTime
+                          }
+                        </span>
+
+                        <span>
+                          <Heart
+                            size={13}
+                          />
+
+                          {typeof post.likes ===
+                          "number"
+                            ? post.likes
+                            : "🐾"}
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                )
+              )
+            ) : (
+              <>
+                {loading ? (
+                  Array.from({
+                    length: 3,
+                  }).map(
+                    (_, index) => (
+                      <article
+                        className={
+                          styles.readCard
+                        }
+                        key={index}
+                      >
+                        <div
+                          className={
+                            styles.readImage
+                          }
+                        >
+                          <img
+                            src="/images/brand/dog.png"
+                            alt="Loading"
+                          />
+
+                          <span>
+                            LOADING
+                          </span>
+                        </div>
+
+                        <div
+                          className={
+                            styles.readContent
+                          }
+                        >
+                          <h3>
+                            Loading
+                            article...
+                          </h3>
+
+                          <p>
+                            Loading the
+                            latest
+                            PetCard
+                            articles.
+                          </p>
+
+                          <div
+                            className={
+                              styles.readFooter
+                            }
+                          >
+                            <span>
+                              <Clock3
+                                size={
+                                  13
+                                }
+                              />
+                              Please
+                              wait
+                            </span>
+
+                            <span>
+                              <Heart
+                                size={
+                                  13
+                                }
+                              />
+                              🐾
+                            </span>
+                          </div>
+                        </div>
+                      </article>
+                    )
+                  )
+                ) : (
+                  <article
+                    className={
+                      styles.readCard
+                    }
+                  >
+                    <div
+                      className={
+                        styles.readImage
+                      }
+                    >
+                      <img
+                        src="/images/brand/dog.png"
+                        alt="PetCard"
+                      />
 
                       <span>
-                        <Heart size={13} />
-                        {post.likes}
+                        PETCARD
                       </span>
                     </div>
-                  </div>
-                </Link>
-              )
+
+                    <div
+                      className={
+                        styles.readContent
+                      }
+                    >
+                      <h3>
+                        No fresh reads
+                        yet
+                      </h3>
+
+                      <p>
+                        New articles will
+                        appear here once
+                        they are added from
+                        the admin panel.
+                      </p>
+
+                      <div
+                        className={
+                          styles.readFooter
+                        }
+                      >
+                        <span>
+                          <Clock3
+                            size={13}
+                          />
+                          PetCard Journal
+                        </span>
+
+                        <span>
+                          <Heart
+                            size={13}
+                          />
+                          🐾
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                )}
+              </>
             )}
           </div>
         </div>
       </section>
 
-      {/* =====================================================
-          NEWSLETTER
-          ===================================================== */}
+
+       {/* =====================================================
+    FINAL DOWNLOAD
+    ===================================================== */}
 
       <section
-        className={`${styles.newsletterSection} ${styles.revealSection}`}
+        className={`${styles.finalDownload} ${styles.homeReveal}`}
+        id="download-app"
+        data-home-reveal="download"
       >
-        <div className="container">
-          <div
-            className={
-              styles.newsletter
-            }
-          >
-            <div
-              className={
-                styles.newsletterPet
-              }
-            >
-              <img
-                src={heroDog}
-                alt="Pet parent companion"
-              />
-            </div>
+        <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
 
-            <div
-              className={
-                styles.newsletterCopy
-              }
-            >
-              <h2>
-                Pawsome updates straight to your inbox!
-              </h2>
+          {/* ================= PETS ================= */}
 
-              <p>
-                Subscribe to get the best pet care tips,
-                stories, and exclusive updates.
-              </p>
-            </div>
+          <div className={styles.finalPets}>
+            <Image
+              src="/images/BlogsFooter.png"
+              alt="PETCARD pets"
+              fill
+              priority
 
-            <form
+              className={styles.finalPetsImage}
+            />
+          </div>
+
+
+          {/* ================= COPY ================= */}
+
+          <div className={styles.finalCopy}>
+
+            <h2>
+              Pawsome updates straight
+                to your inbox!
+            </h2>
+
+            <p>
+              Subscribe to get the
+                best pet care tips,
+                stories, and exclusive
+                updates.
+            </p>
+
+          </div>
+
+
+          {/* ================= STORE BADGES ================= */}
+
+          <form
               className={
                 styles.newsletterForm
               }
@@ -727,24 +1342,16 @@ export default function Blogs() {
                 required
               />
 
-              <button type="submit">
+              <button type="submit" className="btn btn-primary">
                 Subscribe
-               <img
-                 src="/images/paw-white.png"
-                 width={20}
-                 height={20}
-                 />
+                <img
+                  src="/images/paw-white.png"
+                  width={25}
+                  height={25}
+                  alt=""
+                />
               </button>
             </form>
-
-            <div
-              className={
-                styles.envelopeDecoration
-              }
-            >
-              ✉️
-            </div>
-          </div>
         </div>
       </section>
     </main>

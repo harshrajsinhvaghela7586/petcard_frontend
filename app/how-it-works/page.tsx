@@ -140,6 +140,40 @@ const orbitSteps = [
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80",
   },
 ];
+
+
+
+const storeBadges = (
+  <>
+    <div className={styles.storeBadge}>
+      <img
+        src="/images/apple-logo.png"
+        alt="Apple"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>Download on the</small>
+        <b>App Store</b>
+      </span>
+    </div>
+
+    <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
+      <img
+        src="/images/google-play.png"
+        alt="Google Play"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>GET IT ON</small>
+        <b>Google Play</b>
+      </span>
+    </div>
+  </>
+);
+
+
 export default function HowItWorks() {
   return (
     <div className={styles.page}>
@@ -364,170 +398,60 @@ export default function HowItWorks() {
       CENTER PETCARD
       ================================================= */}
 
-            <div className={styles.centerCard}>
-              <div className={styles.centerGlow} />
-
-              <div className={styles.centerIllustration}>
-                <Image
-                  src="/images/brand/dog.png"
-                  alt="PetCard dog"
-                  width={192}
-                  height={192}
-                />
-              </div>
-
-              <div className={styles.centerBrand}>
-                <span>PET</span>
-                <strong>CARD</strong>
-              </div>
-
-              <div className={styles.centerTagline}>
-                Your pet&apos;s digital identity
-              </div>
-            </div>
-          </div>
-
-          {/* =================================================
-    MOBILE PROCESS
-    ================================================= */}
-
-          <div className={styles.mobileSteps}>
-            {steps.map(
-              ({
-                number,
-                title,
-                description,
-                icon: Icon,
-              }) => (
-                <article
-                  className={styles.mobileStep}
-                  key={number}
-                >
-                  <div className={styles.mobileStepTop}>
-                    <span className={styles.mobileStepNumber}>
-                      {number}
-                    </span>
-
-                    <span className={styles.mobileStepIcon}>
-                      <Icon size={18} />
-                    </span>
-                  </div>
-
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                </article>
-              ),
-            )}
-          </div>
-
-          {/* =================================================
-              DOWNLOAD BAR
-              ================================================= */}
-
-          <div
-            className={styles.downloadBar}
-            id="download-app"
-          >
-            {/* =====================================================
-      DOG
-      ===================================================== */}
-            <div className={styles.downloadPet}>
-              <Image
-                src="/images/brand/dog.png"
-                alt="PetCard dog"
-                width={135}
-                height={115}
-              />
-            </div>
-
-
-            {/* =====================================================
-      COPY
-      ===================================================== */}
-            <div className={styles.downloadCopy}>
-              <h3>
-                Ready to start your
-                <br />
-                <span>pet&apos;s amazing journey?</span>
-              </h3>
-
-              <p>
-                Join thousands of pet parents who choose love,
-                care &amp; smart tracking.
-              </p>
-            </div>
-
-
-            {/* =====================================================
-      APP DOWNLOAD BUTTONS
-      ===================================================== */}
-            <div className={styles.downloadApps}>
-              <div className={styles.storeLinks}>
-
-                {/* APP STORE */}
-                <Link
-                  href="#"
-                  className={styles.storeLink}
-                  aria-label="Download on the App Store"
-                >
-                  <Image
-                    src="/images/apple-logo.png"
-                    alt=""
-                    width={22}
-                    height={22}
-                    className={styles.storeIcon}
-                  />
-
-                  <span className={styles.storeText}>
-                    <small>Download on the</small>
-                    <strong>App Store</strong>
-                  </span>
-                </Link>
-
-
-                {/* GOOGLE PLAY */}
-                <Link
-                  href="#"
-                  className={styles.storeLink}
-                  aria-label="Get it on Google Play"
-                >
-                  <Image
-                    src="/images/google-play.png"
-                    alt=""
-                    width={23}
-                    height={23}
-                    className={styles.storeIcon}
-                  />
-
-                  <span className={styles.storeText}>
-                    <small>GET IT ON</small>
-                    <strong>Google Play</strong>
-                  </span>
-                </Link>
-
-              </div>
-            </div>
-
-
-            {/* =====================================================
-      STATS
-      ===================================================== */}
-            <div className={styles.downloadStats}>
-              <div>
-                <strong>100k+</strong>
-                <span>Happy Pet Parents</span>
-              </div>
-
-              <div className={styles.downloadRating}>
-                <strong>4.8 ★</strong>
-                <span>From 12k+ reviews</span>
-              </div>
-            </div>
-          </div>
+           </div>
         </div>
       </section>
 
-      <CTA />
+      {/* =====================================================
+    FINAL DOWNLOAD
+    ===================================================== */}
+
+      <section
+        className={`${styles.finalDownload} ${styles.homeReveal}`}
+        id="download-app"
+        data-home-reveal="download"
+      >
+        <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
+
+          {/* ================= PETS ================= */}
+
+          <div className={styles.finalPets}>
+            <Image
+              src="/images/HowItWorksFooter.png"
+              alt="PETCARD pets"
+              fill
+              priority
+
+              className={styles.finalPetsImage}
+            />
+          </div>
+
+
+          {/* ================= COPY ================= */}
+
+          <div className={styles.finalCopy}>
+
+            <h2>
+              Start your pet&apos;s amazing journey today!
+            </h2>
+
+            <p>
+              Download PETCARD and make every day better
+              <br className={styles.desktopBreak} />
+              for you and your pet.
+            </p>
+
+          </div>
+
+
+          {/* ================= STORE BADGES ================= */}
+
+          <div className={styles.finalButtons}>
+            {storeBadges}
+          </div>
+
+        </div>
+      </section>
     </div>
   );
 }

@@ -498,6 +498,38 @@ function IconBox({
   );
 }
 
+
+
+const storeBadges = (
+  <>
+    <div className={styles.storeBadge}>
+      <img
+        src="/images/apple-logo.png"
+        alt="Apple"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>Download on the</small>
+        <b>App Store</b>
+      </span>
+    </div>
+
+    <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
+      <img
+        src="/images/google-play.png"
+        alt="Google Play"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>GET IT ON</small>
+        <b>Google Play</b>
+      </span>
+    </div>
+  </>
+);
+
 export default function FeaturesPage() {
   const [visible, setVisible] = useState<string[]>([]);
   const [activeItems, setActiveItems] = useState<Record<string, number>>(
@@ -2765,117 +2797,60 @@ export default function FeaturesPage() {
               </div>
             </div>
 
-            <div className={styles.funBottom}>
-              <div>
-                <ShieldCheck size={24} />
-                <div>
-                  <strong>Happy pet. Active mind. Stronger bond.</strong>
-                  <small>
-                    Make every playtime a learning time!
-                  </small>
-                </div>
-              </div>
-
-              <div className={styles.funBottomActions}>
-
-                {/* App Store */}
-                <a
-                  href="#download-app"
-                  className={styles.storeBadge}
-                  aria-label="Download PetCard on the App Store"
-                >
-                  <img
-                    src="/images/apple-logo.png"
-                    alt="Apple"
-                    className={styles.storeIconImage}
-                  />
-
-                  <span className={styles.storeText}>
-                    <small>Download on the</small>
-                    <b>App Store</b>
-                  </span>
-                </a>
-
-                {/* Google Play */}
-                <a
-                  href="#download-app"
-                  className={`${styles.storeBadge} ${styles.googleBadge}`}
-                  aria-label="Get PetCard on Google Play"
-                >
-                  <img
-                    src="/images/google-play.png"
-                    alt="Google Play"
-                    className={styles.storeIconImage}
-                  />
-
-                  <span className={styles.storeText}>
-                    <small>GET IT ON</small>
-                    <b>Google Play</b>
-                  </span>
-                </a>
-              </div>
-            </div>
+           
           </div>
         </div>
       </section>
 
-      {/* =====================================================
-          FINAL CTA
-          ===================================================== */}
+ 
+ {/* =====================================================
+    FINAL DOWNLOAD
+    ===================================================== */}
+
+      <section
+        className={`${styles.finalDownload} ${styles.homeReveal}`}
+        id="download-app"
+        data-home-reveal="download"
+      >
+        <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
+
+          {/* ================= PETS ================= */}
+
+          <div className={styles.finalPets}>
+            <Image
+              src="/images/FeatureFooter.png"
+              alt="PETCARD pets"
+              fill
+              priority
+
+              className={styles.finalPetsImage}
+            />
+          </div>
 
 
-      <div className={styles.container}>
-  <div className={styles.finalCard}>
-    <div className={styles.finalGlow} />
+          {/* ================= COPY ================= */}
 
-    <div className={styles.finalPaw}>
-      <PawPrint
-        size={170}
-        fill="currentColor"
-      />
-    </div>
+          <div className={styles.finalCopy}>
 
-    {/* LEFT IMAGE */}
-    <div className={styles.finalImageWrap}>
-      <img
-        src="/images/footer/pets.png"
-        width={200}
-        height={120}
-        alt=""
-        className={styles.featureCTA}
-      />
-    </div>
+            <h2>
+             Happy pet. Active mind. Stronger bond.
+            </h2>
 
-    {/* CENTER CONTENT */}
-    <div className={styles.finalContent}>
-      <h2>
-        More than features.
-        <span>It&apos;s their whole world.</span>
-      </h2>
+            <p>
+              Make every playtime a learning time!
+            </p>
 
-      <p>
-        Identity, care, health, memories, rewards and smart
-        tools — thoughtfully connected around the pet you love.
-      </p>
-    </div>
+          </div>
 
-    {/* RIGHT BUTTON */}
-    <Link
-      href="/"
-      className={`btn btn-primary ${styles.finalButton}`}
-    >
-      Explore PetCard
 
-      <img
-        src="/images/paw-white.png"
-        width={30}
-        height={30}
-        alt=""
-      />
-    </Link>
-  </div>
-</div>
+          {/* ================= STORE BADGES ================= */}
 
+          <div className={styles.finalButtons}>
+            {storeBadges}
+          </div>
+
+        </div>
+      </section>
     </main>
   );
 }

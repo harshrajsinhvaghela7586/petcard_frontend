@@ -1,0 +1,274 @@
+/* =========================================================
+   FAQ LIST
+========================================================= */
+
+.list {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+}
+
+
+/* =========================================================
+   FAQ ITEM
+========================================================= */
+
+.item {
+  overflow: hidden;
+
+  border: 1px solid #eadfd6;
+  border-radius: 17px;
+
+  background: #fff;
+
+  box-shadow:
+    0 10px 24px rgba(56, 27, 14, 0.04);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.item:hover {
+  transform: translateY(-3px);
+
+  border-color: #ffc27f;
+
+  box-shadow:
+    0 0 10px rgba(255, 122, 0, 0.1),
+    0 15px 30px rgba(56, 27, 14, 0.06);
+}
+
+
+/* =========================================================
+   OPEN
+========================================================= */
+
+.item[open] {
+  background: var(--soft);
+
+  border-color: #ffb46b;
+
+  box-shadow:
+    0 0 9px rgba(255, 122, 0, 0.13),
+    0 18px 35px rgba(56, 27, 14, 0.07);
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding: 18px 20px;
+
+  list-style: none;
+
+  cursor: pointer;
+
+  color: var(--text);
+
+  font-size: 12px;
+  font-weight: 800;
+
+  line-height: 1.5;
+}
+
+.item summary::-webkit-details-marker {
+  display: none;
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.item summary svg {
+  flex-shrink: 0;
+
+  color: var(--orange);
+
+  transition:
+    transform 0.25s ease;
+}
+
+.item[open] summary svg {
+  transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   ANSWER
+========================================================= */
+
+.answer {
+  padding: 0 20px 18px;
+}
+
+.answer p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   LOADING / EMPTY STATE
+========================================================= */
+
+.state {
+  min-height: 180px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px 20px;
+
+  text-align: center;
+
+  color: var(--muted);
+}
+
+.state p {
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .item summary {
+    padding: 17px 18px;
+
+    font-size: 12px;
+  }
+
+  .answer {
+    padding: 0 18px 17px;
+  }
+
+  .answer p {
+    font-size: 10px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .list {
+    gap: 9px;
+  }
+
+  .item {
+    border-radius: 14px;
+  }
+
+  .item summary {
+    padding: 15px 16px;
+
+    gap: 12px;
+
+    font-size: 11px;
+  }
+
+  .item summary svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .answer {
+    padding: 0 16px 16px;
+  }
+
+  .answer p {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 360px) {
+  .item summary {
+    padding: 14px;
+
+    font-size: 10px;
+  }
+
+  .answer {
+    padding: 0 14px 14px;
+  }
+
+  .answer p {
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================================
+   LARGE SCREENS / 2K
+========================================================= */
+
+@media (min-width: 1920px) {
+  .item summary {
+    padding: 21px 24px;
+
+    font-size: 14px;
+  }
+
+  .answer {
+    padding: 0 24px 21px;
+  }
+
+  .answer p {
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   4K
+========================================================= */
+
+@media (min-width: 2560px) {
+  .item summary {
+    padding: 24px 27px;
+
+    font-size: 15px;
+  }
+
+  .answer {
+    padding: 0 27px 24px;
+  }
+
+  .answer p {
+    font-size: 13px;
+  }
+}

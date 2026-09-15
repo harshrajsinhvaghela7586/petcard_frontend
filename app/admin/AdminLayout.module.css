@@ -1,0 +1,40 @@
+.adminLayout {
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+.mainWrapper {
+    min-height: 100vh;
+    margin-left: 270px;
+}
+
+.content {
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 34px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .mainWrapper {
+        margin-left: 0;
+    }
+
+    .content {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .content {
+        padding: 20px 15px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .content {
+        max-width: 1900px;
+        padding: 42px;
+    }
+}

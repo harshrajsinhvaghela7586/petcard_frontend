@@ -806,7 +806,7 @@
   }
 
   .footer :global(.container) {
-    width: min(calc(100% - 140px), 2400px);
+    width: min(calc(100% - 750px), 2520px);
   }
 
   .footerGrid {
@@ -837,7 +837,7 @@
   }
 
   .footerTagline {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .footerDescription {

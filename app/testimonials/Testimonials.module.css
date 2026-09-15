@@ -310,6 +310,28 @@
 
   border-top: 1px solid #f0e8e1;
 }
+.emptyState {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+}
+
+.emptyState h3 {
+  margin: 14px 0 6px;
+  color: var(--text);
+  font-size: 22px;
+}
+
+.emptyState p {
+  margin: 0;
+  max-width: 520px;
+  line-height: 1.7;
+}
 
 .avatar {
   display: grid;
