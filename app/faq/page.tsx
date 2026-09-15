@@ -12,10 +12,7 @@ export default function FAQ() {
         <div className={styles.heroGlow} />
 
         <div className={`${styles.container} ${styles.heroInner}`}>
-          <div className={styles.eyebrow}>
-            Frequently Asked Questions
-          </div>
-
+         
           <h1>
             Everything you need to know{" "}
             <span>about PetCard.</span>
@@ -27,11 +24,7 @@ export default function FAQ() {
             to make everyday pet care easier.
           </p>
 
-          <div className={styles.heroPaws}>
-            <span>🐾</span>
-            <span>✦</span>
-            <span>🐾</span>
-          </div>
+         
         </div>
       </section>
 

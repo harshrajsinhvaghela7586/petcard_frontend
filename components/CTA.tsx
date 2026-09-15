@@ -52,52 +52,59 @@ export default function CTA({
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className={styles.section}
-    >
-      <div className="container">
-        <div className={styles.cta}>
-          {/* Existing decorative glow */}
-          <div
-            className={styles.glow}
+  <section
+    ref={sectionRef}
+    className={styles.section}
+  >
+    <div className="container">
+      <div className={styles.cta}>
+
+        {/* Decorative glow */}
+        <div
+          className={styles.glow}
+          aria-hidden="true"
+        />
+
+        {/* LEFT — PET IMAGE */}
+        <div
+          className={styles.ctaPet}
+          aria-hidden="true"
+        >
+          <div className={styles.ctaPetGlow} />
+
+          <img
+            src="/images/footer/pets.png"
+            alt=""
+            width={220}
+            height={220}
+          />
+        </div>
+
+        {/* CENTER — CONTENT */}
+        <div className={styles.content}>
+          <h2>{title}</h2>
+
+          <p>{text}</p>
+        </div>
+
+        {/* RIGHT — BUTTON */}
+        <Link
+          className={`btn btn-outline ${styles.button}`}
+          href="#download-app"
+        >
+          Download Our App
+
+          <img
+            src="/images/paw.png"
+            width={20}
+            height={20}
+            alt=""
             aria-hidden="true"
           />
+        </Link>
 
-          {/* Center pet image */}
-          <div
-            className={styles.ctaPet}
-            aria-hidden="true"
-          >
-            <div className={styles.ctaPetGlow} />
-
-            <img
-              src="/images/footer/pets.png"
-              alt=""
-              width={150}
-              height={150}
-            />
-          </div>
-
-          {/* Existing content */}
-          <div className={styles.content}>
-            <h2>{title}</h2>
-
-            <p>{text}</p>
-
-           
-          </div>
-
-          {/* Existing button */}
-          <Link
-            className={`btn btn-outline ${styles.button}`}
-            href="#download-app"
-          >
-            Download Our App
-            <img src="/images/paw.png" width={20}/>
-          </Link>
-        </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }

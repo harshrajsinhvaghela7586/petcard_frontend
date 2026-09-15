@@ -94,11 +94,19 @@ export default function PetWorldPage() {
                                     style={{ "--delay": `${index * 140}ms` } as React.CSSProperties}
                                 >
                                     <div className={styles.cardCopy}>
+
+                                        <div className={styles.whyCardTop}>
+                                            <div className={styles.whyCardIcon}>
+                                                <img
+                                                    src="/images/paw.png"
+                                                    alt=""
+                                                    aria-hidden="true"
+                                                />
+                                            </div>
+                                        </div>
                                         <div className={styles.cardTitleRow}>
                                             <h2>{feature.title}</h2>
-                                            <span className={styles.spark}>
-                                                <Sparkles size={15} strokeWidth={2.4} />
-                                            </span>
+
                                         </div>
 
                                         <p>{feature.eyebrow}</p>

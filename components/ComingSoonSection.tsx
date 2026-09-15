@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+"use client";
 import {
   ArrowRight,
   Bell,
@@ -9,8 +8,24 @@ import {
 } from "lucide-react";
 
 import styles from "./ComingSoon.module.css";
+import { usePathname } from "next/navigation";
 
 export default function ComingSoonSection() {
+
+    const pathname = usePathname();
+  
+  const shouldHide =
+    pathname === "/login" ||
+    pathname.startsWith("/admin") ||
+    pathname === "/signup" ||
+    pathname === "/forgot-password" ||
+    pathname === "/verify-otp" ||
+    pathname === "/resend-otp";
+  
+  if (shouldHide) {
+    return null;
+  }
+
   return (
     <main className={styles.page}>
       {/* =====================================================
@@ -101,10 +116,7 @@ export default function ComingSoonSection() {
               <div
                 className={`${styles.floatingPaw} ${styles.floatingPawOne}`}
               >
-                <PawPrint
-                  size={26}
-                  fill="currentColor"
-                />
+               
               </div>
 
               <div

@@ -1,0 +1,1492 @@
+/* =========================================================
+   ADMIN LAYOUT
+========================================================= */
+
+.adminLayout {
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+.mainWrapper {
+    min-height: 100vh;
+    margin-left: 270px;
+}
+
+.content {
+    width: 100%;
+    max-width: 1900px;
+    margin: 0 auto;
+    padding: clamp(24px, 2vw, 42px);
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.welcome {
+    margin-bottom: clamp(22px, 2vw, 32px);
+}
+
+.eyebrow {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.welcome h2 {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(24px, 2vw, 34px);
+    line-height: 1.2;
+}
+
+.welcome p {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: clamp(13px, 0.9vw, 15px);
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(12px, 1vw, 20px);
+
+    margin-bottom: clamp(18px, 1.5vw, 28px);
+}
+
+
+/* =========================================================
+   STAT CARD
+========================================================= */
+
+.statCard {
+    position: relative;
+    isolation: isolate;
+
+    min-width: 0;
+    min-height: clamp(145px, 9vw, 175px);
+
+    padding: clamp(17px, 1.25vw, 23px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    overflow: hidden;
+    box-sizing: border-box;
+
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: clamp(16px, 1vw, 20px);
+
+    text-decoration: none;
+
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+
+    animation:
+        statCardEnter
+        0.65s
+        cubic-bezier(.22, 1, .36, 1)
+        forwards;
+
+    animation-delay:
+        calc(var(--card-index, 0) * 80ms);
+
+    transition:
+        transform 0.32s cubic-bezier(.22, 1, .36, 1),
+        box-shadow 0.32s ease,
+        border-color 0.32s ease,
+        background 0.32s ease;
+}
+
+
+/* =========================================================
+   BACKGROUND GLOW
+========================================================= */
+
+.statCard::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    width: 150px;
+    height: 150px;
+
+    right: -55px;
+    bottom: -65px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 122, 0, 0.16) 0%,
+            rgba(255, 122, 0, 0.06) 38%,
+            transparent 72%
+        );
+
+    opacity: 0;
+
+    transform: scale(0.6);
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.5s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* Bottom orange accent */
+
+.statCard::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: var(--orange);
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition:
+        transform 0.4s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.statCard:hover {
+    transform: translateY(-7px) scale(1.015);
+
+    border-color: #ffc38c;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #fffaf6 100%
+        );
+
+    box-shadow:
+        0 8px 18px rgba(91, 55, 32, 0.08),
+        0 18px 42px rgba(255, 122, 0, 0.14),
+        0 0 0 1px rgba(255, 122, 0, 0.035);
+}
+
+.statCard:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.statCard:hover::after {
+    transform: scaleX(1);
+}
+
+
+/* =========================================================
+   TOP
+========================================================= */
+
+.statTop {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.statIcon {
+    width: clamp(40px, 2.6vw, 50px);
+    height: clamp(40px, 2.6vw, 50px);
+
+    border-radius: clamp(11px, 0.8vw, 14px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: var(--orange-soft);
+    color: var(--orange);
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.35s cubic-bezier(.22, 1, .36, 1),
+        box-shadow 0.3s ease;
+}
+
+.statCard:hover .statIcon {
+    background: var(--orange);
+    color: var(--white);
+
+    transform:
+        translateY(-2px)
+        rotate(-5deg)
+        scale(1.08);
+
+    box-shadow:
+        0 8px 20px rgba(255, 122, 0, 0.25);
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.arrow {
+    color: #a99d95;
+
+    flex-shrink: 0;
+
+    transition:
+        color 0.25s ease,
+        transform 0.3s cubic-bezier(.22, 1, .36, 1);
+}
+
+.statCard:hover .arrow {
+    color: var(--orange);
+
+    transform:
+        translate(3px, -3px)
+        scale(1.08);
+}
+
+
+/* =========================================================
+   BOTTOM CONTENT
+========================================================= */
+
+.statBottom {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.statTitle {
+    min-width: 0;
+    flex: 1;
+}
+
+.statTitle span {
+    display: block;
+
+    color: var(--text);
+
+    font-size: clamp(14px, 1vw, 17px);
+    font-weight: 700;
+
+    line-height: 1.25;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.statTitle small {
+    display: block;
+
+    max-width: 130px;
+
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: clamp(9px, 0.65vw, 11px);
+    font-weight: 500;
+
+    line-height: 1.35;
+
+    opacity: 0.85;
+
+    transition:
+        color 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.statCard:hover .statTitle span {
+    color: var(--orange);
+    transform: translateX(2px);
+}
+
+.statCard:hover .statTitle small {
+    color: #9a7357;
+    opacity: 1;
+}
+
+
+/* =========================================================
+   BIG COUNT
+========================================================= */
+
+.statCount {
+    position: relative;
+
+    min-width: clamp(48px, 4vw, 68px);
+    min-height: clamp(48px, 4vw, 68px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+
+/* Soft circle behind number */
+
+.statCount::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 122, 0, 0.11) 0%,
+            rgba(255, 122, 0, 0.045) 48%,
+            transparent 72%
+        );
+
+    transform: scale(0.85);
+
+    opacity: 0.7;
+
+    transition:
+        transform 0.35s cubic-bezier(.22, 1, .36, 1),
+        opacity 0.3s ease;
+}
+
+
+/* Number */
+
+.statCount strong {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    margin: 0;
+
+    font-size: clamp(32px, 2.7vw, 43px);
+    font-weight: 850;
+
+    line-height: 1;
+
+    letter-spacing: -1.5px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6a2c08 0%,
+            var(--orange) 52%,
+            #ff9e55 100%
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    transform: scale(0.92);
+
+    animation:
+        countReveal
+        0.65s
+        cubic-bezier(.22, 1, .36, 1)
+        forwards;
+
+    animation-delay:
+        calc(
+            (var(--card-index, 0) * 80ms) + 180ms
+        );
+
+    transition:
+        transform 0.35s cubic-bezier(.22, 1, .36, 1),
+        filter 0.35s ease;
+}
+
+
+/* Number hover */
+
+.statCard:hover .statCount::before {
+    transform: scale(1.12);
+    opacity: 1;
+}
+
+.statCard:hover .statCount strong {
+    transform: scale(1.12);
+
+    filter:
+        drop-shadow(
+            0 6px 10px
+            rgba(255, 122, 0, 0.20)
+        );
+}
+
+
+/* =========================================================
+   ENTRANCE ANIMATIONS
+========================================================= */
+
+@keyframes statCardEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+    }
+
+    65% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes countReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.65) translateY(8px);
+    }
+
+    65% {
+        opacity: 1;
+        transform: scale(1.08) translateY(-2px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* =========================================================
+   DASHBOARD GRID
+========================================================= */
+
+.dashboardGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: clamp(16px, 1.5vw, 26px);
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   COMMON CARD
+========================================================= */
+
+.card {
+    min-width: 0;
+
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: clamp(17px, 1.2vw, 22px);
+
+    padding: clamp(18px, 1.5vw, 28px);
+
+    box-sizing: border-box;
+
+    transition:
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.card:hover {
+    border-color: #f4d8c0;
+
+    box-shadow:
+        0 10px 30px rgba(80, 50, 30, 0.06);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.cardHeader {
+    min-height: 42px;
+
+    margin-bottom: clamp(16px, 1.2vw, 23px);
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.cardHeader > div {
+    min-width: 0;
+}
+
+.cardHeader span {
+    display: block;
+
+    color: var(--orange);
+
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.cardHeader h3 {
+    margin: 5px 0 0;
+
+    color: var(--text);
+
+    font-size: clamp(18px, 1.3vw, 22px);
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   HEADER LINK
+========================================================= */
+
+.headerLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    padding: 7px 10px;
+
+    border-radius: 8px;
+
+    color: var(--orange);
+    background: var(--orange-soft);
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.headerLink:hover {
+    background: var(--orange);
+    color: var(--white);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(255, 122, 0, 0.18);
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quickActions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(9px, 0.8vw, 14px);
+}
+
+.quickActions a {
+    min-width: 0;
+    min-height: clamp(76px, 5vw, 96px);
+
+    padding: clamp(13px, 1vw, 18px);
+
+    border: 1px solid var(--line);
+    border-radius: clamp(12px, 0.8vw, 15px);
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    text-decoration: none;
+
+    color: var(--muted);
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        transform 0.3s cubic-bezier(.22, 1, .36, 1),
+        box-shadow 0.3s ease;
+}
+
+.quickActions a:hover {
+    border-color: #ffc58f;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(255, 122, 0, 0.10);
+}
+
+.quickActions a > svg:first-child {
+    flex-shrink: 0;
+
+    transition:
+        transform 0.3s ease,
+        color 0.25s ease;
+}
+
+.quickActions a:hover > svg:first-child {
+    transform: scale(1.1) rotate(-4deg);
+}
+
+.quickActions a > svg:last-child {
+    flex-shrink: 0;
+    color: #a99d95;
+
+    transition:
+        transform 0.3s ease,
+        color 0.25s ease;
+}
+
+.quickActions a:hover > svg:last-child {
+    color: var(--orange);
+    transform: translate(3px, -3px);
+}
+
+.quickActions a div {
+    flex: 1;
+    min-width: 0;
+}
+
+.quickActions strong {
+    display: block;
+
+    color: var(--text);
+
+    font-size: clamp(12px, 0.85vw, 14px);
+    line-height: 1.35;
+}
+
+.quickActions span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: clamp(10px, 0.7vw, 12px);
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   LATEST CONTACTS
+========================================================= */
+
+.latestContacts {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   CONTACT ITEM
+========================================================= */
+
+.contactItem {
+    min-width: 0;
+
+    padding: clamp(10px, 0.8vw, 14px);
+
+    border: 1px solid var(--line);
+    border-radius: clamp(11px, 0.8vw, 14px);
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    text-decoration: none;
+
+    background: var(--white);
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.3s cubic-bezier(.22, 1, .36, 1),
+        box-shadow 0.25s ease;
+}
+
+.contactItem:hover {
+    background: var(--orange-soft);
+
+    border-color: #ffcfa8;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(255, 122, 0, 0.08);
+}
+
+
+/* =========================================================
+   CONTACT AVATAR
+========================================================= */
+
+.contactAvatar {
+    width: clamp(35px, 2.4vw, 42px);
+    height: clamp(35px, 2.4vw, 42px);
+
+    border-radius: clamp(10px, 0.8vw, 12px);
+
+    background: var(--orange-soft);
+    color: var(--orange);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    font-size: clamp(11px, 0.8vw, 14px);
+    font-weight: 800;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.3s ease;
+}
+
+.contactItem:hover .contactAvatar {
+    background: var(--orange);
+    color: var(--white);
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   CONTACT INFO
+========================================================= */
+
+.contactInfo {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.contactInfo strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: var(--text);
+
+    font-size: clamp(11px, 0.8vw, 13px);
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.contactInfo span {
+    display: block;
+
+    margin-top: 2px;
+
+    overflow: hidden;
+
+    color: var(--muted);
+
+    font-size: clamp(10px, 0.7vw, 12px);
+
+    line-height: 1.35;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.contactInfo small {
+    display: block;
+
+    margin-top: 2px;
+
+    overflow: hidden;
+
+    color: #9b8f88;
+
+    font-size: 10px;
+
+    line-height: 1.35;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   CONTACT META
+========================================================= */
+
+.contactMeta {
+    min-width: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 7px;
+
+    color: #a99d95;
+
+    flex-shrink: 0;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.contactItem:hover .contactMeta {
+    color: var(--orange);
+    transform: translateX(2px);
+}
+
+.unreadDot {
+    width: 7px !important;
+    height: 7px !important;
+
+    min-width: 7px;
+    min-height: 7px;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    border-radius: 50%;
+
+    background: var(--orange);
+
+    display: block !important;
+
+    animation: unreadPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes unreadPulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 122, 0, 0.25);
+    }
+
+    50% {
+        box-shadow: 0 0 0 5px rgba(255, 122, 0, 0);
+    }
+}
+
+
+/* =========================================================
+   CONTACT LOADING
+========================================================= */
+
+.contactLoading {
+    min-height: 245px;
+
+    border: 1px dashed var(--line);
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.contactLoading span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   CONTACT FOOTER
+========================================================= */
+
+.contactFooter {
+    margin-top: 14px;
+    padding-top: 14px;
+
+    border-top: 1px solid var(--line);
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+.contactFooter > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.contactFooter strong {
+    color: var(--text);
+
+    font-size: 15px;
+    line-height: 1;
+}
+
+.contactFooter span {
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.contactFooter > a {
+    margin-left: auto;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: var(--orange);
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+.contactFooter > a:hover {
+    color: var(--orange-2);
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.emptyState {
+    min-height: 245px;
+
+    border: 1px dashed var(--line);
+    border-radius: 16px;
+
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+.emptyIcon {
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 13px;
+
+    border-radius: 15px;
+
+    background: var(--orange-soft);
+    color: var(--orange);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.emptyState h4 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 16px;
+}
+
+.emptyState p {
+    max-width: 320px;
+
+    margin: 7px 0 18px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+========================================================= */
+
+.viewButton {
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    background: var(--orange);
+    color: var(--white);
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.viewButton:hover {
+    background: var(--orange-2);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(255, 122, 0, 0.18);
+}
+
+.viewButton img {
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LOADING SCREEN
+========================================================= */
+
+.loadingScreen {
+    min-height: 100vh;
+
+    background: var(--bg);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.loadingScreen p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.loader {
+    width: 30px;
+    height: 30px;
+
+    border: 3px solid var(--line);
+    border-top-color: var(--orange);
+
+    border-radius: 50%;
+
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (max-width: 1450px) {
+    .statsGrid {
+        gap: 13px;
+    }
+
+    .dashboardGrid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        gap: 18px;
+    }
+}
+
+
+/* =========================================================
+   TABLET / SMALL LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+    .statsGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .dashboardGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+    .mainWrapper {
+        margin-left: 0;
+    }
+
+    .content {
+        padding: 28px;
+    }
+
+    .statsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .quickActions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+    .content {
+        padding: 20px 15px;
+    }
+
+    .welcome {
+        margin-bottom: 21px;
+    }
+
+    .eyebrow {
+        font-size: 9px;
+        letter-spacing: 1.1px;
+    }
+
+    .welcome h2 {
+        font-size: 24px;
+    }
+
+    .welcome p {
+        margin-top: 7px;
+        font-size: 13px;
+    }
+
+    .statsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 11px;
+        margin-bottom: 16px;
+    }
+
+    .statCard {
+        min-height: 125px;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .statIcon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+    }
+
+    .statCard strong {
+        font-size: 22px;
+    }
+
+    .dashboardGrid {
+        gap: 15px;
+    }
+
+    .card {
+        padding: 18px;
+        border-radius: 17px;
+    }
+
+    .cardHeader {
+        margin-bottom: 16px;
+    }
+
+    .cardHeader h3 {
+        font-size: 18px;
+    }
+
+    .cardHeader span {
+        font-size: 8px;
+    }
+
+    .headerLink {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+
+    .quickActions {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .quickActions a {
+        min-height: 76px;
+        padding: 13px;
+    }
+
+    .quickActions strong {
+        font-size: 12px;
+    }
+
+    .quickActions span {
+        font-size: 10px;
+    }
+
+    .contactItem {
+        padding: 10px;
+        gap: 9px;
+    }
+
+    .contactFooter {
+        gap: 14px;
+    }
+
+    .contactFooter strong {
+        font-size: 14px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+    .content {
+        padding: 18px 12px;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .statCard {
+        min-height: 110px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .cardHeader {
+        gap: 8px;
+    }
+
+    .headerLink {
+        padding: 5px 7px;
+    }
+
+    .contactFooter {
+        gap: 11px;
+    }
+
+    .contactFooter > a {
+        font-size: 9px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 340px) {
+    .content {
+        padding: 16px 10px;
+    }
+
+    .welcome h2 {
+        font-size: 21px;
+    }
+
+    .cardHeader h3 {
+        font-size: 17px;
+    }
+
+    .contactItem {
+        padding: 9px;
+    }
+
+    .contactAvatar {
+        width: 32px;
+        height: 32px;
+        font-size: 11px;
+    }
+
+    .contactMeta {
+        min-width: 15px;
+    }
+
+    .contactFooter {
+        flex-wrap: wrap;
+    }
+
+    .contactFooter > a {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 3px;
+    }
+}
+
+
+/* =========================================================
+   2K
+========================================================= */
+
+@media (min-width: 1920px) {
+    .content {
+        max-width: 2100px;
+    }
+
+    .statsGrid {
+        gap: 20px;
+    }
+
+    .dashboardGrid {
+        gap: 26px;
+    }
+}
+
+
+/* =========================================================
+   4K
+========================================================= */
+
+@media (min-width: 2560px) {
+    .content {
+        max-width: 2300px;
+        padding: 48px;
+    }
+
+    .statsGrid {
+        gap: 24px;
+    }
+
+    .statCard {
+        min-height: 175px;
+        padding: 26px;
+    }
+
+    .statIcon {
+        width: 52px;
+        height: 52px;
+    }
+
+    .statCard strong {
+        font-size: 32px;
+    }
+
+    .card {
+        padding: 32px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .statCard {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .statCard *,
+    .quickActions a,
+    .contactItem,
+    .headerLink,
+    .viewButton {
+        transition: none !important;
+        animation: none !important;
+    }
+}

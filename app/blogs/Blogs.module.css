@@ -105,13 +105,14 @@
 
   margin: 17px 0 14px;
 
-  color: var(--text);
 
-  font-size: clamp(43px, 5vw, 68px);
-  font-weight: 800;
-  line-height: 1.02;
+ 
+ max-width: 700px;
+  margin: 14px 10 22px;
 
-  letter-spacing: -0.045em;
+  font-size: clamp(48px, 5.4vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.065em;
 }
 
 .heroContent h1 span {
@@ -431,7 +432,7 @@
 
   color: #6c5a4d;
 
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -483,46 +484,46 @@
 
   object-fit: cover;
 }
-
 .shareStory > div:last-child {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex: 1;
+    height: 78px;
+    justify-content: center;
 }
 
 .shareStory strong {
-  color: var(--text);
-
-  font-size: 12px;
+    color: var(--text);
+    font-size: 12px;
 }
 
 .shareStory span {
-  margin-top: 2px;
-
-  color: var(--muted);
-
-  font-size: 10px;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 10px;
 }
 
 .shareStory a {
-  display: inline-flex;
-  align-items: center;
-
-  gap: 4px;
-
-  width: fit-content;
-
-  margin-top: 7px;
-  padding: 7px 10px;
-
-  border-radius: 999px;
-
-  color: #fff;
-  background: var(--orange);
-
-  font-size: 8px;
-  font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    width: fit-content;
+    margin-top: 0;
+    padding: 7px 10px;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
+.shareStory a:hover{
+  
+    transform: translateY(-55%);
+}
 /* =========================================================
    FEATURED SECTION
    ========================================================= */
@@ -945,8 +946,8 @@
    ========================================================= */
 
 .storyPet {
-  width: 150px;
-  height: 150px;
+  width: 190px;
+  height: 190px;
 
   flex-shrink: 0;
 
@@ -967,43 +968,55 @@
   display: block;
 }
 
+.storyCopy {
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .storyCopy strong {
-  display: block;
-
-  color: var(--text);
-
-  font-size: 19px;
+    display: block;
+    color: var(--text);
+    font-size: 19px;
+    text-align: left;
 }
 
 .storyCopy p {
-  margin: 7px 0 13px;
-
-  color: var(--muted);
-
-  font-size: 10px;
-  line-height: 1.65;
+    margin: 7px 0 13px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.65;
+    text-align: left;
 }
 
 .storyCopy a {
-  display: inline-flex;
-  align-items: center;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 
-  gap: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 
-  padding: 9px 13px;
+    padding: 9px 13px;
 
-  border-radius: 999px;
+    color: #fff;
 
-  color: #fff;
-  background: var(--orange);
+    font-size: 12px;
+    font-weight: 800;
 
-  font-size: 9px;
-  font-weight: 800;
-
-  box-shadow:
-    0 9px 22px rgba(255, 122, 0, 0.18);
+    box-shadow:
+        0 9px 22px rgba(255, 122, 0, 0.18);
 }
 
+.storyCopy a:hover{
+  
+    transform: translateY(-55%);
+}
 .polaroids {
   display: flex;
   justify-content: flex-end;
@@ -1274,7 +1287,7 @@
    ========================================================= */
 
 .newsletterPet {
-  width: 130px;
+  width: 190px;
   height: 130px;
 
   flex-shrink: 0;
@@ -1359,13 +1372,10 @@
 
   padding: 0 17px;
 
-  border: 0;
-  border-radius: 12px;
 
   color: #fff;
-  background: var(--orange);
 
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
 
   cursor: pointer;
@@ -1384,6 +1394,19 @@
 }
 
 /* =========================================================
+   DESKTOP
+   1440 — 1919
+   ========================================================= */
+@media (min-width: 1440px) and (max-width: 1919px) {
+
+.storyPet img{
+  height: 390px !important;
+  margin-top: -90px;
+  width:390px !important;
+}
+
+}
+/* =========================================================
    TABLET
    ========================================================= */
 
@@ -1401,9 +1424,10 @@
   }
 
   .heroDog {
-    width: 290px;
-    height: 290px;
-    left: 24%;
+    width: 390px;
+    height: 340px;
+    left: 4%;
+    bottom: 65;
   }
 
   .heroCat {
@@ -1449,7 +1473,7 @@
   .newsletter {
     grid-template-columns: 0.45fr 1fr;
   }
-
+.shareStory{display: none;}
   .newsletterForm {
     grid-column: 1 / -1;
   }
@@ -1481,7 +1505,7 @@
   .heroContent h1 {
     font-size: clamp(39px, 10vw, 52px);
   }
-
+.shareStory{display: none;}
   .heroContent > p {
     margin-inline: auto;
   }
@@ -1564,24 +1588,105 @@
   .readsGrid {
     grid-template-columns: 1fr;
   }
-
-  .newsletter {
-    grid-template-columns: 1fr;
-    justify-items: center;
-
-    text-align: center;
-
-    padding: 28px 22px;
-  }
-
   .newsletterForm {
     width: 100%;
-    grid-column: auto;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 0;
+
+    margin: 0;
+
+    box-sizing: border-box;
   }
 
-  .newsletterPet {
-    width: 115px;
-    height: 115px;
+
+  /* EMAIL INPUT */
+
+  .newsletterForm input {
+    flex: 1 1 auto;
+
+    width: 0;
+    min-width: 0;
+
+    height: 34px;
+    min-height: 34px;
+
+    padding: 0 10px;
+
+    border: none;
+    outline: none;
+
+    border-radius: 17px;
+
+    background: #fff;
+
+    color: #333;
+
+    font-size: 9px;
+    font-weight: 500;
+
+    box-sizing: border-box;
+  }
+
+  .newsletterForm input::placeholder {
+    color: #999;
+  }
+
+
+  /* SUBSCRIBE BUTTON */
+
+  .newsletterForm button {
+    flex: 0 0 auto;
+
+    width: auto;
+    min-width: 82px;
+
+    height: 34px;
+    min-height: 34px;
+
+    margin: 0;
+
+    padding: 0 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    border: none;
+    border-radius: 17px;
+
+    background: #ff7800;
+
+    color: #fff;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+  }
+
+
+  .newsletterForm button img {
+    display: block;
+
+    width: 14px;
+    height: 14px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
   }
 }
 
@@ -1614,10 +1719,13 @@
     min-height: 285px;
   }
 
+  .shareStory{display: none;}
+
   .heroDog {
-    width: 185px;
-    height: 190px;
+    width: 370px;
+    height: 220px;
     bottom: 20;
+    left: 0;
   }
 
   .heroCat {
@@ -1712,8 +1820,8 @@
   }
 
   .storyPet {
-    width: 100px;
-    height: 100px;
+    width: 270px;
+    height: 270px;
   }
 
   .storyCopy strong {
@@ -1755,33 +1863,38 @@
   .readContent p {
     font-size: 8px;
   }
-
-  .newsletterSection {
-    padding-bottom: 60px;
-  }
-
-  .newsletterCopy h2 {
-    font-size: 25px;
-  }
-
-  .newsletterCopy p {
-    font-size: 9px;
-  }
-
-  .newsletterForm {
-    flex-direction: column;
-
+ .newsletterForm {
+    height: 38px;
     gap: 6px;
-
-    padding: 6px;
   }
 
   .newsletterForm input {
-    width: 100%;
+    height: 38px;
+    min-height: 38px;
+
+    padding: 0 12px;
+
+    border-radius: 19px;
+
+    font-size: 10px;
   }
 
   .newsletterForm button {
-    width: 100%;
+    min-width: 95px;
+
+    height: 38px;
+    min-height: 38px;
+
+    padding: 0 12px;
+
+    border-radius: 19px;
+
+    font-size: 10px;
+  }
+
+  .newsletterForm button img {
+    width: 15px;
+    height: 15px;
   }
 }
 
@@ -2937,5 +3050,1927 @@
     animation: none !important;
 
     transition: none !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL DOWNLOAD CTA
+   PRODUCTION RESPONSIVE SYSTEM
+   320px → 8K
+   ========================================================= */
+
+.finalDownload {
+  width: 100%;
+  padding: 28px 0 60px;
+}
+
+
+/* =========================================================
+   CTA CARD
+   ========================================================= */
+
+.finalDownloadCard {
+  position: relative;
+  isolation: isolate;
+
+  width: calc(100% - 48px);
+  margin-inline: auto;
+
+  min-height: 115px;
+  height: 115px;
+
+  display: grid;
+
+  grid-template-columns:
+    255px
+    minmax(0, 1fr)
+    310px;
+
+  align-items: center;
+
+  gap: 26px;
+
+  padding: 4px 22px;
+
+  overflow: visible !important;
+
+  border-radius: 22px;
+
+  color: #fff;
+
+  background:
+    linear-gradient(
+      110deg,
+      #ff7800 0%,
+      #ff850b 42%,
+      #ff941b 72%,
+      #ff7800 100%
+    );
+
+  box-shadow:
+    0 14px 34px
+    rgba(255, 122, 0, 0.20);
+
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+
+/* =========================================================
+   BACKGROUND DETAILS
+   ========================================================= */
+
+.finalDownloadCard::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 8% 28%,
+      rgba(255,255,255,0.13) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 43% 25%,
+      rgba(255,255,255,0.09) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 67% 72%,
+      rgba(255,255,255,0.08) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 94% 28%,
+      rgba(255,255,255,0.08) 0 2px,
+      transparent 3px
+    );
+}
+
+
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
+
+.finalDownloadCard:hover {
+
+  box-shadow:
+    0 20px 42px
+    rgba(255, 122, 0, 0.25);
+}
+
+
+/* =========================================================
+   PET AREA
+   ========================================================= */
+
+.finalPets {
+  position: relative;
+
+  width: 100%;
+  height: 140px;
+
+  min-width: 0;
+  min-height: 0;
+
+  margin: 0;
+  padding: 0;
+
+  align-self: end;
+
+  overflow: visible !important;
+
+  z-index: 3;
+
+  transform-origin: center bottom;
+}
+
+
+.finalPetsImage {
+  position: absolute !important;
+
+  inset: 0;
+
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: contain;
+
+  transform:
+    translateX(50px);
+
+  transform-origin: center top;
+
+  filter:
+    drop-shadow(
+      0 10px 12px
+      rgba(56, 27, 14, 0.14)
+    );
+
+  transition:
+    transform 0.35s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+
+
+
+
+/* =========================================================
+   COPY
+   ========================================================= */
+
+.finalCopy {
+  position: relative;
+
+  z-index: 4;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0;
+
+  text-align: center;
+}
+
+
+.finalCopy h2 {
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(18px, 1.55vw, 44px);
+
+  font-weight: 700;
+
+  line-height: 1.08;
+
+  letter-spacing: -0.025em;
+
+  white-space: nowrap;
+}
+
+
+.finalCopy p {
+  width: 100%;
+  max-width: 570px;
+
+  margin: 6px 10 0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.90
+    );
+
+  font-size: clamp(9px, 0.58vw, 15px);
+
+  font-weight: 500;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   STORE BUTTONS
+   ========================================================= */
+
+.finalButtons {
+  position: relative;
+
+  z-index: 5;
+
+  width: 100%;
+  min-width: 0;
+
+  display: flex !important;
+
+  flex-direction: row !important;
+
+  align-items: center !important;
+
+  justify-content: stretch !important;
+
+  flex-wrap: nowrap !important;
+
+  gap: 8px !important;
+
+  margin: 0 !important;
+
+  overflow: visible;
+}
+
+
+.finalButtons > * {
+  flex: 1 1 0 !important;
+
+  width: 0 !important;
+
+  min-width: 0 !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+}
+
+
+/* =========================================================
+   STORE BADGE
+   ========================================================= */
+
+.finalButtons .storeBadge {
+  width: 100% !important;
+
+  min-width: 0 !important;
+  max-width: none !important;
+
+  flex: 1 1 0 !important;
+
+  margin: 0 !important;
+
+  overflow: hidden;
+
+  padding:
+    5px 8px;
+
+  gap: 5px;
+
+  border-radius: 8px;
+}
+
+
+.finalButtons .storeIconImage {
+  flex: 0 0 auto;
+
+  width: 30px;
+  height: 30px;
+
+  object-fit: contain;
+}
+
+
+.finalButtons .storeText {
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+
+.finalButtons .storeText small {
+  display: block;
+
+  margin-bottom: 2px;
+
+  font-size: 7px;
+
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+
+.finalButtons .storeText b {
+  display: block;
+
+  font-size: 16px;
+
+  line-height: 1.05;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   SMALL LAPTOP
+   1101 — 1439
+   ========================================================= */
+
+@media (min-width: 1101px) and (max-width: 1439px) {
+
+  .finalDownload {
+    padding: 25px 0 55px;
+  }
+
+  .finalDownloadCard {
+    width: calc(100% - 40px);
+
+    height: 104px;
+    min-height: 104px;
+
+    grid-template-columns:
+      205px
+      minmax(0, 1fr)
+      280px;
+
+    gap: 18px;
+
+    padding: 3px 16px;
+
+    border-radius: 19px;
+  }
+
+  .finalPets {
+    height: 100px;
+  }
+
+  .finalPetsImage {
+    transform:
+      translateX(35px)
+      translateY(-5px)
+      scale(1.16);
+  }
+
+ 
+  .finalCopy {
+    transform: translateX(15px);
+  }
+
+  .finalCopy h2 {
+    font-size: 20px;
+  }
+
+  .finalCopy p {
+    margin-top: 5px;
+    font-size: 8px;
+  }
+
+  .finalButtons {
+    gap: 10px !important;
+  }
+
+  .finalButtons .storeBadge {
+    min-height: 46px !important;
+    height: 46px !important;
+
+    padding: 6px 10px !important;
+
+    gap: 7px !important;
+
+    border-radius: 9px !important;
+  }
+
+  .finalButtons .storeIconImage {
+    width: 27px !important;
+    height: 29px !important;
+  }
+
+  .finalButtons .storeText small {
+    font-size: 7px !important;
+  }
+
+  .finalButtons .storeText b {
+    font-size: 15px !important;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP
+   1440 — 1919
+   ========================================================= */
+@media (min-width: 1440px) and (max-width: 1919px) {
+
+  .finalDownloadCard {
+    width: calc(100% - 48px);
+
+    grid-template-columns:
+      300px
+      minmax(0, 1fr)
+      310px;
+
+    gap: 26px;
+  }
+
+  /* IMAGE AREA BIGGER */
+  .finalPets {
+    height: 140px;
+  }
+
+  /* BIG PET IMAGE */
+  .finalPetsImage {
+    width: 320px !important;
+    height: 160px !important;
+
+    transform:
+      translateX(35px)
+      translateY(-80px)
+      scale(1.30);
+overflow: visible;
+    transform-origin: center top;
+  }
+
+ 
+
+  .finalCopy {
+    transform: translateX(20px);
+  }
+
+  .finalCopy h2 {
+    font-size: 24px;
+    transform: translateX(-114px) translateY(-15px);
+  }
+
+  .finalCopy p {
+    font-size: 11px;
+    transform: translateX(-4px) translateY(-15px);
+  }
+
+  .finalButtons {
+    gap: 20px !important;
+    width: 175% !important;
+    
+    transform: translateX(-230px) translateY(-15px);
+  }
+
+  .finalButtons .storeBadge {
+    min-height: 50px !important;
+    height: 66px !important;
+
+    padding: 7px 11px !important;
+    gap: 8px !important;
+    border-radius: 10px !important;
+  }
+
+  .finalButtons .storeIconImage {
+    width: 43px !important;
+    height: 48px !important;
+  }
+
+  .finalButtons .storeText small {
+    font-size: 10px !important;
+  }
+
+  .finalButtons .storeText b {
+    font-size: 20px !important;
+  }
+}
+/* =========================================================
+   2K
+   1920 — 2559
+   ========================================================= */
+
+@media (min-width: 1920px) and (max-width: 2559px) {
+
+  .finalDownload {
+    padding: 38px 0 75px;
+  }
+
+  .finalDownloadCard {
+    width: calc(100% - 70px);
+
+    height: 126px;
+    min-height: 126px;
+
+    grid-template-columns:
+      310px
+      minmax(0, 1fr)
+      340px;
+
+    gap: 34px;
+
+    padding: 4px 26px;
+
+    border-radius: 24px;
+  }
+
+  .finalPets {
+    height: 122px;
+  }
+
+  .finalPetsImage {
+    transform:
+      translateX(55px)
+      translateY(-10px)
+      scale(1.50);
+  }
+
+ 
+  .finalCopy {
+    transform: translateX(25px);
+  }
+
+  .finalCopy h2 {
+    font-size: 30px;
+  }
+
+  .finalCopy p {
+    font-size: 11px;
+  }
+
+  .finalButtons {
+    gap: 8px !important;
+  }
+
+  .finalButtons .storeIconImage {
+    width: 28px;
+    height: 31px;
+  }
+
+  .finalButtons .storeText small {
+    font-size: 7px;
+  }
+
+  .finalButtons .storeText b {
+    font-size: 17px;
+  }
+}
+
+
+/* =========================================================
+   4K
+   2560 — 3839
+   ========================================================= */
+
+@media (min-width: 2560px) and (max-width: 3839px) {
+
+  .finalDownload {
+    padding: 48px 0 95px;
+  }
+
+  .finalDownloadCard {
+    width: calc(100% - 750px);
+
+    height: 145px;
+    min-height: 145px;
+
+    grid-template-columns:
+      390px
+      minmax(0, 1fr)
+      390px;
+
+    gap: 44px;
+
+    padding: 5px 32px;
+
+    border-radius: 28px;
+  }
+
+  .finalPets {
+    height: 140px;
+  }
+
+  .finalPetsImage {
+    transform:
+      translateX(60px)
+      translateY(-12px)
+      scale(1.22);
+  }
+
+  
+
+  .finalCopy {
+    transform: translateX(35px);
+  }
+
+  .finalCopy h2 {
+    font-size: 36px;
+  }
+
+  .finalCopy p {
+    font-size: 14px;
+    transform: translateX(150px);
+  }
+
+  .finalButtons {
+    gap: 10px !important;
+  }
+
+  .finalButtons .storeIconImage {
+    width: 31px;
+    height: 34px;
+  }
+
+  .finalButtons .storeText small {
+    font-size: 8px;
+  }
+
+  .finalButtons .storeText b {
+    font-size: 19px;
+  }
+}
+
+
+/* =========================================================
+   8K
+   3840+
+   ========================================================= */
+
+@media (min-width: 3840px) {
+
+  .finalDownload {
+    padding: 60px 0 120px;
+  }
+
+  .finalDownloadCard {
+    width: calc(100% - 150px);
+
+    height: 175px;
+    min-height: 175px;
+
+    grid-template-columns:
+      500px
+      minmax(0, 1fr)
+      470px;
+
+    gap: 58px;
+
+    padding: 7px 44px;
+
+    border-radius: 34px;
+  }
+
+  .finalPets {
+    height: 168px;
+  }
+
+  .finalPetsImage {
+    transform:
+      translateX(70px)
+      translateY(-15px)
+      scale(1.24);
+  }
+
+ 
+
+  .finalCopy {
+    transform: translateX(45px);
+  }
+
+  .finalCopy h2 {
+    font-size: 44px;
+  }
+
+  .finalCopy p {
+    font-size: 15px;
+  }
+
+  .finalButtons {
+    gap: 12px !important;
+  }
+
+  .finalButtons .storeIconImage {
+    width: 35px;
+    height: 38px;
+  }
+
+  .finalButtons .storeText small {
+    font-size: 9px;
+  }
+
+  .finalButtons .storeText b {
+    font-size: 22px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   769 — 1100
+   ========================================================= */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+  .finalDownload {
+    padding: 22px 0 45px;
+  }
+
+  .finalDownloadCard {
+    width: calc(100% - 30px);
+
+    height: 100px;
+    min-height: 100px;
+
+    grid-template-columns:
+      150px
+      minmax(0, 1fr)
+      245px;
+
+    gap: 12px;
+
+    padding: 3px 11px;
+
+    border-radius: 16px;
+  }
+
+  .finalPets {
+    height: 96px;
+  }
+
+  .finalPetsImage {
+    transform:
+      translateX(22px)
+      translateY(-4px)
+      scale(1.14);
+  }
+
+  .finalDownloadCard:hover {
+    transform:
+      translateX(22px)
+      translateY(-6px)
+      scale(1.17);
+  }
+
+  .finalCopy {
+    transform: none;
+  }
+
+  .finalCopy h2 {
+    font-size: 16px;
+  }
+
+  .finalCopy p {
+    margin-top: 4px;
+    font-size: 7px;
+  }
+
+  .finalButtons {
+    gap: 5px !important;
+  }
+
+  .finalButtons .storeBadge {
+    padding: 4px 5px;
+    gap: 4px;
+    border-radius: 7px;
+  }
+
+  .finalButtons .storeIconImage {
+    width: 19px;
+    height: 21px;
+  }
+
+  .finalButtons .storeText small {
+    font-size: 5px;
+  }
+
+  .finalButtons .storeText b {
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   <= 768px
+
+   IMPORTANT LAYOUT:
+
+   ┌─────────────────────────────┐
+   │                             │
+   │   BIG PET   │ TEXT          │
+   │             │ DESCRIPTION   │
+   │             │               │
+   │             │ APP   PLAY    │
+   │                             │
+   └─────────────────────────────┘
+
+   LEFT  = 45%
+   RIGHT = 55%
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .finalDownload {
+    width: 100%;
+
+    padding:
+      18px 0
+      38px;
+  }
+
+
+  .finalDownloadCard {
+    width: calc(100% - 20px);
+
+    height: 132px;
+    min-height: 132px;
+
+    display: grid;
+
+    /*
+      BIG IMAGE AREA
+      RIGHT CONTENT AREA
+    */
+    grid-template-columns:
+      45%
+      minmax(0, 55%);
+
+    grid-template-rows:
+      minmax(0, 1fr)
+      auto;
+
+    column-gap: 0;
+    row-gap: 5px;
+
+    align-items: center;
+
+    padding:
+      5px 8px;
+
+    border-radius: 16px;
+  }
+
+
+  /* =======================================================
+     BIG MOBILE PET
+     ======================================================= */
+
+  .finalPets {
+    grid-column: 1;
+    grid-row: 1 / 3;
+
+    width: 100%;
+    height: 126px;
+
+    min-width: 0;
+
+    align-self: end;
+
+    /*
+      Give image more visual width.
+    */
+    transform: scaleX(1.08);
+
+    transform-origin:
+      left bottom;
+
+    overflow: visible !important;
+
+    z-index: 3;
+  }
+
+
+  .finalPetsImage {
+    /*
+      BIGGER THAN BEFORE
+    */
+    width: 125% !important;
+    height: 125% !important;
+
+    inset:
+      auto
+      auto
+      0
+      -4px;
+
+    object-fit: contain;
+
+    transform:
+      translateX(0)
+      translateY(5px)
+      scale(1.22);
+
+    transform-origin:
+      left bottom;
+  }
+
+
+ 
+
+
+  /* =======================================================
+     RIGHT CONTENT AREA
+     ======================================================= */
+
+  .finalCopy {
+    grid-column: 2;
+    grid-row: 1;
+
+    width: 100%;
+
+    min-width: 0;
+
+    align-self: center;
+
+    margin: 0;
+
+    padding:
+      0 2px 0 6px;
+
+    transform: none !important;
+
+    text-align: left;
+
+    z-index: 4;
+  }
+
+
+  .finalCopy h2 {
+    width: 100%;
+
+    max-width: 100%;
+
+    margin: 0;
+
+    font-size:
+      clamp(
+        12px,
+        3.2vw,
+        18px
+      );
+
+    line-height: 1.08;
+
+    letter-spacing:
+      -0.02em;
+
+    white-space: normal;
+
+    overflow: visible;
+  }
+
+
+  .finalCopy p {
+    width: 100%;
+
+    max-width: 100%;
+
+    margin:
+      4px 0 0;
+
+    font-size:
+      clamp(
+        5.5px,
+        1.5vw,
+        8px
+      );
+
+    line-height: 1.3;
+
+    white-space: normal;
+  }
+
+
+  /* =======================================================
+     MOBILE BUTTONS
+     
+     SAME RIGHT COLUMN AS TEXT
+     ======================================================= */
+
+  .finalButtons {
+    grid-column: 2;
+    grid-row: 2;
+
+    width: 100% !important;
+
+    min-width: 0 !important;
+
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    flex-wrap: nowrap !important;
+
+    align-items: center !important;
+
+    justify-content: stretch !important;
+
+    gap: 4px !important;
+
+    margin: 0 !important;
+
+    padding:
+      0 2px 0 6px;
+  }
+
+
+  /*
+    DO NOT use fixed 120px / 135px / 165px.
+    Both buttons share the available RIGHT area.
+  */
+  .finalButtons > * {
+    flex:
+      1 1 0 !important;
+
+    width: 0 !important;
+
+    min-width: 0 !important;
+
+    max-width: none !important;
+
+    margin: 0 !important;
+  }
+
+
+  .finalButtons .storeBadge {
+    width: 100% !important;
+
+    height: 31px !important;
+
+    min-height: 31px !important;
+
+    max-width: none !important;
+
+    padding:
+      3px 5px !important;
+
+    gap: 4px !important;
+
+    border-radius:
+      7px !important;
+
+    overflow: hidden;
+  }
+
+
+  .finalButtons .storeIconImage {
+    flex:
+      0 0 auto;
+
+    width: 16px !important;
+
+    height: 18px !important;
+  }
+
+
+  .finalButtons .storeText {
+    min-width: 0;
+
+    overflow: hidden;
+  }
+
+
+  .finalButtons .storeText small {
+    display: block;
+
+    margin-bottom: 1px;
+
+    font-size:
+      clamp(
+        3.5px,
+        1.1vw,
+        4.5px
+      ) !important;
+
+    line-height: 1;
+
+    white-space: nowrap;
+  }
+
+
+  .finalButtons .storeText b {
+    display: block;
+
+    font-size:
+      clamp(
+        7.5px,
+        2.4vw,
+        11px
+      ) !important;
+
+    line-height: 1 !important;
+
+    white-space: nowrap;
+  }
+
+
+  .desktopBreak {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   PHONE
+   481 — 600px
+
+   IMAGE EVEN MORE PROMINENT
+   ========================================================= */
+
+@media (min-width: 481px) and (max-width: 600px) {
+
+  .finalDownloadCard {
+    height: 138px;
+    min-height: 138px;
+
+    grid-template-columns:
+      46%
+      minmax(0, 54%);
+  }
+
+
+  .finalPets {
+    height: 132px;
+  }
+
+
+  .finalPetsImage {
+    width: 128% !important;
+    height: 128% !important;
+
+    transform:
+      translateY(5px)
+      scale(1.24);
+  }
+
+
+  .finalCopy {
+    padding-left: 7px;
+  }
+
+
+  .finalCopy h2 {
+    font-size: 15px;
+  }
+
+
+  .finalCopy p {
+    font-size: 7px;
+  }
+
+
+  .finalButtons {
+    padding-left: 7px;
+
+    gap: 5px !important;
+  }
+
+
+  .finalButtons .storeBadge {
+    height: 32px !important;
+    min-height: 32px !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONE
+   381 — 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .finalDownload {
+    padding:
+      16px 0
+      32px;
+  }
+
+
+  .finalDownloadCard {
+    width: calc(100% - 14px);
+
+    height: 118px;
+    min-height: 118px;
+
+    /*
+      IMAGE = 45%
+      CONTENT = 55%
+    */
+    grid-template-columns:
+      45%
+      minmax(0, 55%);
+
+    grid-template-rows:
+      minmax(0, 1fr)
+      auto;
+
+    row-gap: 4px;
+
+    padding:
+      4px 7px;
+
+    border-radius: 14px;
+  }
+
+
+  /* BIG PET */
+  .finalPets {
+    width: 100%;
+    height: 114px;
+
+    transform:
+      scaleX(1.08);
+
+    transform-origin:
+      left bottom;
+  }
+
+
+  .finalPetsImage {
+    width: 75% !important;
+    height: 100% !important;
+
+
+    transform:
+      translateY(5px)
+      scale(1.18);
+
+    transform-origin:
+      left center;
+  }
+
+
+ 
+
+  /* RIGHT HALF TEXT */
+  .finalCopy {
+    padding:
+      0 1px 0 6px;
+  }
+
+
+  .finalCopy h2 {
+    font-size:
+      clamp(
+        11px,
+        3.8vw,
+        15px
+      );
+
+    line-height: 1.06;
+  }
+
+
+  .finalCopy p {
+    margin-top: 3px;
+
+    font-size:
+      clamp(
+        5px,
+        1.8vw,
+        9px
+      );
+
+    line-height: 1.25;
+  }
+
+
+  /* BUTTONS START FROM SAME RIGHT HALF */
+  .finalButtons {
+    padding:
+      0 1px 0 6px;
+
+    gap: 3px !important;
+  }
+
+
+  .finalButtons .storeBadge {
+    height: 29px !important;
+
+    min-height: 29px !important;
+
+    padding:
+      2px 4px !important;
+
+    gap: 3px !important;
+
+    border-radius:
+      6px !important;
+  }
+
+
+  .finalButtons .storeIconImage {
+    width: 14px !important;
+    height: 17px !important;
+  }
+
+
+  .finalButtons .storeText small {
+    font-size: 7px !important;
+  }
+
+
+  .finalButtons .storeText b {
+    font-size:
+      clamp(
+        7px,
+        2.7vw,
+        10px
+      ) !important;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   <= 380px
+
+   KEEP 45 / 55 LAYOUT
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .finalDownload {
+    padding:
+      14px 0
+      28px;
+  }
+
+
+  .finalDownloadCard {
+    width: calc(100% - 10px);
+
+    height: 108px;
+    min-height: 108px;
+
+    grid-template-columns:
+      45%
+      minmax(0, 55%);
+
+    row-gap: 3px;
+
+    padding:
+      4px 6px;
+
+    border-radius: 12px;
+  }
+
+
+  .finalPets {
+    height: 105px;
+
+    transform:
+      scaleX(1.08);
+  }
+
+
+  .finalPetsImage {
+    width: 135% !important;
+    height: 135% !important;
+
+    left: -3px !important;
+
+    transform:
+      translateY(4px)
+      scale(1.16);
+  }
+
+
+  .finalDownloadCard:hover {
+    transform:
+      translateY(2px)
+      scale(1.18);
+  }
+
+
+  .finalCopy {
+    padding-left: 5px;
+  }
+
+
+  .finalCopy h2 {
+    font-size:
+      clamp(
+        10px,
+        3.6vw,
+        12px
+      );
+
+    line-height: 1.05;
+  }
+
+
+  .finalCopy p {
+    margin-top: 2px;
+
+    font-size:
+      clamp(
+        4.5px,
+        1.7vw,
+        6px
+      );
+
+    line-height: 1.2;
+  }
+
+
+  .finalButtons {
+    padding-left: 5px;
+
+    gap: 3px !important;
+  }
+
+
+  .finalButtons .storeBadge {
+    height: 27px !important;
+
+    min-height: 27px !important;
+
+    padding:
+      2px 3px !important;
+
+    gap: 2px !important;
+
+    border-radius:
+      5px !important;
+  }
+
+
+  .finalButtons .storeIconImage {
+    width: 13px !important;
+    height: 15px !important;
+  }
+
+
+  .finalButtons .storeText small {
+    font-size: 3px !important;
+  }
+
+
+  .finalButtons .storeText b {
+    font-size: 7px !important;
+  }
+}
+
+
+/* =========================================================
+   STORE BADGES
+   ========================================================= */
+
+.storeRow,
+.finalButtons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.storeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  width: 239px;
+  min-width: 239px;
+  height: 57px;
+
+  padding: 7px 12px;
+
+  border: 1px solid #c8c8c8;
+  border-radius: 12px;
+  background: #fff;
+
+  box-sizing: border-box;
+
+  transition: none;
+}
+
+.storeBadge:hover {
+  transform: none;
+  border-color: #c8c8c8;
+  box-shadow: none;
+}
+
+.googleBadge {
+  width: 175px !important;
+  min-width: 185px !important;
+  max-width: 205px !important;
+}
+
+.storeIconImage {
+  width: 30px;
+  height: 34px;
+
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.storeText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  line-height: 1;
+}
+
+.storeText small {
+  display: block;
+  margin-bottom: 4px;
+
+  color: #555;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.storeText b {
+  display: block;
+
+  color: #111827;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   NEWSLETTER FORM
+   ========================================================= */
+
+.newsletterForm {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 0;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   EMAIL INPUT
+   ========================================================= */
+
+.newsletterForm input {
+  flex: 1 1 auto;
+
+  width: 100%;
+  min-width: 0;
+
+  height: 52px;
+
+  padding: 0 16px;
+
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.98);
+
+  color: #222;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.newsletterForm input::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+
+.newsletterForm input:focus {
+  border-color: #fff;
+
+  background: #fff;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.20);
+}
+
+.newsletterForm {
+  width: 120% !important;
+  transform: translateY(-2px);
+  gap: 10px;
+}
+
+.newsletterForm input {
+  height: 52px;
+}
+
+.newsletterForm button {
+  height: 52px;
+}
+@media (min-width: 1440px) and (max-width: 1919px) {
+
+  .newsletterForm {
+    margin-left:-200px;
+    width: 145% !important;
+    transform: translateY(-10px);
+    gap: 10px;
+  }
+
+  .newsletterForm input {
+    height: 52px;
+  }
+
+  .newsletterForm button {
+    height: 42px;
+    min-width: 125px;
+  }
+}
+
+/* =========================================================
+   FINAL DOWNLOAD - MOBILE NEWSLETTER FIX
+   DO NOT CHANGE OTHER SECTIONS
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .finalDownloadCard .newsletterForm {
+    grid-column: 2;
+    grid-row: 2;
+
+    width: 100% !important;
+    min-width: 0 !important;
+
+    height: 31px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+
+    margin: 0 !important;
+    padding: 0 1px 0 6px;
+
+    box-sizing: border-box;
+
+    transform: none !important;
+
+    overflow: hidden;
+  }
+
+
+  /* ================= EMAIL ================= */
+
+  .finalDownloadCard .newsletterForm input {
+    flex: 1 1 auto;
+
+    width: 0 !important;
+    min-width: 0 !important;
+
+    height: 31px;
+    min-height: 31px;
+
+    margin: 0;
+
+    padding: 0 9px;
+
+    border: 0;
+    outline: 0;
+
+    border-radius: 16px;
+
+    background: #fff;
+
+    color: #333;
+
+    font-family: inherit;
+
+    font-size: 8px;
+    font-weight: 500;
+
+    box-sizing: border-box;
+  }
+
+
+  .finalDownloadCard .newsletterForm input::placeholder {
+    color: #999;
+    opacity: 1;
+  }
+
+
+  /* ================= SUBSCRIBE ================= */
+
+  .finalDownloadCard .newsletterForm button {
+    flex: 0 0 auto;
+
+    width: 78px !important;
+    min-width: 78px !important;
+    max-width: 78px !important;
+
+    height: 31px;
+    min-height: 31px;
+
+    margin: 0 !important;
+
+    padding: 0 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+  }
+
+
+  .finalDownloadCard .newsletterForm button img {
+    display: block;
+
+    width: 12px !important;
+    height: 12px !important;
+
+    object-fit: contain;
+
+    flex: 0 0 auto;
+  }
+}
+
+
+/* =========================================================
+   481 — 600px
+   ========================================================= */
+
+@media (min-width: 481px) and (max-width: 600px) {
+
+  .finalDownloadCard .newsletterForm {
+    height: 34px;
+
+    gap: 5px;
+
+    padding-left: 7px;
+  }
+
+  .finalDownloadCard .newsletterForm input {
+    height: 34px;
+    min-height: 34px;
+
+    padding: 0 10px;
+
+    border-radius: 17px;
+
+    font-size: 9px;
+  }
+
+  .finalDownloadCard .newsletterForm button {
+    width: 88px !important;
+    min-width: 88px !important;
+    max-width: 88px !important;
+
+    height: 34px;
+    min-height: 34px;
+
+    border-radius: 17px;
+
+    font-size: 9px;
+  }
+
+  .finalDownloadCard .newsletterForm button img {
+    width: 13px !important;
+    height: 13px !important;
+  }
+}
+
+
+/* =========================================================
+   381 — 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .finalDownloadCard .newsletterForm {
+    height: 34px;
+
+    gap: 3px;
+
+    padding-left: 6px;
+  }
+
+  .finalDownloadCard .newsletterForm input {
+    height: 29px;
+    min-height: 29px;
+
+    padding: 0 8px;
+
+    border-radius: 15px;
+
+    font-size: 7px;
+  }
+
+  .finalDownloadCard .newsletterForm button {
+    width: 74px !important;
+    min-width: 74px !important;
+    max-width: 74px !important;
+
+    height: 29px;
+    min-height: 29px;
+
+
+
+    font-size: 8px;
+  }
+
+  .finalDownloadCard .newsletterForm button img {
+    width: 15px !important;
+    height: 15px !important;
+  }
+}
+
+
+/* =========================================================
+   <= 380px
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .finalDownloadCard .newsletterForm {
+    height: 27px;
+
+    gap: 3px;
+
+    padding-left: 5px;
+  }
+
+  .finalDownloadCard .newsletterForm input {
+    height: 27px;
+    min-height: 27px;
+
+    padding: 0 7px;
+
+    border-radius: 14px;
+
+    font-size: 6.5px;
+  }
+
+  .finalDownloadCard .newsletterForm button {
+    width: 66px !important;
+    min-width: 66px !important;
+    max-width: 66px !important;
+
+    height: 27px;
+    min-height: 27px;
+
+    padding: 0 6px;
+
+    border-radius: 14px;
+
+    font-size: 6.5px;
+  }
+
+  .finalDownloadCard .newsletterForm button img {
+    width: 10px !important;
+    height: 10px !important;
   }
 }

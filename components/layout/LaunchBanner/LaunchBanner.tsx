@@ -8,8 +8,22 @@ import {
 } from "lucide-react";
 
 import styles from "./LaunchBanner.module.css";
+import { usePathname } from "next/navigation";
 
 export default function LaunchBanner() {
+  const pathname = usePathname();
+
+const shouldHide =
+  pathname === "/login" ||
+  pathname.startsWith("/admin") ||
+  pathname === "/signup" ||
+  pathname === "/forgot-password" ||
+  pathname === "/verify-otp" ||
+  pathname === "/resend-otp";
+
+if (shouldHide) {
+  return null;
+}
   return (
     <div className={styles.banner}>
       <div className={styles.inner}>

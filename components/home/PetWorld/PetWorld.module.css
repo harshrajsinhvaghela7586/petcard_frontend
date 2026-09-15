@@ -368,7 +368,7 @@
 .cardCopy h2 {
   max-width: 300px;
 
-  margin: 0;
+  margin-top: 10;
 
   font-size: 24px;
   line-height: 1.12;
@@ -381,7 +381,7 @@
 .cardCopy p {
   max-width: 320px;
 
-  margin: 10px 0 0;
+  margin: -14px 0 0;
 
   font-size: 11px;
   line-height: 1.7;
@@ -637,6 +637,55 @@
       0 28px 32px rgba(56, 27, 14, 0.22)
     );
 }
+
+
+.whyCardTop {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.whyCardIcon {
+  display: grid;
+  place-items: center;
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 14px;
+
+  background: var(--orange-soft);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.whyCardIcon img {
+  width: 25px;
+  height: 25px;
+
+  object-fit: contain;
+}
+
+.whyCard:hover .whyCardIcon {
+  transform:
+    scale(1.08)
+    rotate(-4deg);
+
+  box-shadow:
+    0 0 12px rgba(255, 122, 0, 0.18);
+}
+
 
 
 /* =========================================================
@@ -1026,7 +1075,7 @@
   }
 
   .featureCard {
-    min-height: 370px;
+    min-height: 400px;
 
     padding:
       20px 17px;
@@ -1046,7 +1095,6 @@
   .cardCopy p {
     max-width: 250px;
 
-    margin-top: 8px;
 
     font-size: 9px;
 
@@ -1272,13 +1320,14 @@ top:-20px;
   }
 
   .petFrame {
-    width: 325px;
-    height: 325px;
+    width: 305px;
+    height: 285px;
   }
 
   .rewardList {
     width: 395px;
     height: 205px;
+    margin-top: 25px;
   }
 
   .orange,
