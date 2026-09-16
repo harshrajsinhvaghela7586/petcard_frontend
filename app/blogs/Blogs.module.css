@@ -1827,6 +1827,9 @@
   .storyCopy strong {
     font-size: 17px;
   }
+  .storyCopy a{
+    margin-top:19px;
+  }
 
   .polaroid {
     width: 90px;

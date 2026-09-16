@@ -33,6 +33,9 @@ const storyHighlights = [
   },
 ];
 
+const image = <img src="/images/paw.png" width={15}
+height={15}/>
+
 const stats = [
   {
     title: "01",
@@ -47,7 +50,7 @@ const stats = [
     text: "Possibilities for care",
   },
   {
-    title: "🐾",
+    title: image,
     text: "For every pet",
   },
 ];
@@ -227,7 +230,12 @@ export default function About() {
                   className="btn btn-primary"
                 >
                   Read Our Story
-
+ <Image
+                    src="/images/paw-white.png"
+                    alt=""
+                    width={29}
+                    height={29}
+                  />
                 </a>
 
                 <a
@@ -235,12 +243,7 @@ export default function About() {
                   className="btn btn-outline"
                 >
                   Our Mission
-                  <Image
-                    src="/images/paw.png"
-                    alt=""
-                    width={19}
-                    height={19}
-                  />
+                 
                 </a>
               </div>
             </div>
@@ -271,7 +274,9 @@ export default function About() {
                       styles.storyPetFace
                     }
                   >
-                    🐶
+                    <img src="/images/footer.png"
+                   
+                    className="petImage"/>
                   </div>
                 </div>
 
@@ -542,26 +547,26 @@ export default function About() {
                   styles.missionCircle
                 }
               >
-                <ShieldCheck size={60} />
+                <img src="/images/brand/dog.png" width={60}/>
                 <span>PetCard</span>
               </div>
 
               <div
                 className={`${styles.missionBadge} ${styles.badgeOne}`}
               >
-                🪪 Identity
+                Identity
               </div>
 
               <div
                 className={`${styles.missionBadge} ${styles.badgeTwo}`}
               >
-                🔳 QR
+                QR
               </div>
 
               <div
                 className={`${styles.missionBadge} ${styles.badgeThree}`}
               >
-                🏠 Way Home
+                Way Home
               </div>
             </div>
 

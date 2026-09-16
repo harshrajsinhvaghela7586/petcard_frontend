@@ -57,7 +57,12 @@ export default function FAQ() {
           </div>
 
           <div className={styles.helpCard}>
-            <div className={styles.helpIcon}>🐾</div>
+            <div className={styles.helpIcon}> <img
+                src="/images/paw.png"
+                width={27}
+                height={27}
+                alt=""
+              /></div>
 
             <div className={styles.helpContent}>
               <strong>Still have a question?</strong>

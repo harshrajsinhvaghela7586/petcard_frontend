@@ -5807,7 +5807,7 @@ overflow: visible;
   /* BIG PET */
   .finalPets {
     width: 100%;
-    height: 114px;
+    height: 144px;
 
     transform:
       scaleX(1.08);
@@ -5818,12 +5818,13 @@ overflow: visible;
 
 
   .finalPetsImage {
-    width: 75% !important;
+    width: 90% !important;
     height: 100% !important;
 
 
     transform:
-      translateY(5px)
+      translateY(12px)
+      translateX(-15px)
       scale(1.18);
 
     transform-origin:
@@ -6122,4 +6123,1203 @@ overflow: visible;
   line-height: 1;
   font-weight: 700;
   white-space: nowrap;
+}
+
+
+/* =========================================================
+   FINAL RESPONSIVE ORBIT FIX
+   PETCARD — HOW IT WORKS
+   IMPORTANT:
+   Add this block at the VERY END of the CSS file.
+========================================================= */
+
+
+/* =========================================================
+   769px - 1100px
+   TABLET / LAPTOP
+========================================================= */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+  .processVisual {
+    position: relative !important;
+    width: 100% !important;
+
+    height: 680px !important;
+
+    margin-top: 30px !important;
+    padding: 0 !important;
+
+    display: block !important;
+
+    overflow: hidden !important;
+
+    isolation: isolate;
+
+    --orbit-size: 560px;
+    --step-radius: 275px;
+  }
+
+  /* -------------------------
+     OUTER ORBIT
+  ------------------------- */
+
+  .processVisual .orbitOuter {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 560px !important;
+    height: 560px !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    z-index: 1;
+  }
+
+  /* -------------------------
+     INNER ORBIT
+  ------------------------- */
+
+  .processVisual .orbitInner {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 350px !important;
+    height: 350px !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    z-index: 2;
+  }
+
+  /* -------------------------
+     STEP ORBIT
+  ------------------------- */
+
+  .processVisual .stepsOrbit {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    inset: auto !important;
+
+    --step-radius: 275px;
+
+    z-index: 10;
+  }
+
+  /* -------------------------
+     STEP CARDS
+  ------------------------- */
+
+  .processVisual .stepCard {
+    width: 135px !important;
+    min-width: 135px !important;
+    max-width: 135px !important;
+
+    min-height: 105px !important;
+
+    position: absolute !important;
+
+    top: 0 !important;
+    left: 0 !important;
+  }
+
+  .processVisual .stepCardInner {
+    min-height: 105px !important;
+
+    padding: 12px !important;
+
+    border-radius: 17px !important;
+  }
+
+  .processVisual .stepNumber {
+    width: 27px !important;
+    height: 27px !important;
+
+    top: 9px !important;
+    right: 10px !important;
+
+    font-size: 9px !important;
+  }
+
+  .processVisual .stepIcon {
+    width: 35px !important;
+    height: 35px !important;
+
+    margin-bottom: 7px !important;
+
+    border-radius: 10px !important;
+  }
+
+  .processVisual .stepIcon svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
+
+  .processVisual .stepText h3 {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+  }
+
+  .processVisual .stepText p {
+    font-size: 6.5px !important;
+    line-height: 1.4 !important;
+  }
+
+  .processVisual .stepHoverImage {
+    width: 55px !important;
+    height: 55px !important;
+  }
+
+  /* -------------------------
+     PAWS
+  ------------------------- */
+
+  .processVisual .processPaws {
+    display: block !important;
+  }
+
+  /* -------------------------
+     OLD MOBILE FALLBACK
+  ------------------------- */
+
+  .processVisual .mobileSteps {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   521px - 768px
+   SMALL TABLET
+========================================================= */
+
+@media (min-width: 521px) and (max-width: 768px) {
+
+  .processVisual {
+    position: relative !important;
+
+    width: 100% !important;
+
+    height: 570px !important;
+
+    margin-top: 20px !important;
+    padding: 0 !important;
+
+    display: block !important;
+
+    overflow: hidden !important;
+
+    --orbit-size: 470px;
+    --step-radius: 225px;
+  }
+
+  /* OUTER */
+
+  .processVisual .orbitOuter {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 470px !important;
+    height: 470px !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    z-index: 1;
+  }
+
+  /* INNER */
+
+  .processVisual .orbitInner {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 285px !important;
+    height: 285px !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    z-index: 2;
+  }
+
+  /* STEPS */
+
+  .processVisual .stepsOrbit {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    inset: auto !important;
+
+    --step-radius: 225px;
+
+    z-index: 10;
+  }
+
+  /* CARDS */
+
+  .processVisual .stepCard {
+    width: 105px !important;
+    min-width: 105px !important;
+    max-width: 105px !important;
+
+    min-height: 90px !important;
+  }
+
+  .processVisual .stepCardInner {
+    min-height: 90px !important;
+
+    padding: 9px !important;
+
+    border-radius: 14px !important;
+  }
+
+  .processVisual .stepNumber {
+    width: 22px !important;
+    height: 22px !important;
+
+    top: 7px !important;
+    right: 8px !important;
+
+    font-size: 7px !important;
+  }
+
+  .processVisual .stepIcon {
+    width: 28px !important;
+    height: 28px !important;
+
+    margin-bottom: 5px !important;
+
+    border-radius: 8px !important;
+  }
+
+  .processVisual .stepIcon svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  .processVisual .stepText h3 {
+    font-size: 8px !important;
+    line-height: 1.15 !important;
+  }
+
+  .processVisual .stepText p {
+    font-size: 5.5px !important;
+    line-height: 1.3 !important;
+  }
+
+  .processVisual .stepHoverImage {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .processVisual .mobileSteps {
+    display: none !important;
+  }
+
+  .processVisual .processPaws {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   381px - 520px
+   MOBILE
+========================================================= */
+
+@media (min-width: 381px) and (max-width: 520px) {
+
+  .processVisual {
+    position: relative !important;
+
+    width: 100% !important;
+
+    height: 485px !important;
+
+    margin-top: 15px !important;
+    padding: 0 !important;
+
+    display: block !important;
+
+    overflow: hidden !important;
+
+    --orbit-size: 390px;
+    --step-radius: 185px;
+  }
+
+  /* OUTER CIRCLE */
+
+  .processVisual .orbitOuter {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 390px !important;
+    height: 390px !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    z-index: 1;
+  }
+
+  /* INNER CIRCLE */
+
+  .processVisual .orbitInner {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 235px !important;
+    height: 235px !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    z-index: 2;
+  }
+
+  /* STEP ORBIT */
+
+  .processVisual .stepsOrbit {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    inset: auto !important;
+
+    --step-radius: 185px;
+
+    z-index: 10;
+  }
+
+  /* CARDS */
+
+  .processVisual .stepCard {
+    width: 86px !important;
+    min-width: 86px !important;
+    max-width: 86px !important;
+
+    min-height: 78px !important;
+  }
+
+  .processVisual .stepCardInner {
+    min-height: 78px !important;
+
+    padding: 7px !important;
+
+    border-radius: 12px !important;
+  }
+
+  .processVisual .stepNumber {
+    width: 19px !important;
+    height: 19px !important;
+
+    top: 6px !important;
+    right: 6px !important;
+
+    font-size: 6px !important;
+  }
+
+  .processVisual .stepIcon {
+    width: 23px !important;
+    height: 23px !important;
+
+    margin-bottom: 4px !important;
+
+    border-radius: 7px !important;
+  }
+
+  .processVisual .stepIcon svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .processVisual .stepText h3 {
+    font-size: 7px !important;
+
+    line-height: 1.15 !important;
+
+    margin: 2px 0 !important;
+  }
+
+  .processVisual .stepText p {
+    font-size: 5px !important;
+
+    line-height: 1.25 !important;
+
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+
+    overflow: hidden !important;
+  }
+
+  .processVisual .stepHoverImage {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .processVisual .stepHoverImage img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .processVisual .mobileSteps {
+    display: none !important;
+  }
+
+  .processVisual .processPaws {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   <= 380px
+   SMALL PHONE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .processVisual {
+    position: relative !important;
+
+    width: 100% !important;
+
+    height: 430px !important;
+
+    margin-top: 10px !important;
+    padding: 0 !important;
+
+    display: block !important;
+
+    overflow: hidden !important;
+
+    --orbit-size: 345px;
+    --step-radius: 162px;
+  }
+
+  .processVisual .orbitOuter {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 345px !important;
+    height: 345px !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .processVisual .orbitInner {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 205px !important;
+    height: 205px !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .processVisual .stepsOrbit {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    inset: auto !important;
+
+    --step-radius: 162px;
+
+    z-index: 10;
+  }
+
+  .processVisual .stepCard {
+    width: 75px !important;
+    min-width: 75px !important;
+    max-width: 75px !important;
+
+    min-height: 70px !important;
+  }
+
+  .processVisual .stepCardInner {
+    min-height: 70px !important;
+
+    padding: 6px !important;
+
+    border-radius: 10px !important;
+  }
+
+  .processVisual .stepNumber {
+    width: 17px !important;
+    height: 17px !important;
+
+    top: 5px !important;
+    right: 5px !important;
+
+    font-size: 5.5px !important;
+  }
+
+  .processVisual .stepIcon {
+    width: 20px !important;
+    height: 20px !important;
+
+    margin-bottom: 3px !important;
+
+    border-radius: 6px !important;
+  }
+
+  .processVisual .stepIcon svg {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  .processVisual .stepText h3 {
+    font-size: 6.2px !important;
+    line-height: 1.1 !important;
+  }
+
+  .processVisual .stepText p {
+    font-size: 4.5px !important;
+    line-height: 1.2 !important;
+
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+
+    overflow: hidden !important;
+  }
+
+  .processVisual .stepHoverImage {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .processVisual .stepHoverImage img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .processVisual .mobileSteps {
+    display: none !important;
+  }
+
+  .processVisual .processPaws {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   FINAL MOBILE ORBIT POSITION FIX
+   Replace the previous mobile orbit media queries with this
+========================================================= */
+
+
+/* =========================================================
+   769px - 1100px
+========================================================= */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+  .processVisual {
+    width: 100% !important;
+    height: 680px !important;
+    position: relative !important;
+    overflow: hidden !important;
+
+    --orbit-size: 560px;
+    --step-radius: 255px;
+  }
+
+  .processVisual .orbitOuter {
+    display: block !important;
+
+    width: 560px !important;
+    height: 560px !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .processVisual .orbitInner {
+    display: block !important;
+
+    width: 350px !important;
+    height: 350px !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .processVisual .stepsOrbit {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    inset: auto !important;
+
+    --step-radius: 255px;
+  }
+
+  .processVisual .stepCard {
+    width: 125px !important;
+    min-width: 125px !important;
+    max-width: 125px !important;
+
+    min-height: 100px !important;
+  }
+
+  .processVisual .stepCardInner {
+    min-height: 100px !important;
+    padding: 10px !important;
+  }
+
+  .processVisual .stepText h3 {
+    font-size: 9px !important;
+  }
+
+  .processVisual .stepText p {
+    font-size: 6px !important;
+  }
+
+  .processVisual .mobileSteps {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   521px - 768px
+========================================================= */
+
+@media (min-width: 521px) and (max-width: 768px) {
+
+  .processVisual {
+    width: 100% !important;
+    height: 540px !important;
+
+    position: relative !important;
+    overflow: hidden !important;
+
+    --orbit-size: 420px;
+    --step-radius: 200px;
+  }
+
+  .processVisual .orbitOuter {
+    display: block !important;
+
+    width: 420px !important;
+    height: 420px !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .processVisual .orbitInner {
+    display: block !important;
+
+    width: 270px !important;
+    height: 270px !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .processVisual .stepsOrbit {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    inset: auto !important;
+
+    --step-radius: 200px;
+  }
+
+  .processVisual .stepCard {
+    width: 98px !important;
+    min-width: 98px !important;
+    max-width: 98px !important;
+
+    min-height: 82px !important;
+  }
+
+  .processVisual .stepCardInner {
+    min-height: 82px !important;
+    padding: 8px !important;
+  }
+
+  .processVisual .stepText h3 {
+    font-size: 7.5px !important;
+  }
+
+  .processVisual .stepText p {
+    font-size: 5px !important;
+  }
+
+  .processVisual .mobileSteps {
+    display: none !important;
+  }
+
+  .processVisual .processPaws {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   381px - 520px
+   iPhone 14 Pro Max / Pixel type
+========================================================= */
+
+@media (min-width: 381px) and (max-width: 520px) {
+
+  .processVisual {
+    width: 100% !important;
+
+    /*
+      IMPORTANT:
+      Enough height for the complete circle
+    */
+    height: 430px !important;
+
+    position: relative !important;
+
+    margin-top: 15px !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+
+    --orbit-size: 340px;
+    --step-radius: 158px;
+  }
+
+
+  /* -------------------------
+     OUTER CIRCLE
+  ------------------------- */
+
+  .processVisual .orbitOuter {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 340px !important;
+    height: 340px !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    z-index: 1;
+  }
+
+
+  /* -------------------------
+     INNER CIRCLE
+  ------------------------- */
+
+  .processVisual .orbitInner {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 215px !important;
+    height: 215px !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    z-index: 2;
+  }
+
+
+  /* -------------------------
+     CARD ORBIT CENTER
+  ------------------------- */
+
+  .processVisual .stepsOrbit {
+    display: block !important;
+
+    position: absolute !important;
+
+    /*
+      Keep the orbit origin exactly
+      at the center of processVisual.
+    */
+    width: 0 !important;
+    height: 0 !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    inset: auto !important;
+
+    --step-radius: 158px;
+
+    z-index: 10;
+  }
+
+
+  /* -------------------------
+     CARDS
+  ------------------------- */
+
+  .processVisual .stepCard {
+    width: 78px !important;
+    min-width: 78px !important;
+    max-width: 78px !important;
+
+    min-height: 72px !important;
+
+    top: 0 !important;
+    left: 0 !important;
+  }
+
+  .processVisual .stepCardInner {
+    width: 100% !important;
+    min-height: 72px !important;
+
+    padding: 6px !important;
+
+    border-radius: 11px !important;
+  }
+
+
+  /* NUMBER */
+
+  .processVisual .stepNumber {
+    width: 17px !important;
+    height: 17px !important;
+
+    top: 5px !important;
+    right: 5px !important;
+
+    font-size: 5.5px !important;
+  }
+
+
+  /* ICON */
+
+  .processVisual .stepIcon {
+    width: 21px !important;
+    height: 21px !important;
+
+    margin-bottom: 3px !important;
+
+    border-radius: 6px !important;
+  }
+
+  .processVisual .stepIcon svg {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+
+  /* TEXT */
+
+  .processVisual .stepText h3 {
+    font-size: 6.5px !important;
+
+    line-height: 1.1 !important;
+
+    margin: 2px 0 !important;
+  }
+
+  .processVisual .stepText p {
+    font-size: 4.5px !important;
+
+    line-height: 1.2 !important;
+
+    display: -webkit-box !important;
+
+    -webkit-line-clamp: 2 !important;
+
+    -webkit-box-orient: vertical !important;
+
+    overflow: hidden !important;
+  }
+
+
+  /* HOVER IMAGE */
+
+  .processVisual .stepHoverImage,
+  .processVisual .stepHoverImage img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+
+  /* OLD VERTICAL CARDS OFF */
+
+  .processVisual .mobileSteps {
+    display: none !important;
+  }
+
+  .processVisual .processPaws {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   <= 380px
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .processVisual {
+    width: 100% !important;
+
+    height: 390px !important;
+
+    position: relative !important;
+
+    margin-top: 10px !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+
+    --orbit-size: 305px;
+    --step-radius: 140px;
+  }
+
+
+  .processVisual .orbitOuter {
+    display: block !important;
+
+    width: 305px !important;
+    height: 305px !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+
+  .processVisual .orbitInner {
+    display: block !important;
+
+    width: 190px !important;
+    height: 190px !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+
+  .processVisual .stepsOrbit {
+    display: block !important;
+
+    position: absolute !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    inset: auto !important;
+
+    --step-radius: 140px;
+
+    z-index: 10;
+  }
+
+
+  .processVisual .stepCard {
+    width: 68px !important;
+    min-width: 68px !important;
+    max-width: 68px !important;
+
+    min-height: 64px !important;
+  }
+
+  .processVisual .stepCardInner {
+    min-height: 64px !important;
+    padding: 5px !important;
+  }
+
+  .processVisual .stepNumber {
+    width: 15px !important;
+    height: 15px !important;
+
+    font-size: 5px !important;
+  }
+
+  .processVisual .stepIcon {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .processVisual .stepIcon svg {
+    width: 9px !important;
+    height: 9px !important;
+  }
+
+  .processVisual .stepText h3 {
+    font-size: 5.8px !important;
+  }
+
+  .processVisual .stepText p {
+    font-size: 4px !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .processVisual .stepHoverImage,
+  .processVisual .stepHoverImage img {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .processVisual .mobileSteps {
+    display: none !important;
+  }
+
+  .processVisual .processPaws {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   FINAL CARD VERTICAL ALIGNMENT
+   Move orbit cards DOWN to align with the visible orbit
+   ========================================================= */
+
+
+/* =========================================================
+   769px - 1100px
+========================================================= */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+  .processVisual .stepsOrbit {
+    top: calc(50% + 5px) !important;
+    left: 50% !important;
+
+    --step-radius: 255px !important;
+  }
+}
+
+
+/* =========================================================
+   521px - 768px
+========================================================= */
+
+@media (min-width: 521px) and (max-width: 768px) {
+
+  .processVisual .stepsOrbit {
+    top: calc(50% + 70px) !important;
+    left: 50% !important;
+
+    --step-radius: 200px !important;
+  }
+}
+
+
+/* =========================================================
+   381px - 520px
+   iPhone 14 Pro Max / Pixel 7 Pro
+========================================================= */
+
+@media (min-width: 381px) and (max-width: 520px) {
+
+  .processVisual .stepsOrbit {
+    top: calc(50% + 5px) !important;
+    left: 50% !important;
+
+    --step-radius: 158px !important;
+  }
+}
+
+
+/* =========================================================
+   <= 380px
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .processVisual .stepsOrbit {
+    top: calc(50% + 65px) !important;
+    left: 50% !important;
+
+    --step-radius: 140px !important;
+  }
 }

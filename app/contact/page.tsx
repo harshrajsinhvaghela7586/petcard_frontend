@@ -2,7 +2,6 @@ import ContactForm from "../../components/ContactForm";
 import CTA from "../../components/CTA";
 
 import {
-  ArrowRight,
   Clock,
   Heart,
   Mail,
@@ -12,6 +11,7 @@ import {
 } from "lucide-react";
 
 import styles from "./Contact.module.css";
+import Image from "next/image";
 
 const contactInfo = [
   {
@@ -36,6 +36,36 @@ const contactInfo = [
     description: "Official working hours will be added here",
   },
 ];
+
+const storeBadges = (
+  <>
+    <div className={styles.storeBadge}>
+      <img
+        src="/images/apple-logo.png"
+        alt="Apple"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>Download on the</small>
+        <b>App Store</b>
+      </span>
+    </div>
+
+    <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
+      <img
+        src="/images/google-play.png"
+        alt="Google Play"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>GET IT ON</small>
+        <b>Google Play</b>
+      </span>
+    </div>
+  </>
+);
 
 export default function Contact() {
   return (
@@ -89,7 +119,7 @@ export default function Contact() {
                 style={{ marginTop: 26 }}
               >
                 Send Us a Message
-                <ArrowRight size={17} />
+                <img src="/images/paw-white.png" height={30} width={30}/>
               </a>
 
               <div className={styles.heroTrust}>
@@ -119,7 +149,7 @@ export default function Contact() {
                 </div>
 
                 <div className={styles.contactAvatar}>
-                  🐶
+                  <img src="/images/AboutFooter.png"/>
                 </div>
 
                 <h3>
@@ -157,13 +187,13 @@ export default function Contact() {
               <div
                 className={`${styles.floatingChip} ${styles.chipOne}`}
               >
-                💌 Email us
+                Email us
               </div>
 
               <div
                 className={`${styles.floatingChip} ${styles.chipTwo}`}
               >
-                🐾 Pet-first support
+                Pet-first support
               </div>
             </div>
           </div>
@@ -286,12 +316,56 @@ export default function Contact() {
           CTA
           ===================================================== */}
 
-      <section className={styles.ctaSection}>
-        <CTA
-          title="Still have questions?"
-          text="You can also check our FAQ section for common PetCard questions."
-        />
+
+ {/* =====================================================
+    FINAL DOWNLOAD
+    ===================================================== */}
+
+      <section
+        className={`${styles.finalDownload} ${styles.homeReveal}`}
+        id="download-app"
+        data-home-reveal="download"
+      >
+        <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
+
+          {/* ================= PETS ================= */}
+
+          <div className={styles.finalPets}>
+            <Image
+              src="/images/HowItWorksFooter.png"
+              alt="PETCARD pets"
+              fill
+              priority
+
+              className={styles.finalPetsImage}
+            />
+          </div>
+
+
+          {/* ================= COPY ================= */}
+
+          <div className={styles.finalCopy}>
+
+            <h2>
+            Still have questions?
+            </h2>
+
+            <p>
+             You can also check our FAQ section for common PetCard questions.
+            </p>
+
+          </div>
+
+
+          {/* ================= STORE BADGES ================= */}
+
+          <div className={styles.finalButtons}>
+            {storeBadges}
+          </div>
+
+        </div>
       </section>
+
     </main>
   );
 }

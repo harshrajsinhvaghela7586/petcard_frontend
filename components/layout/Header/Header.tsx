@@ -13,6 +13,7 @@ const links = [
   ["Features","/features"],
   ["Blogs", "/blogs"],
   ["About Us", "/about"],
+  ["Contact Us", "/contact"]
 ] as const;
 
 export default function Header() {
@@ -201,7 +202,12 @@ export default function Header() {
             onClick={() => setMenuOpen(false)}
           >
             <span>Download App</span>
-            <ArrowRight size={16} />
+             <Image
+                                src="/images/paw-white.png"
+                                alt=""
+                                width={29}
+                                height={29}
+                              />
           </Link>
         </nav>
       </div>
