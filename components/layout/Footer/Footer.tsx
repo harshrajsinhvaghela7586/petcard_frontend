@@ -21,7 +21,7 @@ const petWorldLinks = [
 const legalLinks = [
   ["Privacy Policy", "/privacy"],
   ["Terms & Conditions", "/terms"],
- 
+
 ] as const;
 
 export default function Footer() {
@@ -62,38 +62,38 @@ export default function Footer() {
               care, health, memories and rewards into one playful pet world.
             </p>
 
-           <div className={styles.footerSocials}>
+            <div className={styles.footerSocials}>
 
-  {/* INSTAGRAM */}
-  <a
-    href="https://www.instagram.com/petcard.in/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Instagram"
-    className={`${styles.socialLink} ${styles.instagram}`}
-  >
-    <Instagram size={20} />
-  </a>
+              {/* INSTAGRAM */}
+              <a
+                href="https://www.instagram.com/petcard.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className={`${styles.socialLink} ${styles.instagram}`}
+              >
+                <Instagram size={20} />
+              </a>
 
-  {/* FACEBOOK */}
-  <a
-    href="#"
-    aria-label="Facebook"
-    className={`${styles.socialLink} ${styles.facebook}`}
-  >
-    <FaFacebookF />
-  </a>
+              {/* FACEBOOK */}
+              <a
+                href="#"
+                aria-label="Facebook"
+                className={`${styles.socialLink} ${styles.facebook}`}
+              >
+                <FaFacebookF />
+              </a>
 
-  {/* LINKEDIN */}
-  <a
-    href="#"
-    aria-label="LinkedIn"
-    className={`${styles.socialLink} ${styles.linkedin}`}
-  >
-    <FaLinkedinIn />
-  </a>
+              {/* LINKEDIN */}
+              <a
+                href="#"
+                aria-label="LinkedIn"
+                className={`${styles.socialLink} ${styles.linkedin}`}
+              >
+                <FaLinkedinIn />
+              </a>
 
-</div>
+            </div>
           </div>
 
           {/* Explore */}
@@ -105,11 +105,11 @@ export default function Footer() {
           {/* Legal */}
           <FooterColumn title="Legal" links={legalLinks} />
         </div>
-<img
-  src="/images/footer.png"
-  alt=""
-  className={styles.footerPets}
-/>
+        <img
+          src="/images/footer.png"
+          alt=""
+          className={styles.footerPets}
+        />
         {/* Copyright */}
         <div className={styles.copyright}>
           <span>© 2026 PetCard. All rights reserved.</span>

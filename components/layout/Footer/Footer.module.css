@@ -1097,7 +1097,7 @@
   }
 
   .footerSocials {
-    justify-content: center;
+    justify-content: left;
 
     margin-top: 20px;
 
@@ -1254,7 +1254,6 @@
 
   .footerSocials {
     margin-top: 17px;
-
     gap: 13px;
   }
 
