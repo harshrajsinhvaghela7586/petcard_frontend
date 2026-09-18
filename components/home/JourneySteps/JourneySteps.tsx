@@ -314,18 +314,7 @@ export default function JourneySteps() {
             <p className={styles.detailText}>{currentStep.detail}</p>
 
             <div className={styles.detailFooter}>
-              <div className={styles.detailFeatures}>
-                <span>
-                  <BadgeCheck size={15} />
-                  Simple setup
-                </span>
-
-                <span>
-                  <HeartPulse size={15} />
-                  Pet-first
-                </span>
-              </div>
-
+             
               <button
                 type="button"
                 className="btn btn-primary"
@@ -334,14 +323,7 @@ export default function JourneySteps() {
               >
                 <span>Next Step</span>
 
-                <img
-                  src="/images/paw-white.png"
-                  height={30}
-                  width={30}
-                  alt=""
-                  aria-hidden="true"
-                  draggable={false}
-                />
+               
               </button>
             </div>
           </div>

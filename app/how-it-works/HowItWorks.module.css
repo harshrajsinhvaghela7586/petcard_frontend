@@ -179,7 +179,7 @@ color: var(--text);
 
   font-family: var(--font-tagline);
 
-  font-size: 13px;
+  font-size: 14px;
 
   font-weight: 600;
 
@@ -2510,6 +2510,435 @@ color: var(--text);
   color: var(--orange);
 }
 
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 15;
+  width: clamp(180px, 18vw, 315px);
+  height: clamp(180px, 18vw, 315px);
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.centerHalo {
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 155, 47, 0.30) 0%,
+      rgba(255, 184, 101, 0.14) 42%,
+      rgba(255, 122, 0, 0.06) 58%,
+      transparent 72%
+    );
+
+  filter: blur(10px);
+
+  animation:
+    haloPulse
+    3.5s
+    ease-in-out
+    infinite alternate;
+
+  pointer-events: none;
+}
+
+.centerCore {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  border: clamp(2px, 0.2vw, 4px) solid #ff7a00;
+  border-radius: 50%;
+
+  color: #ff7a00;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      #fffefb 0%,
+      #fff5e7 56%,
+      #ffe8c8 100%
+    );
+
+  box-shadow:
+    0 0 0 7px rgba(255, 122, 0, 0.07),
+    0 0 0 16px rgba(255, 122, 0, 0.035),
+    0 0 32px rgba(255, 122, 0, 0.40),
+    0 0 75px rgba(255, 122, 0, 0.18),
+    0 20px 55px rgba(56, 27, 14, 0.10);
+
+  animation:
+    centerPulse
+    4.5s
+    ease-in-out
+    infinite;
+}
+
+.centerCore > svg {
+  width: clamp(31px, 3vw, 52px);
+  height: auto;
+  margin-bottom: clamp(6px, 0.6vw, 11px);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+ color: #16110e;
+   font-family: var(--font-brand);
+
+  font-size: 38px;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  letter-spacing: -1px;
+}
+
+.brand strong {
+ color: var(--orange);
+
+  font-weight: 700;
+}
+
+.centerCore small {
+  margin-top: clamp(6px, 0.55vw, 10px);
+  color: #89786c;
+  font: 700 clamp(8px, 0.62vw, 12px)/1.2 var(--font-tagline, Inter, sans-serif);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+
+@media (min-width: 1920px) {
+  .featuresSection { padding-inline: 40px; }
+  .orbitStage {
+    --orbit-size: min(58vw, 1180px);
+    --card-width: clamp(270px, 12.6vw, 340px);
+    --card-height: clamp(270px, 14.5vw, 355px);
+    height: min(60vw, 1250px);
+  }
+
+}
+
+@media (min-width: 2560px) {
+  .orbitStage {
+    --orbit-size: min(60vw, 1450px);
+    --card-width: clamp(310px, 12.2vw, 390px);
+    --card-height: clamp(310px, 14vw, 400px);
+    height: min(61vw, 1500px);
+  }
+  .heading { width: min(900px, 100%); }
+}
+
+@media (min-width: 3840px) {
+  .orbitStage {
+    --orbit-size: min(61vw, 1900px);
+    --card-width: clamp(380px, 11.8vw, 500px);
+    --card-height: clamp(370px, 13.6vw, 490px);
+    height: min(63vw, 1950px);
+  }
+  .featuresSection { padding-top: 105px; }
+}
+
+@media (max-width: 1100px) {
+  .featuresSection { padding-inline: 18px; }
+  .orbitStage {
+    height: clamp(610px, 82vw, 880px);
+    --orbit-size: clamp(550px, 81vw, 800px);
+    --card-width: clamp(175px, 22vw, 240px);
+    --card-height: clamp(200px, 25vw, 270px);
+  }
+  .centerImage{
+  width: 76px;
+  height: 76px;
+}
+.brand{font-size:22px;}
+  .featureCardInner { padding: clamp(13px, 1.8vw, 20px); border-radius: 20px; }
+  .featureCardInner ul { gap: 4px 8px; }
+  .featureCardInner li { font-size: clamp(8px, 1.08vw, 11px); }
+  .center { width: clamp(155px, 20vw, 205px); height: clamp(155px, 20vw, 205px); }
+}
+
+@media (max-width: 768px) {
+  .featuresSection { min-height: auto; padding-top: 34px; }
+  .heading h1 { font-size: clamp(33px, 8vw, 48px); }
+  .heading p { max-width: 520px; font-size: 11px; }
+  .orbitStage {
+    height: clamp(570px, 118vw, 760px);
+    margin-top: 25px;
+    --orbit-size: clamp(520px, 122vw, 720px);
+    --card-width: clamp(152px, 30vw, 212px);
+    --card-height: clamp(188px, 36vw, 240px);
+  }
+  .orbitRingMiddle { width: calc(var(--orbit-size) * 0.7); height: calc(var(--orbit-size) * 0.7); }
+  .orbitRingInner { width: calc(var(--orbit-size) * 0.46); height: calc(var(--orbit-size) * 0.46); }
+  .featureCardInner { padding: 12px; border-radius: 17px; }
+  .iconBox { width: 36px; height: 36px; border-radius: 10px; }
+  .iconBox svg { width: 18px; height: 18px; }
+  .cardNumber { width: 26px; height: 26px; font-size: 9px; }
+  .featureCardInner h2 { margin-top: 8px; font-size: 12px; }
+  .featureCardInner ul { margin-top: 6px; gap: 2px 6px; }
+  .featureCardInner li { font-size: 7.5px; line-height: 1.2; }
+  .center { width: clamp(132px, 25vw, 175px); height: clamp(132px, 25vw, 175px); }
+  .brand { font-size: clamp(18px, 4vw, 26px); }
+  .centerCore small { font-size: 7px; }
+  .bottomHint { max-width: 340px; text-align: center; white-space: normal; border-radius: 16px; }
+}
+
+@media (max-width: 520px) {
+  .featuresSection {
+    padding-inline: 0;
+    padding-top: 24px;
+    padding-bottom: 45px;
+    overflow: hidden;
+  }
+
+  .heading {
+    width: 100%;
+    padding-inline: 12px;
+  }
+
+  .heading h1 {
+    font-size: clamp(28px, 8.5vw, 37px);
+  }
+
+  .heading p {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-inline: 4px;
+    font-size: 9.5px;
+    line-height: 1.5;
+  }
+
+  .orbitStage {
+    width: 100%;
+    max-width: 100%;
+    height: clamp(500px, 128vw, 610px);
+    margin: 18px auto 0;
+    transform: none;
+
+    /*
+      IMPORTANT:
+      Orbit + card width together stay inside phone viewport.
+    */
+    --orbit-size: min(70vw, 300px);
+    --card-width: min(27vw, 116px);
+    --card-height: clamp(165px, 40vw, 190px);
+    --radius: calc(var(--orbit-size) / 2);
+  }
+
+  .orbitRingOuter {
+    border-style: solid;
+    border-color: rgba(255, 122, 0, 0.24);
+  }
+
+  .orbitRingMiddle {
+    border-color: rgba(255, 122, 0, 0.12);
+  }
+
+  .featureCardInner {
+    padding: 9px;
+    border-radius: 14px;
+  }
+
+  .iconBox {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .iconBox svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .cardNumber {
+    width: 22px;
+    height: 22px;
+    font-size: 8px;
+  }
+
+  .featureCardInner h2 {
+    margin-top: 6px;
+    font-size: 9.5px;
+    line-height: 1.15;
+  }
+
+  .featureCardInner ul {
+    margin-top: 5px;
+    gap: 2px 4px;
+  }
+
+  .featureCardInner li {
+    font-size: 6.2px;
+    line-height: 1.15;
+  }
+
+  .featureCardInner li::before {
+    margin-right: 2px;
+  }
+
+  .center {
+    width: 108px;
+    height: 108px;
+  }
+
+  .centerDog {
+    width: 54px;
+    max-width: 56%;
+  }
+
+  .brand {
+    font-size: 16px;
+    letter-spacing: -0.5px;
+  }
+.orbitStage {
+    width: 100vw;
+    max-width: none;
+
+    /*
+      Bigger orbit = cards edges ki taraf jayenge
+    */
+    height: 620px;
+    margin-top: 20px;
+
+    --orbit-size: 390px;
+    --card-width: 102px;
+    --card-height: 170px;
+    --radius: calc(var(--orbit-size) / 2);
+  }
+
+  /* Center smaller */
+  .center {
+    width: 92px;
+    height: 92px;
+  }
+
+  .centerDog {
+    width: 46px;
+  }
+.centerImage{
+  width: 46px;
+  height: 46px;
+}
+  .brand {
+    font-size: 13px;
+    letter-spacing: -0.4px;
+  }
+
+  /* Card spacing */
+  .featureCardInner {
+    padding: 8px;
+    border-radius: 13px;
+  }
+
+  .iconBox {
+    width: 29px;
+    height: 29px;
+    border-radius: 8px;
+  }
+
+  .iconBox svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cardNumber {
+    width: 21px;
+    height: 21px;
+    font-size: 7px;
+  }
+
+  .featureCardInner h2 {
+    margin-top: 6px;
+    font-size: 9px;
+    line-height: 1.15;
+  }
+
+  .featureCardInner ul {
+    margin-top: 5px;
+    gap: 2px 4px;
+  }
+
+  .featureCardInner li {
+    font-size: 6px;
+    line-height: 1.15;
+  }
+
+  .bottomHint {
+    margin-top: 4px;
+    padding: 7px 9px;
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 360px) {
+  .orbitStage {
+    height: 560px;
+
+    --orbit-size: 350px;
+    --card-width: 100px;
+    --card-height: 165px;
+  }
+
+  .center {
+    width: 82px;
+    height: 82px;
+  }
+
+  .centerDog {
+    width: 40px;
+  }
+
+  .brand {
+    font-size: 12px;
+  }
+
+  .featureCardInner {
+    padding: 7px;
+  }
+
+  .featureCardInner h2 {
+    font-size: 8px;
+  }
+
+  .featureCardInner li {
+    font-size: 5.5px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .orbitSystem,
+  .featureCardInner,
+  .orbitRingOuter,
+  .orbitRingMiddle,
+  .centerCore,
+  .centerHalo,
+  .orbitDot {
+    animation: none !important;
+  }
+  .featureCardInner { transition: none; }
+}
 
 /* =========================================================
    LAPTOP
@@ -5048,9 +5477,9 @@ overflow: visible;
 
   .finalButtons {
     gap: 20px !important;
-    width: 175% !important;
+    width: 90% !important;
     
-    transform: translateX(-230px) translateY(-15px);
+    transform: translateX(-300px) translateY(-15px);
   }
 
   .finalButtons .storeBadge {
@@ -5177,20 +5606,23 @@ overflow: visible;
   }
 
   .finalPets {
-    height: 140px;
+    height: 200px;
+    width: 470px;
+    margin-top:-50px;
+    margin-left:-80px;
   }
 
   .finalPetsImage {
     transform:
       translateX(60px)
-      translateY(-12px)
+      translateY(-32px)
       scale(1.22);
   }
 
   
 
   .finalCopy {
-    transform: translateX(35px);
+    transform: translateX(-85px);
   }
 
   .finalCopy h2 {
@@ -5204,6 +5636,7 @@ overflow: visible;
 
   .finalButtons {
     gap: 10px !important;
+    margin-left:-130px !important;
   }
 
   .finalButtons .storeIconImage {
@@ -5818,12 +6251,12 @@ overflow: visible;
 
 
   .finalPetsImage {
-    width: 90% !important;
+    width: 85% !important;
     height: 100% !important;
 
 
     transform:
-      translateY(12px)
+      translateY(14px)
       translateX(-15px)
       scale(1.18);
 
@@ -6124,6 +6557,7 @@ overflow: visible;
   font-weight: 700;
   white-space: nowrap;
 }
+
 
 
 /* =========================================================
@@ -7321,5 +7755,128 @@ overflow: visible;
     left: 50% !important;
 
     --step-radius: 140px !important;
+  }
+}
+/* =========================================================
+   SHARE YOUR THOUGHTS — COMPACT BUTTON
+   ========================================================= */
+
+.finalButtons > a {
+  flex: 0 0 280px !important;
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+
+  margin: 0 !important;
+}
+
+
+/* 1440 — 1919 */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .finalButtons {
+    width: auto !important;
+    margin-left:80px !important;
+  }
+
+  .finalButtons > a {
+    flex: 0 0 280px !important;
+    width: 280px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+  }
+}
+
+
+/* 2K */
+@media (min-width: 1920px) and (max-width: 2559px) {
+  .finalButtons {
+    width: auto !important;
+  }
+
+  .finalButtons > a {
+    flex: 0 0 320px !important;
+    width: 320px !important;
+    min-width: 320px !important;
+    max-width: 320px !important;
+  }
+}
+
+
+/* 4K */
+@media (min-width: 2560px) and (max-width: 3839px) {
+  .finalButtons {
+    width: auto !important;
+  }
+
+  .finalButtons > a {
+    flex: 0 0 360px !important;
+    width: 360px !important;
+    min-width: 360px !important;
+    max-width: 360px !important;
+  }
+}
+
+/* =========================================================
+   FINAL BUTTONS — COMPACT
+   ========================================================= */
+
+.finalButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.finalButtons > a {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 250px !important;
+  max-width: none !important;
+
+  padding: 12px 20px !important;
+  margin: 0 !important;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   MOBILE — SHOW BOTH FINAL BUTTONS
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .finalButtons {
+    width: 100% !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+
+    gap: 5px !important;
+    padding: 0 2px 0 6px !important;
+
+    overflow: visible !important;
+  }
+
+  .finalButtons > a {
+    flex: 1 1 0 !important;
+
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+   height: 24px !important;
+    min-height: 24px !important;
+
+    padding: 2px 4px !important;
+
+    line-height: 1 !important;
+
+   
+
+    margin: 0 !important;
+
+    font-size: 8px !important;
+
+    white-space: nowrap !important;
   }
 }

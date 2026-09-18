@@ -36,6 +36,7 @@ import PetRewardsSlider from "../components/PetReawardsSlider";
 import JourneySteps from "../components/home/JourneySteps/JourneySteps";
 import FeaturesOrbit from "../components/FeaturesOrbit";
 import PetWorldPage from "../components/home/PetWorld/PetWorld";
+import HomeTestimonialsPreview from "../components/HomeTestimonialsPreview";
 
 
 type IconComponent = typeof PawPrint;
@@ -549,249 +550,10 @@ function PhoneMockup({
 }
 
 
-interface Testimonial {
-  _id: string;
-  name: string;
-  role: string;
-  rating: number;
-  text: string;
-  photo?: string;
-  isActive: boolean;
-}
-
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
   "http://localhost:5000/api";
 
-function HomeTestimonialsPreview() {
-  const [testimonials, setTestimonials] =
-    useState<Testimonial[]>([]);
-
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        const response = await fetch(
-          `${API_URL}/testimonials`
-        );
-
-        const data = await response.json();
-
-        if (response.ok && data.success) {
-          setTestimonials(
-            data.testimonials || []
-          );
-        }
-      } catch (error) {
-        console.error(
-          "Failed to fetch testimonials:",
-          error
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTestimonials();
-  }, []);
-
-  if (loading) {
-    return null;
-  }
-
-  if (testimonials.length === 0) {
-    return null;
-  }
-
-  const slides = [
-    ...testimonials,
-    ...testimonials,
-  ];
-
-  const getImageUrl = (
-    photo?: string
-  ) => {
-    if (!photo) return "";
-
-    if (photo.startsWith("http")) {
-      return photo;
-    }
-
-    return `${API_URL.replace(
-      "/api",
-      ""
-    )}${photo}`;
-  };
-
-  return (
-    <section
-      className={`${styles.section} ${styles.homeTestimonials}`}
-      id="testimonials"
-    >
-      <div className={styles.container}>
-        <div
-          className={`${styles.sectionHeading} ${styles.center}`}
-        >
-          <h2
-            className={
-              styles.sectionTitle
-            }
-          >
-            Loved for the little things.{" "}
-            <span>
-              Built for everyday care.
-            </span>
-          </h2>
-
-          <p
-            className={
-              styles.sectionSubtitle
-            }
-          >
-            Hear from pet parents about
-            their experience with PetCard.
-          </p>
-        </div>
-
-        <div
-          className={
-            styles.homeTestimonialsViewport
-          }
-        >
-          <div
-            className={
-              styles.homeTestimonialsTrack
-            }
-          >
-            {slides.map(
-              (item, index) => {
-                const imageUrl =
-                  getImageUrl(
-                    item.photo
-                  );
-
-                return (
-                  <article
-                    className={
-                      styles.homeTestimonialCard
-                    }
-                    key={`${item._id}-${index}`}
-                  >
-                    <div
-                      className={
-                        styles.homeTestimonialTop
-                      }
-                    >
-                      <span
-                        className={
-                          styles.homeQuote
-                        }
-                      >
-                        “
-                      </span>
-
-                      <span
-                        className={
-                          styles.homeStars
-                        }
-                      >
-                        {"★".repeat(
-                          item.rating
-                        )}
-                      </span>
-                    </div>
-
-                    <p>
-                      {
-                        item.text
-                      }
-                    </p>
-
-                    <div
-                      className={
-                        styles.homeTestimonialAuthor
-                      }
-                    >
-                      <span
-                        className={
-                          styles.homeTestimonialAvatar
-                        }
-                      >
-                        {imageUrl ? (
-                          <Image
-                            src={
-                              imageUrl
-                            }
-                            alt={
-                              item.name
-                            }
-                            width={
-                              48
-                            }
-                            height={
-                              48
-                            }
-                            unoptimized
-                          />
-                        ) : (
-                          item.name
-                            .split(
-                              " "
-                            )
-                            .map(
-                              (
-                                word
-                              ) =>
-                                word[0]
-                            )
-                            .join(
-                              ""
-                            )
-                            .slice(
-                              0,
-                              2
-                            )
-                        )}
-                      </span>
-
-                      <div>
-                        <b>
-                          {
-                            item.name
-                          }
-                        </b>
-
-                        <small>
-                          {
-                            item.role
-                          }
-                        </small>
-                      </div>
-                    </div>
-                  </article>
-                );
-              }
-            )}
-          </div>
-        </div>
-
-        <div
-          className={
-            styles.homePreviewLinkWrap
-          }
-        >
-          <Link
-            href="/testimonials"
-            className="btn btn-primary"
-          >
-            View All Testimonials
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 interface FAQ {
   _id: string;
@@ -1363,12 +1125,7 @@ export default function Home() {
               className="btn btn-primary"
             >
               Create Your Pet&apos;s Card
-              <img
-                src="/images/paw-white.png"
-                width={37}
-                height={37}
-                alt=""
-              />
+              
             </Link>
 
           </div>
@@ -1424,13 +1181,13 @@ export default function Home() {
           <div className={styles.finalCopy}>
 
             <h2>
-              Start your pet&apos;s amazing journey today!
+             Ready to Make Every Day More Paw-some?
             </h2>
 
             <p>
-              Download PETCARD and make every day better
+             Bring your pet's care, memories, and little  moments together 
               <br className={styles.desktopBreak} />
-              for you and your pet.
+             with PETCARD.
             </p>
 
           </div>

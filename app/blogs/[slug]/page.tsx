@@ -24,13 +24,15 @@ type Blog = {
     readTime: string;
     date: string;
     image?: string;
-    intro: string;
-    sections: {
+    intro?: string;
+    content?: string;
+    sections?: {
         heading: string;
         paragraphs: string[];
     }[];
-    takeaways: string[];
+    takeaways?: string[];
     note?: string;
+    views?: number;
     isActive?: boolean;
     isFeatured?: boolean;
     isPopular?: boolean;
@@ -41,6 +43,23 @@ const API_URL =
     "http://localhost:5000/api";
 
 const BACKEND_URL = API_URL.replace(/\/api\/?$/, "");
+
+const formatBlogDate = (date: string) => {
+  if (!date) return "";
+
+  const parsedDate = new Date(date);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return date;
+  }
+
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(parsedDate);
+};
 
 const getImageUrl = (image?: string) => {
     if (!image) return "";
@@ -127,10 +146,7 @@ export default async function BlogDetail({
                     <div className={styles.heroGrid}>
                         <div className={styles.heroContent}>
                             <div className={styles.category}>
-                                <PawPrint
-                                    size={13}
-                                    fill="currentColor"
-                                />
+                                
                                 {blog.category}
                             </div>
 
@@ -153,8 +169,10 @@ export default async function BlogDetail({
 
                                 <div>
                                     <CalendarDays size={15} />
-                                    <span>{blog.date}</span>
+                                   <span>{formatBlogDate(blog.date)}</span>
                                 </div>
+
+                               
                             </div>
                         </div>
 
@@ -168,12 +186,7 @@ export default async function BlogDetail({
                                 />
                             </div>
 
-                            <div className={styles.imagePaw}>
-                                <PawPrint
-                                    size={25}
-                                    fill="currentColor"
-                                />
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -228,101 +241,58 @@ export default async function BlogDetail({
                         </aside>
 
                         <article className={styles.article}>
-                            <p className={styles.articleIntro}>
-                                {blog.intro}
-                            </p>
+                            {blog.content ? (
+                                <div
+                                    className={styles.articleContent}
+                                    dangerouslySetInnerHTML={{
+                                        __html: blog.content,
+                                    }}
+                                />
+                            ) : (
+                                <>
+                                    {blog.intro && (
+                                        <p className={styles.articleIntro}>
+                                            {blog.intro}
+                                        </p>
+                                    )}
 
-                            <div className={styles.articleDivider} />
+                                    <div className={styles.articleDivider} />
 
-                            {blog.sections.map(
-                                (section, index) => (
-                                    <section
-                                        className={styles.articleBlock}
-                                        key={section.heading}
-                                    >
-                                        <div className={styles.blockNumber}>
-                                            {String(index + 1).padStart(
-                                                2,
-                                                "0"
-                                            )}
-                                        </div>
+                                    {blog.sections?.map((section, index) => (
+                                        <section
+                                            className={styles.articleBlock}
+                                            key={`${section.heading}-${index}`}
+                                        >
+                                            <div className={styles.blockNumber}>
+                                                {String(index + 1).padStart(2, "0")}
+                                            </div>
 
-                                        <div>
-                                            <h2>
-                                                {section.heading}
-                                            </h2>
+                                            <div>
+                                                <h2>{section.heading}</h2>
 
-                                            {section.paragraphs.map(
-                                                (paragraph) => (
-                                                    <p key={paragraph}>
-                                                        {paragraph}
-                                                    </p>
-                                                )
-                                            )}
-                                        </div>
-                                    </section>
-                                )
+                                                {section.paragraphs.map(
+                                                    (paragraph, paragraphIndex) => (
+                                                        <p
+                                                            key={`${section.heading}-${paragraphIndex}`}
+                                                        >
+                                                            {paragraph}
+                                                        </p>
+                                                    )
+                                                )}
+                                            </div>
+                                        </section>
+                                    ))}
+                                </>
                             )}
 
-                            <div
-                                className={styles.takeawayCard}
-                            >
-                                <div className={styles.takeawayIcon}>
-                                    <PawPrint
-                                        size={22}
-                                        fill="currentColor"
-                                    />
-                                </div>
-
-                                <div>
-                                    <span>
-                                        Quick Takeaway
-                                    </span>
-
-                                    <h2>
-                                        What to remember
-                                    </h2>
-
-                                    <div
-                                        className={
-                                            styles.takeawayList
-                                        }
-                                    >
-                                        {blog.takeaways.map(
-                                            (item) => (
-                                                <div
-                                                    key={item}
-                                                >
-                                                    <span>✓</span>
-                                                    <p>{item}</p>
-                                                </div>
-                                            )
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {blog.note && (
-                                <div className={styles.noteCard}>
-                                    <strong>
-                                        Important Note
-                                    </strong>
-
-                                    <p>
-                                        {blog.note}
-                                    </p>
-                                </div>
-                            )}
+                           
 
                             <div
                                 className={styles.articleEnd}
                                 id="article-end"
                             >
                                 <div className={styles.endIcon}>
-                                    <PawPrint
-                                        size={22}
-                                        fill="currentColor"
-                                    />
+                                   <img src="/images/paw.png" width={25} height={30}/>
                                 </div>
 
                                 <h2>
@@ -350,7 +320,7 @@ export default async function BlogDetail({
                 <div className={styles.container}>
                     <div className={styles.relatedHeader}>
                         <div>
-                            <span>Keep Reading</span>
+                          
 
                             <h2>
                                 More stories for{" "}
@@ -360,7 +330,7 @@ export default async function BlogDetail({
 
                         <Link href="/blogs">
                             View All Articles
-                            <ArrowRight size={16} />
+                           
                         </Link>
                     </div>
 
@@ -399,7 +369,7 @@ export default async function BlogDetail({
                                             {item.readTime}
                                         </span>
 
-                                        <ArrowRight size={16} />
+                                        
                                     </div>
                                 </div>
                             </Link>
@@ -407,54 +377,7 @@ export default async function BlogDetail({
                     </div>
                 </div>
             </section>
-
-            {/* =====================================================
-          NEWSLETTER
-          ===================================================== */}
-
-            <section className={styles.newsletterSection}>
-                <div className={styles.container}>
-                    <div className={styles.newsletter}>
-                        <div className={styles.newsletterPaw}>
-                            <PawPrint
-                                size={70}
-                                fill="currentColor"
-                            />
-                        </div>
-
-                        <div className={styles.newsletterContent}>
-                            <span>
-                                <Mail size={13} />
-                                PetCard Journal
-                            </span>
-
-                            <h2>
-                                Pawsome updates,
-                                straight to your inbox.
-                            </h2>
-
-                            <p>
-                                Get practical pet-care tips,
-                                thoughtful stories and helpful
-                                ideas delivered without the noise.
-                            </p>
-                        </div>
-
-                        <div className={styles.newsletterForm}>
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                aria-label="Email address"
-                            />
-
-                            <button type="button">
-                                Subscribe
-                                <ArrowRight size={16} />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
+           
         </main>
     );
 }

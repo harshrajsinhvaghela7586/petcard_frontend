@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useEffect, useMemo, useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 
 import {
   Clock3,
   Heart,
+  PenIcon,
   Search,
   Star,
 } from "lucide-react";
@@ -24,6 +27,11 @@ const API_URL =
 const BACKEND_URL = API_URL.replace(
   /\/api\/?$/,
   ""
+);
+
+const JoditEditor = dynamic(
+  () => import("jodit-react"),
+  { ssr: false }
 );
 
 /* =========================================================
@@ -51,10 +59,15 @@ interface Blog {
   slug: string;
   category: string;
   excerpt: string;
+  content?: string;
 
   author: string;
+  email?: string;
   readTime: string;
   date: string;
+
+  status?: "pending" | "approved" | "rejected";
+  source?: "admin" | "user";
 
   image?: string;
 
@@ -107,39 +120,7 @@ const getImageUrl = (image?: string) => {
   return `${BACKEND_URL}${image}`;
 };
 
-/* =========================================================
-   DATE HELPER
-========================================================= */
 
-const storeBadges = (
-  <>
-    <div className={styles.storeBadge}>
-      <img
-        src="/images/apple-logo.png"
-        alt="Apple"
-        className={styles.storeIconImage}
-      />
-
-      <span className={styles.storeText}>
-        <small>Download on the</small>
-        <b>App Store</b>
-      </span>
-    </div>
-
-    <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
-      <img
-        src="/images/google-play.png"
-        alt="Google Play"
-        className={styles.storeIconImage}
-      />
-
-      <span className={styles.storeText}>
-        <small>GET IT ON</small>
-        <b>Google Play</b>
-      </span>
-    </div>
-  </>
-);
 
 const getBlogDate = (blog: Blog) => {
   if (blog.date) {
@@ -188,6 +169,91 @@ export default function Blogs() {
     useState(true);
 
   /* =====================================================
+     SHARE YOUR PET WISDOM
+     Public user submission → pending approval
+     ===================================================== */
+  const [isWisdomModalOpen, setIsWisdomModalOpen] =
+    useState(false);
+
+  const [wisdomStep, setWisdomStep] =
+    useState<"email" | "blog" | "success">("email");
+
+  const [wisdomEmail, setWisdomEmail] =
+    useState("");
+
+  const [wisdomImagePreview, setWisdomImagePreview] =
+    useState("");
+
+  const [wisdomSubmitting, setWisdomSubmitting] =
+    useState(false);
+
+  const [wisdomError, setWisdomError] =
+    useState("");
+
+  const [wisdomContent, setWisdomContent] =
+    useState("");
+
+  const [wisdomForm, setWisdomForm] = useState({
+    authorName: "",
+    title: "",
+    excerpt: "",
+    category: "",
+    readTime: "5 min read",
+    image: null as File | null,
+  });
+
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+
+  const wisdomEditorConfig = useMemo(
+    () => ({
+      readonly: false,
+      height: 500,
+      placeholder:
+        "Write your complete blog content here...",
+      toolbarAdaptive: false,
+      buttons: [
+        "bold",
+        "italic",
+        "underline",
+        "|",
+        "ul",
+        "ol",
+        "|",
+        "font",
+        "fontsize",
+        "|",
+        "paragraph",
+        "|",
+        "image",
+        "table",
+        "link",
+        "|",
+        "align",
+        "|",
+        "undo",
+        "redo",
+        "|",
+        "hr",
+        "fullsize",
+        "source",
+      ],
+      uploader: {
+        insertImageAsBase64URI: true,
+      },
+    }),
+    []
+  );
+
+  const [newsletterEmail, setNewsletterEmail] =
+    useState("");
+
+  const [newsletterSubmitting, setNewsletterSubmitting] =
+    useState(false);
+
+  const [newsletterMessage, setNewsletterMessage] =
+    useState("");
+
+  /* =====================================================
      FETCH BLOGS
   ===================================================== */
 
@@ -232,8 +298,8 @@ export default function Blogs() {
           Array.isArray(data)
             ? data
             : Array.isArray(data?.blogs)
-            ? data.blogs
-            : [];
+              ? data.blogs
+              : [];
 
         /*
          * Only active blogs should be visible
@@ -246,7 +312,9 @@ export default function Blogs() {
         const activeBlogs =
           blogList.filter(
             (blog) =>
-              blog.isActive !== false
+              blog.isActive !== false &&
+              blog.status !== "pending" &&
+              blog.status !== "rejected"
           );
 
         setBlogs(activeBlogs);
@@ -331,16 +399,385 @@ export default function Blogs() {
      
      Featured/Popular status does not matter here.
   ===================================================== */
-const freshReads = useMemo(() => {
+  const freshReads = useMemo(() => {
     return [...blogs]
-        .filter((blog) => blog.isFeatured === false && blog.isPopular === false)
-        .sort(
-            (a, b) =>
-                getBlogDate(b) -
-                getBlogDate(a)
-        )
-        .slice(0, 3);
-}, [blogs]);
+      .filter((blog) => blog.isFeatured === false && blog.isPopular === false)
+      .sort(
+        (a, b) =>
+          getBlogDate(b) -
+          getBlogDate(a)
+      )
+      .slice(0, 3);
+  }, [blogs]);
+
+  const resetWisdomForm = () => {
+    setWisdomStep("email");
+    setWisdomEmail("");
+    setWisdomImagePreview("");
+    setWisdomError("");
+    setWisdomSubmitting(false);
+    setWisdomContent("");
+
+    setWisdomForm({
+      authorName: "",
+      title: "",
+      excerpt: "",
+      category: "",
+      readTime: "5 min read",
+      image: null,
+    });
+  };
+
+  const openWisdomModal = () => {
+    resetWisdomForm();
+    setIsWisdomModalOpen(true);
+  };
+
+  const closeWisdomModal = () => {
+    setIsWisdomModalOpen(false);
+    resetWisdomForm();
+  };
+
+  useEffect(() => {
+    if (!isWisdomModalOpen) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeWisdomModal();
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener(
+      "keydown",
+      handleEscape
+    );
+
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener(
+        "keydown",
+        handleEscape
+      );
+    };
+  }, [isWisdomModalOpen]);
+
+  const handleWisdomFieldChange = (
+    event: ChangeEvent<
+      HTMLInputElement |
+      HTMLTextAreaElement |
+      HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = event.target;
+
+    setWisdomForm((current) => ({
+      ...current,
+      [name]: value,
+    }));
+
+    setWisdomError("");
+  };
+
+  const handleWisdomImageChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    const file =
+      event.target.files?.[0] || null;
+
+    setWisdomError("");
+
+    if (!file) {
+      setWisdomForm((current) => ({
+        ...current,
+        image: null,
+      }));
+      setWisdomImagePreview("");
+      return;
+    }
+
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+      setWisdomError(
+        "Only JPG, PNG and WEBP images are allowed."
+      );
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setWisdomError(
+        "Image size must be less than 5MB."
+      );
+      event.target.value = "";
+      return;
+    }
+
+    setWisdomForm((current) => ({
+      ...current,
+      image: file,
+    }));
+
+    setWisdomImagePreview(
+      URL.createObjectURL(file)
+    );
+  };
+
+  const handleWisdomEmailContinue = (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    setWisdomError("");
+
+    const email =
+      wisdomEmail.trim().toLowerCase();
+
+    if (!email) {
+      setWisdomError(
+        "Please enter your email address."
+      );
+      return;
+    }
+
+    const emailRegex =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setWisdomError(
+        "Please enter a valid email address."
+      );
+      return;
+    }
+
+    setWisdomEmail(email);
+    setWisdomStep("blog");
+  };
+
+  const handleWisdomSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    if (wisdomSubmitting) {
+      return;
+    }
+
+    setWisdomError("");
+
+    if (!wisdomForm.authorName.trim()) {
+      setWisdomError("Please enter your name.");
+      return;
+    }
+
+    if (!wisdomForm.title.trim()) {
+      setWisdomError(
+        "Please enter a blog title."
+      );
+      return;
+    }
+
+    if (!wisdomForm.category) {
+      setWisdomError(
+        "Please select a category."
+      );
+      return;
+    }
+
+    if (!wisdomForm.excerpt.trim()) {
+      setWisdomError(
+        "Please enter a blog excerpt."
+      );
+      return;
+    }
+
+    if (!wisdomContent.trim()) {
+      setWisdomError(
+        "Please write your blog content."
+      );
+      return;
+    }
+
+    if (!wisdomForm.image) {
+      setWisdomError(
+        "Please upload a blog image."
+      );
+      return;
+    }
+
+    try {
+      setWisdomSubmitting(true);
+
+      const formData = new FormData();
+
+      formData.append(
+        "title",
+        wisdomForm.title.trim()
+      );
+
+      formData.append(
+        "category",
+        wisdomForm.category
+      );
+
+      formData.append(
+        "excerpt",
+        wisdomForm.excerpt.trim()
+      );
+
+      /*
+       * Jodit returns HTML.
+       * The backend stores this directly in content.
+       */
+      formData.append(
+        "content",
+        wisdomContent
+      );
+
+      formData.append(
+        "author",
+        wisdomForm.authorName.trim()
+      );
+
+      formData.append(
+        "email",
+        wisdomEmail.trim().toLowerCase()
+      );
+
+      formData.append(
+        "readTime",
+        wisdomForm.readTime.trim() ||
+        "5 min read"
+      );
+
+      formData.append(
+        "image",
+        wisdomForm.image
+      );
+
+      const response = await fetch(
+        `${API_URL}/blogs/submit`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      let data: {
+        success?: boolean;
+        message?: string;
+      } = {};
+
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          data.message ||
+          "Unable to submit your blog."
+        );
+      }
+
+      setWisdomStep("success");
+    } catch (error) {
+      console.error(
+        "Blog submission failed:",
+        error
+      );
+
+      setWisdomError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setWisdomSubmitting(false);
+    }
+  };
+
+  const handleNewsletterSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    if (newsletterSubmitting) {
+      return;
+    }
+
+    setNewsletterMessage("");
+
+    const email =
+      newsletterEmail.trim().toLowerCase();
+
+    if (!email) {
+      setNewsletterMessage(
+        "Please enter your email address."
+      );
+      return;
+    }
+
+    try {
+      setNewsletterSubmitting(true);
+
+      const response = await fetch(
+        `${API_URL}/newsletter/subscribe`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      let data: {
+        success?: boolean;
+        message?: string;
+      } = {};
+
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          data.message ||
+          "Unable to subscribe right now."
+        );
+      }
+      setNewsletterEmail("");
+      setNewsletterMessage("");
+      setNewsletterSuccess(true);
+
+      setTimeout(() => {
+        setNewsletterSuccess(false);
+      }, 3000);
+
+    } catch (error) {
+      console.error(
+        "Newsletter subscription failed:",
+        error
+      );
+
+      setNewsletterMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setNewsletterSubmitting(false);
+    }
+  };
 
   /* =====================================================
      SCROLL REVEAL
@@ -461,7 +898,7 @@ const freshReads = useMemo(() => {
             <div
               className={styles.heroPets}
             >
-             
+
 
               <div
                 className={styles.heroDog}
@@ -501,13 +938,9 @@ const freshReads = useMemo(() => {
                       category.title
                     }
                     type="button"
-                    className={`${styles.categoryButton} ${
-                      index === 0
-                        ? styles.categoryButtonActive
-                        : ""
-                    }`}
+                    className={`${styles.categoryButton} `}
                   >
-                   
+
                     <small>
                       {
                         category.title
@@ -518,43 +951,7 @@ const freshReads = useMemo(() => {
               )}
             </div>
 
-            <div
-              className={
-                styles.shareStory
-              }
-            >
-              <div
-                className={
-                  styles.shareStoryPet
-                }
-              >
-                <img
-                  src="/images/slider/huchiko.png"
-                  alt="Pet"
-                />
-              </div>
 
-              <div>
-                <strong>
-                  Got a story to share?
-                </strong>
-
-                <span>
-                  We&apos;d love to
-                  feature you!
-                </span>
-
-                <Link href="/contact" className="btn btn-primary">
-                  Share Your Story
-                  <img
-                    src="/images/paw-white.png"
-                    width={20}
-                    height={20}
-                    alt=""
-                  />
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -586,133 +983,119 @@ const freshReads = useMemo(() => {
                   styles.sectionLabel
                 }
               >
-              
+
 
                 FEATURED ARTICLE
               </div>
 
               {featuredBlog ? (
-                <article
-                  className={
-                    styles.featuredCard
-                  }
-                  
+                <Link
+                  href={`/blogs/${featuredBlog.slug}`}
+
+                  aria-label="Read featured article"
                 >
-                  <div
+                  <article
                     className={
-                      styles.featuredImage
+                      styles.featuredCard
                     }
-                    
-                  >
-                    {featuredBlog.image ? (
-                      <img
-                        src={getImageUrl(
-                          featuredBlog.image
-                        )}
-                        alt={
-                          featuredBlog.title
-                        }
-                      />
-                    ) : (
-                      <img
-                        src="/images/brand/dog.png"
-                        alt={
-                          featuredBlog.title
-                        }
-                      />
-                    )}
 
-                    <span>
-                      {getCategoryLabel(
-                        featuredBlog.category
-                      )}
-                    </span>
-                  </div>
-
-                  <div
-                    className={
-                      styles.featuredContent
-                    }
                   >
                     <div
                       className={
-                        styles.articleTop
+                        styles.featuredImage
                       }
+
                     >
+                      {featuredBlog.image ? (
+                        <img
+                          src={getImageUrl(
+                            featuredBlog.image
+                          )}
+                          alt={
+                            featuredBlog.title
+                          }
+                        />
+                      ) : (
+                        <img
+                          src="/images/brand/dog.png"
+                          alt={
+                            featuredBlog.title
+                          }
+                        />
+                      )}
+
                       <span>
                         {getCategoryLabel(
                           featuredBlog.category
                         )}
                       </span>
-
-                      <span>
-                        <Clock3
-                          size={13}
-                        />
-
-                        {
-                          featuredBlog.readTime
-                        }
-                      </span>
                     </div>
-
-                    <h2>
-                      {
-                        featuredBlog.title
-                      }
-                    </h2>
-
-                    <p>
-                      {
-                        featuredBlog.excerpt
-                      }
-                    </p>
 
                     <div
                       className={
-                        styles.authorRow
+                        styles.featuredContent
                       }
                     >
                       <div
                         className={
-                          styles.authorAvatar
+                          styles.articleTop
                         }
                       >
-                        {featuredBlog.author
-                          ?.charAt(0)
-                          .toUpperCase() ||
-                          "P"}
-                      </div>
-
-                      <div>
-                        <strong>
-                          {
-                            featuredBlog.author
-                          }
-                        </strong>
-
                         <span>
-                          PetCard Journal
+                          <Clock3
+                            size={13}
+                          />
+
+                          {
+                            featuredBlog.readTime
+                          }
                         </span>
                       </div>
 
-                      <Link
-                        href={`/blogs/${featuredBlog.slug}`}
-                        className={
-                          styles.circleArrow
+                      <h2>
+                        {
+                          featuredBlog.title
                         }
-                        aria-label="Read featured article"
+                      </h2>
+
+                      <p>
+                        {
+                          featuredBlog.excerpt
+                        }
+                      </p>
+
+                      <div
+                        className={
+                          styles.authorRow
+                        }
                       >
-                        <img
-                          src="/images/paw.png"
-                          width={20}
-                          height={20}
-                          alt=""
-                        />
-                      </Link>
+                        <div
+                          className={
+                            styles.authorAvatar
+                          }
+                        >
+                          {featuredBlog.author
+                            ?.charAt(0)
+                            .toUpperCase() ||
+                            "P"}
+                        </div>
+
+                        <div>
+                          <strong>
+                            {
+                              featuredBlog.author
+                            }
+                          </strong>
+
+                          <span>
+                            PetCard Journal
+                          </span>
+                        </div>
+
+
+                      </div>
                     </div>
-                  </div>
-                </article>
+                  </article> </Link>
               ) : (
                 <article
                   className={
@@ -804,7 +1187,7 @@ const freshReads = useMemo(() => {
                 }
               >
                 <h2>
-                 
+
                   Popular Posts
                 </h2>
               </div>
@@ -815,7 +1198,7 @@ const freshReads = useMemo(() => {
                 }
               >
                 {popularBlogs.length >
-                0 ? (
+                  0 ? (
                   popularBlogs.map(
                     (post) => (
                       <Link
@@ -867,9 +1250,7 @@ const freshReads = useMemo(() => {
                               post.readTime
                             }
 
-                            <b>•</b>
 
-                            🐾
                           </span>
                         </div>
                       </Link>
@@ -938,99 +1319,379 @@ const freshReads = useMemo(() => {
               styles.storyBanner
             }
           >
-            <div
-              className={
-                styles.storyPet
-              }
-            >
-              <img
-                src="/images/blogContent.png"
-                alt="Happy pet"
-              />
-            </div>
+
 
             <div
               className={
-                styles.storyCopy
-              }
-            >
-              <strong>
-                Share your pet&apos;s
-                story!
-              </strong>
-
-              <p>
-                Every pet has a unique
-                story.
-                <br />
-                We&apos;d love to feature
-                yours.
-              </p>
-
-              <Link href="/contact" className="btn btn-primary">
-                Share Your Story
-                <img
-                  src="/images/paw-white.png"
-                  width={25}
-                  height={25}
-                  alt=""
-                />
-              </Link>
-            </div>
-
-            <div
-              className={
-                styles.polaroids
+                styles.shareStory
               }
             >
               <div
                 className={
-                  styles.polaroid
+                  styles.shareStoryPet
                 }
               >
                 <img
-                  src={heroDog}
-                  alt="Bruno"
+                  src="/images/AboutFooter.png"
+                  alt="Pet"
                 />
+              </div>
+
+              <div>
+                <strong>
+                  Got a story to share?
+                </strong>
 
                 <span>
-                  Bruno ♡
+                  We&apos;d love to
+                  feature you!
+                </span>
+
+                <Link href="/contact" className="btn btn-primary">
+                  Explore More Stories
+
+                </Link>
+
+                <button
+                  type="button"
+                  className={`${styles.shareWisdomBtn} btn btn-outline`}
+                  onClick={openWisdomModal}
+                >
+                  Share Your Pet Wisdom <PenIcon />
+                </button>
+              </div>
+            </div>
+
+
+
+            <div className={styles.polaroids}>
+              {/* rabbit */}
+              <div className={styles.polaroid}>
+                <img
+                  src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=85"
+                  alt="Browny"
+                />
+                <span>
+                  Browny ♡
                 </span>
               </div>
 
-              <div
-                className={
-                  styles.polaroid
-                }
-              >
+              {/* Cat */}
+              <div className={styles.polaroid}>
                 <img
-                  src={heroCat}
-                  alt="Luna"
+                  src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=700&q=85"
+                  alt="Oreo"
                 />
 
                 <span>
-                  Luna ♡
+                  Oreo ♡
                 </span>
               </div>
 
-              <div
-                className={
-                  styles.polaroid
-                }
-              >
+              {/* dog */}
+              <div className={styles.polaroid}>
                 <img
                   src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=700&q=85"
-                  alt="Milo"
+                  alt="Huchiko"
                 />
 
                 <span>
-                  Milo ♡
+                  Huchiko ♡
                 </span>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+
+      {isWisdomModalOpen && (
+        <div
+          className={styles.wisdomModalOverlay}
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              closeWisdomModal();
+            }
+          }}
+        >
+          <div
+            className={styles.wisdomModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="wisdom-modal-title"
+          >
+            <button
+              type="button"
+              className={styles.wisdomModalClose}
+              onClick={closeWisdomModal}
+              aria-label="Close"
+            >
+              ×
+            </button>
+
+            {wisdomStep === "email" && (
+              <div className={styles.wisdomEmailStep}>
+
+                <h2 id="wisdom-modal-title">
+                  Let&apos;s start with your email
+                </h2>
+                <p>
+                  Enter your email first, then you can share your story with the PetCard community.
+                </p>
+
+                <form onSubmit={handleWisdomEmailContinue}>
+                  <label htmlFor="wisdom-email">Email address</label>
+                  <input
+                    id="wisdom-email"
+                    type="email"
+                    value={wisdomEmail}
+                    onChange={(event) => setWisdomEmail(event.target.value)}
+                    placeholder="Enter your email"
+                    autoComplete="email"
+                    required
+                  />
+                  <button type="submit" className={`${styles.wisdomPrimaryBtn} btn btn-primary`}>
+                    Continue
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {wisdomStep === "blog" && (
+              <div className={styles.wisdomBlogStep}>
+                <div className={styles.wisdomModalHeader}>
+
+                  <h2 id="wisdom-modal-title">Write your story</h2>
+                  <p>
+                    Share something useful, personal, or heartwarming. Our team will review it before publishing.
+                  </p>
+                </div>
+
+                <form onSubmit={handleWisdomSubmit}>
+                  {wisdomError && (
+                    <div
+                      className={styles.wisdomError}
+                      role="alert"
+                    >
+                      {wisdomError}
+                    </div>
+                  )}
+
+                  <div
+                    className={styles.wisdomFormGrid}
+                  >
+                    <div className={styles.wisdomField}>
+                      <label htmlFor="wisdom-authorName">
+                        Author name
+                      </label>
+                      <input
+                        id="wisdom-authorName"
+                        name="authorName"
+                        type="text"
+                        value={wisdomForm.authorName}
+                        onChange={handleWisdomFieldChange}
+                        placeholder="Your name"
+                        autoComplete="name"
+                        required
+                      />
+                    </div>
+
+                    <div className={styles.wisdomField}>
+                      <label htmlFor="wisdom-category">
+                        Category
+                      </label>
+                      <select
+                        id="wisdom-category"
+                        name="category"
+                        value={wisdomForm.category}
+                        onChange={handleWisdomFieldChange}
+                        required
+                      >
+                        <option value="">
+                          Select category
+                        </option>
+                        <option value="Care Tips">
+                          Care Tips
+                        </option>
+                        <option value="Health">
+                          Health
+                        </option>
+                        <option value="Training">
+                          Training
+                        </option>
+                        <option value="Nutrition">
+                          Nutrition
+                        </option>
+                        <option value="Stories">
+                          Stories
+                        </option>
+                        <option value="Lifestyle">
+                          Lifestyle
+                        </option>
+                      </select>
+                    </div>
+
+                    <div className={styles.wisdomField}>
+                      <label htmlFor="wisdom-title">
+                        Blog title
+                      </label>
+                      <input
+                        id="wisdom-title"
+                        name="title"
+                        type="text"
+                        value={wisdomForm.title}
+                        onChange={handleWisdomFieldChange}
+                        placeholder="Give your story a title"
+                        required
+                      />
+                    </div>
+
+                    <div className={styles.wisdomField}>
+                      <label htmlFor="wisdom-readTime">
+                        Read time
+                      </label>
+                      <input
+                        id="wisdom-readTime"
+                        name="readTime"
+                        type="text"
+                        value={wisdomForm.readTime}
+                        onChange={handleWisdomFieldChange}
+                        placeholder="e.g. 5 min read"
+                        required
+                      />
+                    </div>
+
+                    <div
+                      className={`${styles.wisdomField} ${styles.wisdomFieldFull}`}
+                    >
+                      <label htmlFor="wisdom-excerpt">
+                        Excerpt
+                      </label>
+                      <textarea
+                        id="wisdom-excerpt"
+                        name="excerpt"
+                        value={wisdomForm.excerpt}
+                        onChange={handleWisdomFieldChange}
+                        placeholder="A short description of your blog"
+                        rows={3}
+                        required
+                      />
+                    </div>
+
+                    <div
+                      className={`${styles.wisdomField} ${styles.wisdomFieldFull}`}
+                    >
+                      <label htmlFor="wisdom-image">
+                        Blog image
+                      </label>
+
+                      <input
+                        id="wisdom-image"
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                        onChange={handleWisdomImageChange}
+                        required
+                      />
+
+                      <small>
+                        JPG, PNG or WEBP • Maximum 5MB
+                      </small>
+
+                      {wisdomImagePreview && (
+                        <div
+                          className={
+                            styles.wisdomImagePreview
+                          }
+                        >
+                          <img
+                            src={wisdomImagePreview}
+                            alt="Blog preview"
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    <div
+                      className={`${styles.wisdomField} ${styles.wisdomFieldFull}`}
+                    >
+                      <label htmlFor="wisdom-content">
+                        Blog content
+                      </label>
+
+                      <div
+                        className={styles.wisdomEditor}
+                      >
+                        <JoditEditor
+                          value={wisdomContent}
+                          config={wisdomEditorConfig}
+                          onBlur={(newContent) => {
+                            setWisdomContent(newContent);
+                          }}
+                          onChange={(newContent) => {
+                            setWisdomContent(newContent);
+                            setWisdomError("");
+                          }}
+                        />
+                      </div>
+
+                      <small>
+                        Write your complete article using
+                        the rich text editor.
+                      </small>
+                    </div>
+                  </div>
+
+                  <div
+                    className={styles.wisdomSubmitRow}
+                  >
+                    <button
+                      type="button"
+                      className={styles.wisdomBackBtn}
+                      onClick={() =>
+                        setWisdomStep("email")
+                      }
+                      disabled={wisdomSubmitting}
+                    >
+                      Back
+                    </button>
+
+                    <button
+                      type="submit"
+                      className={`${styles.wisdomPrimaryBtn} btn btn-primary`}
+                      disabled={wisdomSubmitting}
+                    >
+                      {wisdomSubmitting
+                        ? "Submitting..."
+                        : "Submit for review"}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {wisdomStep === "success" && (
+              <div className={styles.wisdomSuccessStep}>
+                <div className={styles.wisdomSuccessIcon}>✓</div>
+                <span className={styles.wisdomModalEyebrow}>
+                  SUBMITTED FOR REVIEW
+                </span>
+                <h2>Thanks for sharing!</h2>
+                <p>
+                  Your blog has been submitted for review.
+                </p>
+                <button
+                  type="button"
+                  className={`${styles.wisdomPrimaryBtn} btn btn-primary`}
+                  onClick={closeWisdomModal}
+                >
+                  Done
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* =====================================================
           FRESH READS
@@ -1126,16 +1787,7 @@ const freshReads = useMemo(() => {
                           }
                         </span>
 
-                        <span>
-                          <Heart
-                            size={13}
-                          />
 
-                          {typeof post.likes ===
-                          "number"
-                            ? post.likes
-                            : "🐾"}
-                        </span>
                       </div>
                     </div>
                   </Link>
@@ -1281,7 +1933,7 @@ const freshReads = useMemo(() => {
       </section>
 
 
-       {/* =====================================================
+      {/* =====================================================
     FINAL DOWNLOAD
     ===================================================== */}
 
@@ -1311,15 +1963,11 @@ const freshReads = useMemo(() => {
           <div className={styles.finalCopy}>
 
             <h2>
-              Pawsome updates straight
-                to your inbox!
+              Keep the Paw-sitive Vibes Coming!
             </h2>
 
             <p>
-              Subscribe to get the
-                best pet care tips,
-                stories, and exclusive
-                updates.
+              Get pet-care tips, fresh ideas, heartwarming reads, and the latest from PETCARD, straight to your inbox.
             </p>
 
           </div>
@@ -1328,30 +1976,42 @@ const freshReads = useMemo(() => {
           {/* ================= STORE BADGES ================= */}
 
           <form
-              className={
-                styles.newsletterForm
-              }
-              onSubmit={(event) =>
-                event.preventDefault()
-              }
-            >
-              <input
-                type="email"
-                placeholder="Enter your email"
-                aria-label="Email address"
-                required
-              />
+            className={styles.newsletterForm}
+            onSubmit={handleNewsletterSubmit}
+          >
+            {newsletterSuccess ? (
+              <div className={styles.newsletterSuccess}>
+                <span className={styles.successCheck}>✓</span>
 
-              <button type="submit" className="btn btn-primary">
-                Subscribe
-                <img
-                  src="/images/paw-white.png"
-                  width={25}
-                  height={25}
-                  alt=""
+                <div>
+                  <strong>Successfully subscribed!</strong>
+                  <span>Thanks for joining PetCard updates.</span>
+                </div>
+              </div>
+            ) : (
+              <>
+                <input
+                  type="email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  aria-label="Email address"
+                  disabled={newsletterSubmitting}
                 />
-              </button>
-            </form>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={newsletterSubmitting}
+                >
+                  {newsletterSubmitting ? "Subscribing..." : "Subscribe"}
+                </button>
+
+                
+              </>
+            )}
+          </form>
+
         </div>
       </section>
     </main>

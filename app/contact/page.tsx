@@ -1,3 +1,5 @@
+"use client";
+
 import ContactForm from "../../components/ContactForm";
 import CTA from "../../components/CTA";
 
@@ -5,6 +7,7 @@ import {
   Clock,
   Heart,
   Mail,
+  CheckCircle2,
   MapPin,
   Phone,
   ShieldCheck,
@@ -12,6 +15,7 @@ import {
 
 import styles from "./Contact.module.css";
 import Image from "next/image";
+import { useState } from "react";
 
 const contactInfo = [
   {
@@ -68,6 +72,23 @@ const storeBadges = (
 );
 
 export default function Contact() {
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
+  const [newsletterError, setNewsletterError] = useState("");
+
+  const API_URL =
+    process.env.NEXT_PUBLIC_API_URL ||
+    "http://localhost:5000/api";
+
+  const closeNewsletterModal = () => {
+    setShowEmailForm(false);
+    setIsSubscribed(false);
+    setNewsletterEmail("");
+    setNewsletterError("");
+    setNewsletterSubmitting(false);
+  };
   return (
     <main className={styles.page}>
       {/* =====================================================
@@ -94,7 +115,7 @@ export default function Contact() {
         <div className="container">
           <div className={styles.heroGrid}>
             <div className={styles.heroContent}>
-             
+
 
               <h1>
                 We&apos;d love to{" "}
@@ -119,16 +140,10 @@ export default function Contact() {
                 style={{ marginTop: 26 }}
               >
                 Send Us a Message
-                <img src="/images/paw-white.png" height={30} width={30}/>
+
               </a>
 
-              <div className={styles.heroTrust}>
-                <ShieldCheck size={16} />
 
-                <span>
-                  Questions · Feedback · Support
-                </span>
-              </div>
             </div>
 
             {/* =================================================
@@ -149,7 +164,7 @@ export default function Contact() {
                 </div>
 
                 <div className={styles.contactAvatar}>
-                  <img src="/images/AboutFooter.png"/>
+                  <img src="/images/AboutFooter.png" />
                 </div>
 
                 <h3>
@@ -213,7 +228,7 @@ export default function Contact() {
             {/* FORM */}
 
             <div className={styles.formWrap}>
-             
+
 
               <h2 className={styles.sectionTitle}>
                 Tell us{" "}
@@ -243,9 +258,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <span className={styles.infoLabel}>
-                    Get in Touch
-                  </span>
+
 
                   <h2>
                     We&apos;re{" "}
@@ -317,7 +330,7 @@ export default function Contact() {
           ===================================================== */}
 
 
- {/* =====================================================
+      {/* =====================================================
     FINAL DOWNLOAD
     ===================================================== */}
 
@@ -347,11 +360,11 @@ export default function Contact() {
           <div className={styles.finalCopy}>
 
             <h2>
-            Still have questions?
+              Have Something to Share? We're All Ears.
             </h2>
 
             <p>
-             You can also check our FAQ section for common PetCard questions.
+              Questions, ideas, feedback, or simply want to connect? We'd love to hear from you.
             </p>
 
           </div>
@@ -360,10 +373,175 @@ export default function Contact() {
           {/* ================= STORE BADGES ================= */}
 
           <div className={styles.finalButtons}>
-            {storeBadges}
+
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() => {
+                document
+                  .getElementById("contact-form")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Get in Touch
+            </button>
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() => {
+                setIsSubscribed(false);
+                setShowEmailForm(true);
+              }}
+            >
+              Get PETCARD Updates
+            </button>
           </div>
 
         </div>
+
+        {/* MODAL — OUTSIDE finalDownloadCard */}
+        {showEmailForm && (
+          <div
+            className={styles.emailModalOverlay}
+           onClick={closeNewsletterModal}
+          >
+            <div
+              className={styles.emailModal}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className={styles.emailModalClose}
+                onClick={() => {
+                  setShowEmailForm(false);
+                  setIsSubscribed(false);
+                }}
+                aria-label="Close"
+              >
+                ×
+              </button>
+
+              {!isSubscribed ? (
+                <>
+                  <div className={styles.emailModalIcon}>
+                    <img src="/images/paw.png" height={24} width={24} alt="PETCARD" />
+                  </div>
+
+                  <h3>Get PETCARD Updates</h3>
+
+                  <p>
+                    Stay updated with the latest PETCARD news,
+                    features, and pet-care tips.
+                  </p>
+
+                <form
+  className={styles.emailForm}
+  onSubmit={async (e) => {
+    e.preventDefault();
+
+    const email = newsletterEmail.trim().toLowerCase();
+
+    if (!email) {
+      setNewsletterError("Email is required.");
+      return;
+    }
+
+    setNewsletterSubmitting(true);
+    setNewsletterError("");
+
+    try {
+      const response = await fetch(
+        `${API_URL}/newsletter/subscribe`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setNewsletterError(
+          data?.message ||
+            "This email could not be subscribed."
+        );
+        return;
+      }
+
+      setIsSubscribed(true);
+
+      setTimeout(() => {
+        closeNewsletterModal();
+      }, 3000);
+    } catch (error) {
+      console.error(
+        "Newsletter subscription error:",
+        error
+      );
+
+      setNewsletterError(
+        "Something went wrong. Please try again."
+      );
+    } finally {
+      setNewsletterSubmitting(false);
+    }
+  }}
+>
+  <div className={styles.emailInput}>
+    <Mail size={18} />
+
+    <input
+      type="email"
+      placeholder="Enter your email address"
+      value={newsletterEmail}
+      onChange={(e) => {
+        setNewsletterEmail(e.target.value);
+        setNewsletterError("");
+      }}
+      disabled={newsletterSubmitting}
+      required
+    />
+  </div>
+
+  {newsletterError && (
+    <p className={styles.emailError}>
+      {newsletterError}
+    </p>
+  )}
+
+  <button
+    type="submit"
+    className={`${styles.notifyButton} btn btn-primary`}
+    disabled={newsletterSubmitting}
+  >
+    {newsletterSubmitting
+      ? "Subscribing..."
+      : "Get PETCARD Updates"}
+  </button>
+</form>
+                </>
+              ) : (
+                <div className={styles.emailSuccess}>
+                  <div className={styles.emailSuccessIcon}>
+                    <CheckCircle2 size={34} strokeWidth={2.4} />
+                  </div>
+
+                  <h3>Subscription Successful!</h3>
+
+                  <p>
+                    You&apos;re all set! Thank you for joining the PETCARD community.
+                    We&apos;ll keep you updated with the latest news, features, and pet-care tips.
+                  </p>
+
+                 
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </section>
 
     </main>

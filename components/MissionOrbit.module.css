@@ -1,0 +1,1552 @@
+/* =========================================================
+   PETCARD — MISSION ORBIT
+   MissionOrbit.module.css
+
+   Pure HTML + CSS.
+   Three large cards orbit the static PetCard core.
+   ========================================================= */
+
+.missionOrbit {
+  --mission-orange: #ff7a00;
+  --mission-orange-soft: #fff0dc;
+  --mission-dark: #241811;
+  --mission-muted: #746a63;
+
+  --mission-orbit-radius: 345px;
+
+  --mission-outer-size: 570px;
+  --mission-middle-size: 430px;
+  --mission-inner-size: 274px;
+
+  --mission-center-size: 255px;
+  --mission-core-size: 205px;
+
+  --mission-card-width: 250px;
+  --mission-card-height: 170px;
+
+  position: relative;
+  width: min(100%, 900px);
+  min-height: 720px;
+  margin-inline: auto;
+
+  display: grid;
+  place-items: center;
+
+  overflow: visible;
+  isolation: isolate;
+}
+
+/* =========================================================
+   RINGS
+   ========================================================= */
+
+.missionOrbitBackdrop {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+.missionCircleOuter,
+.missionCircleMiddle,
+.missionCircleInner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+.missionCircleOuter {
+  width: var(--mission-outer-size);
+  height: var(--mission-outer-size);
+
+  border: 1px dashed rgba(255, 122, 0, 0.25);
+
+  animation: missionOuterRing 36s linear infinite;
+}
+
+.missionCircleMiddle {
+  width: var(--mission-middle-size);
+  height: var(--mission-middle-size);
+
+  border: 1px dashed rgba(255, 122, 0, 0.15);
+
+  animation: missionMiddleRing 44s linear infinite reverse;
+}
+
+.missionCircleInner {
+  width: var(--mission-inner-size);
+  height: var(--mission-inner-size);
+
+  border: 1px solid rgba(255, 122, 0, 0.09);
+
+  animation: missionInnerRing 52s linear infinite;
+}
+
+/* =========================================================
+   DOTS
+   ========================================================= */
+
+.missionOrbitDot {
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background: var(--mission-orange);
+
+  box-shadow:
+    0 0 0 6px rgba(255, 122, 0, 0.08),
+    0 0 17px rgba(255, 122, 0, 0.34);
+
+  animation: missionDotPulse 3s ease-in-out infinite;
+}
+
+.missionOrbitDotTop {
+  top: calc(50% - (var(--mission-outer-size) / 2));
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.missionOrbitDotRight {
+  top: 50%;
+  left: calc(50% + (var(--mission-outer-size) / 2));
+  transform: translate(-50%, -50%);
+  animation-delay: -0.75s;
+}
+
+.missionOrbitDotBottom {
+  top: calc(50% + (var(--mission-outer-size) / 2));
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -1.5s;
+}
+
+.missionOrbitDotLeft {
+  top: 50%;
+  left: calc(50% - (var(--mission-outer-size) / 2));
+  transform: translate(-50%, -50%);
+  animation-delay: -2.25s;
+}
+
+/* =========================================================
+   CENTER
+   ========================================================= */
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: var(--mission-center-size);
+  height: var(--mission-center-size);
+
+  display: grid;
+  place-items: center;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 10;
+  pointer-events: none;
+}
+
+.centerHalo {
+  position: absolute;
+  inset: -20px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 183, 100, 0.25) 0%,
+      rgba(255, 122, 0, 0.13) 43%,
+      rgba(255, 122, 0, 0.04) 66%,
+      transparent 73%
+    );
+
+  filter: blur(8px);
+
+  animation: missionCenterGlow 4.5s ease-in-out infinite;
+}
+
+.centerCore {
+  position: relative;
+  z-index: 2;
+
+  width: var(--mission-core-size);
+  height: var(--mission-core-size);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid var(--mission-orange);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      #fffaf3 0%,
+      #fff1dc 63%,
+      #ffe0b8 100%
+    );
+
+  box-shadow:
+    0 0 0 8px rgba(255, 122, 0, 0.045),
+    0 0 34px rgba(255, 122, 0, 0.18),
+    0 18px 45px rgba(76, 40, 15, 0.10);
+}
+
+.centerImage {
+  width: clamp(102px, 10.5vw, 385px);
+  height: clamp(102px, 10.5vw, 385px);
+
+  object-fit: contain;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  margin-top: 3px;
+
+  font-size: clamp(20px, 1.75vw, 25px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.brand span {
+  color: #171717;
+}
+
+.brand strong {
+  color: var(--mission-orange);
+}
+
+/* =========================================================
+   ORBIT SYSTEM
+   ========================================================= */
+
+.missionOrbitSystem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 0;
+  height: 0;
+
+  z-index: 8;
+  pointer-events: none;
+}
+
+.missionOrbitBadge {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: var(--mission-card-width);
+  min-height: var(--mission-card-height);
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  pointer-events: auto;
+
+  animation:
+    missionBadgeOrbit
+    34s
+    linear
+    infinite;
+
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/*
+   Visual reference:
+   01 = top
+   02 = lower-left
+   03 = lower-right
+
+   They remain exactly 120deg apart.
+*/
+
+.missionOrbitBadge1 {
+  --mission-angle: -90deg;
+  --mission-counter-angle: 90deg;
+}
+
+.missionOrbitBadge2 {
+  --mission-angle: 30deg;
+  --mission-counter-angle: -30deg;
+}
+
+.missionOrbitBadge3 {
+  --mission-angle: 150deg;
+  --mission-counter-angle: -150deg;
+}
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.missionOrbitBadgeInner {
+  position: relative;
+
+  width: 100%;
+  min-height: var(--mission-card-height);
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 22px 22px 20px;
+
+  border:
+    1px solid
+    rgba(220, 210, 201, 0.95);
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(255, 252, 248, 0.94)
+    );
+
+  box-shadow:
+    0 18px 38px rgba(57, 34, 19, 0.10),
+    0 4px 12px rgba(57, 34, 19, 0.04);
+
+  overflow: hidden;
+}
+
+.missionOrbitBadgeInner::after {
+  content: "";
+
+  position: absolute;
+  right: -35px;
+  bottom: -55px;
+
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 178, 100, 0.13),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CARD TOP ROW
+   ========================================================= */
+
+.cardTop {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.cardIcon {
+  width: 58px;
+  height: 58px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff2df,
+      #ffe8c9
+    );
+
+  color: var(--mission-orange);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 122, 0, 0.06);
+}
+
+.cardIcon svg {
+  width: 29px;
+  height: 29px;
+}
+
+/* =========================================================
+   NUMBER
+   ========================================================= */
+
+.cardNumber {
+  width: 43px;
+  height: 43px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--mission-orange);
+
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1;
+
+  box-shadow:
+    0 10px 22px rgba(255, 122, 0, 0.22);
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 17px;
+}
+
+.cardContent h3 {
+  margin: 0;
+
+  color: var(--mission-dark);
+
+  font-size: clamp(17px, 1.35vw, 20px);
+  font-weight: 850;
+
+  line-height: 1.16;
+  letter-spacing: -0.025em;
+}
+
+.cardContent p {
+  max-width: 205px;
+
+  margin: 8px 0 0;
+
+  color: var(--mission-muted);
+
+  font-size: clamp(9px, 0.78vw, 11px);
+  font-weight: 500;
+
+  line-height: 1.48;
+}
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.missionOrbitBadge:hover .missionOrbitBadgeInner {
+  border-color: rgba(255, 122, 0, 0.34);
+
+  box-shadow:
+    0 22px 44px rgba(57, 34, 19, 0.13),
+    0 0 0 4px rgba(255, 122, 0, 0.045);
+}
+
+.missionOrbitBadge:hover .cardIcon {
+  background:
+    linear-gradient(
+      145deg,
+      #ffedd7,
+      #ffdfb5
+    );
+}
+
+/* =========================================================
+   ORBIT ANIMATION
+   ========================================================= */
+
+@keyframes missionBadgeOrbit {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--mission-angle))
+      translateX(var(--mission-orbit-radius))
+      rotate(var(--mission-counter-angle));
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(calc(var(--mission-angle) + 360deg))
+      translateX(var(--mission-orbit-radius))
+      rotate(calc(var(--mission-counter-angle) - 360deg));
+  }
+}
+
+/* =========================================================
+   RING ANIMATIONS
+   ========================================================= */
+
+@keyframes missionOuterRing {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes missionMiddleRing {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes missionInnerRing {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+/* =========================================================
+   GLOW / DOT ANIMATIONS
+   ========================================================= */
+
+@keyframes missionDotPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+
+    box-shadow:
+      0 0 0 5px rgba(255, 122, 0, 0.07),
+      0 0 12px rgba(255, 122, 0, 0.24);
+  }
+
+  50% {
+    opacity: 1;
+
+    box-shadow:
+      0 0 0 7px rgba(255, 122, 0, 0.11),
+      0 0 21px rgba(255, 122, 0, 0.48);
+  }
+}
+
+@keyframes missionCenterGlow {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+/* =========================================================
+   1920px / 2K
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .missionOrbit {
+    --mission-orbit-radius: 400px;
+
+    --mission-outer-size: 670px;
+    --mission-middle-size: 505px;
+    --mission-inner-size: 322px;
+
+    --mission-center-size: 285px;
+    --mission-core-size: 225px;
+
+    --mission-card-width: 270px;
+    --mission-card-height: 185px;
+
+    min-height: 850px;
+  }
+
+  .cardIcon {
+    width: 62px;
+    height: 62px;
+  }
+
+  .cardIcon svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .cardNumber {
+    width: 46px;
+    height: 46px;
+  }
+
+  .cardContent {
+    margin-top: 19px;
+  }
+}
+
+/* =========================================================
+   2560px / 4K
+   ========================================================= */
+
+@media (min-width: 2560px) {
+  .missionOrbit {
+    --mission-orbit-radius: 480px;
+
+    --mission-outer-size: 810px;
+    --mission-middle-size: 610px;
+    --mission-inner-size: 389px;
+
+    --mission-center-size: 320px;
+    --mission-core-size: 255px;
+
+    --mission-card-width: 300px;
+    --mission-card-height: 205px;
+
+    min-height: 1050px;
+  }
+
+  .missionOrbitBadgeInner {
+    padding: 25px 26px 23px;
+    border-radius: 24px;
+  }
+
+  .cardIcon {
+    width: 68px;
+    height: 68px;
+    border-radius: 19px;
+  }
+
+  .cardIcon svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .cardNumber {
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  .cardContent {
+    margin-top: 20px;
+  }
+
+  .cardContent h3 {
+    font-size: 22px;
+  }
+
+  .cardContent p {
+    max-width: 245px;
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   3840px / ULTRA-WIDE
+   ========================================================= */
+
+@media (min-width: 3840px) {
+  .missionOrbit {
+    --mission-orbit-radius: 575px;
+
+    --mission-outer-size: 970px;
+    --mission-middle-size: 730px;
+    --mission-inner-size: 466px;
+
+    --mission-center-size: 375px;
+    --mission-core-size: 300px;
+
+    --mission-card-width: 340px;
+    --mission-card-height: 235px;
+
+    min-height: 1250px;
+  }
+
+  .missionOrbitBadgeInner {
+    padding: 29px 32px 27px;
+    border-radius: 27px;
+  }
+
+  .cardIcon {
+    width: 76px;
+    height: 76px;
+    border-radius: 21px;
+  }
+
+  .cardIcon svg {
+    width: 38px;
+    height: 38px;
+  }
+
+  .cardNumber {
+    width: 55px;
+    height: 55px;
+    font-size: 18px;
+  }
+
+  .cardContent {
+    margin-top: 23px;
+  }
+
+  .cardContent h3 {
+    font-size: 26px;
+  }
+
+  .cardContent p {
+    max-width: 275px;
+    margin-top: 11px;
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .missionOrbit {
+    --mission-orbit-radius: 275px;
+
+    --mission-outer-size: 430px;
+    --mission-middle-size: 315px;
+    --mission-inner-size: 210px;
+
+    --mission-center-size: 225px;
+    --mission-core-size: 185px;
+
+    --mission-card-width: 205px;
+    --mission-card-height: 145px;
+
+    min-height: 590px;
+  }
+
+  .missionOrbitBadgeInner {
+    padding: 17px 17px 16px;
+    border-radius: 18px;
+  }
+
+  .cardIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .cardIcon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cardNumber {
+    width: 37px;
+    height: 37px;
+    font-size: 12px;
+  }
+
+  .cardContent {
+    margin-top: 13px;
+  }
+
+  .cardContent h3 {
+    font-size: 15px;
+  }
+
+  .cardContent p {
+    max-width: 168px;
+    margin-top: 6px;
+    font-size: 8px;
+  }
+}
+
+/* =========================================================
+   768px TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .missionOrbit {
+    --mission-orbit-radius: 220px;
+
+    --mission-outer-size: 370px;
+    --mission-middle-size: 285px;
+    --mission-inner-size: 177px;
+
+    --mission-center-size: 215px;
+    --mission-core-size: 175px;
+
+    --mission-card-width: 165px;
+    --mission-card-height: 125px;
+
+    min-height: 500px;
+  }
+
+  .missionOrbitBadgeInner {
+    padding: 13px 13px 12px;
+    border-radius: 16px;
+  }
+
+  .cardIcon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  .cardIcon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .cardNumber {
+    width: 34px;
+    height: 34px;
+    font-size: 10px;
+  }
+
+  .cardContent {
+    margin-top: 10px;
+  }
+
+  .cardContent h3 {
+    font-size: 12px;
+  }
+
+  .cardContent p {
+    max-width: 138px;
+    margin-top: 5px;
+    font-size: 7px;
+    line-height: 1.35;
+  }
+}
+
+/* =========================================================
+   520px MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .missionOrbit {
+    --mission-orbit-radius: 170px;
+
+    --mission-outer-size: 290px;
+    --mission-middle-size: 220px;
+    --mission-inner-size: 150px;
+
+    --mission-center-size: 185px;
+    --mission-core-size: 150px;
+
+    --mission-card-width: 125px;
+    --mission-card-height: 104px;
+
+    min-height: 400px;
+  }
+
+  .missionOrbitBadgeInner {
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+  .cardIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .cardIcon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .cardNumber {
+    width: 28px;
+    height: 28px;
+    font-size: 8px;
+  }
+
+  .cardContent {
+    margin-top: 8px;
+  }
+
+  .cardContent h3 {
+    font-size: 9px;
+  }
+
+  .cardContent p {
+    max-width: 105px;
+    margin-top: 4px;
+    font-size: 5.7px;
+    line-height: 1.3;
+  }
+
+  .missionOrbitDot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+/* =========================================================
+   380px
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .missionOrbit {
+    --mission-orbit-radius: 145px;
+
+    --mission-outer-size: 252px;
+    --mission-middle-size: 192px;
+    --mission-inner-size: 130px;
+
+    --mission-center-size: 165px;
+    --mission-core-size: 135px;
+
+    --mission-card-width: 112px;
+    --mission-card-height: 94px;
+
+    min-height: 365px;
+  }
+
+  .missionOrbitBadgeInner {
+    padding: 9px;
+    border-radius: 13px;
+  }
+
+  .cardIcon {
+    width: 31px;
+    height: 31px;
+    border-radius: 9px;
+  }
+
+  .cardIcon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .cardNumber {
+    width: 25px;
+    height: 25px;
+    font-size: 7px;
+  }
+
+  .cardContent {
+    margin-top: 7px;
+  }
+
+  .cardContent h3 {
+    font-size: 8px;
+  }
+
+  .cardContent p {
+    max-width: 94px;
+    margin-top: 3px;
+    font-size: 5.1px;
+  }
+}
+
+/* =========================================================
+   360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+  .missionOrbit {
+    --mission-orbit-radius: 135px;
+
+    --mission-outer-size: 232px;
+    --mission-middle-size: 178px;
+    --mission-inner-size: 120px;
+
+    --mission-center-size: 155px;
+    --mission-core-size: 127px;
+
+    --mission-card-width: 104px;
+    --mission-card-height: 88px;
+
+    min-height: 345px;
+  }
+
+  .missionOrbitBadgeInner {
+    padding: 8px;
+  }
+
+  .cardIcon {
+    width: 29px;
+    height: 29px;
+  }
+
+  .cardIcon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cardNumber {
+    width: 23px;
+    height: 23px;
+    font-size: 6.5px;
+  }
+
+  .cardContent h3 {
+    font-size: 7.5px;
+  }
+
+  .cardContent p {
+    max-width: 87px;
+    font-size: 4.8px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .missionCircleOuter,
+  .missionCircleMiddle,
+  .missionCircleInner,
+  .missionOrbitBadge,
+  .missionOrbitDot,
+  .centerHalo {
+    animation: none;
+  }
+
+  .missionOrbitBadge {
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--mission-angle))
+      translateX(var(--mission-orbit-radius))
+      rotate(var(--mission-counter-angle));
+  }
+}
+
+
+/* =========================================================
+   STATIC CENTER CORE
+   ========================================================= */
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 15;
+  width: clamp(180px, 18vw, 315px);
+  height: clamp(180px, 18vw, 315px);
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.centerHalo {
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 155, 47, 0.30) 0%,
+      rgba(255, 184, 101, 0.14) 42%,
+      rgba(255, 122, 0, 0.06) 58%,
+      transparent 72%
+    );
+
+  filter: blur(10px);
+
+  animation:
+    haloPulse
+    3.5s
+    ease-in-out
+    infinite alternate;
+
+  pointer-events: none;
+}
+
+.centerCore {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  border: clamp(2px, 0.2vw, 4px) solid #ff7a00;
+  border-radius: 50%;
+
+  color: #ff7a00;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      #fffefb 0%,
+      #fff5e7 56%,
+      #ffe8c8 100%
+    );
+
+  box-shadow:
+    0 0 0 7px rgba(255, 122, 0, 0.07),
+    0 0 0 16px rgba(255, 122, 0, 0.035),
+    0 0 32px rgba(255, 122, 0, 0.40),
+    0 0 75px rgba(255, 122, 0, 0.18),
+    0 20px 55px rgba(56, 27, 14, 0.10);
+
+  animation:
+    centerPulse
+    4.5s
+    ease-in-out
+    infinite;
+}
+
+.centerCore > svg {
+  width: clamp(31px, 3vw, 52px);
+  height: auto;
+  margin-bottom: clamp(6px, 0.6vw, 11px);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+ color: #16110e;
+   font-family: var(--font-brand);
+
+  font-size: 38px;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  letter-spacing: -1px;
+}
+
+.brand strong {
+ color: var(--orange);
+
+  font-weight: 700;
+}
+
+.centerCore small {
+  margin-top: clamp(6px, 0.55vw, 10px);
+  color: #89786c;
+  font: 700 clamp(8px, 0.62vw, 12px)/1.2 var(--font-tagline, Inter, sans-serif);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bottomHint {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  margin: clamp(5px, 1vw, 18px) auto 0;
+  padding: 9px 14px;
+  border: 1px solid rgba(255, 122, 0, 0.1);
+  border-radius: 999px;
+  color: #88776c;
+  background: rgba(255, 255, 255, 0.65);
+  font: 600 clamp(9px, 0.65vw, 12px)/1.25 var(--font-tagline, Inter, sans-serif);
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes systemRotate {
+  from { transform: translate3d(0, 0, 0) rotate(0deg); }
+  to { transform: translate3d(0, 0, 0) rotate(360deg); }
+}
+
+@keyframes cardCounterRotate {
+  from { transform: rotate(calc(-1 * var(--angle))); }
+  to { transform: rotate(calc(-1 * var(--angle) - 360deg)); }
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ringRotateReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes centerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.018); }
+}
+
+@keyframes haloPulse {
+  0%, 100% { opacity: 0.7; transform: scale(0.96); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* =========================================================
+   RESPONSIVE LAYOUTS (2K, 4K, 8K, TABLET, PHONE)
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .featuresSection { padding-inline: 40px; }
+  .orbitStage {
+    --orbit-size: min(58vw, 1180px);
+    --card-width: clamp(270px, 12.6vw, 340px);
+    --card-height: clamp(270px, 14.5vw, 355px);
+    height: min(60vw, 1250px);
+  }
+
+}
+
+@media (min-width: 2560px) {
+  .orbitStage {
+    --orbit-size: min(60vw, 1450px);
+    --card-width: clamp(310px, 12.2vw, 390px);
+    --card-height: clamp(310px, 14vw, 400px);
+    height: min(61vw, 1500px);
+  }
+  .heading { width: min(900px, 100%); }
+}
+
+@media (min-width: 3840px) {
+  .orbitStage {
+    --orbit-size: min(61vw, 1900px);
+    --card-width: clamp(380px, 11.8vw, 500px);
+    --card-height: clamp(370px, 13.6vw, 490px);
+    height: min(63vw, 1950px);
+  }
+  .featuresSection { padding-top: 105px; }
+}
+
+@media (max-width: 1100px) {
+  .featuresSection { padding-inline: 18px; }
+  .orbitStage {
+    height: clamp(610px, 82vw, 880px);
+    --orbit-size: clamp(550px, 81vw, 800px);
+    --card-width: clamp(175px, 22vw, 240px);
+    --card-height: clamp(200px, 25vw, 270px);
+  }
+  .centerImage{
+  width: 76px;
+  height: 76px;
+}
+.brand{font-size:22px;}
+  .featureCardInner { padding: clamp(13px, 1.8vw, 20px); border-radius: 20px; }
+  .featureCardInner ul { gap: 4px 8px; }
+  .featureCardInner li { font-size: clamp(8px, 1.08vw, 11px); }
+  .center { width: clamp(155px, 20vw, 205px); height: clamp(155px, 20vw, 205px); }
+}
+
+@media (max-width: 768px) {
+  .featuresSection { min-height: auto; padding-top: 34px; }
+  .heading h1 { font-size: clamp(33px, 8vw, 48px); }
+  .heading p { max-width: 520px; font-size: 11px; }
+  .orbitStage {
+    height: clamp(570px, 118vw, 760px);
+    margin-top: 25px;
+    --orbit-size: clamp(520px, 122vw, 720px);
+    --card-width: clamp(152px, 30vw, 212px);
+    --card-height: clamp(188px, 36vw, 240px);
+  }
+  .orbitRingMiddle { width: calc(var(--orbit-size) * 0.7); height: calc(var(--orbit-size) * 0.7); }
+  .orbitRingInner { width: calc(var(--orbit-size) * 0.46); height: calc(var(--orbit-size) * 0.46); }
+  .featureCardInner { padding: 12px; border-radius: 17px; }
+  .iconBox { width: 36px; height: 36px; border-radius: 10px; }
+  .iconBox svg { width: 18px; height: 18px; }
+  .cardNumber { width: 26px; height: 26px; font-size: 9px; }
+  .featureCardInner h2 { margin-top: 8px; font-size: 12px; }
+  .featureCardInner ul { margin-top: 6px; gap: 2px 6px; }
+  .featureCardInner li { font-size: 7.5px; line-height: 1.2; }
+  .center { width: clamp(132px, 25vw, 175px); height: clamp(132px, 25vw, 175px); }
+  .brand { font-size: clamp(18px, 4vw, 26px); }
+  .centerCore small { font-size: 7px; }
+  .bottomHint { max-width: 340px; text-align: center; white-space: normal; border-radius: 16px; }
+}
+
+@media (max-width: 520px) {
+  .featuresSection {
+    padding-inline: 0;
+    padding-top: 24px;
+    padding-bottom: 45px;
+    overflow: hidden;
+  }
+
+  .heading {
+    width: 100%;
+    padding-inline: 12px;
+  }
+
+  .heading h1 {
+    font-size: clamp(28px, 8.5vw, 37px);
+  }
+
+  .heading p {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-inline: 4px;
+    font-size: 9.5px;
+    line-height: 1.5;
+  }
+
+  .orbitStage {
+    width: 100%;
+    max-width: 100%;
+    height: clamp(500px, 128vw, 610px);
+    margin: 18px auto 0;
+    transform: none;
+
+    /*
+      IMPORTANT:
+      Orbit + card width together stay inside phone viewport.
+    */
+    --orbit-size: min(70vw, 300px);
+    --card-width: min(27vw, 116px);
+    --card-height: clamp(165px, 40vw, 190px);
+    --radius: calc(var(--orbit-size) / 2);
+  }
+
+  .orbitRingOuter {
+    border-style: solid;
+    border-color: rgba(255, 122, 0, 0.24);
+  }
+
+  .orbitRingMiddle {
+    border-color: rgba(255, 122, 0, 0.12);
+  }
+
+  .featureCardInner {
+    padding: 9px;
+    border-radius: 14px;
+  }
+
+  .iconBox {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .iconBox svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .cardNumber {
+    width: 22px;
+    height: 22px;
+    font-size: 8px;
+  }
+
+  .featureCardInner h2 {
+    margin-top: 6px;
+    font-size: 9.5px;
+    line-height: 1.15;
+  }
+
+  .featureCardInner ul {
+    margin-top: 5px;
+    gap: 2px 4px;
+  }
+
+  .featureCardInner li {
+    font-size: 6.2px;
+    line-height: 1.15;
+  }
+
+  .featureCardInner li::before {
+    margin-right: 2px;
+  }
+
+  .center {
+    width: 108px;
+    height: 108px;
+  }
+
+  .centerDog {
+    width: 54px;
+    max-width: 56%;
+  }
+
+  .brand {
+    font-size: 16px;
+    letter-spacing: -0.5px;
+  }
+.orbitStage {
+    width: 100vw;
+    max-width: none;
+
+    /*
+      Bigger orbit = cards edges ki taraf jayenge
+    */
+    height: 620px;
+    margin-top: 20px;
+
+    --orbit-size: 390px;
+    --card-width: 102px;
+    --card-height: 170px;
+    --radius: calc(var(--orbit-size) / 2);
+  }
+
+  /* Center smaller */
+  .center {
+    width: 92px;
+    height: 92px;
+  }
+
+  .centerDog {
+    width: 46px;
+  }
+.centerImage{
+  width: 46px;
+  height: 46px;
+}
+  .brand {
+    font-size: 13px;
+    letter-spacing: -0.4px;
+  }
+
+  /* Card spacing */
+  .featureCardInner {
+    padding: 8px;
+    border-radius: 13px;
+  }
+
+  .iconBox {
+    width: 29px;
+    height: 29px;
+    border-radius: 8px;
+  }
+
+  .iconBox svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cardNumber {
+    width: 21px;
+    height: 21px;
+    font-size: 7px;
+  }
+
+  .featureCardInner h2 {
+    margin-top: 6px;
+    font-size: 9px;
+    line-height: 1.15;
+  }
+
+  .featureCardInner ul {
+    margin-top: 5px;
+    gap: 2px 4px;
+  }
+
+  .featureCardInner li {
+    font-size: 6px;
+    line-height: 1.15;
+  }
+
+  .bottomHint {
+    margin-top: 4px;
+    padding: 7px 9px;
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 360px) {
+  .orbitStage {
+    height: 560px;
+
+    --orbit-size: 350px;
+    --card-width: 100px;
+    --card-height: 165px;
+  }
+
+  .center {
+    width: 82px;
+    height: 82px;
+  }
+
+  .centerDog {
+    width: 40px;
+  }
+
+  .brand {
+    font-size: 12px;
+  }
+
+  .featureCardInner {
+    padding: 7px;
+  }
+
+  .featureCardInner h2 {
+    font-size: 8px;
+  }
+
+  .featureCardInner li {
+    font-size: 5.5px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .orbitSystem,
+  .featureCardInner,
+  .orbitRingOuter,
+  .orbitRingMiddle,
+  .centerCore,
+  .centerHalo,
+  .orbitDot {
+    animation: none !important;
+  }
+  .featureCardInner { transition: none; }
+}

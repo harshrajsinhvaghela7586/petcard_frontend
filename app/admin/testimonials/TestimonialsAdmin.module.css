@@ -803,3 +803,239 @@
         width: 100%;
     }
 }
+
+/* REVIEW WORKFLOW */
+
+.statusFilters {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.filterButton {
+    min-height: 32px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--white);
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 9px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.filterButton:hover {
+    border-color: #ffc183;
+    color: var(--orange);
+    background: var(--orange-soft);
+}
+
+.filterButtonActive {
+    border-color: #ffb56f;
+    background: var(--orange-soft);
+    color: var(--orange);
+}
+
+.filterButton span {
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    border-radius: 99px;
+    background: #f4eee9;
+    color: #8b7c72;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+}
+
+.filterButtonActive span {
+    background: var(--white);
+    color: var(--orange);
+}
+
+.statusCell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.reviewStatus {
+    min-width: 72px;
+    min-height: 25px;
+    padding: 0 8px;
+    border-radius: 99px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.review-pending {
+    background: #fff6e8;
+    color: #b96a08;
+}
+
+.review-approved {
+    background: #edf9f1;
+    color: #34804e;
+}
+
+.review-rejected {
+    background: #fff0f0;
+    color: #b34444;
+}
+
+.viewButton,
+.approveButton,
+.rejectButton {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.viewButton {
+    border: 1px solid #ded7d1;
+    background: var(--white);
+    color: var(--muted);
+}
+
+.viewButton:hover {
+    color: var(--orange);
+    border-color: #ffc183;
+    background: var(--orange-soft);
+}
+
+.approveButton {
+    border: 1px solid #ccebd6;
+    background: #f2fbf5;
+    color: #34804e;
+}
+
+.approveButton:hover {
+    background: #e5f7eb;
+    border-color: #a9dbb9;
+}
+
+.rejectButton {
+    border: 1px solid #efd0d0;
+    background: #fff7f7;
+    color: #b34444;
+}
+
+.rejectButton:hover {
+    background: #ffeded;
+    border-color: #e4b5b5;
+}
+
+.viewButton:disabled,
+.approveButton:disabled,
+.rejectButton:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+.actionSpinner {
+    width: 13px;
+    height: 13px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+}
+
+.reviewActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 9px;
+    padding: 12px 13px;
+    border: 1px solid #f0e4d9;
+    border-radius: 12px;
+    background: #fffaf5;
+}
+
+.approveModalButton,
+.rejectModalButton {
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.approveModalButton {
+    border: 1px solid #bfe2ca;
+    background: #effaf3;
+    color: #34804e;
+}
+
+.approveModalButton:hover {
+    background: #e1f5e8;
+}
+
+.rejectModalButton {
+    border: 1px solid #e8c5c5;
+    background: #fff5f5;
+    color: #b34444;
+}
+
+.rejectModalButton:hover {
+    background: #ffebeb;
+}
+
+.approveModalButton:disabled,
+.rejectModalButton:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+    .toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .statusFilters {
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .statusFilters {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+    }
+
+    .filterButton {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .reviewActions {
+        flex-direction: column;
+    }
+
+    .approveModalButton,
+    .rejectModalButton {
+        width: 100%;
+    }
+}

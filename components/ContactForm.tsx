@@ -217,12 +217,7 @@ export default function ContactForm() {
             ? "Message Sent"
             : "Send Message"}
 
-        <img
-          src="/images/paw-white.png"
-          width={30}
-          height={30}
-          alt=""
-        />
+       
       </button>
     </form>
   );
