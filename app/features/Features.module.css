@@ -811,7 +811,7 @@
 
   backdrop-filter: blur(7px);
 
-  font-size: 6px;
+  font-size: 9px;
   font-weight: 800;
 
   animation:
@@ -2725,7 +2725,7 @@
 
   margin-top: 13px;
 
-  font-size: 6px;
+  font-size: 7px;
 }
 
 .dailyDateRow span {
@@ -3088,7 +3088,7 @@
 
   color: #988a82;
 
-  font-size: 5px;
+  font-size: 8px;
 }
 
 .activityPanel {
@@ -3314,7 +3314,7 @@
 
   color: #9e9188;
 
-  font-size: 5px;
+  font-size: 8px;
 }
 
 .healthTabs {
@@ -3331,7 +3331,7 @@
 
   text-align: center;
 
-  font-size: 5px;
+  font-size: 8px;
 }
 
 .healthTabs span {
@@ -3443,7 +3443,7 @@
 }
 
 .healthUpcoming strong {
-  font-size: 5.5px;
+  font-size: 7.5px;
 }
 
 .healthUpcoming small {
@@ -10399,6 +10399,7 @@ width: 290px;
 
   .finalCopy h2 {
     font-size: 20px;
+    
   }
 
   .finalCopy p {
@@ -10484,7 +10485,8 @@ overflow: visible;
 
   .finalCopy p {
     font-size: 11px;
-    transform: translateX(-4px) translateY(-15px);
+    width: 340px;
+    transform: translateX(94px) translateY(-15px);
   }
 
   .finalButtons {
@@ -10571,6 +10573,7 @@ overflow: visible;
 
   .finalButtons {
     gap: 8px !important;
+    
   }
 
   .finalButtons .storeIconImage {
@@ -10618,20 +10621,20 @@ overflow: visible;
   }
 
   .finalPets {
-    height: 140px;
+    height: 160px;
   }
 
   .finalPetsImage {
     transform:
       translateX(60px)
-      translateY(-12px)
+      translateY(-42px)
       scale(1.22);
   }
 
   
 
   .finalCopy {
-    transform: translateX(35px);
+    transform: translateX(-5px);
   }
 
   .finalCopy h2 {
@@ -10640,11 +10643,14 @@ overflow: visible;
 
   .finalCopy p {
     font-size: 14px;
-    transform: translateX(150px);
+    width: 450px;
+    transform: translateX(200px);
   }
 
   .finalButtons {
     gap: 10px !important;
+    margin-left:-120px !important;
+    width: 490px !important;
   }
 
   .finalButtons .storeIconImage {
@@ -11248,7 +11254,7 @@ overflow: visible;
   /* BIG PET */
   .finalPets {
     width: 100%;
-    height: 134px;
+    height: 294px;
 
     transform:
       scaleX(1.08);
@@ -11259,12 +11265,12 @@ overflow: visible;
 
 
   .finalPetsImage {
-    width: 75% !important;
+    width: 80% !important;
     height: 100% !important;
 
 
     transform:
-      translateY(32px)
+      translateY(92px)
       scale(1.18);
 
     transform-origin:
@@ -11316,7 +11322,7 @@ overflow: visible;
   }
 
 
-  .finalButtons .storeBadge {
+  .finalButtons a, .finalButtons button {
     height: 29px !important;
 
     min-height: 29px !important;
@@ -11325,7 +11331,7 @@ overflow: visible;
       2px 4px !important;
 
     gap: 3px !important;
-
+font-size:7px !important;
     border-radius:
       6px !important;
   }
@@ -11563,4 +11569,927 @@ overflow: visible;
   line-height: 1;
   font-weight: 700;
   white-space: nowrap;
+}
+
+
+
+/* =========================================================
+   EMAIL UPDATE MODAL
+   Desktop • Laptop • Tablet • Mobile • 2K • 4K • 8K
+   ========================================================= */
+
+.emailModalOverlay {
+  position: fixed !important;
+  inset: 0 !important;
+
+  width: 100vw;
+  height: 100dvh;
+
+  z-index: 9999 !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(35, 20, 12, 0.48);
+
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+
+  overflow-y: auto;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.emailModal {
+  position: relative;
+
+  z-index: 10000;
+
+  width: min(480px, 100%);
+
+  padding: 34px 32px 30px;
+
+  border: 1px solid rgba(255, 122, 0, 0.12);
+  border-radius: 24px;
+
+  background: #fffdfb;
+
+  box-shadow:
+    0 30px 80px rgba(56, 27, 14, 0.22),
+    0 8px 30px rgba(56, 27, 14, 0.10);
+
+  text-align: center;
+
+  animation:
+    emailModalIn
+    0.3s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.emailModalClose {
+  position: absolute;
+
+  top: 12px;
+  right: 14px;
+
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+
+  color: #6d5a4e;
+  background: #fff1df;
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.emailModalClose:hover {
+  background: #ffe4c7;
+  transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.emailModalIcon {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 17px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  color: var(--orange);
+  background: #fff0dd;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.emailModal h3 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-family: var(--font-tagline);
+
+  font-size: 27px;
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.emailModal > p {
+  width: min(100%, 390px);
+
+  margin: 10px auto 22px;
+
+  color: var(--muted);
+
+  font-family: var(--font-tagline);
+
+  font-size: 13px;
+  font-weight: 400;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   EMAIL FORM
+   ========================================================= */
+.emailModal .emailForm {
+  width: 100%;
+
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  gap: 10px;
+
+  padding: 5px;
+
+  border: 1px solid #e6d9ce;
+  border-radius: 15px;
+
+  background: #fff;
+
+  box-shadow:
+    0 10px 28px rgba(56, 27, 14, 0.06);
+}
+
+
+/* INPUT */
+
+.emailModal .emailInput {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0 12px;
+
+  color: #8c7d73;
+
+  border-radius: 10px;
+}
+
+.emailModal .emailInput input {
+  width: 100%;
+  min-width: 0;
+
+  height: 48px;
+
+  padding: 0;
+
+  border: 0;
+  outline: 0;
+
+  color: var(--text);
+  background: transparent;
+
+  font-family: inherit;
+  font-size: 14px;
+}
+
+
+/* SUBMIT */
+
+.emailModal .notifyButton {
+  width: 100%;
+
+  min-width: 0;
+  height: 46px;
+
+  border: 0;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.emailModal .notifyButton:hover {
+  transform: translateY(-1px);
+}
+
+.emailModal .notifyButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.newsletterModalError {
+  margin: 10px 2px 0;
+
+  color: #c0392b;
+
+  font-family: var(--font-tagline);
+  font-size: 12px;
+  font-weight: 600;
+
+  line-height: 1.4;
+
+  text-align: center;
+
+  animation: newsletterErrorIn 0.25s ease both;
+}
+
+@keyframes newsletterErrorIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.emailSuccess {
+  min-height: 250px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px 5px;
+
+  animation: newsletterSuccessIn 0.5s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.emailSuccessIcon {
+  width: 72px;
+  height: 72px;
+
+  margin: 0 auto 17px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  color: #ffffff;
+  background: var(--accent-soft);
+
+  box-shadow:
+    0 10px 28px rgba(32, 166, 90, 0.22);
+
+  animation: newsletterCheckPop 0.55s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    0.1s both;
+}
+
+.successEyebrow {
+  margin-bottom: 6px;
+
+  color: var(--accent);
+
+  font-family: var(--font-tagline);
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+}
+
+.emailSuccess h3 {
+  margin: 0;
+
+  color: var(--accent-deep);
+}
+
+.emailSuccess p {
+  width: min(100%, 400px);
+
+  margin: 10px auto 0;
+
+  color: var(--accent-deep);
+
+  font-family: var(--font-tagline);
+
+  font-size: 13px;
+  font-weight: 400;
+
+  line-height: 1.65;
+}
+
+@keyframes newsletterSuccessIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(15px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes newsletterCheckPop {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (max-width: 768px) {
+  .emailModal .emailForm {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .emailModal .notifyButton {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .emailSuccess {
+    min-height: 220px;
+  }
+
+  .emailSuccessIcon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 14px;
+  }
+
+  .emailSuccessIcon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .emailSuccess p {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+}
+
+/* =========================================================
+   LAPTOP
+   ========================================================= */
+
+@media (min-width: 1101px) and (max-width: 1439px) {
+
+  .emailModal {
+    width: min(460px, calc(100% - 40px));
+
+    padding: 32px 28px 28px;
+  }
+
+  .emailModal h3 {
+    font-size: 25px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   769px – 1100px
+   ========================================================= */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+  .emailModalOverlay {
+    padding: 24px;
+  }
+
+  .emailModal {
+    width: min(450px, calc(100% - 40px));
+
+    padding: 30px 26px 27px;
+
+    border-radius: 22px;
+  }
+
+  .emailModal h3 {
+    font-size: 24px;
+  }
+
+  .emailModal > p {
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   <= 768px
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .emailModalOverlay {
+    padding: 18px;
+  }
+
+  .emailModal {
+    width: 100%;
+    max-width: 430px;
+
+    padding: 29px 18px 22px;
+
+    border-radius: 21px;
+  }
+
+  .emailModalClose {
+    top: 10px;
+    right: 11px;
+
+    width: 33px;
+    height: 33px;
+
+    font-size: 22px;
+  }
+
+  .emailModalIcon {
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 14px;
+  }
+
+  .emailModal h3 {
+    font-size: 22px;
+  }
+
+  .emailModal > p {
+    width: 100%;
+
+    margin: 9px auto 18px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+  }
+
+  .emailModal .emailForm {
+    flex-direction: column;
+
+    gap: 7px;
+
+    padding: 5px;
+  }
+
+  .emailModal .emailInput {
+    width: 100%;
+
+    padding-inline: 9px;
+  }
+
+  .emailModal .emailInput input {
+    height: 40px;
+
+    font-size: 13px;
+  }
+
+  .emailModal .notifyButton {
+    width: 100%;
+
+    min-width: 0;
+    height: 42px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   <= 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .emailModalOverlay {
+    padding: 14px;
+  }
+
+  .emailModal {
+    padding: 27px 15px 19px;
+
+    border-radius: 19px;
+  }
+
+  .emailModalIcon {
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 12px;
+  }
+
+  .emailModal h3 {
+    font-size: 20px;
+  }
+
+  .emailModal > p {
+    font-size: 11px;
+
+    margin-bottom: 16px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   <= 360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .emailModalOverlay {
+    padding: 10px;
+  }
+
+  .emailModal {
+    padding: 24px 12px 16px;
+  }
+
+  .emailModal h3 {
+    font-size: 19px;
+  }
+
+  .emailModal > p {
+    font-size: 10.5px;
+  }
+
+  .emailModal .emailInput input {
+    font-size: 12px;
+  }
+
+  .emailModal .notifyButton {
+    height: 40px;
+
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   2K
+   ========================================================= */
+
+@media (min-width: 1920px) and (max-width: 2559px) {
+
+  .emailModal {
+    width: 540px;
+
+    padding: 40px 38px 35px;
+
+    border-radius: 27px;
+  }
+
+  .emailModalIcon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .emailModal h3 {
+    font-size: 30px;
+  }
+
+  .emailModal > p {
+    font-size: 14px;
+  }
+
+  .emailModal .emailInput input {
+    height: 47px;
+
+    font-size: 15px;
+  }
+
+  .emailModal .notifyButton {
+    height: 47px;
+
+    min-width: 160px;
+  }
+
+}
+
+
+/* =========================================================
+   4K / ULTRA WIDE
+   ========================================================= */
+
+@media (min-width: 2560px) {
+
+  .emailModal {
+    width: 620px;
+
+    padding: 48px 46px 42px;
+
+    border-radius: 30px;
+  }
+
+  .emailModalIcon {
+    width: 72px;
+    height: 72px;
+
+    margin-bottom: 20px;
+  }
+
+  .emailModal h3 {
+    font-size: 34px;
+  }
+
+  .emailModal > p {
+    font-size: 16px;
+
+    max-width: 480px;
+  }
+
+  .emailModal .emailForm {
+    padding: 6px;
+
+    border-radius: 17px;
+  }
+
+  .emailModal .emailInput input {
+    height: 52px;
+
+    font-size: 16px;
+  }
+
+  .emailModal .notifyButton {
+    height: 52px;
+
+    min-width: 180px;
+  }
+
+}
+
+
+/* =========================================================
+   8K
+   ========================================================= */
+
+@media (min-width: 3840px) {
+
+  .emailModal {
+    width: 760px;
+
+    padding: 60px 55px 52px;
+
+    border-radius: 34px;
+  }
+
+  .emailModalIcon {
+    width: 88px;
+    height: 88px;
+
+    margin-bottom: 25px;
+  }
+
+  .emailModal h3 {
+    font-size: 42px;
+  }
+
+  .emailModal > p {
+    font-size: 19px;
+
+    max-width: 580px;
+  }
+
+  .emailModal .emailInput input {
+    height: 60px;
+
+    font-size: 19px;
+  }
+
+  .emailModal .notifyButton {
+    height: 60px;
+
+    min-width: 210px;
+
+    font-size: 16px;
+  }
+
+}
+
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes emailModalIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(18px)
+      scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =========================================================
+   SUBSCRIPTION SUCCESS STATE
+   ========================================================= */
+
+.emailSuccess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.emailSuccessIcon {
+  width: 68px;
+  height: 68px;
+
+  margin: 0 auto 18px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  color: var(--orange);
+  background: #fff0dd;
+
+  animation: emailSuccessPop 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.emailSuccess h3 {
+  margin: 0;
+}
+
+.emailSuccess p {
+  width: min(100%, 400px);
+
+  margin: 10px auto 22px;
+
+  color: var(--muted);
+
+  font-family: var(--font-tagline);
+
+  font-size: 13px;
+  font-weight: 400;
+
+  line-height: 1.65;
+}
+
+.emailSuccess .successDoneButton {
+  min-width: 120px;
+}
+
+@keyframes emailSuccessPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  70% {
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .emailSuccessIcon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 15px;
+  }
+
+  .emailSuccessIcon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .emailSuccess p {
+    font-size: 12px;
+    margin-bottom: 18px;
+  }
+
+  .emailSuccess .successDoneButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .emailSuccessIcon {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 13px;
+  }
+
+  .emailSuccess p {
+    font-size: 11px;
+    margin-bottom: 16px;
+  }
+}
+
+@media (min-width: 1920px) and (max-width: 2559px) {
+  .emailSuccessIcon {
+    width: 74px;
+    height: 74px;
+  }
+
+  .emailSuccessIcon svg {
+    width: 38px;
+    height: 38px;
+  }
+
+  .emailSuccess p {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .emailSuccessIcon {
+    width: 82px;
+    height: 82px;
+    margin-bottom: 21px;
+  }
+
+  .emailSuccessIcon svg {
+    width: 42px;
+    height: 42px;
+  }
+
+  .emailSuccess p {
+    max-width: 500px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 3840px) {
+  .emailSuccessIcon {
+    width: 94px;
+    height: 94px;
+  }
+
+  .emailSuccessIcon svg {
+    width: 48px;
+    height: 48px;
+  }
 }

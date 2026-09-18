@@ -7,14 +7,19 @@ import {
   useState,
 } from "react";
 
+import JoditEditor from "jodit-react";
+
 import {
   BookOpen,
   Check,
+  CheckCircle2,
+  CircleX,
   ChevronLeft,
   ChevronRight,
   Clock3,
   FileText,
   Flame,
+  Eye,
   ImagePlus,
   Loader2,
   Pencil,
@@ -42,11 +47,6 @@ const CATEGORIES = [
   "Lifestyle",
 ];
 
-type BlogSection = {
-  heading: string;
-  paragraphs: string[];
-};
-
 type Blog = {
   _id: string;
   title: string;
@@ -57,13 +57,16 @@ type Blog = {
   readTime: string;
   date: string;
   image?: string;
-  intro: string;
-  sections: BlogSection[];
-  takeaways: string[];
-  note?: string;
+  content: string;
+  views: number;
   isFeatured: boolean;
   isPopular: boolean;
   isActive: boolean;
+  email?: string;
+  source?: "admin" | "user";
+  status?: "pending" | "approved" | "rejected";
+  approvedAt?: string | null;
+  rejectedAt?: string | null;
   createdAt: string;
   updatedAt?: string;
 };
@@ -74,6 +77,12 @@ type Stats = {
   inactive: number;
   featured: number;
   popular: number;
+  views: number;
+  pending: number;
+  approved: number;
+  rejected: number;
+  userBlogs: number;
+  adminBlogs: number;
 };
 
 type Pagination = {
@@ -85,40 +94,42 @@ type Pagination = {
 
 type BlogForm = {
   title: string;
+  slug: string;
   category: string;
   excerpt: string;
   author: string;
   readTime: string;
   date: string;
-  intro: string;
-  sections: BlogSection[];
-  takeaways: string[];
-  note: string;
+  content: string;
   isFeatured: boolean;
   isPopular: boolean;
   isActive: boolean;
+  email: string;
 };
 
 const getInitialForm = (): BlogForm => ({
   title: "",
+  slug: "",
   category: "Care Tips",
   excerpt: "",
   author: "PetCard Care Team",
   readTime: "5 min read",
   date: new Date().toISOString().split("T")[0],
-  intro: "",
-  sections: [
-    {
-      heading: "",
-      paragraphs: [""],
-    },
-  ],
-  takeaways: [""],
-  note: "",
+  content: "",
   isFeatured: false,
   isPopular: false,
   isActive: true,
+  email: "",
 });
+
+const slugify = (text: string) => {
+  return text
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
 
 const getImageUrl = (image?: string) => {
   if (!image) {
@@ -156,6 +167,12 @@ export default function AdminBlogsPage() {
     inactive: 0,
     featured: 0,
     popular: 0,
+    views: 0,
+    pending: 0,
+    approved: 0,
+    rejected: 0,
+    userBlogs: 0,
+    adminBlogs: 0,
   });
 
   const [pagination, setPagination] =
@@ -179,6 +196,9 @@ export default function AdminBlogsPage() {
     useState("");
 
   const [statusFilter, setStatusFilter] =
+    useState("all");
+
+  const [approvalFilter, setApprovalFilter] =
     useState("all");
 
   const [loading, setLoading] = useState(true);
@@ -213,6 +233,9 @@ export default function AdminBlogsPage() {
     useState(false);
 
   const [statusLoadingId, setStatusLoadingId] =
+    useState("");
+
+  const [approvalLoadingId, setApprovalLoadingId] =
     useState("");
 
   const firstSearchRender = useRef(true);
@@ -298,6 +321,12 @@ export default function AdminBlogsPage() {
             inactive: 0,
             featured: 0,
             popular: 0,
+            views: 0,
+            pending: 0,
+            approved: 0,
+            rejected: 0,
+            userBlogs: 0,
+            adminBlogs: 0,
           }
         );
 
@@ -333,6 +362,7 @@ export default function AdminBlogsPage() {
       typeFilter,
       categoryFilter,
       statusFilter,
+      approvalFilter,
       debouncedSearch,
     ]
   );
@@ -366,6 +396,7 @@ export default function AdminBlogsPage() {
 
     setForm({
       title: blog.title,
+      slug: blog.slug,
       category: blog.category,
       excerpt: blog.excerpt,
       author: blog.author,
@@ -375,32 +406,11 @@ export default function AdminBlogsPage() {
             .toISOString()
             .split("T")[0]
         : "",
-      intro: blog.intro,
-      sections:
-        blog.sections?.length > 0
-          ? blog.sections.map(
-              (section) => ({
-                heading:
-                  section.heading,
-                paragraphs: [
-                  ...section.paragraphs,
-                ],
-              })
-            )
-          : [
-              {
-                heading: "",
-                paragraphs: [""],
-              },
-            ],
-      takeaways:
-        blog.takeaways?.length > 0
-          ? [...blog.takeaways]
-          : [""],
-      note: blog.note || "",
+      content: blog.content || "",
       isFeatured: blog.isFeatured,
       isPopular: blog.isPopular,
       isActive: blog.isActive,
+      email: blog.email || "",
     });
 
     setImage(null);
@@ -513,183 +523,6 @@ export default function AdminBlogsPage() {
   };
 
   /* =====================================================
-     SECTIONS
-  ===================================================== */
-
-  const addSection = () => {
-    setForm((current) => ({
-      ...current,
-      sections: [
-        ...current.sections,
-        {
-          heading: "",
-          paragraphs: [""],
-        },
-      ],
-    }));
-  };
-
-  const removeSection = (
-    sectionIndex: number
-  ) => {
-    setForm((current) => ({
-      ...current,
-      sections:
-        current.sections.filter(
-          (_, index) =>
-            index !== sectionIndex
-        ),
-    }));
-  };
-
-  const updateSectionHeading = (
-    sectionIndex: number,
-    value: string
-  ) => {
-    setForm((current) => ({
-      ...current,
-      sections:
-        current.sections.map(
-          (section, index) =>
-            index === sectionIndex
-              ? {
-                  ...section,
-                  heading: value,
-                }
-              : section
-        ),
-    }));
-  };
-
-  const addParagraph = (
-    sectionIndex: number
-  ) => {
-    setForm((current) => ({
-      ...current,
-      sections:
-        current.sections.map(
-          (section, index) =>
-            index === sectionIndex
-              ? {
-                  ...section,
-                  paragraphs: [
-                    ...section.paragraphs,
-                    "",
-                  ],
-                }
-              : section
-        ),
-    }));
-  };
-
-  const updateParagraph = (
-    sectionIndex: number,
-    paragraphIndex: number,
-    value: string
-  ) => {
-    setForm((current) => ({
-      ...current,
-      sections:
-        current.sections.map(
-          (section, index) => {
-            if (
-              index !== sectionIndex
-            ) {
-              return section;
-            }
-
-            return {
-              ...section,
-              paragraphs:
-                section.paragraphs.map(
-                  (
-                    paragraph,
-                    index
-                  ) =>
-                    index ===
-                    paragraphIndex
-                      ? value
-                      : paragraph
-                ),
-            };
-          }
-        ),
-    }));
-  };
-
-  const removeParagraph = (
-    sectionIndex: number,
-    paragraphIndex: number
-  ) => {
-    setForm((current) => ({
-      ...current,
-      sections:
-        current.sections.map(
-          (section, index) => {
-            if (
-              index !== sectionIndex
-            ) {
-              return section;
-            }
-
-            return {
-              ...section,
-              paragraphs:
-                section.paragraphs.filter(
-                  (_, index) =>
-                    index !==
-                    paragraphIndex
-                ),
-            };
-          }
-        ),
-    }));
-  };
-
-  /* =====================================================
-     TAKEAWAYS
-  ===================================================== */
-
-  const addTakeaway = () => {
-    setForm((current) => ({
-      ...current,
-      takeaways: [
-        ...current.takeaways,
-        "",
-      ],
-    }));
-  };
-
-  const updateTakeaway = (
-    index: number,
-    value: string
-  ) => {
-    setForm((current) => ({
-      ...current,
-      takeaways:
-        current.takeaways.map(
-          (item, itemIndex) =>
-            itemIndex === index
-              ? value
-              : item
-        ),
-    }));
-  };
-
-  const removeTakeaway = (
-    index: number
-  ) => {
-    setForm((current) => ({
-      ...current,
-      takeaways:
-        current.takeaways.filter(
-          (_, itemIndex) =>
-            itemIndex !== index
-        ),
-    }));
-  };
-
-  /* =====================================================
      SAVE
   ===================================================== */
 
@@ -714,51 +547,9 @@ export default function AdminBlogsPage() {
       return;
     }
 
-    if (!form.intro.trim()) {
+    if (!form.content.replace(/<[^>]*>/g, "").trim()) {
       setFormError(
-        "Article intro is required."
-      );
-      return;
-    }
-
-    const cleanedSections =
-      form.sections
-        .map((section) => ({
-          heading:
-            section.heading.trim(),
-          paragraphs:
-            section.paragraphs
-              .map((item) =>
-                item.trim()
-              )
-              .filter(Boolean),
-        }))
-        .filter(
-          (section) =>
-            section.heading &&
-            section.paragraphs.length >
-              0
-        );
-
-    if (
-      cleanedSections.length === 0
-    ) {
-      setFormError(
-        "Add at least one complete article section."
-      );
-      return;
-    }
-
-    const cleanedTakeaways =
-      form.takeaways
-        .map((item) => item.trim())
-        .filter(Boolean);
-
-    if (
-      cleanedTakeaways.length === 0
-    ) {
-      setFormError(
-        "Add at least one takeaway."
+        "Blog content is required."
       );
       return;
     }
@@ -820,27 +611,8 @@ export default function AdminBlogsPage() {
       );
 
       formData.append(
-        "intro",
-        form.intro.trim()
-      );
-
-      formData.append(
-        "sections",
-        JSON.stringify(
-          cleanedSections
-        )
-      );
-
-      formData.append(
-        "takeaways",
-        JSON.stringify(
-          cleanedTakeaways
-        )
-      );
-
-      formData.append(
-        "note",
-        form.note.trim()
+        "content",
+        form.content
       );
 
       formData.append(
@@ -951,6 +723,37 @@ export default function AdminBlogsPage() {
       );
     } finally {
       setStatusLoadingId("");
+    }
+  };
+
+  /* =====================================================
+     APPROVAL
+  ===================================================== */
+
+  const handleApproval = async (
+    blog: Blog,
+    action: "approve" | "reject"
+  ) => {
+    try {
+      setApprovalLoadingId(blog._id);
+      setError("");
+
+      const response = await fetch(
+        `${API_URL}/blogs/${blog._id}/${action}`,
+        { method: "PATCH", credentials: "include" }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || `Failed to ${action} blog.`);
+      }
+
+      await fetchBlogs();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : `Failed to ${action} blog.`);
+    } finally {
+      setApprovalLoadingId("");
     }
   };
 
@@ -1082,17 +885,7 @@ export default function AdminBlogsPage() {
       {/* STATS */}
 
       <div className={styles.statsGrid}>
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>
-            <BookOpen size={22} />
-          </div>
-
-          <div>
-            <span>Total Blogs</span>
-            <strong>{stats.total}</strong>
-          </div>
-        </div>
-
+        
         <div className={styles.statCard}>
           <div className={styles.statIcon}>
             <Check size={22} />
@@ -1103,6 +896,16 @@ export default function AdminBlogsPage() {
             <strong>
               {stats.active}
             </strong>
+          </div>
+        </div>
+
+        <div className={styles.statCard}>
+          <div className={styles.statIcon}>
+            <Clock3 size={22} />
+          </div>
+          <div>
+            <span>Pending Review</span>
+            <strong>{stats.pending}</strong>
           </div>
         </div>
 
@@ -1128,6 +931,19 @@ export default function AdminBlogsPage() {
             <span>Popular</span>
             <strong>
               {stats.popular}/4
+            </strong>
+          </div>
+        </div>
+
+        <div className={styles.statCard}>
+          <div className={styles.statIcon}>
+            <Eye size={22} />
+          </div>
+
+          <div>
+            <span>Total Views</span>
+            <strong>
+              {stats.views}
             </strong>
           </div>
         </div>
@@ -1231,6 +1047,19 @@ export default function AdminBlogsPage() {
               Inactive
             </option>
           </select>
+
+          <select
+            value={approvalFilter}
+            onChange={(event) => {
+              setApprovalFilter(event.target.value);
+              setPage(1);
+            }}
+          >
+            <option value="all">All Reviews</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
         </div>
       </div>
 
@@ -1321,6 +1150,8 @@ export default function AdminBlogsPage() {
                 <th>Blog</th>
                 <th>Category</th>
                 <th>Type</th>
+                <th>Views</th>
+                <th>Review</th>
                 <th>Status</th>
                 <th>Date</th>
                 <th>Actions</th>
@@ -1333,7 +1164,7 @@ export default function AdminBlogsPage() {
                   length: 5,
                 }).map((_, index) => (
                   <tr key={index}>
-                    <td colSpan={6}>
+                    <td colSpan={8}>
                       <div
                         className={
                           styles.skeleton
@@ -1346,7 +1177,7 @@ export default function AdminBlogsPage() {
                 0 ? (
                 <tr>
                   <td
-                    colSpan={6}
+                    colSpan={8}
                     className={
                       styles.emptyCell
                     }
@@ -1451,6 +1282,24 @@ export default function AdminBlogsPage() {
                     </td>
 
                     <td>
+                    <span className={styles.viewsCell}>
+                      {blog.views ?? 0}
+                    </span>
+                  </td>
+
+                  <td>
+                    <span className={`${styles.reviewBadge} ${
+                      blog.status === "pending"
+                        ? styles.pendingReview
+                        : blog.status === "rejected"
+                        ? styles.rejectedReview
+                        : styles.approvedReview
+                    }`}>
+                      {blog.status === "pending" ? "Pending" : blog.status === "rejected" ? "Rejected" : "Approved"}
+                    </span>
+                  </td>
+
+                  <td>
                       <button
                         type="button"
                         className={`${styles.statusButton} ${
@@ -1459,8 +1308,8 @@ export default function AdminBlogsPage() {
                             : styles.inactiveStatus
                         }`}
                         disabled={
-                          statusLoadingId ===
-                          blog._id
+                          statusLoadingId === blog._id ||
+                          blog.status !== "approved"
                         }
                         onClick={() =>
                           handleToggleStatus(
@@ -1502,6 +1351,17 @@ export default function AdminBlogsPage() {
                           styles.actions
                         }
                       >
+                        {blog.status === "pending" && (
+                          <>
+                            <button type="button" aria-label="Approve blog" className={styles.approveAction} disabled={approvalLoadingId === blog._id} onClick={() => handleApproval(blog, "approve")}>
+                              {approvalLoadingId === blog._id ? <Loader2 size={16} className={styles.spinner} /> : <CheckCircle2 size={16} />}
+                            </button>
+                            <button type="button" aria-label="Reject blog" className={styles.rejectAction} disabled={approvalLoadingId === blog._id} onClick={() => handleApproval(blog, "reject")}>
+                              <CircleX size={16} />
+                            </button>
+                          </>
+                        )}
+
                         <button
                           type="button"
                           aria-label="Edit blog"
@@ -1660,9 +1520,9 @@ export default function AdminBlogsPage() {
                 </h2>
 
                 <p>
-                  Create complete article
-                  content for the PetCard
-                  Journal.
+                  {editingBlog?.status === "pending"
+                    ? "Review and edit this user-submitted article before approval."
+                    : "Create complete article content for the PetCard Journal."}
                 </p>
               </div>
 
@@ -1759,6 +1619,20 @@ export default function AdminBlogsPage() {
                         styles.field
                       }
                     >
+                      <label>Slug</label>
+
+                      <input
+                        value={form.slug}
+                        readOnly
+                        placeholder="Auto-generated from title"
+                      />
+                    </div>
+
+                    <div
+                      className={
+                        styles.field
+                      }
+                    >
                       <label>
                         Category *
                       </label>
@@ -1829,6 +1703,18 @@ export default function AdminBlogsPage() {
                             })
                           )
                         }
+                      />
+                    </div>
+
+                    <div className={styles.field}>
+                      <label>Submitter Email</label>
+                      <input
+                        type="email"
+                        value={form.email}
+                        onChange={(event) =>
+                          setForm((current) => ({ ...current, email: event.target.value }))
+                        }
+                        placeholder="user@example.com"
                       />
                     </div>
 
@@ -2196,8 +2082,7 @@ export default function AdminBlogsPage() {
                     </span>
                   </div>
                 </div>
-
-                {/* ARTICLE */}
+                {/* ARTICLE CONTENT */}
 
                 <div
                   className={
@@ -2213,370 +2098,57 @@ export default function AdminBlogsPage() {
 
                     <div>
                       <h3>
-                        Article Content
+                        Blog Content
                       </h3>
                       <p>
-                        This content is
-                        displayed on the
-                        blog detail page.
+                        Write and format the
+                        complete article using
+                        the rich text editor.
                       </p>
                     </div>
                   </div>
 
                   <div
-                    className={
-                      styles.field
-                    }
+                    className={`${styles.field} ${styles.editorField}`}
                   >
                     <label>
-                      Article Intro *
+                      Blog Content *
                     </label>
 
-                    <textarea
-                      rows={5}
-                      value={form.intro}
-                      onChange={(
-                        event
-                      ) =>
-                        setForm(
-                          (current) => ({
-                            ...current,
-                            intro:
-                              event.target
-                                .value,
-                          })
-                        )
+                    <div
+                      className={
+                        styles.joditWrapper
                       }
-                      placeholder="Opening paragraph of the article..."
-                    />
-                  </div>
-
-                  <div
-                    className={
-                      styles.sectionsList
-                    }
-                  >
-                    {form.sections.map(
-                      (
-                        section,
-                        sectionIndex
-                      ) => (
-                        <div
-                          className={
-                            styles.articleSectionCard
-                          }
-                          key={
-                            sectionIndex
-                          }
-                        >
-                          <div
-                            className={
-                              styles.sectionCardHeader
-                            }
-                          >
-                            <strong>
-                              Section{" "}
-                              {String(
-                                sectionIndex +
-                                  1
-                              ).padStart(
-                                2,
-                                "0"
-                              )}
-                            </strong>
-
-                            {form
-                              .sections
-                              .length >
-                              1 && (
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  removeSection(
-                                    sectionIndex
-                                  )
-                                }
-                              >
-                                <Trash2
-                                  size={
-                                    15
-                                  }
-                                />
-                                Remove
-                              </button>
-                            )}
-                          </div>
-
-                          <div
-                            className={
-                              styles.field
-                            }
-                          >
-                            <label>
-                              Heading *
-                            </label>
-
-                            <input
-                              value={
-                                section.heading
-                              }
-                              onChange={(
-                                event
-                              ) =>
-                                updateSectionHeading(
-                                  sectionIndex,
-                                  event
-                                    .target
-                                    .value
-                                )
-                              }
-                              placeholder="Section heading"
-                            />
-                          </div>
-
-                          <div
-                            className={
-                              styles.paragraphs
-                            }
-                          >
-                            {section.paragraphs.map(
-                              (
-                                paragraph,
-                                paragraphIndex
-                              ) => (
-                                <div
-                                  key={
-                                    paragraphIndex
-                                  }
-                                  className={
-                                    styles.paragraphRow
-                                  }
-                                >
-                                  <div
-                                    className={
-                                      styles.field
-                                    }
-                                  >
-                                    <label>
-                                      Paragraph{" "}
-                                      {paragraphIndex +
-                                        1}
-                                    </label>
-
-                                    <textarea
-                                      rows={
-                                        4
-                                      }
-                                      value={
-                                        paragraph
-                                      }
-                                      onChange={(
-                                        event
-                                      ) =>
-                                        updateParagraph(
-                                          sectionIndex,
-                                          paragraphIndex,
-                                          event
-                                            .target
-                                            .value
-                                        )
-                                      }
-                                      placeholder="Write paragraph..."
-                                    />
-                                  </div>
-
-                                  {section
-                                    .paragraphs
-                                    .length >
-                                    1 && (
-                                    <button
-                                      type="button"
-                                      className={
-                                        styles.removeSmallButton
-                                      }
-                                      onClick={() =>
-                                        removeParagraph(
-                                          sectionIndex,
-                                          paragraphIndex
-                                        )
-                                      }
-                                    >
-                                      <X
-                                        size={
-                                          16
-                                        }
-                                      />
-                                    </button>
-                                  )}
-                                </div>
-                              )
-                            )}
-
-                            <button
-                              type="button"
-                              className={
-                                styles.addInlineButton
-                              }
-                              onClick={() =>
-                                addParagraph(
-                                  sectionIndex
-                                )
-                              }
-                            >
-                              <Plus
-                                size={15}
-                              />
-                              Add Paragraph
-                            </button>
-                          </div>
-                        </div>
-                      )
-                    )}
-                  </div>
-
-                  <button
-                    type="button"
-                    className={
-                      styles.addSectionButton
-                    }
-                    onClick={addSection}
-                  >
-                    <Plus size={17} />
-                    Add Article Section
-                  </button>
-                </div>
-
-                {/* TAKEAWAYS */}
-
-                <div
-                  className={
-                    styles.formSection
-                  }
-                >
-                  <div
-                    className={
-                      styles.sectionTitle
-                    }
-                  >
-                    <span>05</span>
-
-                    <div>
-                      <h3>
-                        Quick Takeaways
-                      </h3>
-                      <p>
-                        Points displayed
-                        inside the “What to
-                        remember” card.
-                      </p>
+                    >
+                      <JoditEditor
+                        value={form.content}
+                        onChange={(newContent) =>
+                          setForm(
+                            (current) => ({
+                              ...current,
+                              content:
+                                newContent,
+                            })
+                          )
+                        }
+                        config={{
+                          readonly: saving,
+                          height: 520,
+                          toolbarAdaptive: true,
+                          showCharsCounter: true,
+                          showWordsCounter: true,
+                          showXPathInStatusbar: false,
+                          uploader: {
+                            insertImageAsBase64URI: false,
+                          },
+                        }}
+                      />
                     </div>
-                  </div>
-
-                  <div
-                    className={
-                      styles.takeawayList
-                    }
-                  >
-                    {form.takeaways.map(
-                      (
-                        takeaway,
-                        index
-                      ) => (
-                        <div
-                          className={
-                            styles.takeawayRow
-                          }
-                          key={index}
-                        >
-                          <span>
-                            {index + 1}
-                          </span>
-
-                          <input
-                            value={
-                              takeaway
-                            }
-                            onChange={(
-                              event
-                            ) =>
-                              updateTakeaway(
-                                index,
-                                event
-                                  .target
-                                  .value
-                              )
-                            }
-                            placeholder="Enter takeaway..."
-                          />
-
-                          {form
-                            .takeaways
-                            .length >
-                            1 && (
-                            <button
-                              type="button"
-                              onClick={() =>
-                                removeTakeaway(
-                                  index
-                                )
-                              }
-                            >
-                              <X
-                                size={16}
-                              />
-                            </button>
-                          )}
-                        </div>
-                      )
-                    )}
-                  </div>
-
-                  <button
-                    type="button"
-                    className={
-                      styles.addInlineButton
-                    }
-                    onClick={
-                      addTakeaway
-                    }
-                  >
-                    <Plus size={15} />
-                    Add Takeaway
-                  </button>
-
-                  <div
-                    className={
-                      styles.noteField
-                    }
-                  >
-                    <label>
-                      Important Note
-                      <span>
-                        Optional
-                      </span>
-                    </label>
-
-                    <textarea
-                      rows={4}
-                      value={form.note}
-                      onChange={(
-                        event
-                      ) =>
-                        setForm(
-                          (current) => ({
-                            ...current,
-                            note:
-                              event.target
-                                .value,
-                          })
-                        )
-                      }
-                      placeholder="Optional note displayed below the article..."
-                    />
                   </div>
                 </div>
               </div>
 
+             
               <div
                 className={
                   styles.modalFooter
@@ -2592,6 +2164,17 @@ export default function AdminBlogsPage() {
                 >
                   Cancel
                 </button>
+
+                {editingBlog?.status === "pending" && (
+                  <>
+                    <button type="button" className={styles.rejectFooterButton} disabled={saving || approvalLoadingId === editingBlog._id} onClick={() => handleApproval(editingBlog, "reject")}>
+                      <CircleX size={17} /> Reject
+                    </button>
+                    <button type="button" className={styles.approveFooterButton} disabled={saving || approvalLoadingId === editingBlog._id} onClick={() => handleApproval(editingBlog, "approve")}>
+                      <CheckCircle2 size={17} /> Approve
+                    </button>
+                  </>
+                )}
 
                 <button
                   type="submit"

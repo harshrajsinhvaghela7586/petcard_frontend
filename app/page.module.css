@@ -7135,9 +7135,18 @@ height: 250px;
   gap: 18px;
   padding: 10px 0 20px;
   animation: homeTestimonialMarquee 34s linear infinite;
+  will-change: transform;
 }
 
+@keyframes homeTestimonialMarquee {
+  0% {
+    transform: translateX(0);
+  }
 
+  100% {
+    transform: translateX(calc(-50% - 9px));
+  }
+}
 
 .homeTestimonialCard {
   flex: 0 0 360px;
@@ -9876,7 +9885,7 @@ overflow: visible;
   }
 
   .finalButtons .storeText small {
-    font-size: 7px;
+    font-size: 11px !important;
   }
 
   .finalButtons .storeText b {
@@ -9950,7 +9959,7 @@ overflow: visible;
   }
 
   .finalButtons .storeText small {
-    font-size: 8px;
+    font-size: 12px;
   }
 
   .finalButtons .storeText b {
@@ -10232,13 +10241,6 @@ overflow: visible;
       left bottom;
   }
 
-
-  .finalDownloadCard:hover{
-    transform:
-      translateX(0)
-      translateY(2px)
-      scale(1.25);
-  }
 
 
   /* =======================================================
@@ -10576,11 +10578,7 @@ overflow: visible;
   }
 
 
-  .finalDownloadCard:hover {
-    transform:
-      translateY(2px)
-      scale(1.21);
-  }
+
 
 
   /* RIGHT HALF TEXT */
@@ -10647,7 +10645,7 @@ overflow: visible;
 
 
   .finalButtons .storeText small {
-    font-size: 3.5px !important;
+    font-size: 6px !important;
   }
 
 

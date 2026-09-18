@@ -11,6 +11,7 @@ import {
   CalendarDays,
   Camera,
   Check,
+  CheckCircle2,
   ChevronDown,
   ChevronRight,
   CircleCheck,
@@ -48,8 +49,15 @@ import {
   Weight,
   WandSparkles,
   X,
+  Mail,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import type { FormEvent } from "react";
+
 import styles from "./Features.module.css";
 import { GiWhistle } from "react-icons/gi";
 
@@ -499,43 +507,114 @@ function IconBox({
 }
 
 
-
-const storeBadges = (
-  <>
-    <div className={styles.storeBadge}>
-      <img
-        src="/images/apple-logo.png"
-        alt="Apple"
-        className={styles.storeIconImage}
-      />
-
-      <span className={styles.storeText}>
-        <small>Download on the</small>
-        <b>App Store</b>
-      </span>
-    </div>
-
-    <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
-      <img
-        src="/images/google-play.png"
-        alt="Google Play"
-        className={styles.storeIconImage}
-      />
-
-      <span className={styles.storeText}>
-        <small>GET IT ON</small>
-        <b>Google Play</b>
-      </span>
-    </div>
-  </>
-);
-
 export default function FeaturesPage() {
   const [visible, setVisible] = useState<string[]>([]);
   const [activeItems, setActiveItems] = useState<Record<string, number>>(
     {}
   );
+  const [showEmailForm, setShowEmailForm] =
+  useState(false);
 
+const [isSubscribed, setIsSubscribed] =
+  useState(false);
+
+const [newsletterEmail, setNewsletterEmail] =
+  useState("");
+
+const [newsletterSubmitting, setNewsletterSubmitting] =
+  useState(false);
+
+const [newsletterError, setNewsletterError] =
+  useState("");
+
+  const handleNewsletterSubmit = async (
+  event: FormEvent<HTMLFormElement>
+) => {
+  event.preventDefault();
+
+  if (newsletterSubmitting) {
+    return;
+  }
+
+  setNewsletterError("");
+
+  const email =
+    newsletterEmail.trim().toLowerCase();
+
+  if (!email) {
+    setNewsletterError(
+      "Please enter your email address."
+    );
+    return;
+  }
+
+  const emailRegex =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
+    setNewsletterError(
+      "Please enter a valid email address."
+    );
+    return;
+  }
+
+  try {
+    setNewsletterSubmitting(true);
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"}/newsletter/subscribe`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      }
+    );
+
+    let data: {
+      success?: boolean;
+      message?: string;
+    } = {};
+
+    try {
+      data = await response.json();
+    } catch {
+      data = {};
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        data.message ||
+          "Unable to subscribe right now."
+      );
+    }
+
+    // Success
+    setNewsletterEmail("");
+    setNewsletterError("");
+    setIsSubscribed(true);
+
+    // Automatically close after 3 seconds
+    setTimeout(() => {
+      setShowEmailForm(false);
+      setIsSubscribed(false);
+    }, 3000);
+  } catch (error) {
+    console.error(
+      "Newsletter subscription failed:",
+      error
+    );
+
+    setNewsletterError(
+      error instanceof Error
+        ? error.message
+        : "Something went wrong. Please try again."
+    );
+  } finally {
+    setNewsletterSubmitting(false);
+  }
+};
   const sectionRefs = useRef<
     Record<string, HTMLElement | null>
   >({});
@@ -701,11 +780,7 @@ export default function FeaturesPage() {
                   onClick={() => scrollToFeature("01")}
                 >
                   Explore Features
-                  <img
-                    src="/images/paw-white.png"
-                    width={30}
-                    height={30}
-                  />
+
                 </button>
 
                 <a
@@ -838,11 +913,15 @@ export default function FeaturesPage() {
           </div>
 
           <div
-            ref={overviewRailRef}
-            className={styles.overviewRail}
-
-
-          >
+  ref={overviewRailRef}
+  className={styles.overviewRail}
+  onMouseEnter={() => {
+    overviewHoverRef.current = true;
+  }}
+  onMouseLeave={() => {
+    overviewHoverRef.current = false;
+  }}
+>
             {[...sections, ...sections].map(
               (section, index) => {
                 const Icon = section.icon;
@@ -2797,60 +2876,171 @@ export default function FeaturesPage() {
               </div>
             </div>
 
-           
+
           </div>
         </div>
       </section>
 
- 
- {/* =====================================================
+
+      {/* =====================================================
     FINAL DOWNLOAD
     ===================================================== */}
 
-      <section
-        className={`${styles.finalDownload} ${styles.homeReveal}`}
-        id="download-app"
-        data-home-reveal="download"
+     <section
+  className={`${styles.finalDownload} ${styles.homeReveal}`}
+  id="download-app"
+  data-home-reveal="download"
+>
+  <div
+    className={`${styles.container} container ${styles.finalDownloadCard}`}
+  >
+    <div className={styles.finalPets}>
+      <Image
+        src="/images/FeatureFooter.png"
+        alt="PETCARD pets"
+        fill
+        priority
+        className={styles.finalPetsImage}
+      />
+    </div>
+
+    <div className={styles.finalCopy}>
+      <h2>More to Discover. More to Love.</h2>
+
+      <p>
+        From everyday care to special memories, there's always something more
+        to explore with PETCARD.
+      </p>
+    </div>
+
+    <div className={styles.finalButtons}>
+      <Link
+        href="#feature-overview"
+        className="btn btn-outline"
       >
-        <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
+        Discover What’s New
+      </Link>
 
-          {/* ================= PETS ================= */}
+      <button
+        type="button"
+        className="btn btn-outline"
+        onClick={() => setShowEmailForm(true)}
+      >
+        Get PETCARD Updates
+      </button>
+    </div>
+  </div>
 
-          <div className={styles.finalPets}>
-            <Image
-              src="/images/FeatureFooter.png"
-              alt="PETCARD pets"
-              fill
-              priority
+  {/* MODAL — OUTSIDE finalDownloadCard */}
+  {showEmailForm && (
+    <div
+      className={styles.emailModalOverlay}
+      onClick={() => {
+        setShowEmailForm(false);
+        setIsSubscribed(false);
+      }}
+    >
+      <div
+        className={styles.emailModal}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          className={styles.emailModalClose}
+          onClick={() => {
+            setShowEmailForm(false);
+            setIsSubscribed(false);
+          }}
+          aria-label="Close"
+        >
+          ×
+        </button>
 
-              className={styles.finalPetsImage}
-            />
-          </div>
+        {!isSubscribed ? (
+  <>
+    <div className={styles.emailModalIcon}>
+      <img
+        src="/images/paw.png"
+        height={24}
+        width={24}
+        alt="PETCARD"
+      />
+    </div>
 
+    <h3>Get PETCARD Updates</h3>
 
-          {/* ================= COPY ================= */}
+    <p>
+      Stay updated with the latest PETCARD news,
+      features, and pet-care tips.
+    </p>
 
-          <div className={styles.finalCopy}>
+    <form
+      className={styles.emailForm}
+      onSubmit={handleNewsletterSubmit}
+    >
+      <div className={styles.emailInput}>
+        <Mail size={18} />
 
-            <h2>
-             Happy pet. Active mind. Stronger bond.
-            </h2>
+        <input
+          type="email"
+          value={newsletterEmail}
+          onChange={(event) => {
+            setNewsletterEmail(event.target.value);
+            setNewsletterError("");
+          }}
+          placeholder="Enter your email address"
+          autoComplete="email"
+          required
+          disabled={newsletterSubmitting}
+        />
+      </div>
 
-            <p>
-              Make every playtime a learning time!
-            </p>
+      <button
+        type="submit"
+        className={`${styles.notifyButton} btn btn-primary`}
+        disabled={newsletterSubmitting}
+      >
+        {newsletterSubmitting
+          ? "Subscribing..."
+          : "Get PETCARD Updates"}
+      </button>
+    </form>
 
-          </div>
+    {newsletterError && (
+      <p
+        className={styles.newsletterModalError}
+        role="alert"
+      >
+        {newsletterError}
+      </p>
+    )}
+  </>
+) : (
+  <div className={styles.emailSuccess}>
+    <div className={styles.emailSuccessIcon}>
+      <CheckCircle2
+        size={34}
+        strokeWidth={2.4}
+      />
+    </div>
 
+    <span className={styles.successEyebrow}>
+      PETCARD UPDATES
+    </span>
 
-          {/* ================= STORE BADGES ================= */}
+    <h3>Successfully Subscribed!</h3>
 
-          <div className={styles.finalButtons}>
-            {storeBadges}
-          </div>
-
-        </div>
-      </section>
+    <p>
+      You&apos;re all set! Thank you for joining the
+      PETCARD community. We&apos;ll keep you updated
+      with the latest news, features, and pet-care tips.
+    </p>
+  </div>
+)}
+      </div>
+    </div>
+  )}
+</section>
     </main>
   );
 }

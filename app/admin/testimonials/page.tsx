@@ -11,6 +11,9 @@ import {
     Power,
     MessageSquareQuote,
     ImagePlus,
+    Eye,
+    Check,
+    Ban,
 } from "lucide-react";
 
 import styles from "./TestimonialsAdmin.module.css";
@@ -18,16 +21,22 @@ import styles from "./TestimonialsAdmin.module.css";
 interface Testimonial {
     _id: string;
     name: string;
+    email?: string;
     role: string;
     rating: number;
     text: string;
     photo?: string;
     isActive: boolean;
+    source?: "admin" | "user";
+    status?: "pending" | "approved" | "rejected";
+    approvedAt?: string | null;
+    rejectedAt?: string | null;
     createdAt?: string;
 }
 
 interface FormData {
     name: string;
+    email: string;
     role: string;
     rating: number;
     text: string;
@@ -40,6 +49,7 @@ const API_URL =
 
 const initialForm: FormData = {
     name: "",
+    email: "",
     role: "Pet Parent",
     rating: 5,
     text: "",
@@ -55,6 +65,8 @@ export default function TestimonialsAdmin() {
     const [saving, setSaving] = useState(false);
 
     const [search, setSearch] = useState("");
+    const [statusFilter, setStatusFilter] = useState<"all" | "pending" | "approved" | "rejected">("all");
+    const [actionLoading, setActionLoading] = useState<string | null>(null);
 
     const [modalOpen, setModalOpen] = useState(false);
     const [editingId, setEditingId] = useState<string | null>(
@@ -132,6 +144,7 @@ const [photoPreview, setPhotoPreview] =
 
     setForm({
         name: testimonial.name,
+        email: testimonial.email || "",
         role: testimonial.role,
         rating: testimonial.rating,
         text: testimonial.text,
@@ -232,6 +245,11 @@ const handlePhotoChange = (
 formData.append(
     "name",
     form.name.trim()
+);
+
+formData.append(
+    "email",
+    form.email.trim()
 );
 
 formData.append(
@@ -417,16 +435,98 @@ const response = await fetch(url, {
         }
     };
 
+    const handleReviewAction = async (
+        testimonial: Testimonial,
+        action: "approve" | "reject"
+    ) => {
+        try {
+            setError("");
+            setSuccess("");
+            setActionLoading(`${action}-${testimonial._id}`);
+
+            const response = await fetch(
+                `${API_URL}/testimonials/${testimonial._id}/${action}`,
+                {
+                    method: "PATCH",
+                    credentials: "include",
+                }
+            );
+
+            if (response.status === 401) {
+                window.location.href = "/login";
+                return;
+            }
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(
+                    data.message ||
+                        `Failed to ${action} testimonial.`
+                );
+            }
+
+            setTestimonials((current) =>
+                current.map((item) =>
+                    item._id === testimonial._id
+                        ? {
+                              ...item,
+                              status:
+                                  action === "approve"
+                                      ? "approved"
+                                      : "rejected",
+                              isActive:
+                                  action === "approve",
+                              approvedAt:
+                                  action === "approve"
+                                      ? new Date().toISOString()
+                                      : null,
+                              rejectedAt:
+                                  action === "reject"
+                                      ? new Date().toISOString()
+                                      : null,
+                          }
+                        : item
+                )
+            );
+
+            setSuccess(
+                action === "approve"
+                    ? "Testimonial approved successfully."
+                    : "Testimonial rejected successfully."
+            );
+
+            setTimeout(() => setSuccess(""), 3000);
+        } catch (err) {
+            console.error(err);
+            setError(
+                err instanceof Error
+                    ? err.message
+                    : `Failed to ${action} testimonial.`
+            );
+        } finally {
+            setActionLoading(null);
+        }
+    };
+
     const filteredTestimonials =
         testimonials.filter((item) => {
             const query = search
                 .trim()
                 .toLowerCase();
 
+            const matchesStatus =
+                statusFilter === "all" ||
+                (item.status || "approved") === statusFilter;
+
+            if (!matchesStatus) return false;
             if (!query) return true;
 
             return (
                 item.name
+                    .toLowerCase()
+                    .includes(query) ||
+                (item.email || "")
                     .toLowerCase()
                     .includes(query) ||
                 item.role
@@ -509,10 +609,45 @@ const response = await fetch(url, {
                     )}
                 </div>
 
+                <div className={styles.statusFilters}>
+                    {(["all", "pending", "approved", "rejected"] as const).map(
+                        (status) => {
+                            const count =
+                                status === "all"
+                                    ? testimonials.length
+                                    : testimonials.filter(
+                                          (item) =>
+                                              (item.status || "approved") ===
+                                              status
+                                      ).length;
+
+                            return (
+                                <button
+                                    key={status}
+                                    type="button"
+                                    className={`${styles.filterButton} ${
+                                        statusFilter === status
+                                            ? styles.filterButtonActive
+                                            : ""
+                                    } ${styles[`filter-${status}`]}`}
+                                    onClick={() =>
+                                        setStatusFilter(status)
+                                    }
+                                >
+                                    {status === "all"
+                                        ? "All"
+                                        : status.charAt(0).toUpperCase() +
+                                          status.slice(1)}
+                                    <span>{count}</span>
+                                </button>
+                            );
+                        }
+                    )}
+                </div>
+
                 <div className={styles.total}>
                     <strong>
-                        {filteredTestimonials.length}
-                    </strong>
+                        {filteredTestimonials.length}</strong>
 
                     <span>
                         {filteredTestimonials.length === 1
@@ -578,7 +713,7 @@ const response = await fetch(url, {
                                 <tr>
                                     <th>TESTIMONIAL</th>
                                     <th>RATING</th>
-                                    <th>STATUS</th>
+                                    <th>REVIEW STATUS</th>
                                     <th>DATE</th>
                                     <th>ACTIONS</th>
                                 </tr>
@@ -672,23 +807,40 @@ const response = await fetch(url, {
                                             </td>
 
                                             <td>
-                                                <button
-                                                    className={`${styles.status} ${
-                                                        item.isActive
-                                                            ? styles.active
-                                                            : styles.inactive
-                                                    }`}
-                                                    onClick={() =>
-                                                        toggleStatus(
-                                                            item
-                                                        )
-                                                    }
-                                                >
-                                                    <span />
-                                                    {item.isActive
-                                                        ? "Active"
-                                                        : "Inactive"}
-                                                </button>
+                                                <div className={styles.statusCell}>
+                                                    <span
+                                                        className={`${styles.reviewStatus} ${
+                                                            styles[
+                                                                `review-${item.status || "approved"}`
+                                                            ]
+                                                        }`}
+                                                    >
+                                                        {item.status === "pending"
+                                                            ? "Pending"
+                                                            : item.status === "rejected"
+                                                              ? "Rejected"
+                                                              : "Approved"}
+                                                    </span>
+
+                                                    {item.status === "approved" && (
+                                                        <button
+                                                            className={`${styles.status} ${
+                                                                item.isActive
+                                                                    ? styles.active
+                                                                    : styles.inactive
+                                                            }`}
+                                                            onClick={() =>
+                                                                toggleStatus(item)
+                                                            }
+                                                            title="Toggle website visibility"
+                                                        >
+                                                            <span />
+                                                            {item.isActive
+                                                                ? "Active"
+                                                                : "Inactive"}
+                                                        </button>
+                                                    )}
+                                                </div>
                                             </td>
 
                                             <td>
@@ -718,6 +870,72 @@ const response = await fetch(url, {
                                                         styles.actions
                                                     }
                                                 >
+                                                    {item.status === "pending" && (
+                                                        <>
+                                                            <button
+                                                                className={styles.approveButton}
+                                                                onClick={() =>
+                                                                    handleReviewAction(
+                                                                        item,
+                                                                        "approve"
+                                                                    )
+                                                                }
+                                                                disabled={
+                                                                    actionLoading !== null
+                                                                }
+                                                                title="Approve"
+                                                            >
+                                                                {actionLoading ===
+                                                                `approve-${item._id}` ? (
+                                                                    <span
+                                                                        className={
+                                                                            styles.actionSpinner
+                                                                        }
+                                                                    />
+                                                                ) : (
+                                                                    <Check size={16} />
+                                                                )}
+                                                            </button>
+
+                                                            <button
+                                                                className={styles.rejectButton}
+                                                                onClick={() =>
+                                                                    handleReviewAction(
+                                                                        item,
+                                                                        "reject"
+                                                                    )
+                                                                }
+                                                                disabled={
+                                                                    actionLoading !== null
+                                                                }
+                                                                title="Reject"
+                                                            >
+                                                                {actionLoading ===
+                                                                `reject-${item._id}` ? (
+                                                                    <span
+                                                                        className={
+                                                                            styles.actionSpinner
+                                                                        }
+                                                                    />
+                                                                ) : (
+                                                                    <Ban size={16} />
+                                                                )}
+                                                            </button>
+                                                        </>
+                                                    )}
+
+                                                    <button
+                                                        className={
+                                                            styles.viewButton
+                                                        }
+                                                        onClick={() =>
+                                                            openEditModal(item)
+                                                        }
+                                                        title="View / Edit"
+                                                    >
+                                                        <Eye size={16} />
+                                                    </button>
+
                                                     <button
                                                         className={
                                                             styles.editButton
@@ -887,6 +1105,29 @@ const response = await fetch(url, {
                                                         .value,
                                                 })
                                             )
+                                        }
+                                    />
+                                </div>
+
+                                <div
+                                    className={
+                                        styles.field
+                                    }
+                                >
+                                    <label htmlFor="email">
+                                        Email
+                                    </label>
+
+                                    <input
+                                        id="email"
+                                        type="email"
+                                        placeholder="user@example.com"
+                                        value={form.email}
+                                        onChange={(event) =>
+                                            setForm((current) => ({
+                                                ...current,
+                                                email: event.target.value,
+                                            }))
                                         }
                                     />
                                 </div>
@@ -1084,6 +1325,57 @@ const response = await fetch(url, {
                                     size={18}
                                 />
                             </label>
+
+                            {editingId &&
+                                testimonials.find(
+                                    (item) => item._id === editingId
+                                )?.status === "pending" && (
+                                    <div className={styles.reviewActions}>
+                                        <button
+                                            type="button"
+                                            className={styles.rejectModalButton}
+                                            onClick={() => {
+                                                const item = testimonials.find(
+                                                    (testimonial) =>
+                                                        testimonial._id ===
+                                                        editingId
+                                                );
+                                                if (item) {
+                                                    handleReviewAction(
+                                                        item,
+                                                        "reject"
+                                                    );
+                                                }
+                                            }}
+                                            disabled={saving || actionLoading !== null}
+                                        >
+                                            <Ban size={16} />
+                                            Reject
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            className={styles.approveModalButton}
+                                            onClick={() => {
+                                                const item = testimonials.find(
+                                                    (testimonial) =>
+                                                        testimonial._id ===
+                                                        editingId
+                                                );
+                                                if (item) {
+                                                    handleReviewAction(
+                                                        item,
+                                                        "approve"
+                                                    );
+                                                }
+                                            }}
+                                            disabled={saving || actionLoading !== null}
+                                        >
+                                            <Check size={16} />
+                                            Approve & Publish
+                                        </button>
+                                    </div>
+                                )}
 
                             <div
                                 className={

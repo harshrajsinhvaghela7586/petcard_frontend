@@ -14,6 +14,7 @@ import {
     LogOut,
     X,
     Settings,
+    Send,
 } from "lucide-react";
 
 import styles from "./AdminSidebar.module.css";
@@ -52,6 +53,11 @@ const communicationItems = [
         href: "/admin/contacts",
         icon: Mail,
     },
+    {
+        label: "Newsletter",
+        href: "/admin/newsletter",
+        icon: Send,
+    },
 ];
 
 const settingsItems = [
@@ -86,7 +92,7 @@ export default function AdminSidebar({
                 }
             );
 
-            window.location.href = "/login";
+            window.location.href = "/";
         } catch (error) {
             console.error("Logout failed:", error);
         }

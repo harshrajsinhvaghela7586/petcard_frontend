@@ -1,5 +1,7 @@
+import Link from "next/link";
 import FAQList from "../../components/FAQList";
 import styles from "./FAQ.module.css";
+import Image from "next/image";
 
 export default function FAQ() {
   return (
@@ -36,9 +38,7 @@ export default function FAQ() {
         <div className={styles.container}>
           <div className={styles.faqHeader}>
             <div>
-              <div className={styles.sectionEyebrow}>
-                Need Help?
-              </div>
+             
 
               <h2>
                 Questions, answered{" "}
@@ -56,32 +56,57 @@ export default function FAQ() {
             <FAQList />
           </div>
 
-          <div className={styles.helpCard}>
-            <div className={styles.helpIcon}> <img
-                src="/images/paw.png"
-                width={27}
-                height={27}
-                alt=""
-              /></div>
+          </div>
+      </section>
 
-            <div className={styles.helpContent}>
-              <strong>Still have a question?</strong>
+        <section
+        className={`${styles.finalDownload} ${styles.homeReveal}`}
+        id="download-app"
+        data-home-reveal="download"
+      >
+        <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
 
-              <p>
-                We&apos;re here to help you understand the
-                PetCard experience better.
-              </p>
-            </div>
+          {/* ================= PETS ================= */}
 
-            <a href="/contact">
-              Contact Us
-              <img
-                src="/images/paw-white.png"
-                width={27}
-                height={27}
-                alt=""
-              />
-            </a>
+          <div className={styles.finalPets}>
+            <Image
+              src="/images/HowItWorksFooter.png"
+              alt="PETCARD pets"
+              fill
+              priority
+
+              className={styles.finalPetsImage}
+            />
+          </div>
+
+
+          {/* ================= COPY ================= */}
+
+          <div className={styles.finalCopy}>
+
+            <h2>
+             Still have a question?
+            </h2>
+
+            <p>
+               We&apos;re here to help you understand the
+              <br className={styles.desktopBreak} />
+            PetCard experience better.
+            </p>
+
+          </div>
+
+
+          {/* ================= STORE BADGES ================= */}
+
+          <div className={styles.finalButtons}>
+            <Link href="/contact#contact-form" className="btn btn-outline">
+              Get In Touch
+            </Link>
+
+            <Link href="/features#feature-overview" className="btn btn-outline">
+             Explore PETCARD
+            </Link>
           </div>
         </div>
       </section>

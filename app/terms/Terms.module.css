@@ -1,23 +1,18 @@
 /* =========================================================
-   TERMS PAGE — PETCARD BRANDED
-   ========================================================= */
+   TERMS — PETCARD BOX GRID
+========================================================= */
 
 .page {
   position: relative;
-
   width: 100%;
   min-height: 100vh;
-
   overflow: hidden;
-
-  padding:
-    75px 0
-    115px;
+  padding: 75px 0 110px;
 
   background:
     radial-gradient(
-      circle at 86% 6%,
-      rgba(255, 155, 47, 0.10),
+      circle at 85% 8%,
+      rgba(255, 155, 47, 0.1),
       transparent 28%
     ),
     linear-gradient(
@@ -31,36 +26,26 @@
 .container {
   position: relative;
   z-index: 2;
-
-  width:
-    min(
-      1280px,
-      calc(100% - 48px)
-    );
-
+  width: min(1380px, calc(100% - 80px));
   margin-inline: auto;
 }
 
-
 /* =========================================================
    BACKGROUND
-   ========================================================= */
+========================================================= */
 
 .glowOne {
   position: absolute;
-
-  width: 650px;
-  height: 650px;
-
-  top: -290px;
-  right: -220px;
-
+  width: 620px;
+  height: 620px;
+  top: -280px;
+  right: -200px;
   border-radius: 50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(255, 155, 47, 0.19),
+      rgba(255, 155, 47, 0.18),
       transparent 70%
     );
 
@@ -69,19 +54,16 @@
 
 .glowTwo {
   position: absolute;
-
-  width: 420px;
-  height: 420px;
-
-  left: -240px;
-  bottom: 14%;
-
+  width: 450px;
+  height: 450px;
+  left: -260px;
+  bottom: 12%;
   border-radius: 50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(255, 208, 158, 0.15),
+      rgba(255, 210, 160, 0.16),
       transparent 70%
     );
 
@@ -90,488 +72,198 @@
 
 .bigPaw {
   position: absolute;
-
-  right: 2%;
-  top: 32%;
-
+  right: 3%;
+  top: 30%;
   color: var(--orange);
-
   opacity: 0.025;
-
-  transform:
-    rotate(17deg);
-
+  transform: rotate(18deg);
   pointer-events: none;
 }
 
-
 /* =========================================================
-   SCROLL REVEAL
-   ========================================================= */
+   REVEAL
+========================================================= */
 
 .reveal {
   opacity: 0;
-
-  transform:
-    translateY(25px);
-
+  transform: translateY(24px);
   transition:
     opacity 0.75s ease,
-    transform 0.85s
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      );
+    transform 0.85s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
 }
 
 .visible {
   opacity: 1;
-
-  transform:
-    translateY(0);
+  transform: translateY(0);
 }
-
 
 /* =========================================================
    HERO
-   ========================================================= */
+========================================================= */
 
 .hero {
-  margin-bottom:
-    28px;
-}
-
-.heroBadge {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  padding:
-    8px 13px;
-
-  border:
-    1px solid #eadfd6;
-
-  border-radius:
-    999px;
-
-  color:
-    var(--orange);
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.82
-    );
-
-  font-size:
-    9px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.07em;
-
-  text-transform:
-    uppercase;
-
-  box-shadow:
-    0 7px 18px
-      rgba(
-        56,
-        27,
-        14,
-        0.035
-      );
+  margin-bottom: 32px;
 }
 
 .heroGrid {
-  display:
-    grid;
-
+  display: grid;
   grid-template-columns:
-    minmax(0, 1.05fr)
-    minmax(370px, 0.95fr);
-
-  align-items:
-    center;
-
-  gap:
-    75px;
-
-  margin-top:
-    22px;
+    minmax(0, 1.08fr)
+    minmax(380px, 0.92fr);
+  align-items: center;
+  gap: 75px;
 }
 
 .heroCopy {
-  max-width:
-    690px;
+  max-width: 680px;
 }
 
 .heroEyebrow {
-  margin-bottom:
-    9px;
-
-  color:
-    var(--orange);
-
-  font-size:
-    9px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.10em;
-
-  text-transform:
-    uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .heroCopy h1 {
-  margin:
-    0 0
-    19px;
-
-  color:
-    var(--text);
-
-  font-size: clamp(34px, 4.3vw, 58px);
-  line-height: 1.03;
+  margin: 0 0 18px;
+  color: var(--text);
+  font-size: clamp(46px, 5vw, 68px);
+  font-weight: 700;
+  line-height: 1.02;
   letter-spacing: -0.045em;
 }
 
 .heroCopy h1 span {
-  color:
-    var(--orange);
+  color: var(--orange);
 }
 
 .heroCopy > p {
-  max-width:
-    690px;
-
-  margin:
-    0;
-
-  color:
-    var(--muted);
-
-  font-family:
-    var(--font-tagline);
-
-  font-size:
-    13px;
-
-  line-height:
-    1.84;
+  max-width: 680px;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-tagline);
+  font-size: 13px;
+  line-height: 1.8;
 }
-
 
 /* =========================================================
    HERO ACTIONS
-   ========================================================= */
+========================================================= */
 
 .heroActions {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    16px;
-
-  margin-top:
-    25px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 26px;
 }
 
-.exploreButton {
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  gap:
-    7px;
-
-  min-height:
-    46px;
-
-  padding:
-    0 17px;
-
-  border:
-    0;
-
-  border-radius:
-    12px;
-
-  color:
-    #fff;
-
-  background:
-    var(--orange);
-
-  font-family:
-    inherit;
-
-  font-size:
-    9px;
-
-  font-weight:
-    800;
-
-  box-shadow:
-    0 12px 25px
-      rgba(
-        255,
-        122,
-        0,
-        0.2
-      );
-
-  cursor:
-    pointer;
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+.heroActions :global(.btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
 }
-
-.exploreButton:hover {
-  transform:
-    translateY(-2px);
-
-  box-shadow:
-    0 16px 31px
-      rgba(
-        255,
-        122,
-        0,
-        0.26
-      );
-}
-
-.questionLink {
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  gap:
-    6px;
-
-  color:
-    var(--text);
-
-  font-size:
-    9px;
-
-  font-weight:
-    800;
-
-  transition:
-    color 0.2s ease;
-}
-
-.questionLink:hover {
-  color:
-    var(--orange);
-}
-
 
 /* =========================================================
    HERO POINTS
-   ========================================================= */
+========================================================= */
 
 .heroPoints {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  flex-wrap:
-    wrap;
-
-  gap:
-    7px;
-
-  margin-top:
-    21px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 21px;
 }
 
 .heroPoints span {
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  gap:
-    6px;
-
-  padding:
-    7px 10px;
-
-  border:
-    1px solid
-    #ece0d7;
-
-  border-radius:
-    999px;
-
-  color:
-    #88766c;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.72
-    );
-
-  font-size:
-    10px;
-
-  font-weight:
-    700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border: 1px solid #ece0d7;
+  border-radius: 999px;
+  color: #88766c;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 10px;
+  font-weight: 700;
 }
 
 .heroPoints svg {
-  color:
-    var(--orange);
+  color: var(--orange);
 }
 
-
 /* =========================================================
-   VISUAL
-   ========================================================= */
+   VISUAL CARD
+========================================================= */
 
 .visualArea {
-  position:
-    relative;
-
-  min-height:
-    390px;
-
-  display:
-    grid;
-
-  place-items:
-    center;
+  position: relative;
+  min-height: 370px;
+  display: grid;
+  place-items: center;
 }
 
 .visualGlow {
-  position:
-    absolute;
-
-  width:
-    370px;
-
-  height:
-    370px;
-
-  border-radius:
-    50%;
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(
-        255,
-        161,
-        72,
-        0.23
-      ),
+      rgba(255, 155, 47, 0.22),
       transparent 70%
     );
 
-  animation:
-    visualPulse
-    5s
-    ease-in-out
-    infinite
-    alternate;
+  animation: visualPulse 5s ease-in-out infinite alternate;
 }
 
 @keyframes visualPulse {
   from {
-    transform:
-      scale(0.94);
+    transform: scale(0.94);
   }
 
   to {
-    transform:
-      scale(1.05);
+    transform: scale(1.05);
   }
 }
 
 .visualCard {
-  position:
-    relative;
+  position: relative;
+  z-index: 2;
 
-  z-index:
-    2;
+  width: min(390px, 100%);
+  min-height: 335px;
+  overflow: hidden;
+  padding: 28px;
 
-  width:
-    min(
-      400px,
-      100%
-    );
-
-  min-height:
-    345px;
-
-  overflow:
-    hidden;
-
-  padding:
-    27px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      209,
-      170,
-      0.85
-    );
-
-  border-radius:
-    31px;
+  border: 1px solid rgba(255, 207, 163, 0.85);
+  border-radius: 31px;
 
   background:
     linear-gradient(
       145deg,
       #fffdf9,
-      #fff5e8
+      #fff6eb
     );
 
   box-shadow:
-    0 28px 62px
-      rgba(
-        56,
-        27,
-        14,
-        0.08
-      );
+    0 28px 60px rgba(56, 27, 14, 0.08);
 
-  transform:
-    rotate(-2deg);
+  transform: rotate(2deg);
 
   transition:
     transform 0.35s ease,
@@ -580,809 +272,260 @@
 
 .visualCard:hover {
   transform:
-    rotate(0)
+    rotate(0deg)
     translateY(-5px);
 
   box-shadow:
-    0 35px 72px
-      rgba(
-        56,
-        27,
-        14,
-        0.11
-      ),
-    0 0 35px
-      rgba(
-        255,
-        155,
-        47,
-        0.10
-      );
+    0 35px 70px rgba(56, 27, 14, 0.11),
+    0 0 35px rgba(255, 155, 47, 0.1);
 }
 
 .visualHeader {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    11px;
-
-  padding-bottom:
-    19px;
-
-  border-bottom:
-    1px solid
-    #eee2d9;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee1d7;
 }
 
 .visualIcon {
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  width:
-    47px;
-
-  height:
-    47px;
-
-  border-radius:
-    14px;
-
-  color:
-    var(--orange);
-
-  background:
-    #fff;
+  display: grid;
+  place-items: center;
+  width: 47px;
+  height: 47px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  color: var(--orange);
+  background: #fff;
 
   box-shadow:
-    0 8px 18px
-      rgba(
-        56,
-        27,
-        14,
-        0.06
-      );
+    0 8px 18px rgba(56, 27, 14, 0.06);
 }
 
 .visualHeader div:last-child {
-  display:
-    grid;
-
-  gap:
-    2px;
+  display: grid;
+  gap: 2px;
 }
 
 .visualHeader span {
-  color:
-    var(--orange);
-
-  font-size:
-    7px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.10em;
+  color: var(--orange);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
 }
 
 .visualHeader strong {
-  color:
-    var(--text);
-
-  font-size:
-    15px;
+  color: var(--text);
+  font-size: 15px;
 }
 
 .visualTitle {
-  margin-top:
-    23px;
-
-  color:
-    var(--text);
-
-  font-size:
-    28px;
-
-  font-weight:
-    700;
-
-  line-height:
-    1.06;
-
-  letter-spacing:
-    -0.6px;
+  margin-top: 24px;
+  color: var(--text);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.8px;
 }
 
 .visualTitle span {
-  color:
-    var(--orange);
+  color: var(--orange);
 }
 
 .visualList {
-  display:
-    grid;
-
-  gap:
-    8px;
-
-  margin-top:
-    21px;
+  display: grid;
+  gap: 8px;
+  margin-top: 22px;
 }
 
 .visualList div {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    7px;
-
-  color:
-    #76675f;
-
-  font-size:
-    10px;
-
-  font-weight:
-    600;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #76675f;
+  font-size: 10px;
+  font-weight: 600;
 }
 
 .visualList svg {
-  color:
-    var(--orange);
-
-  flex-shrink:
-    0;
+  flex-shrink: 0;
+  color: var(--orange);
 }
 
 .visualPaw {
-  position:
-    absolute;
-
-  right:
-    -4px;
-
-  bottom:
-    -7px;
-
-  color:
-    var(--orange);
-
-  opacity:
-    0.075;
-
-  transform:
-    rotate(14deg);
+  position: absolute;
+  right: -10px;
+  bottom: -12px;
+  color: var(--orange);
+  opacity: 0.07;
+  transform: rotate(15deg);
 }
-
 
 /* =========================================================
    NOTICE
-   ========================================================= */
+========================================================= */
 
 .notice {
-  position:
-    relative;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  overflow: hidden;
+  margin-bottom: 34px;
+  padding: 19px 22px;
 
-  display:
-    flex;
-
-  align-items:
-    flex-start;
-
-  gap:
-    14px;
-
-  overflow:
-    hidden;
-
-  margin-bottom:
-    31px;
-
-  padding:
-    20px 22px;
-
-  border:
-    1px solid
-    #ffd3aa;
-
-  border-radius:
-    20px;
+  border: 1px solid #ffd4ad;
+  border-radius: 19px;
 
   background:
     linear-gradient(
       135deg,
-      #fff8ee,
-      #ffefdc
+      #fff8ef,
+      #fff0dd
     );
 
   box-shadow:
-    0 13px 32px
-      rgba(
-        56,
-        27,
-        14,
-        0.045
-      );
+    0 12px 30px rgba(56, 27, 14, 0.04);
 }
 
 .noticeIcon {
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  width:
-    41px;
-
-  height:
-    41px;
-
-  flex-shrink:
-    0;
-
-  border-radius:
-    12px;
-
-  color:
-    var(--orange);
-
-  background:
-    #fff;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 39px;
+  height: 39px;
+  border-radius: 12px;
+  color: var(--orange);
+  background: #fff;
 }
 
 .noticeContent {
-  position:
-    relative;
-
-  z-index:
-    2;
+  position: relative;
+  z-index: 2;
 }
 
 .noticeContent > span {
-  display:
-    block;
-
-  margin-bottom:
-    4px;
-
-  color:
-    var(--text);
-
-  font-size:
-    12px;
-
-  font-weight:
-    800;
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 800;
 }
 
 .noticeContent p {
-  max-width:
-    900px;
-
-  margin:
-    0;
-
-  color:
-    var(--muted);
-
-  font-size:
-    10px;
-
-  line-height:
-    1.7;
+  max-width: 900px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
 }
 
 .noticePaw {
-  position:
-    absolute;
-
-  right:
-    17px;
-
-  bottom:
-    -12px;
-
-  color:
-    var(--orange);
-
-  opacity:
-    0.08;
-
-  transform:
-    rotate(
-      16deg
-    );
+  position: absolute;
+  right: 18px;
+  bottom: -12px;
+  color: var(--orange);
+  opacity: 0.08;
+  transform: rotate(15deg);
 }
-
-
-/* =========================================================
-   MOBILE NAV
-   ========================================================= */
-
-.mobileNav {
-  display:
-    none;
-}
-
 
 /* =========================================================
    TERMS AREA
-   ========================================================= */
+========================================================= */
 
 .termsArea {
-  display:
-    grid;
-
-  grid-template-columns:
-    215px
-    minmax(
-      0,
-      1fr
-    );
-
-  align-items:
-    start;
-
-  gap:
-    37px;
+  width: 100%;
 }
-
-
-/* =========================================================
-   SIDE NAV
-   ========================================================= */
-
-.sideNav {
-  position:
-    sticky;
-
-  top:
-    95px;
-}
-
-.sideNavTitle {
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    7px;
-
-  margin-bottom:
-    16px;
-
-  color:
-    var(--orange);
-
-  font-size:
-    9px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.07em;
-
-  text-transform:
-    uppercase;
-}
-
-.sideNavList {
-  position:
-    relative;
-
-  display:
-    grid;
-
-  gap:
-    3px;
-}
-
-.sideLine {
-  position:
-    absolute;
-
-  left:
-    14px;
-
-  top:
-    13px;
-
-  bottom:
-    13px;
-
-  width:
-    1px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffc27f,
-      #e9ded5
-    );
-}
-
-.sideItem {
-  position:
-    relative;
-
-  display:
-    grid;
-
-  grid-template-columns:
-    29px
-    27px
-    minmax(
-      0,
-      1fr
-    );
-
-  align-items:
-    center;
-
-  gap:
-    3px;
-
-  width:
-    100%;
-
-  padding:
-    10px 7px;
-
-  border:
-    1px solid transparent;
-
-  border-radius:
-    11px;
-
-  color:
-    #87766c;
-
-  background:
-    transparent;
-
-  text-align:
-    left;
-
-  cursor:
-    pointer;
-
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.25s ease;
-}
-
-.sideItem:hover,
-.sideItemActive {
-  border-color:
-    #f0d3b9;
-
-  background:
-    rgba(
-      255,
-      249,
-      242,
-      0.9
-    );
-
-  transform:
-    translateX(3px);
-}
-
-.sideDot {
-  position:
-    relative;
-
-  z-index:
-    2;
-
-  width:
-    11px;
-
-  height:
-    11px;
-
-  border:
-    2px solid
-    #e7d9d0;
-
-  border-radius:
-    50%;
-
-  background:
-    #fff;
-
-  transition:
-    border-color 0.25s ease,
-    background 0.25s ease,
-    transform 0.25s ease;
-}
-
-.sideItemActive
-.sideDot {
-  border-color:
-    var(--orange);
-
-  background:
-    var(--orange);
-
-  transform:
-    scale(1.18);
-
-  box-shadow:
-    0 0 0 4px
-      rgba(
-        255,
-        122,
-        0,
-        0.1
-      );
-}
-
-.sideNumber {
-  color:
-    #a29187;
-
-  font-size:
-    7px;
-
-  font-weight:
-    800;
-}
-
-.sideName {
-  color:
-    #806f66;
-
-  font-size:
-    9px;
-
-  font-weight:
-    700;
-
-  line-height:
-    1.25;
-}
-
-.sideItemActive
-.sideName {
-  color:
-    var(--orange);
-}
-
-
-/* =========================================================
-   CARDS
-   ========================================================= */
 
 .cards {
-  min-width:
-    0;
-
-  display:
-    grid;
-
-  gap:
-    13px;
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
 }
 
+/* =========================================================
+   TERMS CARD
+========================================================= */
+
 .termsSection {
-  position:
-    relative;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
 
-  scroll-margin-top:
-    95px;
+  display: flex;
+  flex-direction: column;
 
-  opacity:
-    0;
+  border: 1px solid rgba(229, 215, 204, 0.95);
+  border-radius: 24px;
 
-  transform:
-    translateY(26px);
+  background: rgba(255, 255, 255, 0.96);
+
+  box-shadow:
+    0 12px 30px rgba(56, 27, 14, 0.045);
+
+  opacity: 0;
+  transform: translateY(28px);
 
   transition:
-    opacity 0.72s ease var(--delay),
-    transform 0.85s
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      ) var(--delay);
+    opacity 0.75s ease var(--delay),
+    transform 0.85s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ) var(--delay),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .visible.termsSection {
-  opacity:
-    1;
-
-  transform:
-    translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.connectorPaw {
-  position:
-    absolute;
+.termsSection:hover {
+  border-color: #ffd0a6;
 
-  left:
-    -33px;
+  box-shadow:
+    0 18px 42px rgba(56, 27, 14, 0.075),
+    0 0 25px rgba(255, 122, 0, 0.055);
 
-  top:
-    25px;
-
-  color:
-    var(--orange);
-
-  opacity:
-    0.28;
-
-  transform:
-    rotate(
-      -11deg
-    );
+  transform: translateY(-5px);
 }
-
-.termsSection::before {
-  content:
-    "";
-
-  position:
-    absolute;
-
-  left:
-    -16px;
-
-  top:
-    48px;
-
-  bottom:
-    -21px;
-
-  width:
-    1px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffd3a8,
-      #ebdfd7
-    );
-}
-
-.termsSection:last-of-type::before {
-  display:
-    none;
-}
-
 
 /* =========================================================
    CARD HEADER
-   ========================================================= */
+========================================================= */
 
 .cardHeader {
-  position:
-    relative;
-
-  z-index:
-    2;
-
-  display:
-    grid;
-
-  grid-template-columns:
-    45px
-    45px
-    minmax(
-      0,
-      1fr
-    )
-    33px;
-
-  align-items:
-    center;
-
-  gap:
-    13px;
-
-  width:
-    100%;
-
-  padding:
-    22px 23px;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius:
-    19px;
-
-  color:
-    inherit;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.95
-    );
-
-  box-shadow:
-    0 12px 30px
-      rgba(
-        56,
-        27,
-        14,
-        0.04
-      );
-
-  text-align:
-    left;
-
-  cursor:
-    pointer;
-
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid #f0e4db;
 }
 
-.cardHeader:hover {
-  border-color:
-    #ffd0a6;
-
-  box-shadow:
-    0 0 12px
-      rgba(
-        255,
-        122,
-        0,
-        0.07
-      ),
-    0 17px 37px
-      rgba(
-        56,
-        27,
-        14,
-        0.065
-      );
-
-  transform:
-    translateY(-2px);
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0;
 }
+
+/* =========================================================
+   NUMBER
+========================================================= */
 
 .number {
-  display:
-    grid;
+  display: grid;
+  place-items: center;
 
-  place-items:
-    center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
 
-  width:
-    43px;
+  border-radius: 14px;
 
-  height:
-    43px;
-
-  border-radius:
-    13px;
-
-  color:
-    #fff;
+  color: #fff;
 
   background:
     linear-gradient(
@@ -1391,522 +534,323 @@
       var(--orange-2)
     );
 
-  font-size:
-    9px;
-
-  font-weight:
-    800;
+  font-size: 10px;
+  font-weight: 800;
 
   box-shadow:
-    0 8px 18px
-      rgba(
-        255,
-        122,
-        0,
-        0.17
-      );
+    0 8px 18px rgba(255, 122, 0, 0.18);
 }
+
+/* =========================================================
+   ICON
+========================================================= */
 
 .cardIcon {
-  display:
-    grid;
+  display: grid;
+  place-items: center;
 
-  place-items:
-    center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
 
-  width:
-    41px;
+  border: 1px solid #f0e0d5;
+  border-radius: 14px;
 
-  height:
-    41px;
-
-  border:
-    1px solid
-    #f0e0d5;
-
-  border-radius:
-    12px;
-
-  color:
-    var(--orange);
-
-  background:
-    #fff7ef;
+  color: var(--orange);
+  background: #fffaf6;
 }
+
+.cardIcon svg {
+  width: 21px;
+  height: 21px;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
 
 .cardHeading {
-  min-width:
-    0;
-}
-
-.cardHeading > span {
-  display:
-    block;
-
-  margin-bottom:
-    3px;
-
-  color:
-    var(--orange);
-
-  font-size:
-    7px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.08em;
-
-  text-transform:
-    uppercase;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
 }
 
 .cardHeading h2 {
-  margin:
-    0;
+  width: 100%;
+  max-width: 100%;
 
-  color:
-    var(--text);
+  margin: 0;
 
-  font-size:
-    20px;
+  color: var(--text);
 
-  font-weight:
-    700;
+  font-size: 28px;
+  font-weight: 700;
 
-  line-height:
-    1.2;
+  line-height: 1.08;
+  letter-spacing: -0.6px;
+
+  overflow-wrap: normal;
+  word-break: normal;
 }
-
-.expandButton {
-  display:
-    grid;
-
-  place-items:
-    center;
-
-  width:
-    32px;
-
-  height:
-    32px;
-
-  border-radius:
-    50%;
-
-  color:
-    var(--orange);
-
-  background:
-    var(--orange-soft);
-
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease;
-}
-
-.expandOpen {
-  transform:
-    rotate(
-      180deg
-    );
-
-  background:
-    #ffe0bf;
-}
-
 
 /* =========================================================
-   EXPAND
-   ========================================================= */
-
-.expandArea {
-  display:
-    grid;
-
-  grid-template-rows:
-    0fr;
-
-  transition:
-    grid-template-rows
-      0.42s
-      cubic-bezier(
-        0.22,
-        1,
-        0.36,
-        1
-      );
-}
-
-.expandAreaOpen {
-  grid-template-rows:
-    1fr;
-}
+   CARD BODY
+========================================================= */
 
 .cardBody {
-  min-height:
-    0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 
-  overflow:
-    hidden;
-
-  padding:
-    0 23px;
-
-  transition:
-    padding 0.4s ease;
-}
-
-.expandAreaOpen
-.cardBody {
-  padding:
-    0 23px
-    24px
-    72px;
+  padding: 20px 22px 22px;
 }
 
 .intro {
-  max-width:
-    790px;
+  margin: 0 0 16px;
 
-  margin:
-    0;
+  color: var(--muted);
+  font-family: var(--font-tagline);
 
-  padding-top:
-    2px;
-
-  color:
-    var(--muted);
-
-  font-family:
-    var(--font-tagline);
-
-  font-size:
-    11px;
-
-  line-height:
-    1.8;
+  font-size: 14px !important;
+  line-height: 1.7;
 }
 
-.expandAreaOpen
-.intro {
-  margin:
-    1px 0
-    18px;
-}
+/* IMPORTANT:
+   No margin-top:auto here.
+   List always starts immediately after intro.
+*/
 
 .detailList {
-  display:
-    grid;
-
-  gap:
-    8px;
+  display: grid;
+  gap: 8px;
+  margin-top: 0;
 }
 
 .detailItem {
-  display:
-    grid;
-
+  display: grid;
   grid-template-columns:
-    30px
-    minmax(
-      0,
-      1fr
-    );
+    28px
+    minmax(0, 1fr);
 
-  gap:
-    9px;
+  align-items: start;
+  gap: 9px;
 
-  padding:
-    10px;
+  padding: 9px;
 
-  border:
-    1px solid
-    #efe4db;
+  border: 1px solid #f0e5dd;
+  border-radius: 11px;
 
-  border-radius:
-    11px;
-
-  background:
-    #fffdfa;
+  background: #fffdfa;
 
   transition:
     border-color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
 .detailItem:hover {
-  border-color:
-    #ffd3aa;
+  border-color: #ffd4aa;
 
-  transform:
-    translateX(3px);
+  transform: translateX(2px);
 
   box-shadow:
-    0 7px 18px
-      rgba(
-        56,
-        27,
-        14,
-        0.04
-      );
+    0 6px 18px rgba(56, 27, 14, 0.04);
 }
 
 .detailIcon {
-  display:
-    grid;
+  display: grid;
+  place-items: center;
 
-  place-items:
-    center;
+  width: 28px;
+  height: 28px;
 
-  width:
-    28px;
+  border-radius: 8px;
 
-  height:
-    28px;
+  color: var(--orange);
+  background: #fff2e4;
+}
 
-  border-radius:
-    8px;
+.detailIcon svg {
+  width: 15px;
+  height: 15px;
+}
 
-  color:
-    var(--orange);
-
-  background:
-    #fff1e3;
+.detailCopy {
+  min-width: 0;
 }
 
 .detailNumber {
-  display:
-    block;
+  display: block;
+  margin-bottom: 2px;
 
-  margin-bottom:
-    2px;
+  color: #ad988b;
 
-  color:
-    #a39085;
+  font-size: 10px !important;
+  font-weight: 800;
 
-  font-size:
-    6px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.08em;
+  letter-spacing: 0.08em;
 }
 
 .detailItem p {
-  margin:
-    0;
+  margin: 0;
 
-  color:
-    #65574f;
+  color: #65574f;
 
-  font-size:
-    9px;
-
-  line-height:
-    1.65;
+  font-size: 14px !important;
+  line-height: 1.6;
 }
 
+/* =========================================================
+   CARD PAW
+========================================================= */
+
+.cardPaw {
+  position: absolute;
+  right: -14px;
+  bottom: -18px;
+
+  color: var(--orange);
+  opacity: 0.045;
+
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
 
 /* =========================================================
-   SUPPORT
-   ========================================================= */
+   SUPPORT CARD
+========================================================= */
 
 .supportCard {
-  position:
-    relative;
+  position: relative;
+  overflow: hidden;
 
-  overflow:
-    hidden;
+  grid-column: 1 / -1;
 
-  display:
-    grid;
-
+  display: grid;
   grid-template-columns:
     auto
-    minmax(
-      0,
-      1fr
-    )
+    minmax(0, 1fr)
     auto;
 
-  align-items:
-    center;
+  align-items: center;
+  gap: 18px;
 
-  gap:
-    17px;
+  margin-top: 0;
+  padding: 26px 28px;
 
-  margin-top:
-    10px;
-
-  padding:
-    25px 27px;
-
-  border:
-    1px solid
-    #ffd0a4;
-
-  border-radius:
-    23px;
+  border: 1px solid #ffd0a3;
+  border-radius: 24px;
 
   background:
     linear-gradient(
       125deg,
       #fff1dc,
-      #ffe1ba
+      #ffe2bf
     );
 
   box-shadow:
-    0 18px 42px
-      rgba(
-        56,
-        27,
-        14,
-        0.05
-      );
+    0 18px 42px rgba(56, 27, 14, 0.05);
+
+  opacity: 0;
+  transform: translateY(25px);
+
+  transition:
+    opacity 0.75s ease,
+    transform 0.85s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+    box-shadow 0.3s ease;
+}
+
+.visible.supportCard {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.supportCard:hover {
+  box-shadow:
+    0 24px 50px rgba(56, 27, 14, 0.075);
 }
 
 .supportIcon {
-  display:
-    grid;
+  display: grid;
+  place-items: center;
 
-  place-items:
-    center;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
 
-  width:
-    49px;
+  border-radius: 14px;
 
-  height:
-    49px;
-
-  border-radius:
-    14px;
-
-  color:
-    var(--orange);
-
-  background:
-    #fff;
+  color: var(--orange);
+  background: #fff;
 
   box-shadow:
-    0 8px 19px
-      rgba(
-        56,
-        27,
-        14,
-        0.06
-      );
+    0 8px 19px rgba(56, 27, 14, 0.06);
 }
 
 .supportContent > span {
-  display:
-    block;
+  display: block;
+  margin-bottom: 4px;
 
-  margin-bottom:
-    4px;
+  color: var(--orange);
 
-  color:
-    var(--orange);
+  font-size: 10px !important;
+  font-weight: 800;
 
-  font-size:
-    8px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.08em;
-
-  text-transform:
-    uppercase;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .supportContent h2 {
-  margin:
-    0 0
-    6px;
+  margin: 0 0 6px;
 
-  color:
-    var(--text);
+  color: var(--text);
 
-  font-size:
-    21px;
-
-  line-height:
-    1.2;
+  font-size: 24px;
+  line-height: 1.15;
 }
 
 .supportContent h2 strong {
-  color:
-    var(--orange);
+  color: var(--orange);
 }
 
 .supportContent p {
-  max-width:
-    640px;
+  max-width: 650px;
+  margin: 0;
 
-  margin:
-    0;
+  color: var(--muted);
+  font-family: var(--font-tagline);
 
-  color:
-    var(--muted);
-
-  font-size:
-    9px;
-
-  line-height:
-    1.7;
+  font-size: 12px !important;
+  line-height: 1.7;
 }
 
 .supportButton {
-  display:
-    inline-flex;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  align-items:
-    center;
+  gap: 7px;
 
-  justify-content:
-    center;
+  min-height: 45px;
+  padding: 0 17px;
 
-  gap:
-    7px;
+  border-radius: 12px;
 
-  min-height:
-    45px;
+  color: #fff;
+  background: var(--orange);
 
-  padding:
-    0 16px;
+  font-size: 14px;
+  font-weight: 700;
 
-  border-radius:
-    12px;
-
-  color:
-    #fff;
-
-  background:
-    var(--orange);
-
-  font-size:
-    12px;
-
-  font-weight:
-    800;
-
-  white-space:
-    nowrap;
+  white-space: nowrap;
 
   box-shadow:
-    0 10px 24px
-      rgba(
-        255,
-        122,
-        0,
-        0.18
-      );
+    0 10px 24px rgba(255, 122, 0, 0.18);
 
   transition:
     transform 0.25s ease,
@@ -1914,1613 +858,2287 @@
 }
 
 .supportButton:hover {
-  transform:
-    translateY(-2px);
+  transform: translateY(-2px);
 
   box-shadow:
-    0 14px 30px
-      rgba(
-        255,
-        122,
-        0,
-        0.25
-      );
+    0 14px 30px rgba(255, 122, 0, 0.25);
 }
 
 .supportPaw {
-  position:
-    absolute;
+  position: absolute;
 
-  right:
-    18%;
+  right: 16%;
+  bottom: -23px;
 
-  bottom:
-    -25px;
+  color: var(--orange);
+  opacity: 0.07;
 
-  color:
-    var(--orange);
+  transform: rotate(-10deg);
+}
 
-  opacity:
-    0.07;
+/* =========================================================
+   FOOTER NOTE
+========================================================= */
 
-  transform:
-    rotate(
-      -10deg
+.footerNote {
+  grid-column: 1 / -1;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+  margin-top: -8px;
+
+  color: #988980;
+  font-size: 10px;
+}
+
+.footerNote span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footerNote svg {
+  color: var(--orange);
+}
+
+/* =========================================================
+   1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+  .container {
+    width: calc(100% - 48px);
+  }
+
+  .heroGrid {
+    gap: 45px;
+  }
+
+  .cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+  }
+
+  .cardHeading h2 {
+    font-size: 25px;
+  }
+}
+
+/* =========================================================
+   950px
+========================================================= */
+
+@media (max-width: 950px) {
+  .page {
+    padding: 60px 0 85px;
+  }
+
+  .heroGrid {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(300px, 0.8fr);
+
+    gap: 30px;
+  }
+
+  .heroCopy h1 {
+    font-size: 50px;
+  }
+
+  .visualArea {
+    min-height: 330px;
+  }
+
+  .visualCard {
+    width: 330px;
+  }
+
+  .cardHeader {
+    padding: 20px;
+  }
+
+  .number,
+  .cardIcon {
+    width: 43px;
+    height: 43px;
+  }
+
+  .cardHeading h2 {
+    font-size: 23px;
+  }
+
+  .cardBody {
+    padding: 18px 20px 20px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .page {
+    padding: 48px 0 65px;
+  }
+
+  .container {
+    width: calc(100% - 28px);
+  }
+
+  .bigPaw {
+    display: none;
+  }
+
+  .hero {
+    margin-bottom: 22px;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .heroCopy {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .heroEyebrow {
+    justify-content: center;
+    font-size: 8px;
+  }
+
+  .heroCopy h1 {
+    font-size: 42px;
+    letter-spacing: -1.2px;
+  }
+
+  .heroCopy > p {
+    font-size: 9px;
+    line-height: 1.7;
+  }
+
+  .heroActions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .heroPoints {
+    justify-content: center;
+  }
+
+  .heroPoints span {
+    font-size: 7px;
+  }
+
+  .visualArea {
+    min-height: 300px;
+  }
+
+  .visualGlow {
+    width: 290px;
+    height: 290px;
+  }
+
+  .visualCard {
+    width: min(310px, 100%);
+    min-height: 280px;
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .visualTitle {
+    font-size: 24px;
+  }
+
+  .visualList {
+    margin-top: 17px;
+  }
+
+  .visualList div {
+    font-size: 7px;
+  }
+
+  /* NOTICE */
+
+  .notice {
+    gap: 10px;
+    padding: 15px;
+    border-radius: 16px;
+  }
+
+  .noticeIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .noticeContent > span {
+    font-size: 9px;
+  }
+
+  .noticeContent p {
+    font-size: 7.5px;
+    line-height: 1.65;
+  }
+
+  .noticePaw {
+    display: none;
+  }
+
+  /* ONE COLUMN */
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .termsSection {
+    border-radius: 18px;
+  }
+
+  .cardHeader {
+    padding: 17px;
+  }
+
+  .cardTop {
+    gap: 9px;
+  }
+
+  .number,
+  .cardIcon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .number {
+    font-size: 8px;
+  }
+
+  .cardIcon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .cardHeading h2 {
+    width: 100%;
+    max-width: 100%;
+
+    font-size: 21px;
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+  }
+
+  .cardBody {
+    padding: 15px 17px 18px;
+  }
+
+  .intro {
+    font-size: 8px;
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .detailList {
+    gap: 6px;
+  }
+
+  .detailItem {
+    grid-template-columns:
+      25px
+      minmax(0, 1fr);
+
+    gap: 7px;
+    padding: 8px;
+    border-radius: 9px;
+  }
+
+  .detailIcon {
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+  }
+
+  .detailIcon svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .detailNumber {
+    font-size: 5.5px;
+  }
+
+  .detailItem p {
+    font-size: 7.5px;
+    line-height: 1.58;
+  }
+
+  .cardPaw {
+    display: none;
+  }
+
+  /* SUPPORT */
+
+  .supportCard {
+    grid-column: 1;
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
+
+    gap: 10px;
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .supportIcon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+
+  .supportContent > span {
+    font-size: 7px;
+  }
+
+  .supportContent h2 {
+    font-size: 17px;
+  }
+
+  .supportContent p {
+    font-size: 7.5px;
+  }
+
+  .supportButton {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 40px;
+    font-size: 8px;
+  }
+
+  .footerNote {
+    grid-column: 1;
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    font-size: 6.5px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .heroCopy h1 {
+    font-size: 37px;
+  }
+
+  .heroCopy > p {
+    font-size: 8.5px;
+  }
+
+  .visualCard {
+    width: 285px;
+    padding: 18px;
+  }
+
+  .visualTitle {
+    font-size: 22px;
+  }
+
+  .noticeContent p {
+    font-size: 7px;
+  }
+
+  .number,
+  .cardIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cardHeading h2 {
+    font-size: 19px;
+  }
+
+  .detailItem p {
+    font-size: 7px;
+  }
+}
+
+/* =========================================================
+   LARGE LAPTOP
+========================================================= */
+
+@media (min-width: 1440px) {
+  .container {
+    width: min(1380px, calc(100% - 80px));
+  }
+
+  .page {
+    padding: 95px 0 125px;
+  }
+
+  .heroGrid {
+    gap: 90px;
+  }
+
+  .heroCopy h1 {
+    font-size: 78px;
+  }
+
+  .heroCopy > p {
+    font-size: 15px;
+  }
+
+  .cards {
+    gap: 24px;
+  }
+
+  .termsSection {
+    border-radius: 25px;
+  }
+
+  .cardHeader {
+    padding: 25px;
+  }
+
+  .cardTop {
+    gap: 11px;
+  }
+
+  .number {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    font-size: 10px;
+  }
+
+  .cardIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .cardIcon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .cardHeading h2 {
+    width: 100%;
+    max-width: 100%;
+    font-size: 29px;
+    line-height: 1.07;
+  }
+
+  .cardBody {
+    padding: 22px 25px 25px;
+  }
+
+  .intro {
+    font-size: 11px;
+  }
+
+  .detailItem p {
+    font-size: 9.5px;
+  }
+
+  .supportContent h2 {
+    font-size: 24px;
+  }
+
+  .supportContent p {
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   2K
+========================================================= */
+
+@media (min-width: 1920px) {
+  .container {
+    width: min(1650px, calc(100% - 110px));
+  }
+
+  .page {
+    padding: 125px 0 160px;
+  }
+
+  .heroGrid {
+    gap: 120px;
+  }
+
+  .heroCopy h1 {
+    font-size: 98px;
+  }
+
+  .heroCopy > p {
+    font-size: 17px;
+  }
+
+  .cards {
+    gap: 28px;
+  }
+
+  .noticeContent span{
+    font-size:20px;
+  }
+
+  .noticeContent p{
+    font-size:16px;
+  }
+  .termsSection {
+    border-radius: 28px;
+  }
+
+  .cardHeader {
+    padding: 30px;
+  }
+
+  .cardTop {
+    gap: 13px;
+  }
+
+  .number {
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    font-size: 11px;
+  }
+
+  .cardIcon {
+    width: 53px;
+    height: 53px;
+    border-radius: 16px;
+  }
+
+  .cardIcon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cardHeading h2 {
+    font-size: 36px !important;
+    line-height: 1.05;
+  }
+
+  .cardBody {
+    padding: 26px 30px 30px;
+  }
+
+  .intro {
+    font-size: 18px !important;
+  }
+
+  .detailItem {
+    padding: 12px;
+  }
+
+  .detailItem p {
+    font-size: 18px !important;
+  }
+
+  .supportContent h2 {
+    font-size: 27px;
+  }
+
+  .supportContent p {
+    font-size: 18px !important;
+  }
+
+  .supportCard a{
+    font-size:20px !important;
+    font-weight: 600;
+  }
+}
+
+/* =========================================================
+   4K
+========================================================= */
+
+@media (min-width: 2560px) {
+  .container {
+    width: min(2050px, calc(100% - 150px));
+  }
+
+  .page {
+    padding: 160px 0 195px;
+  }
+
+  .heroGrid {
+    gap: 170px;
+  }
+
+  .heroCopy h1 {
+    font-size: 124px;
+  }
+
+  .heroCopy > p {
+    max-width: 950px;
+    font-size: 21px;
+  }
+
+  .cards {
+    gap: 34px;
+  }
+
+  .termsSection {
+    border-radius: 32px;
+  }
+
+  .cardHeader {
+    padding: 38px 40px 30px;
+  }
+
+  .cardTop {
+    gap: 15px;
+  }
+
+  .number {
+    width: 66px;
+    height: 66px;
+    border-radius: 18px;
+    font-size: 13px;
+  }
+
+  .cardIcon {
+    width: 62px;
+    height: 62px;
+    border-radius: 18px;
+  }
+
+  .cardIcon svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .cardHeading h2 {
+    font-size: 40px;
+    line-height: 1.03;
+    letter-spacing: -1px;
+  }
+
+  .cardBody {
+    padding: 32px 40px 40px;
+  }
+
+  .intro {
+    font-size: 17px;
+  }
+
+  .detailItem {
+    grid-template-columns:
+      38px
+      minmax(0, 1fr);
+
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .detailIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .detailItem p {
+    font-size: 13px;
+  }
+
+  .supportContent h2 {
+    font-size: 32px;
+  }
+
+  .supportContent p {
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .termsSection,
+  .supportCard,
+  .visualCard,
+  .detailItem {
+    transition: none;
+  }
+
+  .visualGlow {
+    animation: none;
+  }
+}
+
+
+
+
+/* =========================================================
+   FINAL DOWNLOAD CTA
+   PRODUCTION RESPONSIVE SYSTEM
+   320px → 8K
+   ========================================================= */
+
+.finalDownload {
+  width: 100%;
+  padding: 98px 0 60px;
+}
+
+
+/* =========================================================
+   CTA CARD
+   ========================================================= */
+
+.finalDownloadCard {
+  position: relative;
+  isolation: isolate;
+
+  width: calc(100% - 48px);
+  margin-inline: auto;
+
+  min-height: 115px;
+  height: 115px;
+
+  display: grid;
+
+  grid-template-columns:
+    255px
+    minmax(0, 1fr)
+    310px;
+
+  align-items: center;
+
+  gap: 26px;
+
+  padding: 4px 22px;
+
+  overflow: visible !important;
+
+  border-radius: 22px;
+
+  color: #fff;
+
+  background:
+    linear-gradient(
+      110deg,
+      #ff7800 0%,
+      #ff850b 42%,
+      #ff941b 72%,
+      #ff7800 100%
+    );
+
+  box-shadow:
+    0 14px 34px
+    rgba(255, 122, 0, 0.20);
+
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+
+/* =========================================================
+   BACKGROUND DETAILS
+   ========================================================= */
+
+.finalDownloadCard::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 8% 28%,
+      rgba(255,255,255,0.13) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 43% 25%,
+      rgba(255,255,255,0.09) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 67% 72%,
+      rgba(255,255,255,0.08) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 94% 28%,
+      rgba(255,255,255,0.08) 0 2px,
+      transparent 3px
     );
 }
 
 
 /* =========================================================
-   FOOTER NOTE
+   CARD HOVER
    ========================================================= */
 
-.footerNote {
-  display:
-    flex;
+.finalDownloadCard:hover {
 
-  align-items:
-    center;
-
-  justify-content:
-    space-between;
-
-  gap:
-    12px;
-
-  margin-top:
-    16px;
-
-  color:
-    #97877e;
-
-  font-size:
-    7px;
-}
-
-.footerNote span {
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  gap:
-    5px;
-}
-
-.footerNote svg {
-  color:
-    var(--orange);
+  box-shadow:
+    0 20px 42px
+    rgba(255, 122, 0, 0.25);
 }
 
 
 /* =========================================================
-   TABLET
+   PET AREA
    ========================================================= */
 
-@media (max-width: 950px) {
-  .page {
-    padding:
-      60px 0
-      85px;
-  }
+.finalPets {
+  position: relative;
 
-  .container {
-    width:
-      min(
-        100%,
-        calc(100% - 36px)
-      );
-  }
+  width: 100%;
+  height: 140px;
 
-  .heroGrid {
-    grid-template-columns:
-      1fr 0.84fr;
+  min-width: 0;
+  min-height: 0;
 
-    gap:
-      32px;
-  }
+  margin: 0;
+  padding: 0;
 
-  .heroCopy h1 {
-    font-size:
-      58px;
-  }
+  align-self: end;
 
-  .visualArea {
-    min-height:
-      335px;
-  }
+  overflow: visible !important;
 
-  .visualCard {
-    width:
-      335px;
-  }
+  z-index: 3;
 
-  .termsArea {
-    grid-template-columns:
-      175px
-      minmax(
-        0,
-        1fr
-      );
+  transform-origin: center bottom;
+}
 
-    gap:
-      22px;
-  }
 
-  .sideName {
-    font-size:
-      8px;
-  }
+.finalPetsImage {
+  position: absolute !important;
 
-  .cardHeader {
-    grid-template-columns:
-      40px
-      40px
-      minmax(
-        0,
-        1fr
-      )
-      31px;
+  inset: 0;
 
-    padding:
-      19px;
-  }
+  display: block;
 
-  .cardHeading h2 {
-    font-size:
-      18px;
-  }
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: contain;
+
+  transform:
+    translateX(50px);
+
+  transform-origin: center top;
+
+  filter:
+    drop-shadow(
+      0 10px 12px
+      rgba(56, 27, 14, 0.14)
+    );
+
+  transition:
+    transform 0.35s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+
+
+
+
+/* =========================================================
+   COPY
+   ========================================================= */
+
+.finalCopy {
+  position: relative;
+
+  z-index: 4;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0;
+
+  text-align: center;
+}
+
+
+.finalCopy h2 {
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(18px, 1.55vw, 44px);
+
+  font-weight: 700;
+
+  line-height: 1.08;
+
+  letter-spacing: -0.025em;
+
+  white-space: nowrap;
+}
+
+
+.finalCopy p {
+  width: 100%;
+  max-width: 570px;
+
+  margin: 6px 10 0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.90
+    );
+
+  font-size: clamp(9px, 0.58vw, 15px);
+
+  font-weight: 500;
+
+  line-height: 1.4;
 }
 
 
 /* =========================================================
-   MOBILE
+   STORE BUTTONS
    ========================================================= */
 
-@media (max-width: 700px) {
-  .page {
-    padding:
-      48px 0
-      70px;
+.finalButtons {
+  position: relative;
+
+  z-index: 5;
+
+  width: 100%;
+  min-width: 0;
+
+  display: flex !important;
+
+  flex-direction: row !important;
+
+  align-items: center !important;
+
+  justify-content: stretch !important;
+
+  flex-wrap: nowrap !important;
+
+  gap: 8px !important;
+
+  margin: 0 !important;
+
+  overflow: visible;
+}
+
+
+.finalButtons > * {
+  flex: 1 1 0 !important;
+
+  width: 0 !important;
+
+  min-width: 0 !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+}
+
+
+/* =========================================================
+   STORE BADGE
+   ========================================================= */
+
+.finalButtons .storeBadge {
+  width: 100% !important;
+
+  min-width: 0 !important;
+  max-width: none !important;
+
+  flex: 1 1 0 !important;
+
+  margin: 0 !important;
+
+  overflow: hidden;
+
+  padding:
+    5px 8px;
+
+  gap: 5px;
+
+  border-radius: 8px;
+}
+
+
+.finalButtons .storeIconImage {
+  flex: 0 0 auto;
+
+  width: 30px;
+  height: 30px;
+
+  object-fit: contain;
+}
+
+
+.finalButtons .storeText {
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+
+.finalButtons .storeText small {
+  display: block;
+
+  margin-bottom: 2px;
+
+  font-size: 7px;
+
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+
+.finalButtons .storeText b {
+  display: block;
+
+  font-size: 16px;
+
+  line-height: 1.05;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   SMALL LAPTOP
+   1101 — 1439
+   ========================================================= */
+
+@media (min-width: 1101px) and (max-width: 1439px) {
+
+  .finalDownload {
+    padding: 25px 0 55px;
   }
 
-  .container {
-    width:
-      min(
-        100%,
-        calc(100% - 28px)
-      );
-  }
+  .finalDownloadCard {
+    width: calc(100% - 40px);
 
-  .bigPaw {
-    display:
-      none;
-  }
+    height: 104px;
+    min-height: 104px;
 
-  .hero {
-    margin-bottom:
-      20px;
-  }
-
-  .heroBadge {
-    font-size:
-      8px;
-  }
-
-  .heroGrid {
     grid-template-columns:
-      1fr;
-
-    gap:
-      27px;
-
-    margin-top:
-      17px;
-  }
-
-  .heroCopy {
-    max-width:
-      100%;
-
-    text-align:
-      center;
-  }
-
-  .heroEyebrow {
-    font-size:
-      8px;
-  }
-
-  .heroCopy h1 {
-    font-size:
-      42px;
-
-    letter-spacing:
-      -1.2px;
-  }
-
-  .heroCopy > p {
-    font-size:
-      9px;
-
-    line-height:
-      1.7;
-  }
-
-  .heroActions {
-    justify-content:
-      center;
-
-    flex-wrap:
-      wrap;
-  }
-
-  .heroPoints {
-    justify-content:
-      center;
-  }
-
-  .heroPoints span {
-    font-size:
-      6.5px;
-  }
-
-  .visualArea {
-    min-height:
-      295px;
-  }
-
-  .visualGlow {
-    width:
-      285px;
-
-    height:
-      285px;
-  }
-
-  .visualCard {
-    width:
-      min(
-        310px,
-        100%
-      );
-
-    min-height:
+      205px
+      minmax(0, 1fr)
       280px;
 
-    padding:
-      20px;
+    gap: 18px;
 
-    border-radius:
-      24px;
+    padding: 3px 16px;
+
+    border-radius: 19px;
   }
 
-  .visualTitle {
-    font-size:
-      24px;
+  .finalPets {
+    height: 100px;
   }
 
-  .visualList {
-    margin-top:
-      17px;
+  .finalPetsImage {
+    transform:
+      translateX(35px)
+      translateY(-5px)
+      scale(1.16);
   }
 
-  .visualList div {
-    font-size:
-      7px;
+ 
+  .finalCopy {
+    transform: translateX(15px);
   }
 
-  .notice {
-    gap:
-      10px;
-
-    padding:
-      15px;
-
-    border-radius:
-      16px;
+  .finalCopy h2 {
+    font-size: 20px;
   }
 
-  .noticeIcon {
-    width:
-      34px;
-
-    height:
-      34px;
-
-    border-radius:
-      10px;
+  .finalCopy p {
+    margin-top: 5px;
+    font-size: 8px;
   }
 
-  .noticeContent > span {
-    font-size:
-      9px;
+  .finalButtons {
+    gap: 10px !important;
   }
 
-  .noticeContent p {
-    font-size:
-      7.5px;
+  .finalButtons .storeBadge {
+    min-height: 46px !important;
+    height: 46px !important;
 
-    line-height:
-      1.65;
+    padding: 6px 10px !important;
+
+    gap: 7px !important;
+
+    border-radius: 9px !important;
   }
 
-  .noticePaw {
-    display:
-      none;
+  .finalButtons .storeIconImage {
+    width: 27px !important;
+    height: 29px !important;
   }
 
-  .mobileNav {
-    display:
-      flex;
-
-    align-items:
-      center;
-
-    gap:
-      5px;
-
-    overflow-x:
-      auto;
-
-    margin-bottom:
-      13px;
-
-    padding:
-      5px;
-
-    border:
-      1px solid
-      #ebdfd6;
-
-    border-radius:
-      13px;
-
-    background:
-      rgba(
-        255,
-        255,
-        255,
-        0.82
-      );
-
-    scrollbar-width:
-      none;
+  .finalButtons .storeText small {
+    font-size: 7px !important;
   }
 
-  .mobileNav::-webkit-scrollbar {
-    display:
-      none;
-  }
-
-  .mobileNav button {
-    flex:
-      0 0 auto;
-
-    min-width:
-      38px;
-
-    height:
-      30px;
-
-    border:
-      0;
-
-    border-radius:
-      8px;
-
-    color:
-      #8d7c72;
-
-    background:
-      transparent;
-
-    font-family:
-      inherit;
-
-    font-size:
-      7px;
-
-    font-weight:
-      800;
-
-    cursor:
-      pointer;
-  }
-
-  .mobileNavActive {
-    color:
-      #fff !important;
-
-    background:
-      var(--orange) !important;
-  }
-
-  .termsArea {
-    display:
-      block;
-  }
-
-  .sideNav {
-    display:
-      none;
-  }
-
-  .cards {
-    gap:
-      10px;
-  }
-
-  .termsSection {
-    scroll-margin-top:
-      78px;
-  }
-
-  .termsSection::before,
-  .connectorPaw {
-    display:
-      none;
-  }
-
-  .cardHeader {
-    grid-template-columns:
-      37px
-      37px
-      minmax(
-        0,
-        1fr
-      )
-      29px;
-
-    gap:
-      9px;
-
-    padding:
-      16px;
-
-    border-radius:
-      16px;
-  }
-
-  .number {
-    width:
-      36px;
-
-    height:
-      36px;
-
-    border-radius:
-      10px;
-
-    font-size:
-      8px;
-  }
-
-  .cardIcon {
-    width:
-      36px;
-
-    height:
-      36px;
-
-    border-radius:
-      10px;
-  }
-
-  .cardIcon svg {
-    width:
-      17px;
-
-    height:
-      17px;
-  }
-
-  .cardHeading > span {
-    font-size:
-      6px;
-  }
-
-  .cardHeading h2 {
-    font-size:
-      15px;
-
-    line-height:
-      1.18;
-  }
-
-  .expandButton {
-    width:
-      29px;
-
-    height:
-      29px;
-  }
-
-  .cardBody {
-    padding:
-      0 16px;
-  }
-
-  .expandAreaOpen
-  .cardBody {
-    padding:
-      0 16px
-      17px;
-  }
-
-  .intro {
-    font-size:
-      8px;
-
-    line-height:
-      1.65;
-  }
-
-  .expandAreaOpen
-  .intro {
-    margin-bottom:
-      12px;
-  }
-
-  .detailList {
-    gap:
-      6px;
-  }
-
-  .detailItem {
-    grid-template-columns:
-      26px
-      minmax(
-        0,
-        1fr
-      );
-
-    gap:
-      7px;
-
-    padding:
-      8px;
-
-    border-radius:
-      9px;
-  }
-
-  .detailIcon {
-    width:
-      24px;
-
-    height:
-      24px;
-
-    border-radius:
-      7px;
-  }
-
-  .detailIcon svg {
-    width:
-      13px;
-
-    height:
-      13px;
-  }
-
-  .detailNumber {
-    font-size:
-      5px;
-  }
-
-  .detailItem p {
-    font-size:
-      7.5px;
-
-    line-height:
-      1.58;
-  }
-
-  .supportCard {
-    grid-template-columns:
-      auto
-      minmax(
-        0,
-        1fr
-      );
-
-    gap:
-      10px;
-
-    padding:
-      18px;
-
-    border-radius:
-      18px;
-  }
-
-  .supportIcon {
-    width:
-      38px;
-
-    height:
-      38px;
-
-    border-radius:
-      11px;
-  }
-
-  .supportContent > span {
-    font-size:
-      7px;
-  }
-
-  .supportContent h2 {
-    font-size:
-      15px;
-  }
-
-  .supportContent p {
-    font-size:
-      7.5px;
-  }
-
-  .supportButton {
-    grid-column:
-      1 / -1;
-
-    width:
-      100%;
-
-    min-height:
-      40px;
-
-    font-size:
-      8px;
-  }
-
-  .footerNote {
-    flex-direction:
-      column;
-
-    align-items:
-      flex-start;
-
-    font-size:
-      6.5px;
+  .finalButtons .storeText b {
+    font-size: 15px !important;
   }
 }
 
 
 /* =========================================================
-   SMALL MOBILE
+   DESKTOP
+   1440 — 1919
    ========================================================= */
+@media (min-width: 1440px) and (max-width: 1919px) {
 
-@media (max-width: 380px) {
-  .heroCopy h1 {
-    font-size:
-      37px;
-  }
+  .finalDownloadCard {
+    width: calc(100% - 48px);
 
-  .heroCopy > p {
-    font-size:
-      8.5px;
-  }
-
-  .visualCard {
-    width:
-      285px;
-  }
-
-  .visualTitle {
-    font-size:
-      22px;
-  }
-
-  .noticeContent p {
-    font-size:
-      7px;
-  }
-
-  .cardHeading h2 {
-    font-size:
-      14px;
-  }
-
-  .detailItem p {
-    font-size:
-      7px;
-  }
-}
-
-
-/* =========================================================
-   LARGE LAPTOP
-   ========================================================= */
-
-@media (min-width: 1440px) {
-  .page {
-    padding:
-      95px 0
-      125px;
-  }
-
-  .container {
-    width:
-      min(
-        1400px,
-        calc(100% - 80px)
-      );
-  }
-
-  .heroGrid {
-    gap:
-      100px;
-  }
-
-  .heroCopy h1 {
-    font-size:
-      86px;
-  }
-
-  .heroCopy > p {
-    font-size:
-      15px;
-  }
-
-  .visualArea {
-    min-height:
-      470px;
-  }
-
-  .visualCard {
-    width:
-      450px;
-
-    min-height:
-      385px;
-  }
-
-  .visualTitle {
-    font-size:
-      34px;
-  }
-
-  .termsArea {
     grid-template-columns:
-      235px
-      minmax(
-        0,
-        1fr
-      );
+      300px
+      minmax(0, 1fr)
+      310px;
 
-    gap:
-      46px;
+    gap: 26px;
   }
 
-  .sideName {
-    font-size:
-      10px;
+  /* IMAGE AREA BIGGER */
+  .finalPets {
+    height: 140px;
   }
 
-  .cardHeading h2 {
-    font-size:
-      23px;
+  /* BIG PET IMAGE */
+  .finalPetsImage {
+    width: 100% !important;
+    height: 100% !important;
+
+    transform:
+      translateX(-25px)
+      translateY(-52px)
+      scale(1.30);
+overflow: visible;
+    transform-origin: center top;
   }
 
-  .intro {
-    font-size:
-      13px;
+ 
+
+  .finalCopy {
+    transform: translateX(-10px);
   }
 
-  .detailItem p {
-    font-size:
-      10px;
+  .finalCopy h2 {
+    font-size: 24px;
+    transform: translateX(-134px) translateY(-15px);
+  }
+
+  .finalCopy p {
+    font-size: 11px;
+    transform: translateX(-116px) translateY(-15px);
+  }
+
+  .finalButtons {
+    gap: 20px !important;
+    width: 175% !important;
+    
+    transform: translateX(-230px) translateY(-15px);
+  }
+
+  .finalButtons .storeBadge {
+    min-height: 50px !important;
+    height: 66px !important;
+
+    padding: 7px 11px !important;
+    gap: 8px !important;
+    border-radius: 10px !important;
+  }
+
+  .finalButtons .storeIconImage {
+    width: 43px !important;
+    height: 48px !important;
+  }
+
+  .finalButtons .storeText small {
+    font-size: 10px !important;
+  }
+
+  .finalButtons .storeText b {
+    font-size: 20px !important;
   }
 }
-
-
 /* =========================================================
    2K
+   1920 — 2559
    ========================================================= */
 
-@media (min-width: 1920px) {
-  .page {
-    padding:
-      125px 0
-      160px;
+@media (min-width: 1920px) and (max-width: 2559px) {
+
+  .finalDownload {
+    padding: 38px 0 75px;
   }
 
-  .container {
-    width:
-      min(
-        1700px,
-        calc(100% - 110px)
-      );
-  }
+  .finalDownloadCard {
+    width: calc(100% - 70px);
 
-  .heroGrid {
-    gap:
-      125px;
-  }
+    height: 126px;
+    min-height: 126px;
 
-  .heroCopy h1 {
-    font-size:
-      104px;
-  }
-
-  .heroCopy > p {
-    font-size:
-      17px;
-  }
-
-  .heroPoints span {
-    font-size:
-      9px;
-  }
-
-  .visualArea {
-    min-height:
-      560px;
-  }
-
-  .visualGlow {
-    width:
-      500px;
-
-    height:
-      500px;
-  }
-
-  .visualCard {
-    width:
-      560px;
-
-    min-height:
-      470px;
-
-    padding:
-      38px;
-
-    border-radius:
-      39px;
-  }
-
-  .visualTitle {
-    font-size:
-      43px;
-  }
-
-  .visualList div {
-    font-size:
-      10px;
-  }
-
-  .termsArea {
     grid-template-columns:
-      275px
-      minmax(
-        0,
-        1fr
-      );
+      310px
+      minmax(0, 1fr)
+      340px;
 
-    gap:
-      56px;
+    gap: 34px;
+
+    padding: 4px 26px;
+
+    border-radius: 24px;
   }
 
-  .sideName {
-    font-size:
-      11px;
+  .finalPets {
+    height: 122px;
   }
 
-  .cardHeader {
-    grid-template-columns:
-      54px
-      52px
-      minmax(
-        0,
-        1fr
-      )
-      38px;
-
-    padding:
-      29px 30px;
-
-    border-radius:
-      24px;
+  .finalPetsImage {
+    transform:
+      translateX(55px)
+      translateY(-10px)
+      scale(1.50);
   }
 
-  .number {
-    width:
-      52px;
-
-    height:
-      52px;
+ 
+  .finalCopy {
+    transform: translateX(25px);
   }
 
-  .cardIcon {
-    width:
-      50px;
-
-    height:
-      50px;
+  .finalCopy h2 {
+    font-size: 30px;
   }
 
-  .cardHeading h2 {
-    font-size:
-      27px;
+  .finalCopy p {
+    font-size: 11px;
   }
 
-  .cardHeading > span {
-    font-size:
-      8px;
+  .finalButtons {
+    gap: 8px !important;
   }
 
-  .intro {
-    font-size:
-      15px;
+  .finalButtons .storeIconImage {
+    width: 28px;
+    height: 31px;
   }
 
-  .detailItem p {
-    font-size:
-      12px;
+  .finalButtons .storeText small {
+    font-size: 7px;
   }
 
-  .detailItem {
-    padding:
-      12px;
-  }
-
-  .supportCard {
-    padding:
-      34px 38px;
-
-    border-radius:
-      28px;
-  }
-
-  .supportContent h2 {
-    font-size:
-      26px;
-  }
-
-  .supportContent p {
-    font-size:
-      11px;
+  .finalButtons .storeText b {
+    font-size: 17px;
   }
 }
 
 
 /* =========================================================
    4K
+   2560 — 3839
    ========================================================= */
 
-@media (min-width: 2560px) {
-  .page {
-    padding:
-      160px 0
-      200px;
+@media (min-width: 2560px) and (max-width: 3839px) {
+
+  .finalDownload {
+    padding: 48px 0 95px;
   }
 
-  .container {
-    width:
-      min(
-        2100px,
-        calc(100% - 150px)
-      );
-  }
+  .finalDownloadCard {
+    width: calc(100% - 750px);
 
-  .heroGrid {
-    gap:
-      175px;
-  }
+    height: 145px;
+    min-height: 145px;
 
-  .heroCopy h1 {
-    font-size:
-      128px;
-  }
-
-  .heroCopy > p {
-    max-width:
-      980px;
-
-    font-size:
-      21px;
-  }
-
-  .heroPoints span {
-    padding:
-      10px 14px;
-
-    font-size:
-      11px;
-  }
-
-  .visualArea {
-    min-height:
-      690px;
-  }
-
-  .visualGlow {
-    width:
-      630px;
-
-    height:
-      630px;
-  }
-
-  .visualCard {
-    width:
-      700px;
-
-    min-height:
-      590px;
-
-    padding:
-      50px;
-
-    border-radius:
-      48px;
-  }
-
-  .visualIcon {
-    width:
-      63px;
-
-    height:
-      63px;
-  }
-
-  .visualHeader strong {
-    font-size:
-      20px;
-  }
-
-  .visualTitle {
-    font-size:
-      54px;
-  }
-
-  .visualList div {
-    font-size:
-      13px;
-  }
-
-  .termsArea {
     grid-template-columns:
-      345px
-      minmax(
-        0,
-        1fr
-      );
+      390px
+      minmax(0, 1fr)
+      390px;
 
-    gap:
-      85px;
+    gap: 44px;
+
+    padding: 5px 32px;
+
+    border-radius: 28px;
   }
 
-  .sideName {
-    font-size:
-      13px;
+  .finalPets {
+    height: 140px;
   }
 
-  .cardHeader {
-    grid-template-columns:
-      68px
-      64px
-      minmax(
-        0,
-        1fr
-      )
-      45px;
-
-    gap:
-      14px;
-
-    padding:
-      38px 42px;
-
-    border-radius:
-      32px;
+  .finalPetsImage {
+    transform:
+      translateX(60px)
+      translateY(-12px)
+      scale(1.22);
   }
 
-  .number {
-    width:
-      65px;
+  
 
-    height:
-      65px;
-
-    border-radius:
-      17px;
-
-    font-size:
-      13px;
+  .finalCopy {
+    transform: translateX(35px);
   }
 
-  .cardIcon {
-    width:
-      61px;
-
-    height:
-      61px;
-
-    border-radius:
-      16px;
+  .finalCopy h2 {
+    font-size: 36px;
   }
 
-  .cardHeading h2 {
-    font-size:
-      35px;
+  .finalCopy p {
+    font-size: 14px;
+    transform: translateX(150px);
   }
 
-  .cardHeading > span {
-    font-size:
-      10px;
+  .finalButtons {
+    gap: 10px !important;
   }
 
-  .cardBody {
-    padding:
-      0 42px;
+  .finalButtons .storeIconImage {
+    width: 31px;
+    height: 34px;
   }
 
-  .expandAreaOpen
-  .cardBody {
-    padding:
-      0 42px
-      40px
-      105px;
+  .finalButtons .storeText small {
+    font-size: 8px;
   }
 
-  .intro {
-    font-size:
-      18px;
-  }
-
-  .detailList {
-    gap:
-      11px;
-  }
-
-  .detailItem {
-    grid-template-columns:
-      42px
-      minmax(
-        0,
-        1fr
-      );
-
-    padding:
-      14px;
-  }
-
-  .detailIcon {
-    width:
-      39px;
-
-    height:
-      39px;
-  }
-
-  .detailItem p {
-    font-size:
-      14px;
-  }
-
-  .notice {
-    padding:
-      30px 34px;
-
-    border-radius:
-      25px;
-  }
-
-  .noticeContent > span {
-    font-size:
-      16px;
-  }
-
-  .noticeContent p {
-    font-size:
-      14px;
-  }
-
-  .supportCard {
-    padding:
-      41px 46px;
-
-    border-radius:
-      31px;
-  }
-
-  .supportContent h2 {
-    font-size:
-      32px;
-  }
-
-  .supportContent p {
-    font-size:
-      14px;
-  }
-
-  .supportButton {
-    min-height:
-      59px;
-
-    padding-inline:
-      25px;
-
-    border-radius:
-      15px;
-
-    font-size:
-      12px;
+  .finalButtons .storeText b {
+    font-size: 19px;
   }
 }
 
 
 /* =========================================================
    8K
+   3840+
    ========================================================= */
 
 @media (min-width: 3840px) {
-  .page {
-    padding:
-      220px 0
-      275px;
+
+  .finalDownload {
+    padding: 60px 0 120px;
   }
 
-  .container {
-    width:
-      min(
-        2900px,
-        calc(100% - 230px)
-      );
-  }
+  .finalDownloadCard {
+    width: calc(100% - 150px);
 
-  .heroGrid {
-    gap:
-      250px;
-  }
+    height: 175px;
+    min-height: 175px;
 
-  .heroCopy h1 {
-    font-size:
-      170px;
-  }
-
-  .heroCopy > p {
-    max-width:
-      1350px;
-
-    font-size:
-      28px;
-  }
-
-  .heroEyebrow {
-    font-size:
-      17px;
-  }
-
-  .heroBadge {
-    padding:
-      14px 21px;
-
-    font-size:
-      14px;
-  }
-
-  .heroPoints span {
-    padding:
-      13px 17px;
-
-    font-size:
-      13px;
-  }
-
-  .visualArea {
-    min-height:
-      980px;
-  }
-
-  .visualGlow {
-    width:
-      850px;
-
-    height:
-      850px;
-  }
-
-  .visualCard {
-    width:
-      960px;
-
-    min-height:
-      800px;
-
-    padding:
-      65px;
-
-    border-radius:
-      62px;
-  }
-
-  .visualIcon {
-    width:
-      82px;
-
-    height:
-      82px;
-  }
-
-  .visualHeader strong {
-    font-size:
-      28px;
-  }
-
-  .visualTitle {
-    font-size:
-      70px;
-  }
-
-  .visualList {
-    gap:
-      16px;
-  }
-
-  .visualList div {
-    font-size:
-      18px;
-  }
-
-  .termsArea {
     grid-template-columns:
-      480px
-      minmax(
-        0,
-        1fr
-      );
+      500px
+      minmax(0, 1fr)
+      470px;
 
-    gap:
-      120px;
+    gap: 58px;
+
+    padding: 7px 44px;
+
+    border-radius: 34px;
   }
 
-  .sideName {
-    font-size:
-      17px;
+  .finalPets {
+    height: 168px;
   }
 
-  .cardHeader {
-    grid-template-columns:
-      86px
-      82px
-      minmax(
-        0,
-        1fr
-      )
-      57px;
-
-    gap:
-      20px;
-
-    padding:
-      53px 60px;
-
-    border-radius:
-      46px;
+  .finalPetsImage {
+    transform:
+      translateX(70px)
+      translateY(-15px)
+      scale(1.24);
   }
 
-  .number {
-    width:
-      84px;
+ 
 
-    height:
-      84px;
-
-    border-radius:
-      23px;
-
-    font-size:
-      17px;
+  .finalCopy {
+    transform: translateX(45px);
   }
 
-  .cardIcon {
-    width:
-      77px;
-
-    height:
-      77px;
-
-    border-radius:
-      21px;
+  .finalCopy h2 {
+    font-size: 44px;
   }
 
-  .cardHeading > span {
-    font-size:
-      13px;
+  .finalCopy p {
+    font-size: 15px;
   }
 
-  .cardHeading h2 {
-    font-size:
-      47px;
+  .finalButtons {
+    gap: 12px !important;
   }
 
-  .cardBody {
-    padding:
-      0 60px;
+  .finalButtons .storeIconImage {
+    width: 35px;
+    height: 38px;
   }
 
-  .expandAreaOpen
-  .cardBody {
-    padding:
-      0 60px
-      55px
-      145px;
+  .finalButtons .storeText small {
+    font-size: 9px;
   }
 
-  .intro {
-    font-size:
-      24px;
-
-    line-height:
-      1.8;
-  }
-
-  .detailList {
-    gap:
-      15px;
-  }
-
-  .detailItem {
-    grid-template-columns:
-      55px
-      minmax(
-        0,
-        1fr
-      );
-
-    padding:
-      19px;
-
-    border-radius:
-      16px;
-  }
-
-  .detailIcon {
-    width:
-      52px;
-
-    height:
-      52px;
-
-    border-radius:
-      14px;
-  }
-
-  .detailItem p {
-    font-size:
-      19px;
-
-    line-height:
-      1.7;
-  }
-
-  .notice {
-    gap:
-      26px;
-
-    padding:
-      46px 54px;
-
-    border-radius:
-      38px;
-  }
-
-  .noticeIcon {
-    width:
-      70px;
-
-    height:
-      70px;
-
-    border-radius:
-      20px;
-  }
-
-  .noticeContent > span {
-    font-size:
-      24px;
-  }
-
-  .noticeContent p {
-    font-size:
-      18px;
-  }
-
-  .supportCard {
-    gap:
-      34px;
-
-    padding:
-      60px 68px;
-
-    border-radius:
-      44px;
-  }
-
-  .supportIcon {
-    width:
-      82px;
-
-    height:
-      82px;
-
-    border-radius:
-      22px;
-  }
-
-  .supportContent > span {
-    font-size:
-      11px;
-  }
-
-  .supportContent h2 {
-    font-size:
-      45px;
-  }
-
-  .supportContent p {
-    font-size:
-      18px;
-  }
-
-  .supportButton {
-    min-height:
-      78px;
-
-    padding-inline:
-      39px;
-
-    border-radius:
-      21px;
-
-    font-size:
-      16px;
-  }
-
-  .footerNote {
-    font-size:
-      12px;
+  .finalButtons .storeText b {
+    font-size: 22px;
   }
 }
 
 
 /* =========================================================
-   REDUCED MOTION
+   TABLET
+   769 — 1100
    ========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .termsSection,
-  .visible.termsSection,
-  .supportCard {
-    opacity:
-      1 !important;
+@media (min-width: 769px) and (max-width: 1100px) {
+
+  .finalDownload {
+    padding: 22px 0 45px;
+  }
+
+  .finalDownloadCard {
+    width: calc(100% - 30px);
+
+    height: 100px;
+    min-height: 100px;
+
+    grid-template-columns:
+      150px
+      minmax(0, 1fr)
+      245px;
+
+    gap: 12px;
+
+    padding: 3px 11px;
+
+    border-radius: 16px;
+  }
+
+  .finalPets {
+    height: 96px;
+  }
+
+  .finalPetsImage {
+    transform:
+      translateX(22px)
+      translateY(-4px)
+      scale(1.14);
+  }
+
+  .finalDownloadCard:hover {
+    transform:
+      translateX(22px)
+      translateY(-6px)
+      scale(1.17);
+  }
+
+  .finalCopy {
+    transform: none;
+  }
+
+  .finalCopy h2 {
+    font-size: 16px;
+  }
+
+  .finalCopy p {
+    margin-top: 4px;
+    font-size: 7px;
+  }
+
+  .finalButtons {
+    gap: 5px !important;
+  }
+
+  .finalButtons .storeBadge {
+    padding: 4px 5px;
+    gap: 4px;
+    border-radius: 7px;
+  }
+
+  .finalButtons .storeIconImage {
+    width: 19px;
+    height: 21px;
+  }
+
+  .finalButtons .storeText small {
+    font-size: 5px;
+  }
+
+  .finalButtons .storeText b {
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   <= 768px
+
+   IMPORTANT LAYOUT:
+
+   ┌─────────────────────────────┐
+   │                             │
+   │   BIG PET   │ TEXT          │
+   │             │ DESCRIPTION   │
+   │             │               │
+   │             │ APP   PLAY    │
+   │                             │
+   └─────────────────────────────┘
+
+   LEFT  = 45%
+   RIGHT = 55%
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .finalDownload {
+    width: 100%;
+
+    padding:
+      18px 0
+      38px;
+  }
+
+
+  .finalDownloadCard {
+    width: calc(100% - 20px);
+
+    height: 132px;
+    min-height: 132px;
+
+    display: grid;
+
+    /*
+      BIG IMAGE AREA
+      RIGHT CONTENT AREA
+    */
+    grid-template-columns:
+      45%
+      minmax(0, 55%);
+
+    grid-template-rows:
+      minmax(0, 1fr)
+      auto;
+
+    column-gap: 0;
+    row-gap: 5px;
+
+    align-items: center;
+
+    padding:
+      5px 8px;
+
+    border-radius: 16px;
+  }
+
+
+  /* =======================================================
+     BIG MOBILE PET
+     ======================================================= */
+
+  .finalPets {
+    grid-column: 1;
+    grid-row: 1 / 3;
+
+    width: 100%;
+    height: 126px;
+
+    min-width: 0;
+
+    align-self: end;
+
+    /*
+      Give image more visual width.
+    */
+    transform: scaleX(1.08);
+
+    transform-origin:
+      left bottom;
+
+    overflow: visible !important;
+
+    z-index: 3;
+  }
+
+
+  .finalPetsImage {
+    /*
+      BIGGER THAN BEFORE
+    */
+    width: 125% !important;
+    height: 125% !important;
+
+    inset:
+      auto
+      auto
+      0
+      -4px;
+
+    object-fit: contain;
 
     transform:
-      none !important;
+      translateX(0)
+      translateY(5px)
+      scale(1.22);
 
-    transition:
-      none !important;
+    transform-origin:
+      left bottom;
   }
 
-  .visualGlow {
-    animation:
-      none !important;
+
+ 
+
+
+  /* =======================================================
+     RIGHT CONTENT AREA
+     ======================================================= */
+
+  .finalCopy {
+    grid-column: 2;
+    grid-row: 1;
+
+    width: 100%;
+
+    min-width: 0;
+
+    align-self: center;
+
+    margin: 0;
+
+    padding:
+      0 2px 0 6px;
+
+    transform: none !important;
+
+    text-align: left;
+
+    z-index: 4;
   }
 
-  .exploreButton,
-  .questionLink,
-  .cardHeader,
-  .detailItem,
-  .sideItem,
-  .supportButton {
-    transition:
-      none !important;
+
+  .finalCopy h2 {
+    width: 100%;
+
+    max-width: 100%;
+
+    margin: 0;
+
+    font-size:
+      clamp(
+        12px,
+        3.2vw,
+        18px
+      );
+
+    line-height: 1.08;
+
+    letter-spacing:
+      -0.02em;
+
+    white-space: normal;
+
+    overflow: visible;
   }
+
+
+  .finalCopy p {
+    width: 100%;
+
+    max-width: 100%;
+
+    margin:
+      4px 0 0;
+
+    font-size:
+      clamp(
+        5.5px,
+        1.5vw,
+        8px
+      );
+
+    line-height: 1.3;
+
+    white-space: normal;
+  }
+
+
+  /* =======================================================
+     MOBILE BUTTONS
+     
+     SAME RIGHT COLUMN AS TEXT
+     ======================================================= */
+
+  .finalButtons {
+    grid-column: 2;
+    grid-row: 2;
+
+    width: 100% !important;
+
+    min-width: 0 !important;
+
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    flex-wrap: nowrap !important;
+
+    align-items: center !important;
+
+    justify-content: stretch !important;
+
+    gap: 4px !important;
+
+    margin: 0 !important;
+
+    padding:
+      0 2px 0 6px;
+  }
+
+
+  /*
+    DO NOT use fixed 120px / 135px / 165px.
+    Both buttons share the available RIGHT area.
+  */
+  .finalButtons > * {
+    flex:
+      1 1 0 !important;
+
+    width: 0 !important;
+
+    min-width: 0 !important;
+
+    max-width: none !important;
+
+    margin: 0 !important;
+  }
+
+
+  .finalButtons .storeBadge {
+    width: 100% !important;
+
+    height: 31px !important;
+
+    min-height: 31px !important;
+
+    max-width: none !important;
+
+    padding:
+      3px 5px !important;
+
+    gap: 4px !important;
+
+    border-radius:
+      7px !important;
+
+    overflow: hidden;
+  }
+
+
+  .finalButtons .storeIconImage {
+    flex:
+      0 0 auto;
+
+    width: 16px !important;
+
+    height: 18px !important;
+  }
+
+
+  .finalButtons .storeText {
+    min-width: 0;
+
+    overflow: hidden;
+  }
+
+
+  .finalButtons .storeText small {
+    display: block;
+
+    margin-bottom: 1px;
+
+    font-size:
+      clamp(
+        3.5px,
+        1.1vw,
+        4.5px
+      ) !important;
+
+    line-height: 1;
+
+    white-space: nowrap;
+  }
+
+
+  .finalButtons .storeText b {
+    display: block;
+
+    font-size:
+      clamp(
+        7.5px,
+        2.4vw,
+        11px
+      ) !important;
+
+    line-height: 1 !important;
+
+    white-space: nowrap;
+  }
+
+
+  .desktopBreak {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   PHONE
+   481 — 600px
+
+   IMAGE EVEN MORE PROMINENT
+   ========================================================= */
+
+@media (min-width: 481px) and (max-width: 600px) {
+
+  .finalDownloadCard {
+    height: 138px;
+    min-height: 138px;
+
+    grid-template-columns:
+      46%
+      minmax(0, 54%);
+  }
+
+
+  .finalPets {
+    height: 132px;
+  }
+
+
+  .finalPetsImage {
+    width: 128% !important;
+    height: 128% !important;
+
+    transform:
+      translateY(5px)
+      scale(1.24);
+  }
+
+
+  .finalCopy {
+    padding-left: 7px;
+  }
+
+
+  .finalCopy h2 {
+    font-size: 15px;
+  }
+
+
+  .finalCopy p {
+    font-size: 7px;
+  }
+
+
+  .finalButtons {
+    padding-left: 7px;
+
+    gap: 5px !important;
+  }
+
+
+  .finalButtons .storeBadge {
+    height: 32px !important;
+    min-height: 32px !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONE
+   381 — 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .finalDownload {
+    padding:
+      16px 0
+      32px;
+  }
+
+
+  .finalDownloadCard {
+    width: calc(100% - 14px);
+
+    height: 118px;
+    min-height: 118px;
+
+    /*
+      IMAGE = 45%
+      CONTENT = 55%
+    */
+    grid-template-columns:
+      45%
+      minmax(0, 55%);
+
+    grid-template-rows:
+      minmax(0, 1fr)
+      auto;
+
+    row-gap: 4px;
+
+    padding:
+      4px 7px;
+
+    border-radius: 14px;
+  }
+
+
+  /* BIG PET */
+  .finalPets {
+    width: 100%;
+    height: 174px;
+
+    transform:
+      scaleX(1.08);
+
+    transform-origin:
+      left bottom;
+  }
+
+
+  .finalPetsImage {
+    width: 80% !important;
+    height: 100% !important;
+
+
+    transform:
+      translateY(32px)
+      scale(1.18);
+
+    transform-origin:
+      left center;
+  }
+
+
+ 
+
+  /* RIGHT HALF TEXT */
+  .finalCopy {
+    padding:
+      0 1px 0 6px;
+  }
+
+
+  .finalCopy h2 {
+    font-size:
+      clamp(
+        11px,
+        3.8vw,
+        15px
+      );
+
+    line-height: 1.06;
+  }
+
+
+  .finalCopy p {
+    margin-top: 3px;
+
+    font-size:
+      clamp(
+        5px,
+        1.8vw,
+        9px
+      );
+
+    line-height: 1.25;
+  }
+
+
+  /* BUTTONS START FROM SAME RIGHT HALF */
+  .finalButtons {
+    padding:
+      0 1px 0 6px;
+
+    gap: 3px !important;
+  }
+
+
+  .finalButtons .storeBadge {
+    height: 29px !important;
+
+    min-height: 29px !important;
+
+    padding:
+      2px 4px !important;
+
+    gap: 3px !important;
+
+    border-radius:
+      6px !important;
+  }
+
+
+  .finalButtons .storeIconImage {
+    width: 14px !important;
+    height: 17px !important;
+  }
+
+
+  .finalButtons .storeText small {
+    font-size: 7px !important;
+  }
+
+
+  .finalButtons .storeText b {
+    font-size:
+      clamp(
+        7px,
+        2.7vw,
+        10px
+      ) !important;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   <= 380px
+
+   KEEP 45 / 55 LAYOUT
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .finalDownload {
+    padding:
+      14px 0
+      28px;
+  }
+
+
+  .finalDownloadCard {
+    width: calc(100% - 10px);
+
+    height: 108px;
+    min-height: 108px;
+
+    grid-template-columns:
+      45%
+      minmax(0, 55%);
+
+    row-gap: 3px;
+
+    padding:
+      4px 6px;
+
+    border-radius: 12px;
+  }
+
+
+  .finalPets {
+    height: 105px;
+
+    transform:
+      scaleX(1.08);
+  }
+
+
+  .finalPetsImage {
+    width: 135% !important;
+    height: 135% !important;
+
+    left: -3px !important;
+
+    transform:
+      translateY(4px)
+      scale(1.16);
+  }
+
+
+  .finalDownloadCard:hover {
+    transform:
+      translateY(2px)
+      scale(1.18);
+  }
+
+
+  .finalCopy {
+    padding-left: 5px;
+  }
+
+
+  .finalCopy h2 {
+    font-size:
+      clamp(
+        10px,
+        3.6vw,
+        12px
+      );
+
+    line-height: 1.05;
+  }
+
+
+  .finalCopy p {
+    margin-top: 2px;
+
+    font-size:
+      clamp(
+        4.5px,
+        1.7vw,
+        6px
+      );
+
+    line-height: 1.2;
+  }
+
+
+  .finalButtons {
+    padding-left: 5px;
+
+    gap: 3px !important;
+  }
+
+
+  .finalButtons .storeBadge {
+    height: 27px !important;
+
+    min-height: 27px !important;
+
+    padding:
+      2px 3px !important;
+
+    gap: 2px !important;
+
+    border-radius:
+      5px !important;
+  }
+
+
+  .finalButtons .storeIconImage {
+    width: 13px !important;
+    height: 15px !important;
+  }
+
+
+  .finalButtons .storeText small {
+    font-size: 3px !important;
+  }
+
+
+  .finalButtons .storeText b {
+    font-size: 7px !important;
+  }
+}
+
+
+
+
+/* =========================================================
+   STORE BADGES
+   ========================================================= */
+
+.storeRow,
+.finalButtons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.storeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  width: 239px;
+  min-width: 239px;
+  height: 57px;
+
+  padding: 7px 12px;
+
+  border: 1px solid #c8c8c8;
+  border-radius: 12px;
+  background: #fff;
+
+  box-sizing: border-box;
+
+  transition: none;
+}
+
+.storeBadge:hover {
+  transform: none;
+  border-color: #c8c8c8;
+  box-shadow: none;
+}
+
+.googleBadge {
+  width: 175px !important;
+  min-width: 185px !important;
+  max-width: 205px !important;
+}
+
+.storeIconImage {
+  width: 30px;
+  height: 34px;
+
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.storeText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  line-height: 1;
+}
+
+.storeText small {
+  display: block;
+  margin-bottom: 4px;
+
+  color: #555;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.storeText b {
+  display: block;
+
+  color: #111827;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 700;
+  white-space: nowrap;
 }

@@ -1,21 +1,22 @@
 "use client";
 
 import {
-  ArrowDown,
   ArrowRight,
   CheckCircle2,
   Database,
-  FileText,
   Eye,
+  FileText,
   LockKeyhole,
   Mail,
   PawPrint,
   ShieldCheck,
   UserRound,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import styles from "./Privacy.module.css";
+import Link from "next/link";
+import Image from "next/image";
 
 const sections = [
   {
@@ -98,160 +99,106 @@ const sections = [
   },
 ];
 
+
+const storeBadges = (
+  <>
+    <div className={styles.storeBadge}>
+      <img
+        src="/images/apple-logo.png"
+        alt="Apple"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>Download on the</small>
+        <b>App Store</b>
+      </span>
+    </div>
+
+    <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
+      <img
+        src="/images/google-play.png"
+        alt="Google Play"
+        className={styles.storeIconImage}
+      />
+
+      <span className={styles.storeText}>
+        <small>GET IT ON</small>
+        <b>Google Play</b>
+      </span>
+    </div>
+  </>
+);
+
 export default function Privacy() {
-  const [openSection, setOpenSection] = useState<string>("01");
-  const [activeSection, setActiveSection] = useState<string>("01");
-
   useEffect(() => {
-    const revealElements =
-      document.querySelectorAll<HTMLElement>(
-        `.${styles.reveal}`
-      );
-
-    const sectionElements =
-      document.querySelectorAll<HTMLElement>(
-        `.${styles.policySection}`
-      );
-
-    const reducedMotion =
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-
-    if (reducedMotion) {
-      revealElements.forEach((element) =>
-        element.classList.add(styles.visible)
-      );
-    } else {
-      const revealObserver =
-        new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-
-              entry.target.classList.add(
-                styles.visible
-              );
-
-              revealObserver.unobserve(
-                entry.target
-              );
-            });
-          },
-          {
-            threshold: 0.12,
-            rootMargin:
-              "0px 0px -60px 0px",
-          }
-        );
-
-      revealElements.forEach((element) =>
-        revealObserver.observe(element)
-      );
-
-      return () => {
-        revealObserver.disconnect();
-      };
-    }
-
-    const activeObserver =
-      new IntersectionObserver(
-        (entries) => {
-          const visibleEntries =
-            entries
-              .filter(
-                (entry) =>
-                  entry.isIntersecting
-              )
-              .sort(
-                (a, b) =>
-                  b.intersectionRatio -
-                  a.intersectionRatio
-              );
-
-          const visible =
-            visibleEntries[0];
-
-          if (!visible) return;
-
-          const id =
-            (visible.target as HTMLElement)
-              .dataset.section;
-
-          if (id) {
-            setActiveSection(id);
-          }
-        },
-        {
-          threshold: [
-            0.15,
-            0.35,
-            0.55,
-          ],
-          rootMargin:
-            "-12% 0px -50% 0px",
-        }
-      );
-
-    sectionElements.forEach((element) =>
-      activeObserver.observe(element)
+    const revealElements = document.querySelectorAll<HTMLElement>(
+      `.${styles.reveal}`
     );
 
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reducedMotion) {
+      revealElements.forEach((element) => {
+        element.classList.add(styles.visible);
+      });
+
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add(styles.visible);
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -60px 0px",
+      }
+    );
+
+    revealElements.forEach((element) => {
+      observer.observe(element);
+    });
+
     return () => {
-      activeObserver.disconnect();
+      observer.disconnect();
     };
   }, []);
 
-  const scrollToSection = (
-    number: string
-  ) => {
+  const scrollToFirstSection = () => {
     document
-      .getElementById(
-        `privacy-${number}`
-      )
+      .getElementById("privacy-01")
       ?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
-
-    setOpenSection(number);
   };
 
   return (
     <main className={styles.page}>
-      {/* ==================================================
-          BACKGROUND DECOR
-          ================================================== */}
+      {/* Background Decoration */}
 
-      <div
-        className={styles.glowOne}
-        aria-hidden="true"
-      />
+      <div className={styles.glowOne} aria-hidden="true" />
 
-      <div
-        className={styles.glowTwo}
-        aria-hidden="true"
-      />
+      <div className={styles.glowTwo} aria-hidden="true" />
 
-      <div
-        className={styles.pawWatermark}
-        aria-hidden="true"
-      >
-        <PawPrint
-          size={150}
-          fill="currentColor"
-        />
+      <div className={styles.pawWatermark} aria-hidden="true">
+        <PawPrint size={150} fill="currentColor" />
       </div>
 
       <div className={styles.container}>
-        {/* ==================================================
+        {/* =====================================================
             HERO
-            ================================================== */}
+        ====================================================== */}
 
-        <header
-          className={`${styles.hero} ${styles.reveal}`}
-        >
-          
+        <header className={`${styles.hero} ${styles.reveal}`}>
           <div className={styles.heroGrid}>
             <div className={styles.heroCopy}>
              
@@ -259,32 +206,25 @@ export default function Privacy() {
               <h1>
                 Privacy,
                 <br />
-                made{" "}
-                <span>simple.</span>
+                made <span>simple.</span>
               </h1>
 
               <p>
-                PetCard is committed to building a simple,
-                useful and responsible pet-care experience.
-                This page explains the types of information
-                that may be handled through the PetCard
-                website and application and the general
-                purposes for which that information may be
-                used.
+                PetCard is committed to building a simple, useful and
+                responsible pet-care experience. This page explains the types
+                of information that may be handled through the PetCard website
+                and application and the general purposes for which that
+                information may be used.
               </p>
 
               <div className={styles.heroActions}>
                 <button
                   type="button"
-                  onClick={() =>
-                    scrollToSection("01")
-                  }
+                  onClick={scrollToFirstSection}
                   className="btn btn-primary"
                 >
                   Explore Privacy
-                  <img src="/images/paw-white.png"
-                 height={35}
-                 width={35}/>
+                  
                 </button>
 
                 <a
@@ -292,143 +232,96 @@ export default function Privacy() {
                   className="btn btn-outline"
                 >
                   Ask a question
-                  <ArrowRight size={14} />
+                 
                 </a>
               </div>
             </div>
 
             {/* TRUST CARD */}
+
             <div className={styles.trustArea}>
-              <div
-                className={styles.trustHalo}
-                aria-hidden="true"
-              />
+              <div className={styles.trustHalo} aria-hidden="true" />
 
               <div className={styles.trustCard}>
                 <div className={styles.trustHeader}>
-                  <div
-                    className={
-                      styles.trustIcon
-                    }
-                  >
+                  <div className={styles.trustIcon}>
                     <ShieldCheck size={26} />
                   </div>
 
                   <div>
-                    <span>
-                      PETCARD
-                    </span>
-                    <strong>
-                      TRUST CENTER
-                    </strong>
+                    <span>PETCARD</span>
+                    <strong>TRUST CENTER</strong>
                   </div>
                 </div>
 
-                <div
-                  className={
-                    styles.trustHeadline
-                  }
-                >
+                <div className={styles.trustHeadline}>
                   Your privacy
                   <br />
-                  <span>
-                    matters.
-                  </span>
+                  <span>matters.</span>
                 </div>
 
-                <div
-                  className={
-                    styles.trustStats
-                  }
-                >
+                <div className={styles.trustStats}>
                   <div>
-                    <strong>
-                      06
-                    </strong>
+                    <strong>06</strong>
                     <span>
                       Policy
+                      <br />
                       sections
                     </span>
                   </div>
 
                   <div>
-                    <strong>
-                      18
-                    </strong>
+                    <strong>18</strong>
                     <span>
                       Key
+                      <br />
                       points
                     </span>
                   </div>
 
                   <div>
-                    <strong>
-                      01
-                    </strong>
+                    <strong>01</strong>
                     <span>
                       Support
+                      <br />
                       email
                     </span>
                   </div>
                 </div>
 
-                <div
-                  className={
-                    styles.trustFooter
-                  }
-                >
-                  <CheckCircle2
-                    size={15}
-                  />
+                <div className={styles.trustFooter}>
+                  <CheckCircle2 size={15} />
 
-                  <span>
-                    Clear information
-                    practices
-                  </span>
+                  <span>Clear information practices</span>
                 </div>
 
-                <div
-                  className={
-                    styles.trustPaw
-                  }
-                >
-                  <PawPrint
-                    size={75}
-                    fill="currentColor"
-                  />
+                <div className={styles.trustPaw}>
+                  <PawPrint size={75} fill="currentColor" />
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        {/* ==================================================
+        {/* =====================================================
             IMPORTANT NOTICE
-            ================================================== */}
+        ====================================================== */}
 
-        <section
-          className={`${styles.notice} ${styles.reveal}`}
-        >
-          <div
-            className={styles.noticeIcon}
-          >
+        <section className={`${styles.notice} ${styles.reveal}`}>
+          <div className={styles.noticeIcon}>
             <Eye size={19} />
           </div>
 
           <div>
-            <span>
-              Important Notice
-            </span>
+            <span>Important Notice</span>
 
             <p>
-              This page currently contains draft
-              promotional-site content. Before production
-              launch, it should be replaced or reviewed
-              against the officially approved PetCard
-              Privacy Policy, including the final data
-              practices, legal requirements, retention
-              periods, third-party services and user
-              rights applicable to the product.
+              This page currently contains draft promotional-site content.
+              Before production launch, it should be replaced or reviewed
+              against the officially approved PetCard Privacy Policy,
+              including the final data practices, legal requirements,
+              retention periods, third-party services and user rights
+              applicable to the product.
             </p>
           </div>
 
@@ -439,378 +332,138 @@ export default function Privacy() {
           />
         </section>
 
-        {/* ==================================================
-            MOBILE SECTION NAV
-            ================================================== */}
+        {/* =====================================================
+            POLICY CARDS
+        ====================================================== */}
 
-        <div
-          className={`${styles.mobileNav} ${styles.reveal}`}
-        >
-          {sections.map((section) => (
-            <button
-              key={section.number}
-              type="button"
-              className={
-                activeSection ===
-                section.number
-                  ? styles.mobileNavActive
-                  : ""
-              }
-              onClick={() =>
-                scrollToSection(
-                  section.number
-                )
-              }
-            >
-              {section.number}
-            </button>
-          ))}
-        </div>
-
-        {/* ==================================================
-            POLICY AREA
-            ================================================== */}
-
-        <section
-          className={`${styles.policyArea} ${styles.reveal}`}
-        >
-          {/* TIMELINE */}
-          <aside
-            className={styles.timeline}
-          >
-            <div
-              className={
-                styles.timelineTitle
-              }
-            >
-              <PawPrint
-                size={15}
-                fill="currentColor"
-              />
-
-              <span>
-                Privacy journey
-              </span>
-            </div>
-
-            <div
-              className={
-                styles.timelineItems
-              }
-            >
-              <div
-                className={
-                  styles.timelineLine
-                }
-              />
-
-              {sections.map(
-                (section) => {
-                  const isActive =
-                    activeSection ===
-                    section.number;
-
-                  return (
-                    <button
-                      key={
-                        section.number
-                      }
-                      type="button"
-                      className={`${styles.timelineItem} ${
-                        isActive
-                          ? styles.timelineActive
-                          : ""
-                      }`}
-                      onClick={() =>
-                        scrollToSection(
-                          section.number
-                        )
-                      }
-                    >
-                      <span
-                        className={
-                          styles.timelineDot
-                        }
-                      />
-
-                      <span
-                        className={
-                          styles.timelineNumber
-                        }
-                      >
-                        {section.number}
-                      </span>
-
-                      <span
-                        className={
-                          styles.timelineName
-                        }
-                      >
-                        {
-                          section.title
-                        }
-                      </span>
-                    </button>
-                  );
-                }
-              )}
-            </div>
-          </aside>
-
-          {/* CONTENT */}
+        <section className={styles.policyArea}>
           <div className={styles.cards}>
-            {sections.map(
-              (
-                section,
-                index
-              ) => {
-                const Icon =
-                  section.icon;
+            {sections.map((section, index) => {
+              const Icon = section.icon;
 
-                const isOpen =
-                  openSection ===
-                  section.number;
+              return (
+                <article
+                  id={`privacy-${section.number}`}
+                  key={section.number}
+                  className={`${styles.policyCard} ${styles.reveal}`}
+                  style={{
+                    "--delay": `${index * 70}ms`,
+                  } as React.CSSProperties}
+                >
+                  {/* Card Header */}
 
-                return (
-                  <article
-                    id={`privacy-${section.number}`}
-                    data-section={
-                      section.number
-                    }
-                    className={`${styles.policySection} ${styles.reveal}`}
-                    style={
-                      {
-                        "--delay": `${index * 70}ms`,
-                      } as React.CSSProperties
-                    }
-                    key={
-                      section.number
-                    }
-                  >
-                    <div
-                      className={
-                        styles.pawConnector
-                      }
-                    >
-                      <PawPrint
-                        size={18}
-                        fill="currentColor"
-                      />
+                  <div className={styles.cardHeader}>
+                    <div className={styles.cardTop}>
+                     
+
+                      <div className={styles.sectionIcon}>
+                        <Icon size={21} />
+                      </div>
                     </div>
 
-                    <button
-                      type="button"
-                      className={
-                        styles.cardHeader
-                      }
-                      onClick={() =>
-                        setOpenSection(
-                          isOpen
-                            ? ""
-                            : section.number
-                        )
-                      }
-                    >
-                      <div
-                        className={
-                          styles.sectionNumber
-                        }
-                      >
-                        {section.number}
-                      </div>
+                    <h2>{section.title}</h2>
 
-                      <div
-                        className={
-                          styles.sectionIcon
-                        }
-                      >
-                        <Icon
-                          size={21}
-                        />
-                      </div>
+                    <div className={styles.titleLine} />
+                  </div>
 
-                      <div
-                        className={
-                          styles.sectionHeading
-                        }
-                      >
-                        
+                  {/* Card Content */}
 
-                        <h2>
-                          {
-                            section.title
-                          }
-                        </h2>
-                      </div>
+                  <div className={styles.cardContent}>
+                    <p className={styles.intro}>{section.intro}</p>
 
-                      <div
-                        className={`${styles.expandIcon} ${
-                          isOpen
-                            ? styles.expandIconOpen
-                            : ""
-                        }`}
-                      >
-                        <ArrowDown
-                          size={17}
-                        />
-                      </div>
-                    </button>
-
-                    <div
-                      className={`${styles.expandArea} ${
-                        isOpen
-                          ? styles.expandAreaOpen
-                          : ""
-                      }`}
-                    >
-                      <div
-                        className={
-                          styles.cardContent
-                        }
-                      >
-                        <p
-                          className={
-                            styles.intro
-                          }
-                        >
-                          {
-                            section.intro
-                          }
-                        </p>
-
+                    <div className={styles.detailGrid}>
+                      {section.items.map((item, itemIndex) => (
                         <div
-                          className={
-                            styles.detailGrid
-                          }
+                          className={styles.detailItem}
+                          key={`${section.number}-${itemIndex}`}
                         >
-                          {section.items.map(
-                            (
-                              item,
-                              itemIndex
-                            ) => (
-                              <div
-                                className={
-                                  styles.detailItem
-                                }
-                                key={
-                                  item
-                                }
-                              >
-                                <div
-                                  className={
-                                    styles.detailIcon
-                                  }
-                                >
-                                  <CheckCircle2
-                                    size={15}
-                                  />
-                                </div>
+                          <div className={styles.detailIcon}>
+                            <CheckCircle2 size={15} />
+                          </div>
 
-                                <div>
-                                  <span
-                                    className={
-                                      styles.detailNumber
-                                    }
-                                  >
-                                    0
-                                    {itemIndex +
-                                      1}
-                                  </span>
+                          <div className={styles.detailCopy}>
+                            <span className={styles.detailNumber}>
+                              {String(itemIndex + 1).padStart(2, "0")}
+                            </span>
 
-                                  <p>
-                                    {
-                                      item
-                                    }
-                                  </p>
-                                </div>
-                              </div>
-                            )
-                          )}
+                            <p>{item}</p>
+                          </div>
                         </div>
-                      </div>
+                      ))}
                     </div>
-                  </article>
-                );
-              }
-            )}
+                  </div>
 
-            {/* =================================================
-                CONTACT
-                ================================================= */}
+                  {/* Decorative Paw */}
 
-            <section
-              className={`${styles.contactCard} ${styles.reveal}`}
-            >
-              <div
-                className={
-                  styles.contactPaws
-                }
-              >
-                <PawPrint
-                  size={90}
-                  fill="currentColor"
-                />
-              </div>
-
-              <div
-                className={
-                  styles.contactIcon
-                }
-              >
-                <Mail size={23} />
-              </div>
-
-              <div
-                className={
-                  styles.contactCopy
-                }
-              >
-                <span>
-                  Privacy Support
-                </span>
-
-                <h2>
-                  Still have a
-                  question?
-                  <strong>
-                    {" "}
-                    Talk to us.
-                  </strong>
-                </h2>
-
-                <p>
-                  For privacy-related questions
-                  or requests, reach out to the
-                  PetCard team using the official
-                  support email.
-                </p>
-              </div>
-
-              <a
-                href="mailto:info@petcard.in"
-                className={
-                  styles.contactButton
-                }
-              >
-                info@petcard.in
-                <ArrowRight size={15} />
-              </a>
-            </section>
-
-            <div
-              className={`${styles.footerNote} ${styles.reveal}`}
-            >
-              <span>
-                Last updated: To be confirmed
-              </span>
-
-              <span>
-                <LockKeyhole size={12} />
-                PetCard Privacy
-              </span>
-            </div>
+                  <div className={styles.cardPaw} aria-hidden="true">
+                    <PawPrint size={65} fill="currentColor" />
+                  </div>
+                </article>
+              );
+            })}
           </div>
+
+          {/* =================================================
+              CONTACT CARD
+          ================================================== */}
+
+          
+
         </section>
+
+
+        {/* =====================================================
+    FINAL DOWNLOAD
+    ===================================================== */}
+
+      <section
+        className={`${styles.finalDownload} ${styles.homeReveal}`}
+        id="download-app"
+        data-home-reveal="download"
+      >
+        <div className={`${styles.container} container ${styles.finalDownloadCard}`}>
+
+          {/* ================= PETS ================= */}
+
+          <div className={styles.finalPets}>
+            <Image
+              src="/images/HowItWorksFooter.png"
+              alt="PETCARD pets"
+              fill
+              priority
+
+              className={styles.finalPetsImage}
+            />
+          </div>
+
+
+          {/* ================= COPY ================= */}
+
+          <div className={styles.finalCopy}>
+
+            <h2>
+              Still have a
+                
+                question? <strong>Talk to us.</strong>
+            </h2>
+
+            <p>
+             For privacy-related questions or requests, reach out to the
+               
+              <br className={styles.desktopBreak} />
+             PetCard team using the official support email.
+            </p>
+
+          </div>
+
+
+          {/* ================= STORE BADGES ================= */}
+
+           <div className={styles.finalButtons}>
+            {storeBadges}
+          </div>
+        </div>
+      </section>
       </div>
     </main>
   );

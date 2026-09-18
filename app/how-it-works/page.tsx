@@ -143,37 +143,6 @@ const orbitSteps = [
 
 
 
-const storeBadges = (
-  <>
-    <div className={styles.storeBadge}>
-      <img
-        src="/images/apple-logo.png"
-        alt="Apple"
-        className={styles.storeIconImage}
-      />
-
-      <span className={styles.storeText}>
-        <small>Download on the</small>
-        <b>App Store</b>
-      </span>
-    </div>
-
-    <div className={`${styles.storeBadge} ${styles.googleBadge}`}>
-      <img
-        src="/images/google-play.png"
-        alt="Google Play"
-        className={styles.storeIconImage}
-      />
-
-      <span className={styles.storeText}>
-        <small>GET IT ON</small>
-        <b>Google Play</b>
-      </span>
-    </div>
-  </>
-);
-
-
 export default function HowItWorks() {
   return (
     <div className={styles.page}>
@@ -393,12 +362,25 @@ export default function HowItWorks() {
                 ),
               )}
             </div>
+            <div className={styles.center} aria-label="PetCard">
+              <div className={styles.centerHalo} />
+              <div className={styles.centerCore}>
+                <img
+                  src="/images/brand/dog.png"
+                  className={styles.centerImage}
+                  height={140}
+                  width={140}
+                />
+                <div className={styles.brand}>
+                  <span>PET</span>
+                  <strong>CARD</strong>
+                </div>
 
-            {/* =================================================
-      CENTER PETCARD
-      ================================================= */}
+              </div>
+            </div>
 
-           </div>
+
+          </div>
         </div>
       </section>
 
@@ -432,13 +414,13 @@ export default function HowItWorks() {
           <div className={styles.finalCopy}>
 
             <h2>
-              Start your pet&apos;s amazing journey today!
+              Now You Know How It All Comes Together.
             </h2>
 
             <p>
-              Download PETCARD and make every day better
+              Have thoughts after exploring PETCARD?
               <br className={styles.desktopBreak} />
-              for you and your pet.
+              We'd love to hear what you think.
             </p>
 
           </div>
@@ -447,9 +429,14 @@ export default function HowItWorks() {
           {/* ================= STORE BADGES ================= */}
 
           <div className={styles.finalButtons}>
-            {storeBadges}
-          </div>
+            <Link href="/contact#contact-form" className="btn btn-outline">
+              Share Your Thoughts
+            </Link>
 
+            <Link href="/faq" className="btn btn-outline">
+              See FAQS
+            </Link>
+          </div>
         </div>
       </section>
     </div>

@@ -5,36 +5,31 @@ import { useEffect } from "react";
 
 import {
   ArrowRight,
-  Heart,
   MapPin,
-  ShieldCheck,
   Sparkles,
-  Users,
 } from "lucide-react";
 
 import CTA from "../../components/CTA";
 import styles from "./About.module.css";
+import MissionOrbit from "../../components/MissionOrbit";
 
 const storyHighlights = [
   {
-    icon: Heart,
     title: "Pets are family",
     text: "Their identity, health, routines, memories and milestones deserve a place of their own.",
   },
   {
-    icon: ShieldCheck,
     title: "Built for recognition",
     text: "Make every pet recognisable, even when they are found alone on the streets.",
   },
   {
-    icon: Users,
     title: "Connected back home",
     text: "Help the people who find a lost pet connect them back to the family that loves them.",
   },
 ];
 
-const image = <img src="/images/paw.png" width={15}
-height={15}/>
+const image = <img src="/images/paw.png" width={25}
+height={25}/>
 
 const stats = [
   {
@@ -230,12 +225,7 @@ export default function About() {
                   className="btn btn-primary"
                 >
                   Read Our Story
- <Image
-                    src="/images/paw-white.png"
-                    alt=""
-                    width={29}
-                    height={29}
-                  />
+ 
                 </a>
 
                 <a
@@ -262,10 +252,7 @@ export default function About() {
                 >
                   <span>PetCard Story</span>
 
-                  <Heart
-                    size={16}
-                    fill="currentColor"
-                  />
+                  
                 </div>
 
                 <div className={styles.storyPet}>
@@ -280,11 +267,7 @@ export default function About() {
                   </div>
                 </div>
 
-                <span
-                  className={styles.storyLabel}
-                >
-                  Brownie
-                </span>
+                
 
                 <h3>
                   One question changed
@@ -523,122 +506,27 @@ export default function About() {
       >
         <div className="container">
           <div className={styles.missionCard}>
-            <div
-              className={
-                styles.missionVisual
-              }
-            >
-              <div
-                className={
-                  styles.missionCircleOuter
-                }
-                aria-hidden="true"
-              />
-
-              <div
-                className={
-                  styles.missionCircleMiddle
-                }
-                aria-hidden="true"
-              />
-
-              <div
-                className={
-                  styles.missionCircle
-                }
-              >
-                <img src="/images/brand/dog.png" width={60}/>
-                <span>PetCard</span>
-              </div>
-
-              <div
-                className={`${styles.missionBadge} ${styles.badgeOne}`}
-              >
-                Identity
-              </div>
-
-              <div
-                className={`${styles.missionBadge} ${styles.badgeTwo}`}
-              >
-                QR
-              </div>
-
-              <div
-                className={`${styles.missionBadge} ${styles.badgeThree}`}
-              >
-                Way Home
-              </div>
-            </div>
-
-            <div
-              className={
-                styles.missionContent
-              }
-            >
-
-
-              <h2
-                className={
-                  styles.sectionTitle
-                }
-              >
+            <div className={styles.missionContent}>
+              <h2 className={styles.sectionTitle}>
                 No pet should be lost without{" "}
                 <span>a way home.</span>
               </h2>
 
-              <p>
-                We’re building PetCard with one simple
-                belief: no pet should be lost without a
-                way home.
-              </p>
+              <div className={styles.missionDescription}>
+                <p>
+                  We’re building PetCard with one simple belief: no pet
+                  should be lost without a way home.
+                </p>
 
-              <p>
-                Our goal is to make every pet
-                recognisable, even when they are found
-                alone on the streets so that the people
-                who find them can help them get back to
-                their parents.
-              </p>
-
-              <div
-                className={
-                  styles.missionPoints
-                }
-              >
-                {storyHighlights.map(
-                  ({
-                    icon: Icon,
-                    title,
-                    text,
-                  }) => (
-                    <div
-                      className={
-                        styles.missionPoint
-                      }
-                      key={title}
-                    >
-                      <div
-                        className={
-                          styles.missionPointIcon
-                        }
-                      >
-                        <Icon size={19} />
-                      </div>
-
-                      <div>
-                        <strong>
-                          {title}
-                        </strong>
-
-                        <span>
-                          {text}
-                        </span>
-                      </div>
-                    </div>
-                  )
-                )}
+                <p>
+                  Our goal is to make every pet recognisable, even when they
+                  are found alone on the streets so that the people who find
+                  them can help them get back to their parents.
+                </p>
               </div>
             </div>
+
+        <MissionOrbit/>
           </div>
         </div>
       </section>
@@ -656,12 +544,7 @@ export default function About() {
               styles.closingCard
             }
           >
-            <Sparkles
-              className={
-                styles.closingSparkle
-              }
-              size={28}
-            />
+          
 
             <Image
               className={
@@ -743,7 +626,30 @@ export default function About() {
           {/* ================= STORE BADGES ================= */}
 
           <div className={styles.finalButtons}>
-            {storeBadges}
+
+            <button
+  type="button"
+  className="btn btn-outline"
+  onClick={() => {
+    document
+      .getElementById("our-story")
+      ?.scrollIntoView({ behavior: "smooth" });
+  }}
+>
+  What Drives Us
+</button>
+
+<button
+  type="button"
+  className="btn btn-outline"
+  onClick={() => {
+    document
+      .getElementById("download-app")
+      ?.scrollIntoView({ behavior: "smooth" });
+  }}
+>
+  Join the PETCARD Journey
+</button>
           </div>
 
         </div>

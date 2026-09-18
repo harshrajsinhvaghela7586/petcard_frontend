@@ -73,7 +73,7 @@
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 18px;
   margin-bottom: 25px;
 }
@@ -256,7 +256,7 @@
 
 .tableScroll table {
   width: 100%;
-  min-width: 1000px;
+  min-width: 1100px;
   border-collapse: collapse;
 }
 
@@ -360,6 +360,31 @@
   color: #6e625d;
   background: #f5f2f0;
 }
+
+/* =========================================================
+   REVIEW / APPROVAL STATUS
+========================================================= */
+
+.reviewBadge {
+  width: max-content; padding: 7px 10px; display: inline-flex;
+  align-items: center; justify-content: center; border-radius: 999px;
+  font-size: 11px; font-weight: 700;
+}
+.pendingReview { color: #9a6500; background: #fff5d9; }
+.approvedReview { color: #17834e; background: #eaf8f0; }
+.rejectedReview { color: #b33a32; background: #fff0ef; }
+.actions button:disabled { opacity: 0.5; cursor: wait; }
+.actions .approveAction { color: #17834e; }
+.actions .approveAction:hover { color: #17834e; background: #eaf8f0; border-color: #bfe7d0; }
+.actions .rejectAction { color: #d94c43; }
+.actions .rejectAction:hover { color: #d94c43; background: #fff0ef; border-color: #f1c8c4; }
+.rejectFooterButton, .approveFooterButton {
+  min-height: 43px; padding: 0 18px; display: inline-flex; align-items: center;
+  justify-content: center; gap: 7px; border-radius: 10px; font-weight: 700; cursor: pointer;
+}
+.rejectFooterButton { color: #d94c43; background: #fff0ef; border: 1px solid #f1c8c4; }
+.approveFooterButton { color: #fff; background: #17834e; border: 1px solid #17834e; }
+.rejectFooterButton:disabled, .approveFooterButton:disabled { opacity: .6; cursor: not-allowed; }
 
 .statusButton {
   padding: 7px 10px;
@@ -925,170 +950,42 @@
 }
 
 /* =========================================================
-   ARTICLE SECTIONS
+   JODIT EDITOR
 ========================================================= */
 
-.sectionsList {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 18px;
+.editorField {
+  width: 100%;
 }
 
-.articleSectionCard {
-  padding: 18px;
-  background: #fffaf6;
+.joditWrapper {
+  width: 100%;
+  overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 15px;
-}
-
-.sectionCardHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.sectionCardHeader strong {
-  color: var(--orange);
-  font-size: 12px;
-}
-
-.sectionCardHeader button {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #d34d43;
-  background: transparent;
-  border: 0;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.paragraphs {
-  margin-top: 15px;
-}
-
-.paragraphRow {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.removeSmallButton {
-  width: 35px;
-  height: 35px;
-  flex: 0 0 35px;
-  margin-bottom: 4px;
-  display: grid;
-  place-items: center;
-  color: #d34d43;
+  border-radius: 12px;
   background: var(--white);
-  border: 1px solid #f0d1ce;
-  border-radius: 9px;
-  cursor: pointer;
 }
 
-.addInlineButton,
-.addSectionButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  color: var(--orange);
-  background: transparent;
-  border: 0;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
+.joditWrapper :global(.jodit-container) {
+  border: 0 !important;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.addSectionButton {
-  width: 100%;
-  min-height: 45px;
-  margin-top: 15px;
-  border: 1px dashed rgba(255, 122, 0, 0.45);
-  border-radius: 11px;
-  background: #fffaf5;
+.joditWrapper :global(.jodit-workplace) {
+  min-height: 520px;
 }
 
-/* =========================================================
-   TAKEAWAYS
-========================================================= */
-
-.takeawayList {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  margin-bottom: 11px;
-}
-
-.takeawayRow {
-  display: grid;
-  grid-template-columns: 32px 1fr 35px;
-  align-items: center;
-  gap: 8px;
-}
-
-.takeawayRow > span {
-  width: 32px;
-  height: 32px;
-  display: grid;
-  place-items: center;
-  color: var(--orange);
-  background: var(--orange-soft);
-  border-radius: 9px;
-  font-size: 10px;
-  font-weight: 800;
-}
-
-.takeawayRow input {
-  width: 100%;
-  height: 42px;
-  padding: 0 12px;
+.joditWrapper :global(.jodit-wysiwyg) {
   color: var(--text);
-  background: #fffdfb;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  outline: none;
-  font: inherit;
-  font-size: 12px;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
-.takeawayRow input:focus {
-  border-color: rgba(255, 122, 0, 0.65);
-}
-
-.takeawayRow button {
-  width: 35px;
-  height: 35px;
-  display: grid;
-  place-items: center;
-  color: #d34d43;
-  background: var(--white);
-  border: 1px solid #f0d1ce;
-  border-radius: 9px;
-  cursor: pointer;
-}
-
-.noteField {
-  margin-top: 20px;
-}
-
-.noteField label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.noteField label span {
-  color: #a4958d;
-  font-size: 10px;
-  font-weight: 500;
+.viewsCell {
+  color: var(--text);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 /* =========================================================
@@ -1264,6 +1161,10 @@
     flex-basis: auto;
   }
 
+  .joditWrapper :global(.jodit-workplace) {
+    min-height: 420px;
+  }
+
   .overlay {
     padding: 15px;
   }
@@ -1329,12 +1230,8 @@
     height: 180px;
   }
 
-  .paragraphRow {
-    align-items: stretch;
-  }
-
-  .removeSmallButton {
-    margin-top: 25px;
+  .joditWrapper :global(.jodit-workplace) {
+    min-height: 320px;
   }
 }
 

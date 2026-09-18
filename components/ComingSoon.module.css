@@ -622,7 +622,6 @@
 
   display: block;
 
-  object-fit: cover;
 
   object-position: center center;
 
@@ -1099,11 +1098,7 @@
   }
 
   .imageWrapper {
-    width:
-      min(
-        100%,
-        430px
-      );
+   
 
     height:
       370px;
@@ -1293,7 +1288,7 @@
 
   .imageWrapper {
     width:
-      820px;
+      870px;
 
     height:
       680px;
@@ -1408,8 +1403,7 @@
   }
 
   .imageWrapper {
-    width:
-      960px;
+  
 
     height:
       770px;
@@ -1535,8 +1529,7 @@
   }
 
   .imageWrapper {
-    width:
-      800px;
+   
 
     height:
       900px;
@@ -1664,8 +1657,7 @@
   }
 
   .imageWrapper {
-    width:
-      1650px;
+    
 
     height:
       1220px;
