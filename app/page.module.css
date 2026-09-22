@@ -4898,7 +4898,8 @@ height: 250px;
   }
 
   .storeText small {
-    font-size: 7px;
+    font-size: 8px;
+    text-align: left;
   }
 
   .storeText b {
@@ -10870,5 +10871,210 @@ overflow: visible;
 
   .finalDownloadCard:hover {
     transform: none !important;
+  }
+}
+
+/* =========================================================
+   PHONE MOCKUP — IPHONE STYLE FINAL FIX
+   Only phone frame + top + bottom navigation
+   ========================================================= */
+
+/* -------------------------
+   Slim iPhone-style frame
+   ------------------------- */
+
+.phoneShell {
+  border-width: 3px !important;
+  padding: 4px !important;
+  border-radius: 36px !important;
+}
+
+
+/* -------------------------
+   Dynamic Island
+   ------------------------- */
+
+.phoneSpeaker {
+  position: absolute !important;
+  z-index: 20 !important;
+
+  top: 8px !important;
+  left: 50% !important;
+
+  width: 72px !important;
+  height: 18px !important;
+
+  border-radius: 999px !important;
+
+  background: #080b12 !important;
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.18),
+    inset 0 1px 1px rgba(255, 255, 255, 0.04);
+}
+
+
+/* -------------------------
+   Hide "PetCard" from top
+   Keep 9:41 + right status
+   ------------------------- */
+
+.phoneStatus span:nth-child(2) {
+  display: none !important;
+}
+
+
+/* -------------------------
+   Keep status safely below
+   Dynamic Island
+   ------------------------- */
+
+.phoneStatus {
+  position: relative;
+  z-index: 5;
+
+  padding-top: 2px;
+}
+
+
+/* -------------------------
+   Phone screen
+   ------------------------- */
+
+.phoneScreen {
+  position: relative !important;
+  overflow: hidden !important;
+
+  border-radius: 31px !important;
+}
+
+
+/* -------------------------
+   Bottom Navigation
+   ALWAYS STAY AT BOTTOM
+   ------------------------- */
+
+.phoneBottomNav {
+  position: absolute !important;
+
+  left: 7px !important;
+  right: 7px !important;
+  bottom: 7px !important;
+
+  z-index: 15 !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+
+  padding: 6px 3px 3px !important;
+
+  border-top: 1px solid #eee3da !important;
+
+  background: rgba(255, 253, 250, 0.97) !important;
+}
+
+
+/* Keep nav items centered */
+
+.phoneBottomNav span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #9a9089;
+  font-size: 11px;
+  line-height: 1;
+  text-align: center;
+}
+
+.phoneBottomNav span.active {
+  color: var(--orange);
+}
+
+.phoneBottomNav small {
+  display: block;
+  margin-top: 2px;
+  font-size: 5px;
+  line-height: 1;
+}
+
+
+/* =========================================================
+   SMALL PHONE — same iPhone treatment
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .phoneShell {
+    border-width: 2px !important;
+    padding: 3px !important;
+    border-radius: 30px !important;
+  }
+
+  .phoneScreen {
+    border-radius: 26px !important;
+  }
+
+  .phoneSpeaker {
+    top: 8px !important;
+    width: 48px !important;
+    height: 13px !important;
+    border-radius: 999px !important;
+  }
+
+  .phoneBottomNav {
+    left: 5px !important;
+    right: 5px !important;
+    bottom: 5px !important;
+
+    padding: 4px 2px 2px !important;
+  }
+
+  .phoneBottomNav span {
+    font-size: 8px;
+  }
+
+  .phoneBottomNav small {
+    font-size: 4px;
+    margin-top: 1px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .phoneShell {
+    border-width: 2px !important;
+    padding: 3px !important;
+    border-radius: 28px !important;
+  }
+
+  .phoneScreen {
+    border-radius: 24px !important;
+  }
+
+  .phoneSpeaker {
+    top: 2px !important;
+    width: 44px !important;
+    height: 12px !important;
+  }
+
+  .phoneBottomNav {
+    left: 4px !important;
+    right: 4px !important;
+    bottom: 4px !important;
+  }
+
+  .phoneBottomNav span {
+    font-size: 7px;
+  }
+
+  .phoneBottomNav small {
+    font-size: 3.5px;
   }
 }

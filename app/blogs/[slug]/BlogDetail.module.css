@@ -1911,6 +1911,7 @@
     margin-left:
       auto;
   }
+ 
 
   .articleIntro {
     font-size:
@@ -2107,7 +2108,14 @@
   }
 }
 
-
+@media (max-width:480px) {
+  .shareCard span{
+    margin-right:10px;
+  }
+  .shareCard button{
+    margin-left:10px;
+  }
+}
 /* =========================================================
    SMALL MOBILE
    ========================================================= */
@@ -2137,7 +2145,7 @@
     font-size:
       18px;
   }
-
+ 
   .relatedHeader h2 {
     font-size:
       27px;

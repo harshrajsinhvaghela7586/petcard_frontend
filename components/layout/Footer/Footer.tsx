@@ -77,7 +77,8 @@ export default function Footer() {
 
               {/* FACEBOOK */}
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61592409427533"
+                target="_blank"
                 aria-label="Facebook"
                 className={`${styles.socialLink} ${styles.facebook}`}
               >
@@ -86,7 +87,8 @@ export default function Footer() {
 
               {/* LINKEDIN */}
               <a
-                href="#"
+                href="https://www.linkedin.com/company/petcardin/"
+                 target="_blank"
                 aria-label="LinkedIn"
                 className={`${styles.socialLink} ${styles.linkedin}`}
               >

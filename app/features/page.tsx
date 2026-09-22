@@ -2896,7 +2896,7 @@ const [newsletterError, setNewsletterError] =
   >
     <div className={styles.finalPets}>
       <Image
-        src="/images/FeatureFooter.png"
+        src="/images/AboutFooter.png"
         alt="PETCARD pets"
         fill
         priority

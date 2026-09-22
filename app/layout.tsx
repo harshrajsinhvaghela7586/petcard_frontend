@@ -21,10 +21,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <SiteEnhancements />
+                
 
                 <ConditionalSiteLayout>
                     {children}
+
                 </ConditionalSiteLayout>
             </body>
         </html>
