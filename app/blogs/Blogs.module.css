@@ -444,8 +444,13 @@ margin-left:12px;
   border: 1px solid #eadfd6;
   border-radius: 16px;
 
-  background: #fff;
+  border-color: #ffd5aa;
 
+  background: #fff9f2;
+
+  box-shadow:
+    0 8px 18px
+      rgba(255, 122, 0, 0.08);
   color: var(--text);
 
   cursor: pointer;
@@ -471,24 +476,14 @@ margin-left:12px;
       rgba(255, 122, 0, 0.1);
 }
 
-.categoryButtonActive {
-  border-color: #ffd5aa;
-
-  background: #fff9f2;
-
-  box-shadow:
-    0 8px 18px
-      rgba(255, 122, 0, 0.08);
-}
-
 .categoryButton small {
   display: block;
 
   margin: 0;
 
-  color: #6c5a4d;
+  color: var(--orange);
 
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
 
   line-height: 1.2;
@@ -496,9 +491,7 @@ margin-left:12px;
   white-space: nowrap;
 }
 
-.categoryButtonActive small {
-  color: var(--orange);
-}
+
 
 
 /* =========================================================
@@ -2202,10 +2195,9 @@ margin-left:-10px !important;
   transform: scale(1.05);
 }
 
-.readImage span {
+.span1 {
   position: absolute;
 
-  left: 10px;
   top: 10px;
 
   padding: 6px 9px;
@@ -2512,7 +2504,7 @@ margin-left:-10px !important;
   }
 
   .heroContent h1 {
-    font-size: clamp(39px, 10vw, 52px);
+     font-size: clamp(46px, 8vw, 64px);
   }
   .heroContent > p {
     margin-inline: auto;
@@ -2700,11 +2692,11 @@ margin-left:-10px !important;
   }
 
   .heroContent h1 {
-    font-size: 37px;
+     font-size: clamp(40px, 11vw, 56px);
   }
 
   .heroContent > p {
-    font-size: 11px;
+    font-size: 14px;
   }
 
   .searchBar input {
@@ -2853,7 +2845,7 @@ margin-left:-10px !important;
 
 @media (max-width: 360px) {
   .heroContent h1 {
-    font-size: 33px;
+    font-size: clamp(36px, 10.8vw, 48px);
   }
 
   .categories {
@@ -3418,9 +3410,9 @@ margin-left:-10px !important;
 
   margin: 0;
 
-  color: inherit;
+  color: var(--orange);
 
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
 
   line-height: 1.2;

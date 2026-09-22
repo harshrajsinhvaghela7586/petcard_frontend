@@ -3863,7 +3863,7 @@ color: var(--text);
   }
 
   .heroTitle {
-    font-size: 45px;
+    font-size: clamp(46px, 8vw, 64px);
   }
 
   .heroDescription {
@@ -4068,8 +4068,7 @@ color: var(--text);
   }
 
   .heroTitle {
-    font-size: 39px;
-
+    font-size: clamp(46px, 8vw, 64px);
     letter-spacing: -1.5px;
   }
 
@@ -4085,7 +4084,7 @@ color: var(--text);
 
     margin-inline: auto;
 
-    font-size: 10px;
+    font-size: 14px;
 
     line-height: 1.55;
   }
@@ -4384,15 +4383,14 @@ color: var(--text);
   }
 
   .heroTitle {
-    font-size: 34px;
-
+     font-size: clamp(36px, 10.8vw, 48px);
     letter-spacing: -1.2px;
   }
 
   .heroDescription {
     max-width: 290px;
 
-    font-size: 9px;
+    font-size: 12px;
   }
 
   .heroPets {
@@ -5295,7 +5293,6 @@ color: var(--text);
 
   gap: 5px;
 
-  border-radius: 8px;
 }
 
 
@@ -5870,7 +5867,6 @@ overflow: visible;
     padding:
       5px 8px;
 
-    border-radius: 16px;
   }
 
 
@@ -6069,8 +6065,7 @@ overflow: visible;
 
     gap: 4px !important;
 
-    border-radius:
-      7px !important;
+
 
     overflow: hidden;
   }
@@ -6233,7 +6228,6 @@ overflow: visible;
     padding:
       4px 7px;
 
-    border-radius: 14px;
   }
 
 
@@ -6319,8 +6313,7 @@ overflow: visible;
 
     gap: 3px !important;
 
-    border-radius:
-      6px !important;
+  
   }
 
 
@@ -7844,6 +7837,10 @@ overflow: visible;
 
 @media (max-width: 768px) {
 
+  .finalDownloadCard{
+    margin-top:40px;
+    overflow: visible;
+  }
   .finalButtons {
     width: 100% !important;
 
@@ -7872,7 +7869,7 @@ overflow: visible;
     line-height: 1 !important;
 
    
-
+border-radius: 6px !important;
     margin: 0 !important;
 
     font-size: 8px !important;

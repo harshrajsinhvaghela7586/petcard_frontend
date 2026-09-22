@@ -1752,11 +1752,7 @@ export default function Blogs() {
                         />
                       )}
 
-                      <span>
-                        {getCategoryLabel(
-                          post.category
-                        )}
-                      </span>
+                     
                     </div>
 
                     <div
@@ -1764,6 +1760,12 @@ export default function Blogs() {
                         styles.readContent
                       }
                     >
+                       <span className={styles.span1}>
+                        {getCategoryLabel(
+                          post.category
+                        )}
+                      </span>
+
                       <h3>
                         {post.title}
                       </h3>

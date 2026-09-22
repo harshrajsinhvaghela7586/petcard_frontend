@@ -6,6 +6,7 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import LaunchBanner from "./LaunchBanner/LaunchBanner";
 import ComingSoonPage from "../../app/comming-soon/page";
+import Chatbot from "../chatbot/Chatbot";
 
 interface ConditionalSiteLayoutProps {
     children: React.ReactNode;
@@ -29,7 +30,7 @@ export default function ConditionalSiteLayout({
             <Header />
 
             <ComingSoonPage />
-
+<Chatbot/>
             <main>{children}</main>
 
             <Footer />

@@ -133,7 +133,7 @@
   color: var(--text);
 
 
- font-size: clamp(34px, 4.3vw, 58px);
+ font-size: 74px;
   line-height: 1.03;
   letter-spacing: -0.045em;
 }
@@ -988,6 +988,7 @@
    ========================================================= */
 
 @media (max-width: 760px) {
+
   .container {
     width:
       min(
@@ -1003,9 +1004,10 @@
     gap:
       10px;
 
+   
     padding:
-      45px 0
-      15px;
+      0px 0
+      0px;
   }
 
   .content {
@@ -1024,13 +1026,7 @@
       auto;
   }
 
-  .content h1 {
-    font-size:
-      42px;
-
-    letter-spacing:
-      -1.4px;
-  }
+ 
 
   .titleHeart {
     width:
@@ -1099,9 +1095,12 @@
 
   .imageWrapper {
    
-
     height:
       370px;
+  }
+
+  .imageWrapper img{
+    object-fit: cover;
   }
 
   .floatingPawOne {

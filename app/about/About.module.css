@@ -169,7 +169,7 @@
 
   background: var(--orange-soft);
 
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 800;
 
   line-height: 1;
@@ -244,7 +244,7 @@
 
   color: var(--muted);
 
-  font-size: 15px;
+  font-size: 14px;
 
   line-height: 1.8;
 
@@ -781,7 +781,7 @@
   color:
     var(--muted);
 
-  font-size: 13px;
+  font-size: 14px;
 
   line-height: 1.8;
 }
@@ -2408,7 +2408,7 @@ margin-bottom:100px;
   text-align: center;
 
   font-size:
-    clamp(40px, 4.4vw, 68px);
+   58px;
 
   line-height: 1.02;
 
@@ -4334,12 +4334,7 @@ margin-bottom:100px;
   }
 
   .heroTitle {
-    font-size:
-      clamp(
-        37px,
-        9vw,
-        53px
-      );
+    font-size: clamp(46px, 8vw, 64px);
 
     letter-spacing:
       -1.7px;
@@ -4477,11 +4472,11 @@ margin-bottom:100px;
   }
 
   .heroTitle {
-    font-size: 34px;
+      font-size: clamp(40px, 11vw, 56px);
   }
 
   .heroDescription {
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .heroActions {
@@ -6571,7 +6566,7 @@ width: 200px !important;
 
 @media (max-width: 768px) {
   .featuresSection { min-height: auto; padding-top: 34px; }
-  .heading h1 { font-size: clamp(33px, 8vw, 48px); }
+  .heading h1 {  font-size: clamp(50px, 6vw, 66px); }
   .heading p { max-width: 520px; font-size: 11px; }
   .orbitStage {
     height: clamp(570px, 118vw, 760px);
@@ -6609,7 +6604,7 @@ width: 200px !important;
   }
 
   .heading h1 {
-    font-size: clamp(28px, 8.5vw, 37px);
+     font-size: clamp(46px, 8vw, 64px);
   }
 
   .heading p {

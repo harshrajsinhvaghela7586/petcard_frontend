@@ -145,7 +145,7 @@
 
   color: var(--text);
 
-  font-size: clamp(48px, 5vw, 76px);
+  font-size: clamp(48px, 5.4vw, 76px);
 
   line-height: 1.02;
 
@@ -1065,7 +1065,7 @@
   }
 
   .heroContent h1 {
-    font-size: clamp(38px, 9vw, 55px);
+     font-size: clamp(46px, 8vw, 64px);
 
     letter-spacing: -1.7px;
   }
@@ -1151,11 +1151,11 @@
   }
 
   .heroContent h1 {
-    font-size: 34px;
+    font-size: clamp(40px, 11vw, 56px);
   }
 
   .heroContent p {
-    font-size: 10px;
+    font-size: 14px;
 
     line-height: 1.7;
   }
@@ -1326,7 +1326,7 @@
 
 @media (max-width: 360px) {
   .heroContent h1 {
-    font-size: 30px;
+    font-size: clamp(36px, 10.8vw, 48px);
   }
 
   .heroVisual {
@@ -3108,8 +3108,8 @@ overflow: visible;
   /* BIG PET */
   .finalPets {
     width: 100%;
-    height: 174px;
-
+    height: 119px;
+margin-left:-25px;
     transform:
       scaleX(1.08);
 
@@ -3119,12 +3119,12 @@ overflow: visible;
 
 
   .finalPetsImage {
-    width: 80% !important;
+    width: 100% !important;
     height: 100% !important;
 
 
     transform:
-      translateY(32px)
+      translateY(0px)
       scale(1.18);
 
     transform-origin:
@@ -3194,6 +3194,7 @@ overflow: visible;
   font-size:9px;
   min-height: 36px !important;
 }
+
   .finalButtons .storeIconImage {
     width: 14px !important;
     height: 17px !important;
