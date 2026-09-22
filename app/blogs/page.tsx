@@ -938,7 +938,7 @@ export default function Blogs() {
                       category.title
                     }
                     type="button"
-                    className={`${styles.categoryButton} `}
+                    className={styles.categoryButton}
                   >
 
                     <small>

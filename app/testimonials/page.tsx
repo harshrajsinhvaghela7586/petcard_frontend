@@ -812,7 +812,7 @@ export default function Testimonials() {
   }}
 >
   Write Your Review
-  <Pen size={17} />
+  <Pen className={styles.PenIcon} />
 </Link>
 
             <Link

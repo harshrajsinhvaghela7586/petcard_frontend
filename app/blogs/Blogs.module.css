@@ -3365,7 +3365,7 @@ margin-left:-10px !important;
   border: 1px solid #eadfd6;
   border-radius: 18px;
 
-  background: #fff;
+  background: var(--soft);
 
   color: var(--text);
 
@@ -3382,7 +3382,7 @@ margin-left:-10px !important;
 .categoryButton:hover {
   border-color: #ffc68f;
 
-  background: #fffaf5;
+  background: var(--soft);
 
   color: var(--orange);
 

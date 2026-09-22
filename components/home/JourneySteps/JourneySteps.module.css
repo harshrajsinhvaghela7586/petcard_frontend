@@ -1279,6 +1279,13 @@
   }
 }
 
+@media (max-width:480px) {
+    .pawText {
+    left: 22%;
+    width: 25%;
+  }
+}
+
 @media (min-width: 2560px) {
   .container {
     width: min(
