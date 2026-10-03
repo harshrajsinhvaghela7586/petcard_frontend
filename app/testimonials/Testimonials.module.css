@@ -3235,3 +3235,19 @@ overflow: visible;
     font-size: 11px;
   }
 }
+@media (max-width: 480px) {
+  .PenIcon {
+    width: 10px !important;
+    height: 10px !important;
+    margin-left:-5px;
+    flex-shrink: 0;
+  }
+}
+@media (min-width: 381px) and (max-width: 480px) {
+  .PenIcon {
+    width: 10px;
+    height: 10px;
+    margin-left:-5px;
+    flex-shrink: 0;
+  }
+}
