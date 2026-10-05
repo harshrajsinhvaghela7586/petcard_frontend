@@ -1359,7 +1359,14 @@
     min-height:
       800px;
   }
+ .imageWrapper {
+    width: 100%;
+    height: 770px;
+  }
 
+  .imageWrapper img {
+    object-fit: cover;
+  }
   .content h1 {
     font-size:
       101px;
@@ -1493,6 +1500,14 @@
       20px;
   }
 
+   .imageWrapper {
+    width: 100%;
+    height: 900px;
+  }
+
+  .imageWrapper img {
+    object-fit: cover;
+  }
   .launchText {
     font-size:
       26px;

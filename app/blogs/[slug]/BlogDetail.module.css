@@ -2237,7 +2237,7 @@
    2K
    ========================================================= */
 
-@media (min-width: 1920px) {
+@media (min-width: 1900px) {
   .container {
     width:
       min(
@@ -2269,7 +2269,7 @@
 
   .meta > div {
     font-size:
-      10px;
+      14px;
   }
 
   .heroImageWrap {
@@ -2321,12 +2321,12 @@
 
   .articleBlock h2 {
     font-size:
-      35px;
+      45px;
   }
 
   .articleBlock p {
     font-size:
-      16px;
+      26px;
   }
 
   .relatedSection {
