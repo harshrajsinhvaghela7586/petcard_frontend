@@ -12819,3 +12819,282 @@ overflow: visible;
     transition: none !important;
   }
 }
+
+
+/* =========================================================
+   FEATURES — FINAL CTA FIX (1920 – 2559)
+   Add at the VERY END of the file
+   ========================================================= */
+
+@media (min-width: 1920px) and (max-width: 2559px) {
+
+  .finalDownloadCard {
+    height: 150px;
+    min-height: 150px;
+
+    grid-template-columns: 330px minmax(0, 1fr) 520px;
+    gap: 34px;
+
+    padding: 6px 30px;
+    border-radius: 26px;
+  }
+
+  /* ---------- PETS ---------- */
+  .finalPets {
+    height: 180px;
+    margin-top:-30px;
+  }
+
+  .finalPetsImage {
+    transform:
+      translateX(55px)
+      translateY(-52px)
+      scale(1.5);
+  }
+
+  /* ---------- TEXT ---------- */
+  .finalCopy {
+    transform: none !important;
+  }
+
+  .finalCopy h2 {
+    font-size: 40px;
+    line-height: 1.08;
+    transform: none;
+  }
+
+  .finalCopy p {
+    max-width: 760px;
+    margin: 10px auto 0;     /* h2 ke exact neeche center */
+    font-size: 17px;
+    line-height: 1.45;
+    transform: none;
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .finalButtons {
+    width: 100% !important;
+    margin: 0 !important;
+    transform: none !important;
+    gap: 14px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .finalButtons > * {
+    flex: 1 1 0 !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  .finalButtons .btn,
+  .finalButtons a,
+  .finalButtons button {
+    height: 58px !important;
+    min-height: 58px !important;
+    padding: 0 18px !important;
+
+    font-size: 18px !important;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap !important;   /* 2 line me nahi tootega */
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px !important;
+  }
+}
+
+/* =========================================================
+   FEATURES — FONT SIZE BOOST (1920 – 2559 only)
+   Add at the VERY END of the file
+   ========================================================= */
+
+@media (min-width: 1920px) and (max-width: 2559px) {
+
+  /* ---------- OVERVIEW CARDS ---------- */
+  .overviewItem { min-height: 190px; padding: 24px; }
+  .overviewLabel { font-size: 20px; }
+  .overviewNo { font-size: 14px; }
+
+  /* ---------- COMMON PANEL TITLES ---------- */
+  .panelTitle { font-size: 15px; }
+  .viewAll { font-size: 11px; }
+
+  /* ---------- 01 IDENTITY ---------- */
+  .identityBottomCard strong { font-size: 18px; }
+  .identityBottomCard p { font-size: 13px; max-width: 300px; }
+  .identityBadge { font-size: 12px; }
+  .identityBadge small { font-size: 10px; }
+
+  .idHeader { font-size: 10px; }
+  .idProfile strong { font-size: 12px; }
+  .idProfile small { font-size: 8px; }
+  .idCardHero span { font-size: 8px; }
+  .idCardHero strong { font-size: 11px; }
+  .idEmergency strong { font-size: 9px; }
+  .idGuardians small { font-size: 6px; }
+  .idGuardians strong { font-size: 8px; }
+  .phoneAction { font-size: 9px; }
+  .phoneBottom { font-size: 6px; }
+
+  /* ---------- 02 DAILY ---------- */
+  .dailyProfile strong { font-size: 10px; }
+  .dailyProfile small { font-size: 7px; }
+  .dailyDateRow { font-size: 9px; }
+  .dailyTaskRow strong { font-size: 8px; }
+  .dailyTaskRow small { font-size: 6px; }
+  .dailyReminder small { font-size: 6px; }
+  .dailyReminder strong { font-size: 8px; }
+  .dailyReminder > div > span { font-size: 6px; }
+  .dailyNav { font-size: 6px; }
+
+  .calendarMonth { font-size: 14px; }
+  .calendarMonth strong { font-size: 15px; }
+  .calendarGrid { font-size: 12px; }
+  .calendarToday { width: 30px; height: 30px; font-size: 12px; }
+  .overviewStats strong { font-size: 18px; }
+  .overviewStats small { font-size: 13px; }
+  .activityRow strong { font-size: 14px; }
+  .activityRow small { font-size: 12px; }
+
+  /* ---------- 03 HEALTH ---------- */
+  .healthTopBar { font-size: 10px; }
+  .healthPet strong { font-size: 11px; }
+  .healthPet small { font-size: 9px; }
+  .healthTabs { font-size: 9px; }
+  .healthMini small { font-size: 6px; }
+  .healthMini strong { font-size: 8px; }
+  .healthUpcoming > strong { font-size: 9px; }
+  .healthUpcoming strong { font-size: 9px; }
+  .healthUpcoming small { font-size: 6px; }
+  .healthUpcoming em { font-size: 6px; }
+  .healthAddButton { font-size: 8px; }
+
+  .vaccineRow strong { font-size: 13px; }
+  .vaccineRow small { font-size: 10px; }
+  .vaccineRow em { font-size: 11px; }
+  .chartValue { font-size: 28px; }
+  .chartValue small { font-size: 11px; }
+  .alertRow strong { font-size: 13px; }
+  .alertRow small { font-size: 10px; }
+  .alertRow button { font-size: 10px; min-height: 28px; padding: 0 10px; }
+  .healthAsideTip strong { font-size: 14px; }
+  .healthAsideTip p { font-size: 11px; }
+
+  /* ---------- 04 SMART ---------- */
+  .smartKnowledge strong { font-size: 14px; }
+  .smartKnowledge p { font-size: 11px; }
+
+  .chatHeader > div:nth-child(2) strong { font-size: 10px; }
+  .chatHeader > div:nth-child(2) small { font-size: 7px; }
+  .chatQuestion { font-size: 8px; }
+  .chatAnswer { font-size: 7.5px; }
+  .chatAnswer > div:last-child > strong { font-size: 7.5px; }
+  .aiRecommendation strong { font-size: 7px; }
+  .aiRecommendation small { font-size: 6px; }
+  .aiSuggestions span { font-size: 6px; }
+  .aiInput { font-size: 7px; }
+  .smartPhoneNav { font-size: 6px; }
+
+  .smartBreedCard span { font-size: 22px; }
+  .smartBreedCard strong { font-size: 20px; }
+  .smartBreedCard p { font-size: 13px; }
+  .smartBreedCard button { font-size: 13px; padding: 9px 13px; }
+  .guideCard strong { font-size: 12px; }
+  .guideCard small { font-size: 10px; }
+  .askPanel button { font-size: 12px; padding: 11px; }
+
+  /* ---------- 05 MEMORIES ---------- */
+  .galleryHeader { font-size: 14px; }
+  .galleryTabs button { font-size: 11px; min-height: 34px; }
+
+  .milestoneItem strong { font-size: 11px; }
+  .milestoneItem small { font-size: 9.5px; }
+  .progressMetrics strong { font-size: 15px; }
+  .progressMetrics small { font-size: 10px; }
+  .progressMetrics span { font-size: 10px; }
+  .scoreCircle strong { font-size: 26px; }
+  .scoreCircle small { font-size: 11px; }
+  .scoreList > div { font-size: 12px; }
+  .scoreList strong { font-size: 11px; }
+  .memoryMessage strong { font-size: 14px; }
+  .memoryMessage p { font-size: 11px; }
+
+  /* ---------- 06 REWARDS ---------- */
+  .rewardTop strong { font-size: 10px; }
+  .rewardProfile strong { font-size: 11px; }
+  .rewardProfile small { font-size: 7px; }
+  .rewardLevel strong { font-size: 10px; }
+  .rewardLevel span { font-size: 7px; }
+  .rewardStats strong { font-size: 11px; }
+  .rewardStats small { font-size: 6px; }
+  .missionHead strong { font-size: 8px; }
+  .missionHead span { font-size: 7px; }
+  .rewardMission > div:not(.missionHead) strong { font-size: 7.5px; }
+  .rewardMission > div:not(.missionHead) small { font-size: 6px; }
+  .rewardPhoneBottom { font-size: 6px; }
+
+  .weekRow small { font-size: 11px; }
+  .weekRow > div > span { width: 36px; height: 36px; }
+  .streakMessage strong { font-size: 14px; }
+  .streakMessage small { font-size: 11px; }
+  .achievementGrid strong { font-size: 11px; }
+  .achievementGrid small { font-size: 10px; }
+  .shopItem strong { font-size: 12px; }
+  .shopItem small { font-size: 10px; }
+  .rewardMessage strong { font-size: 14px; }
+  .rewardMessage p { font-size: 11px; }
+
+  /* ---------- 07 PETMOJI ---------- */
+  .editorHeader { font-size: 10px; }
+  .editorTools button { font-size: 6px; }
+  .editorSectionHead strong { font-size: 8px; }
+  .editorSectionHead span { font-size: 7px; }
+  .editorPreviewText { font-size: 8px; }
+
+  .previewSticker { font-size: 11px; }
+  .themeRow small { font-size: 10px; }
+  .petmojiBottomMessage strong { font-size: 14px; }
+  .petmojiBottomMessage p { font-size: 11px; }
+
+  /* ---------- 08 FUN ---------- */
+  .funPhoneHeader { font-size: 9px; }
+  .funPetProfile strong { font-size: 11px; }
+  .funPetProfile small { font-size: 7px; }
+  .funTabs span { font-size: 7px; }
+  .clickerTitle strong { font-size: 9px; }
+  .clickerTitle small { font-size: 6.5px; }
+  .clickCount { font-size: 10px; }
+  .clickerArea > span:last-child { font-size: 6.5px; }
+  .clickerTips strong { font-size: 8px; }
+  .clickerTips span { font-size: 6.5px; }
+  .funNav { font-size: 6px; }
+
+  .clickerSteps strong { font-size: 13px; }
+  .clickerSteps small { font-size: 10px; }
+  .clickerSteps > div > span { width: 28px; height: 28px; font-size: 12px; }
+  .goodBoy strong { font-size: 13px; }
+  .goodBoy span { font-size: 11px; }
+  .whistleCommands strong { font-size: 12px; }
+  .whistleCommands small { font-size: 10px; }
+  .waveButton { font-size: 12px; }
+  .trainingGrid strong { font-size: 11px; }
+  .trainingLevel strong { font-size: 12px; }
+  .trainingLevel small { font-size: 10px; }
+  .trainingLevel button { font-size: 10px; min-height: 30px; padding: 0 10px; }
+
+  /* ---------- HERO PHONE ---------- */
+  .heroPhoneHeader { font-size: 9px; }
+  .heroPetHeader small { font-size: 8px; }
+  .heroPetHeader strong { font-size: 12px; }
+  .heroTodayCard small { font-size: 8px; }
+  .heroTodayCard strong { font-size: 24px; }
+  .heroTask strong { font-size: 9px; }
+  .heroTask small { font-size: 7.5px; }
+  .heroPhoneNav { font-size: 8px; }
+  .heroFloatA, .heroFloatB, .heroFloatC { font-size: 13px; }
+}

@@ -9853,7 +9853,7 @@ overflow: visible;
   .finalPetsImage {
     transform:
       translateX(55px)
-      translateY(-10px)
+      translateY(-40px)
       scale(1.50);
   }
 
@@ -9873,7 +9873,8 @@ overflow: visible;
   }
 
   .finalCopy p {
-    font-size: 11px;
+    font-size: 12px;
+    margin-left:270px;
   }
 
   .finalButtons {

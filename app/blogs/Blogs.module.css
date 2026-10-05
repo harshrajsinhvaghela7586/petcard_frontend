@@ -1937,7 +1937,7 @@ margin-left:12px;
    2K: 1920px+
    ========================================================= */
 
-@media (min-width: 1920px) {
+@media (min-width: 1900px) {
 
   .storyBanner {
     grid-template-columns:
@@ -1953,7 +1953,7 @@ margin-left:12px;
 
   .storyBanner .shareStory {
     grid-template-columns:
-      125px
+      145px
       minmax(230px, 1fr)
       165px;
 
@@ -1962,20 +1962,21 @@ margin-left:12px;
 
   .storyBanner .shareStoryPet,
   .storyBanner .shareStoryPet img {
-    width: 125px;
-    height: 125px;
+    width: 135px;
+    height: 135px;
   }
 
   .storyBanner .shareStoryPet {
-    flex-basis: 125px;
+    flex-basis: 145px;
   }
 
   .storyBanner .shareStory strong {
+    margin-left:-20px;
     font-size: 28px;
   }
 
   .storyBanner .shareStory span {
-    font-size: 10px;
+    font-size: 12px;
 
     max-width: 280px;
   }
@@ -1984,7 +1985,7 @@ margin-left:12px;
     width: 165px;
     min-height: 56px;
 
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .storyBanner .polaroids {
@@ -6436,8 +6437,8 @@ margin-left:80px;
 
   .storyBanner .shareStoryPet,
   .storyBanner .shareStoryPet img {
-    width: 145px;
-    height: 145px;
+    width: 175px;
+    height: 185px;
   }
 
   .storyBanner .shareStory > div:last-child {
@@ -6448,25 +6449,31 @@ margin-left:80px;
   }
 
   .storyBanner .shareStory strong {
-    font-size: 32px;
+    font-size: 36px;
+    margin-left:-30px;
   }
 
   .storyBanner .shareStory span {
-    font-size: 12px;
+    font-size: 14px;
+      margin-left:-30px;
   }
 
   .storyBanner .shareStory a {
     min-height: 60px;
-
+  margin-left:-30px;
     padding: 0 18px;
 
-    font-size: 13px;
+    font-size: 14px;
 
     border-radius: 14px;
   }
-
+.storyBanner .shareStory button{
+    margin-left:-30px;
+    margin-right:20px;
+}
   .storyBanner .polaroids {
     gap: 20px;
+      margin-left:20px;
   }
 }
 
@@ -7163,4 +7170,96 @@ margin-left:80px;
   text-align: center;
 
   font-size: 13px;
+}
+
+/* =========================================================
+   BLOGS — FINAL DOWNLOAD FIX (1920 – 2559)
+   Add at the VERY END of the file
+   ========================================================= */
+
+@media (min-width: 1920px) and (max-width: 2559px) {
+
+  .finalDownloadCard {
+    height: 150px;
+    min-height: 150px;
+
+    grid-template-columns: 330px minmax(0, 1fr) 520px;
+    gap: 34px;
+
+    padding: 6px 30px;
+    border-radius: 26px;
+  }
+
+  /* ---------- PETS ---------- */
+  .finalPets {
+    height: 150px;
+  }
+
+  .finalPetsImage {
+    transform:
+      translateX(55px)
+      translateY(-65px)
+      scale(1.5);
+  }
+
+  /* ---------- TEXT ---------- */
+  .finalCopy {
+    transform: none !important;
+  }
+
+  .finalCopy h2 {
+    font-size: 40px;
+    line-height: 1.08;
+    transform: none;
+  }
+
+  .finalCopy p {
+    max-width: 600px;
+    margin: 10px auto 0;   /* h2 ke exact neeche center */
+    font-size: 17px;
+    line-height: 1.45;
+    transform: none;
+  }
+
+  /* ---------- NEWSLETTER FORM ---------- */
+  .finalDownloadCard .newsletterForm {
+    width: 100% !important;
+    margin: 0 !important;
+    transform: none !important;
+
+    gap: 12px;
+    align-items: center;
+  }
+
+  .finalDownloadCard .newsletterForm input {
+    height: 58px;
+    padding: 0 20px;
+    font-size: 17px;
+    border-radius: 14px;
+  }
+
+  .finalDownloadCard .newsletterForm button {
+    flex: 0 0 auto;
+    height: 58px;
+    min-width: 150px;
+    padding: 0 26px;
+
+    font-size: 18px !important;
+    font-weight: 800;
+    border-radius: 14px;
+  }
+
+  /* success state bhi fit ho */
+  .finalDownloadCard .newsletterSuccess {
+    min-height: 58px;
+    padding: 6px 16px;
+  }
+
+  .finalDownloadCard .newsletterSuccess strong {
+    font-size: 18px;
+  }
+
+  .finalDownloadCard .newsletterSuccess span:not(.successCheck) {
+    font-size: 14px;
+  }
 }
