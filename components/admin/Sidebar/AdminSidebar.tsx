@@ -25,11 +25,7 @@ interface AdminSidebarProps {
 }
 
 const contentItems = [
-    {
-        label: "Hero Slider",
-        href: "/admin/hero-slider",
-        icon: Images,
-    },
+
     {
         label: "FAQs",
         href: "/admin/faqs",

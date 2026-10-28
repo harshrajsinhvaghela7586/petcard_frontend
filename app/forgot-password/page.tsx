@@ -73,7 +73,7 @@ export default function ForgotPasswordPage() {
             );
 
             setTimeout(() => {
-                window.location.href = "/verify-otp";
+               window.location.href = "/verify-otp?flow=reset";
             }, 800);
         } catch (error) {
             console.error(

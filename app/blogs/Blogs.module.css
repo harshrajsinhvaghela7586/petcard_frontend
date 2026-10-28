@@ -465,16 +465,32 @@ margin-left:12px;
 }
 
 .categoryButton:hover {
-  transform: translateY(-3px);
+  transform:
+    translateY(-7px);
 
-  border-color: #ffc98f;
+  border-color:
+    #ffc58d;
 
-  background: #fffaf5;
+  background:
+    var(--accent-soft);
 
   box-shadow:
-    0 8px 20px
-      rgba(255, 122, 0, 0.1);
+    0 0 12px
+      rgba(255,122,0,.10),
+    0 0 26px
+      rgba(255,155,47,.09),
+    0 20px 40px
+      rgba(56,27,14,.09);
 }
+
+.categoryButton:hover::before {
+  transform:
+    scale(1.18);
+
+  opacity:
+    1;
+}
+
 
 .categoryButton small {
   display: block;
@@ -2895,7 +2911,7 @@ margin-left:-10px !important;
 
   .heroDog {
     margin-top:50px;
-    width: 890px !important;
+    width: 970px !important;
     height: 500px !important;
   }
 
@@ -3366,9 +3382,9 @@ margin-left:-10px !important;
   border: 1px solid #eadfd6;
   border-radius: 18px;
 
-  background: var(--soft);
+  background:  var(--soft);
 
-  color: var(--text);
+  color: #000;
 
   cursor: pointer;
 
@@ -3383,15 +3399,13 @@ margin-left:-10px !important;
 .categoryButton:hover {
   border-color: #ffc68f;
 
-  background: var(--soft);
+ 
 
-  color: var(--orange);
+  transform: translateY(-7px);
+  border-color: #ffc98f;
+  background:#ffecd9 ;
 
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 8px 20px
-      rgba(56, 27, 14, 0.045);
+  box-shadow: 0 8px 20px rgba(255, 122, 0, 0.1);
 }
 
 .categoryButtonActive {
@@ -7208,15 +7222,15 @@ margin-left:80px;
   }
 
   .finalCopy h2 {
-    font-size: 40px;
+    font-size: 30px;
     line-height: 1.08;
     transform: none;
   }
 
   .finalCopy p {
-    max-width: 600px;
+    max-width: 470px;
     margin: 10px auto 0;   /* h2 ke exact neeche center */
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.45;
     transform: none;
   }

@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, Loader2 } from "lucide-react";
 
 import styles from "./VerifyOtp.module.css";
@@ -11,7 +12,13 @@ const API_URL =
     process.env.NEXT_PUBLIC_API_URL ||
     "http://localhost:5000/api";
 
-export default function VerifyOtpPage() {
+function VerifyOtpForm() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const flow =
+        searchParams.get("flow") === "signup" ? "signup" : "reset";
+
     const [email, setEmail] = useState("");
     const [otp, setOtp] = useState("");
 
@@ -23,19 +30,43 @@ export default function VerifyOtpPage() {
 
     const [resendTimer, setResendTimer] = useState(60);
 
+    const endpoints =
+        flow === "signup"
+            ? {
+                  verify: "/auth/verify-otp",
+                  resend: "/auth/resend-otp",
+              }
+            : {
+                  verify: "/auth/verify-forgot-password-otp",
+                  resend: "/auth/resend-forgot-password-otp",
+              };
+
+    const backHref = flow === "signup" ? "/signup" : "/forgot-password";
+    const backLabel = flow === "signup" ? "Back to Signup" : "Change Email";
+
+    /* Email source: signup -> query, reset -> sessionStorage */
     useEffect(() => {
-        const storedEmail =
-            sessionStorage.getItem(
-                "passwordResetEmail"
-            );
+        if (flow === "signup") {
+            const queryEmail = searchParams.get("email");
+
+            if (!queryEmail) {
+                router.replace("/signup");
+                return;
+            }
+
+            setEmail(queryEmail);
+            return;
+        }
+
+        const storedEmail = sessionStorage.getItem("passwordResetEmail");
 
         if (!storedEmail) {
-            window.location.href = "/forgot-password";
+            router.replace("/forgot-password");
             return;
         }
 
         setEmail(storedEmail);
-    }, []);
+    }, [flow, searchParams, router]);
 
     useEffect(() => {
         if (resendTimer <= 0) return;
@@ -58,9 +89,7 @@ export default function VerifyOtpPage() {
         setMessage("");
 
         if (!email || !/^\d{6}$/.test(otp)) {
-            setError(
-                "Please enter the valid 6-digit OTP."
-            );
+            setError("Please enter the valid 6-digit OTP.");
             return;
         }
 
@@ -68,47 +97,50 @@ export default function VerifyOtpPage() {
             setLoading(true);
 
             const response = await fetch(
-                `${API_URL}/auth/verify-forgot-password-otp`,
+                `${API_URL}${endpoints.verify}`,
                 {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     credentials: "include",
-                    body: JSON.stringify({
-                        email,
-                        otp,
-                    }),
+                    body: JSON.stringify({ email, otp }),
                 }
             );
 
             const data = await response.json();
+
+            if (data.code === "ADMIN_EXISTS") {
+                router.replace("/login");
+                return;
+            }
 
             if (!response.ok || !data.success) {
                 setError(
                     data.message ||
                         "Invalid OTP. Please try again."
                 );
+
+                if (data.code === "OTP_EXPIRED") {
+                    setResendTimer(0);
+                }
+
                 return;
             }
 
-            /*
-             * Backend should set the reset authorization
-             * as an HttpOnly cookie.
-             */
-            setMessage(
-                "OTP verified successfully."
-            );
+            setMessage("OTP verified successfully.");
 
             setTimeout(() => {
-                window.location.href =
-                    "/change-password";
+                if (flow === "signup") {
+                    // Backend ne cookie set kar di hai, to seedha admin
+                    // Agar login page pe bhejna ho to "/login" kar do
+                    window.location.href = "/admin";
+                } else {
+                    window.location.href = "/change-password";
+                }
             }, 600);
         } catch (error) {
-            console.error(
-                "Verify OTP error:",
-                error
-            );
+            console.error("Verify OTP error:", error);
 
             setError(
                 "Unable to connect to the server. Please try again."
@@ -130,49 +162,39 @@ export default function VerifyOtpPage() {
             setResending(true);
 
             const response = await fetch(
-                `${API_URL}/auth/resend-forgot-password-otp`,
+                `${API_URL}${endpoints.resend}`,
                 {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     credentials: "include",
-                    body: JSON.stringify({
-                        email,
-                    }),
+                    body: JSON.stringify({ email }),
                 }
             );
 
             const data = await response.json();
 
+            if (data.code === "ADMIN_EXISTS") {
+                router.replace("/login");
+                return;
+            }
+
             if (!response.ok || !data.success) {
-                setError(
-                    data.message ||
-                        "Unable to resend OTP."
-                );
+                setError(data.message || "Unable to resend OTP.");
 
                 if (data.retryAfterSeconds) {
-                    setResendTimer(
-                        data.retryAfterSeconds
-                    );
+                    setResendTimer(data.retryAfterSeconds);
                 }
 
                 return;
             }
 
             setOtp("");
-            setResendTimer(
-                data.resendAvailableInSeconds || 60
-            );
-
-            setMessage(
-                "A new OTP has been sent to your email."
-            );
+            setResendTimer(data.resendAvailableInSeconds || 60);
+            setMessage("A new OTP has been sent to your email.");
         } catch (error) {
-            console.error(
-                "Resend OTP error:",
-                error
-            );
+            console.error("Resend OTP error:", error);
 
             setError(
                 "Unable to connect to the server. Please try again."
@@ -199,17 +221,11 @@ export default function VerifyOtpPage() {
 
                     <div className={styles.brandContent}>
                         <h1>
-                            <span className={styles.pet}>
-                                PET
-                            </span>
-                            <span className={styles.card}>
-                                CARD
-                            </span>
+                            <span className={styles.pet}>PET</span>
+                            <span className={styles.card}>CARD</span>
                         </h1>
 
-                        <p>
-                            WORLD&apos;S FIRST AI-ENABLED PET ID
-                        </p>
+                        <p>WORLD&apos;S FIRST AI-ENABLED PET ID</p>
                     </div>
                 </div>
 
@@ -225,31 +241,20 @@ export default function VerifyOtpPage() {
                 </div>
 
                 {error && (
-                    <div
-                        className={styles.errorMessage}
-                        role="alert"
-                    >
+                    <div className={styles.errorMessage} role="alert">
                         {error}
                     </div>
                 )}
 
                 {message && (
-                    <div
-                        className={styles.successMessage}
-                        role="status"
-                    >
+                    <div className={styles.successMessage} role="status">
                         {message}
                     </div>
                 )}
 
-                <form
-                    className={styles.form}
-                    onSubmit={handleSubmit}
-                >
+                <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.field}>
-                        <label htmlFor="otp">
-                            Verification Code
-                        </label>
+                        <label htmlFor="otp">Verification Code</label>
 
                         <input
                             id="otp"
@@ -260,10 +265,7 @@ export default function VerifyOtpPage() {
                             value={otp}
                             onChange={(event) =>
                                 setOtp(
-                                    event.target.value.replace(
-                                        /\D/g,
-                                        ""
-                                    )
+                                    event.target.value.replace(/\D/g, "")
                                 )
                             }
                             autoComplete="one-time-code"
@@ -297,10 +299,7 @@ export default function VerifyOtpPage() {
                     <button
                         type="button"
                         onClick={handleResend}
-                        disabled={
-                            resendTimer > 0 ||
-                            resending
-                        }
+                        disabled={resendTimer > 0 || resending}
                     >
                         {resending
                             ? "Sending..."
@@ -311,12 +310,20 @@ export default function VerifyOtpPage() {
                 </div>
 
                 <div className={styles.backLink}>
-                    <Link href="/forgot-password">
+                    <Link href={backHref}>
                         <ArrowLeft size={15} />
-                        Change Email
+                        {backLabel}
                     </Link>
                 </div>
             </section>
         </main>
+    );
+}
+
+export default function VerifyOtpPage() {
+    return (
+        <Suspense fallback={null}>
+            <VerifyOtpForm />
+        </Suspense>
     );
 }

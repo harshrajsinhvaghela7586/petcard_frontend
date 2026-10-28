@@ -17,7 +17,7 @@ export default function ConditionalSiteLayout({
 }: ConditionalSiteLayoutProps) {
     const pathname = usePathname();
 
-    const isAdminRoute = pathname.startsWith("/admin") || pathname.startsWith("/login");
+    const isAdminRoute = pathname.startsWith("/admin") || pathname.startsWith("/login") || pathname.startsWith("/signup") || pathname.startsWith("/change-password");
 
     if (isAdminRoute) {
         return <>{children}</>;

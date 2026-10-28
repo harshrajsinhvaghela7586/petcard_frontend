@@ -291,7 +291,9 @@
     transform 0.7s ease 0.4s;
 }
 
-
+.heroActions a{
+  min-width:180px;
+}
 /* =========================================================
    HERO VISUAL
    ========================================================= */
@@ -676,7 +678,7 @@
 
   border-color:
     #ffbd78;
-
+background: #ffecd9;
   box-shadow:
     0 0 8px
       rgba(
@@ -773,7 +775,7 @@
       0.05s;
 }
 
-.storyIntro > p {
+.storyIntro > p,.storyP {
   max-width: 480px;
 
   margin: 0;
@@ -8684,15 +8686,15 @@ width: 200px !important;
   }
 
   .finalCopy h2 {
-    font-size: 40px;
+    font-size: 30px;
     line-height: 1.08;
     transform: none;
   }
 
   .finalCopy p {
-    max-width: 600px;
+    max-width: 450px;
     margin: 10px auto 0;     /* h2 ke exact neeche center */
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.45;
     transform: none;
   }
@@ -8721,7 +8723,7 @@ width: 200px !important;
     min-height: 58px !important;
     padding: 0 16px !important;
 
-    font-size: 17px !important;
+    font-size: 16px !important;
     font-weight: 800;
     line-height: 1;
     white-space: nowrap !important;   /* 2 line me nahi tootega */

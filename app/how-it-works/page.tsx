@@ -318,8 +318,7 @@ export default function HowItWorks() {
                   title,
                   description,
                   icon: Icon,
-                  className,
-                  image
+                  className
                 }) => (
                   <article
                     className={`${styles.stepCard} ${styles[className as keyof typeof styles]
@@ -328,16 +327,7 @@ export default function HowItWorks() {
                   >
                     <div className={styles.stepCardInner}>
 
-                      {/* HOVER IMAGE */}
-                      <div className={styles.stepHoverImage}>
-                        <Image
-                          src={image}
-                          alt=""
-                          width={75}
-                          height={75}
-                        />
-                      </div>
-
+                     
                       {/* NUMBER */}
                       <div className={styles.stepNumber}>
                         {number}
@@ -418,9 +408,9 @@ export default function HowItWorks() {
             </h2>
 
             <p>
-              Have thoughts after exploring PETCARD?
+              Have thoughts after exploring PETCARD? We'd love
               <br className={styles.desktopBreak} />
-              We'd love to hear what you think.
+              to hear what you think.
             </p>
 
           </div>
