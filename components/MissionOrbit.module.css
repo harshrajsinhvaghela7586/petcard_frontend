@@ -480,20 +480,30 @@
    ========================================================= */
 
 .missionOrbitBadge:hover .missionOrbitBadgeInner {
-  border-color: rgba(255, 122, 0, 0.34);
+   border-color: #ffb35c;
+
+  background:
+    rgba(255, 255, 255, 1);
 
   box-shadow:
-    0 22px 44px rgba(57, 34, 19, 0.13),
-    0 0 0 4px rgba(255, 122, 0, 0.045);
-}
+    0 26px 52px
+      rgba(56, 27, 14, 0.14),
+
+    0 0 34px
+      rgba(255, 122, 0, 0.16);}
 
 .missionOrbitBadge:hover .cardIcon {
+  border-color: #ffb35c;
+
   background:
-    linear-gradient(
-      145deg,
-      #ffedd7,
-      #ffdfb5
-    );
+    rgba(255, 255, 255, 1);
+
+  box-shadow:
+    0 26px 52px
+      rgba(56, 27, 14, 0.14),
+
+    0 0 34px
+      rgba(255, 122, 0, 0.16);
 }
 
 /* =========================================================

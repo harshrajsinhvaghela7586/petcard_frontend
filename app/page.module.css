@@ -9857,12 +9857,7 @@ overflow: visible;
       scale(1.50);
   }
 
-  .finalDownloadCard:hover{
-    transform:
-      translateX(55px)
-      translateY(-13px)
-      scale(1.23);
-  }
+  
 
   .finalCopy {
     transform: translateX(25px);
@@ -9873,8 +9868,8 @@ overflow: visible;
   }
 
   .finalCopy p {
-    font-size: 12px;
-    margin-left:270px;
+    font-size: 16px;
+    margin-left:250px;
   }
 
   .finalButtons {

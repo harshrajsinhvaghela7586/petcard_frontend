@@ -1002,109 +1002,6 @@ color: var(--text);
 }
 
 
-/* =========================================================
-   HOVER IMAGE
-   ========================================================= */
-
-.stepHoverImage {
-  position: absolute;
-
-  /*
-    Larger image + proper breathing room.
-  */
-  right: 13px;
-  bottom: 12px;
-
-  width: clamp(90px, 5.8vw, 125px);
-  height: clamp(90px, 5.8vw, 125px);
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  z-index: 1;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  transform:
-    translate3d(24px, 16px, 0)
-    scale(0.7);
-
-  transition:
-    opacity 0.28s ease,
-    transform 0.34s cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    );
-}
-
-
-/* =========================================================
-   HOVER IMAGE ITSELF
-   ========================================================= */
-
-.stepHoverImage img {
-  display: block;
-
-  /*
-    Force the Next/Image output to actually
-    occupy the larger hover container.
-  */
-  width: 100% !important;
-  height: 100% !important;
-
-  max-width: none;
-
-  object-fit: contain;
-  object-position: center;
-
-  filter:
-    drop-shadow(
-      0 8px 14px
-      rgba(56, 27, 14, 0.15)
-    );
-}
-
-
-/* =========================================================
-   IMAGE GLOW
-   ========================================================= */
-
-.stepHoverImage::before {
-  content: "";
-
-  position: absolute;
-
-  inset: -28px;
-
-  z-index: -1;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255, 155, 47, 0.22) 0%,
-      rgba(255, 155, 47, 0.09) 42%,
-      transparent 73%
-    );
-
-  filter: blur(8px);
-
-  opacity: 0;
-
-  transform: scale(0.55);
-
-  transition:
-    opacity 0.3s ease,
-    transform 0.35s ease;
-}
-
 
 /* =========================================================
    CARD HOVER
@@ -1129,24 +1026,6 @@ color: var(--text);
    IMAGE REVEAL
    ========================================================= */
 
-.stepCardInner:hover .stepHoverImage {
-  opacity: 1;
-
-  transform:
-    translate3d(0, 0, 0)
-    scale(1);
-}
-
-
-/* =========================================================
-   IMAGE GLOW REVEAL
-   ========================================================= */
-
-.stepCardInner:hover .stepHoverImage::before {
-  opacity: 1;
-
-  transform: scale(1);
-}
 
 
 /* =========================================================
@@ -1177,13 +1056,7 @@ color: var(--text);
 }
 
 
-.stepCardInner:hover .stepText {
-  /*
-    Give the large hover image
-    its own dedicated area.
-  */
-  padding-right: 92px;
-}
+
 
 
 /* =========================================================
@@ -1400,10 +1273,6 @@ color: var(--text);
     height: 88px;
   }
 
-  .stepCardInner:hover .stepText {
-    padding-right: 78px;
-  }
-
   .stepNumber {
     width: 35px;
     height: 35px;
@@ -1464,10 +1333,6 @@ color: var(--text);
 
     right: 14px;
     bottom: 13px;
-  }
-
-  .stepCardInner:hover .stepText {
-    padding-right: 90px;
   }
 
   .stepNumber {
@@ -1534,10 +1399,6 @@ color: var(--text);
     bottom: 14px;
   }
 
-  .stepCardInner:hover .stepText {
-    padding-right: 100px;
-  }
-
   .stepNumber {
     width: 41px;
     height: 41px;
@@ -1602,10 +1463,6 @@ color: var(--text);
 
     right: 17px;
     bottom: 16px;
-  }
-
-  .stepCardInner:hover .stepText {
-    padding-right: 115px;
   }
 
   .stepNumber {
@@ -7903,7 +7760,7 @@ border-radius: 6px !important;
   .finalCopy p {
     max-width: 600px;
     margin: 8px auto 0;
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .finalButtons {
@@ -7920,7 +7777,7 @@ border-radius: 6px !important;
     min-width: 190px !important;
     max-width: none !important;
     padding: 12px 22px !important;
-    font-size: 15px !important;
+    font-size: 16px !important;
   }
 }
 

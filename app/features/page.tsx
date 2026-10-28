@@ -2908,7 +2908,7 @@ const [newsletterError, setNewsletterError] =
       <h2>More to Discover. More to Love.</h2>
 
       <p>
-        From everyday care to special memories, there's always something more
+        From everyday care to special memories, there's<br></br>  always something more
         to explore with PETCARD.
       </p>
     </div>

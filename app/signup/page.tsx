@@ -12,6 +12,9 @@ const API_URL =
     process.env.NEXT_PUBLIC_API_URL ||
     "http://localhost:5000/api";
 
+const ADMIN_EXISTS_MESSAGE =
+    "Admin already exists. Signup is disabled. Please login.";
+
 interface SignupStatusResponse {
     success: boolean;
     canSignup: boolean;
@@ -46,7 +49,13 @@ export default function SignupPage() {
     const [checkingStatus, setCheckingStatus] =
         useState(true);
 
+    // true => signup band, form disabled
+    const [signupDisabled, setSignupDisabled] =
+        useState(false);
+
     const [error, setError] = useState("");
+
+    const formDisabled = loading || signupDisabled;
 
     useEffect(() => {
         const checkSignupStatus = async () => {
@@ -63,22 +72,21 @@ export default function SignupPage() {
                 const data: SignupStatusResponse =
                     await response.json();
 
-                if (
-                    !response.ok ||
-                    !data.success
-                ) {
-                    router.replace("/login");
+                if (!response.ok || !data.success) {
+                    setSignupDisabled(true);
+                    setError(
+                        "Unable to check signup availability. Please try again later."
+                    );
                     return;
                 }
 
                 /*
-                 * IMPORTANT:
-                 * If admin already exists, signup page
-                 * should never remain accessible.
+                 * If admin already exists, signup stays
+                 * disabled and the error is shown here.
                  */
                 if (!data.canSignup) {
-                    router.replace("/login");
-                    return;
+                    setSignupDisabled(true);
+                    setError(ADMIN_EXISTS_MESSAGE);
                 }
             } catch (error) {
                 console.error(
@@ -86,19 +94,24 @@ export default function SignupPage() {
                     error
                 );
 
-                router.replace("/login");
+                setSignupDisabled(true);
+                setError(
+                    "Unable to connect to the server. Please try again."
+                );
             } finally {
                 setCheckingStatus(false);
             }
         };
 
         checkSignupStatus();
-    }, [router]);
+    }, []);
 
     const handleSubmit = async (
         event: FormEvent<HTMLFormElement>
     ) => {
         event.preventDefault();
+
+        if (signupDisabled) return;
 
         setError("");
 
@@ -159,36 +172,40 @@ export default function SignupPage() {
                 await response.json();
 
             /*
-             * Another admin could have been created
-             * between status check and signup.
+             * Admin already exists (or got created
+             * between status check and signup).
+             * Stay on this page and show the error.
              */
-            if (
-                data.code === "ADMIN_EXISTS"
-            ) {
-                router.replace("/login");
+            if (data.code === "ADMIN_EXISTS") {
+                setSignupDisabled(true);
+                setError(ADMIN_EXISTS_MESSAGE);
                 return;
             }
 
-            if (
-                !response.ok ||
-                !data.success
-            ) {
+            if (!response.ok || !data.success) {
                 setError(
                     data.message ||
                         "Unable to create account."
                 );
-
                 return;
             }
 
             /*
-             * OTP page will use this email.
-             *
-             * No password is stored in localStorage,
-             * sessionStorage or cookies.
+             * admin@petcard.in is approved directly
+             * without OTP. Send the user to login.
+             */
+            if (data.code === "ADMIN_APPROVED") {
+                router.push("/login");
+                return;
+            }
+
+            /*
+             * Every other email goes through OTP.
+             * flow=signup is REQUIRED, otherwise the
+             * verify page assumes the reset flow.
              */
             router.push(
-                `/verify-otp?email=${encodeURIComponent(
+                `/verify-otp?flow=signup&email=${encodeURIComponent(
                     data.email || trimmedEmail
                 )}`
             );
@@ -301,7 +318,7 @@ export default function SignupPage() {
                                 )
                             }
                             autoComplete="name"
-                            disabled={loading}
+                            disabled={formDisabled}
                             required
                         />
                     </div>
@@ -323,7 +340,7 @@ export default function SignupPage() {
                                 )
                             }
                             autoComplete="email"
-                            disabled={loading}
+                            disabled={formDisabled}
                             required
                         />
                     </div>
@@ -354,7 +371,7 @@ export default function SignupPage() {
                                     )
                                 }
                                 autoComplete="new-password"
-                                disabled={loading}
+                                disabled={formDisabled}
                                 required
                             />
 
@@ -368,7 +385,7 @@ export default function SignupPage() {
                                         (value) => !value
                                     )
                                 }
-                                disabled={loading}
+                                disabled={formDisabled}
                                 aria-label={
                                     showPassword
                                         ? "Hide password"
@@ -403,16 +420,14 @@ export default function SignupPage() {
                                         : "password"
                                 }
                                 placeholder="Confirm your password"
-                                value={
-                                    confirmPassword
-                                }
+                                value={confirmPassword}
                                 onChange={(event) =>
                                     setConfirmPassword(
                                         event.target.value
                                     )
                                 }
                                 autoComplete="new-password"
-                                disabled={loading}
+                                disabled={formDisabled}
                                 required
                             />
 
@@ -426,7 +441,7 @@ export default function SignupPage() {
                                         (value) => !value
                                     )
                                 }
-                                disabled={loading}
+                                disabled={formDisabled}
                                 aria-label={
                                     showConfirmPassword
                                         ? "Hide password"
@@ -447,7 +462,7 @@ export default function SignupPage() {
                         <input
                             type="checkbox"
                             required
-                            disabled={loading}
+                            disabled={formDisabled}
                         />
 
                         <span>
@@ -467,7 +482,7 @@ export default function SignupPage() {
                     <button
                         type="submit"
                         className="btn btn-primary"
-                        disabled={loading}
+                        disabled={formDisabled}
                     >
                         {loading ? (
                             <>

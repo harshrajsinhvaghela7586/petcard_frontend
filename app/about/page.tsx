@@ -348,14 +348,15 @@ export default function About() {
                   a bigger mission.
                 </span>
               </h2>
-            </div>
-
-            <p>
+               <p className={styles.storyP}>
               Our founder loved his dog deeply. He
               was more than a pet, he was family, a
               constant companion, and a part of
               everyday life.
             </p>
+            </div>
+
+           
           </div>
 
           <div className={styles.journey}>

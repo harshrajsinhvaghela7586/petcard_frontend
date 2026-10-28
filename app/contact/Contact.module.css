@@ -4217,15 +4217,15 @@ margin-left:-25px;
   }
 
   .finalCopy h2 {
-    font-size: 40px;
+    font-size: 30px;
     line-height: 1.08;
     transform: none;
   }
 
   .finalCopy p {
-    max-width: 760px;
+    max-width: 470px;
     margin: 10px auto 0;     /* h2 ke exact neeche center */
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.45;
     transform: none;
   }
@@ -4254,7 +4254,7 @@ margin-left:-25px;
     min-height: 58px !important;
     padding: 0 16px !important;
 
-    font-size: 17px !important;
+    font-size: 16px !important;
     font-weight: 800;
     line-height: 1;
     white-space: nowrap !important;   /* 2 line me nahi tootega */
