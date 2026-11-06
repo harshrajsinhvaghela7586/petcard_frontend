@@ -176,13 +176,7 @@ export default function PetRewardsSlider() {
 
                     <h3>{pet.name}</h3>
 
-                    <div className={styles.badge}>
-                      <PawPrint
-                        size={10}
-                        fill="currentColor"
-                      />
-                      {pet.points}
-                    </div>
+                 
 
                    
                   </div>

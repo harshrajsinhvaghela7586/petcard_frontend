@@ -1083,42 +1083,7 @@ export default function FeaturesPage() {
             </div>
 
             <div className={styles.memoryAside}>
-              <div className={styles.milestonePanel}>
-                <div className={styles.panelTitle}>
-                  <span>
-                    <Star size={15} />
-                    Milestones
-                  </span>
-
-                  <span className={styles.viewAll}>View All →</span>
-                </div>
-
-                <div className={styles.milestoneRail}>
-                  {(
-                    [
-                      ["Gotcha Day", "Jan 10, 2023", Heart],
-                      ["First Walk", "Feb 05, 2023", PawPrint],
-                      ["Birthday", "May 20, 2023", Gift],
-                      ["Vet Visit", "Aug 12, 2023", Stethoscope],
-                      ["Trick Master", "Dec 01, 2023", Trophy],
-                    ] as Array<[string, string, React.ElementType]>
-                  ).map(([title, date, Icon]) => {
-                    const MilestoneIcon = Icon as React.ElementType;
-
-                    return (
-                      <div className={styles.milestoneItem} key={String(title)}>
-                        <span>
-                          <MilestoneIcon size={14} fill="currentColor" />
-                        </span>
-
-                        <strong>{title}</strong>
-                        <small>{date}</small>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
+             
               <div className={styles.progressPanel}>
                 <div className={styles.panelTitle}>
                   <span>Pet Progress</span>
@@ -1281,79 +1246,7 @@ export default function FeaturesPage() {
                 </div>
               </div>
 
-              <div className={styles.achievementPanel}>
-                <div className={styles.panelTitle}>
-                  <span>
-                    <Trophy size={15} />
-                    Top Achievements
-                  </span>
-                  <span className={styles.viewAll}>View All →</span>
-                </div>
-
-                <div className={styles.achievementGrid}>
-                  {(
-                    [
-                      ["Pawfect Start", PawPrint],
-                      ["Care Master", ShieldCheck],
-                      ["Healthy Habit", HeartPulse],
-                      ["Super Groomer", Sparkles],
-                    ] as Array<[string, React.ElementType]>
-                  ).map(([title, Icon]) => {
-                    const AchievementIcon = Icon as React.ElementType;
-
-                    return (
-                      <div key={String(title)}>
-                        <span>
-                          <AchievementIcon size={18} />
-                        </span>
-                        <strong>{title}</strong>
-                        <small>Completed</small>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className={styles.shopPanel}>
-                <div className={styles.panelTitle}>
-                  <span>
-                    <Gift size={15} />
-                    Rewards Shop
-                  </span>
-                  <span className={styles.viewAll}>View Shop →</span>
-                </div>
-
-                <div className={styles.shopGrid}>
-                  {(
-                    [
-                      ["Cozy Bed", Gift],
-                      ["Fun Toy Ball", Star],
-                      ["Premium Food", Utensils],
-                      ["Pet Hoodie", Sparkles],
-                    ] as Array<[string, React.ElementType]>
-                  ).map(([name, Icon]) => {
-                    const ShopIcon = Icon as React.ElementType;
-
-                    return (
-                      <button
-                        type="button"
-                        key={String(name)}
-                        className={styles.shopItem}
-                      >
-                        <span>
-                          <ShopIcon size={20} />
-                        </span>
-                        <strong>{name}</strong>
-                        <small>
-                          <PawPrint size={9} fill="currentColor" />
-                          2,500
-                        </small>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
+            
               <div className={styles.rewardMessage}>
                 <Gift size={22} />
                 <div>
@@ -1474,31 +1367,6 @@ export default function FeaturesPage() {
                 </div>
               </div>
 
-              <div className={styles.themePanel}>
-                <div className={styles.panelTitle}>
-                  <span>PetCard Themes</span>
-                  <span className={styles.viewAll}>View All →</span>
-                </div>
-
-                <div className={styles.themeRow}>
-                  {[
-                    ["Classic Paw", "🐾"],
-                    ["Royal Paws", "👑"],
-                    ["Pastel Love", "💗"],
-                    ["Adventure", "🏔️"],
-                    ["Galaxy", "🪐"],
-                  ].map(([name, emoji], index) => (
-                    <button
-                      type="button"
-                      className={index === 0 ? styles.themeActive : ""}
-                      key={name}
-                    >
-                      <span>{emoji}</span>
-                      <small>{name}</small>
-                    </button>
-                  ))}
-                </div>
-              </div>
 
               <div className={styles.petmojiBottomMessage}>
                 <Sparkles size={18} />
