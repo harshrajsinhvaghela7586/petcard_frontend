@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Activity,
-  ArrowRight,
   Award,
   BadgeCheck,
   Bell,
@@ -12,9 +11,7 @@ import {
   Camera,
   Check,
   CheckCircle2,
-  ChevronDown,
   ChevronRight,
-  CircleCheck,
   Clock3,
   CloudUpload,
   Dumbbell,
@@ -28,17 +25,14 @@ import {
   Leaf,
   ListChecks,
   LockKeyhole,
+  Mail,
   Medal,
   MessageCircle,
-  MoreHorizontal,
   PawPrint,
-  Pencil,
   Pill,
   Play,
-  Plus,
   QrCode,
   ScanLine,
-  Send,
   ShieldCheck,
   Sparkles,
   Star,
@@ -46,20 +40,15 @@ import {
   Trophy,
   Utensils,
   Video,
-  Weight,
   WandSparkles,
-  X,
-  Mail,
+  Weight,
 } from "lucide-react";
-import {
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
+import { GiWhistle } from "react-icons/gi";
 
 import styles from "./Features.module.css";
-import { GiWhistle } from "react-icons/gi";
+import PhoneMockup, { ITEM_SCREEN, SCREENS } from "./PhoneMockup";
 
 type Item = {
   title: string;
@@ -89,49 +78,16 @@ const sections: SectionData[] = [
     icon: ShieldCheck,
     image: "/images/slider/huchiko.png",
     items: [
-      {
-        title: "Digital PetCard",
-        description: "Your pet's all-in-one digital identity card.",
-        icon: ShieldCheck,
-      },
-      {
-        title: "Pet ID",
-        description: "Unique and permanent ID for your pet.",
-        icon: BadgeCheck,
-      },
-      {
-        title: "QR Code",
-        description: "Instant access to your pet's information.",
-        icon: QrCode,
-      },
-      {
-        title: "Scan QR",
-        description: "Anyone can scan and view essential info.",
-        icon: ScanLine,
-      },
-      {
-        title: "Emergency Card",
-        description: "Important medical and emergency details.",
-        icon: HeartPulse,
-      },
-      {
-        title: "Guardian Access",
-        description: "Trusted guardians can access and help.",
-        icon: KeyRound,
-      },
-      {
-        title: "Two Guardian Support",
-        description: "Add two guardians for double the safety.",
-        icon: Heart,
-      },
-      {
-        title: "Share / Download",
-        description: "Share digitally or download your PetCard.",
-        icon: CloudUpload,
-      },
+      { title: "Digital PetCard", description: "Your pet's all-in-one digital identity card.", icon: ShieldCheck },
+      { title: "Pet ID", description: "Unique and permanent ID for your pet.", icon: BadgeCheck },
+      { title: "QR Code", description: "Instant access to your pet's information.", icon: QrCode },
+      { title: "Scan QR", description: "Anyone can scan and view essential info.", icon: ScanLine },
+      { title: "Emergency Card", description: "Important medical and emergency details.", icon: HeartPulse },
+      { title: "Guardian Access", description: "Trusted guardians can access and help.", icon: KeyRound },
+      { title: "Two Guardian Support", description: "Add two guardians for double the safety.", icon: Heart },
+      { title: "Share / Download", description: "Share digitally or download your PetCard.", icon: CloudUpload },
     ],
   },
-
   {
     number: "02",
     eyebrow: "DAILY CARE",
@@ -141,59 +97,18 @@ const sections: SectionData[] = [
       "Stay on top of your pet's daily routine with smart tasks, timely reminders, and helpful insights.",
     icon: ListChecks,
     items: [
-      {
-        title: "Daily Tasks",
-        description: "All essential care tasks in one place.",
-        icon: ListChecks,
-      },
-      {
-        title: "Feeding",
-        description: "Track meals and build healthy eating habits.",
-        icon: Utensils,
-      },
-      {
-        title: "Water",
-        description: "Remind and ensure proper hydration.",
-        icon: Activity,
-      },
-      {
-        title: "Walking",
-        description: "Log walks and keep them active.",
-        icon: PawPrint,
-      },
-      {
-        title: "Training",
-        description: "Track training and progress.",
-        icon: Dumbbell,
-      },
-      {
-        title: "Grooming",
-        description: "Maintain grooming routines with ease.",
-        icon: Sparkles,
-      },
-      {
-        title: "Medication",
-        description: "Never miss important medications.",
-        icon: Pill,
-      },
-      {
-        title: "Reminders",
-        description: "Smart reminders for every task.",
-        icon: Bell,
-      },
-      {
-        title: "Calendar",
-        description: "Plan ahead with a clear care calendar.",
-        icon: CalendarDays,
-      },
-      {
-        title: "Task History",
-        description: "Review completed care and routines.",
-        icon: Clock3,
-      },
+      { title: "Daily Tasks", description: "All essential care tasks in one place.", icon: ListChecks },
+      { title: "Feeding", description: "Track meals and build healthy eating habits.", icon: Utensils },
+      { title: "Water", description: "Remind and ensure proper hydration.", icon: Activity },
+      { title: "Walking", description: "Log walks and keep them active.", icon: PawPrint },
+      { title: "Training", description: "Track training and progress.", icon: Dumbbell },
+      { title: "Grooming", description: "Maintain grooming routines with ease.", icon: Sparkles },
+      { title: "Medication", description: "Never miss important medications.", icon: Pill },
+      { title: "Reminders", description: "Smart reminders for every task.", icon: Bell },
+      { title: "Calendar", description: "Plan ahead with a clear care calendar.", icon: CalendarDays },
+      { title: "Task History", description: "Review completed care and routines.", icon: Clock3 },
     ],
   },
-
   {
     number: "03",
     eyebrow: "HEALTH & WELLNESS",
@@ -203,59 +118,18 @@ const sections: SectionData[] = [
       "Keep all your pet's health records in one safe place. Track, manage, and never miss what matters.",
     icon: HeartPulse,
     items: [
-      {
-        title: "Health Records",
-        description: "Complete health information at a glance.",
-        icon: HeartPulse,
-      },
-      {
-        title: "Vaccination",
-        description: "Track vaccines and their dates.",
-        icon: ShieldCheck,
-      },
-      {
-        title: "Deworming",
-        description: "Stay on schedule for deworming.",
-        icon: Leaf,
-      },
-      {
-        title: "Medicines",
-        description: "Manage medicines and dosage.",
-        icon: Pill,
-      },
-      {
-        title: "Treatments",
-        description: "Track ongoing treatments.",
-        icon: Stethoscope,
-      },
-      {
-        title: "Vet Visits",
-        description: "Record every visit and consultation.",
-        icon: Stethoscope,
-      },
-      {
-        title: "Medical Documents",
-        description: "Store reports and documents safely.",
-        icon: CloudUpload,
-      },
-      {
-        title: "Weight / Growth",
-        description: "Monitor weight and growth.",
-        icon: Weight,
-      },
-      {
-        title: "Medical Conditions",
-        description: "Keep track of medical conditions.",
-        icon: Heart,
-      },
-      {
-        title: "Allergies",
-        description: "Note allergies and special care needs.",
-        icon: Info,
-      },
+      { title: "Health Records", description: "Complete health information at a glance.", icon: HeartPulse },
+      { title: "Vaccination", description: "Track vaccines and their dates.", icon: ShieldCheck },
+      { title: "Deworming", description: "Stay on schedule for deworming.", icon: Leaf },
+      { title: "Medicines", description: "Manage medicines and dosage.", icon: Pill },
+      { title: "Treatments", description: "Track ongoing treatments.", icon: Stethoscope },
+      { title: "Vet Visits", description: "Record every visit and consultation.", icon: Stethoscope },
+      { title: "Medical Documents", description: "Store reports and documents safely.", icon: CloudUpload },
+      { title: "Weight / Growth", description: "Monitor weight and growth.", icon: Weight },
+      { title: "Medical Conditions", description: "Keep track of medical conditions.", icon: Heart },
+      { title: "Allergies", description: "Note allergies and special care needs.", icon: Info },
     ],
   },
-
   {
     number: "04",
     eyebrow: "SMART PET CARE",
@@ -265,49 +139,16 @@ const sections: SectionData[] = [
       "Get expert-backed guidance and AI-powered answers for every step of your pet parenting journey.",
     icon: WandSparkles,
     items: [
-      {
-        title: "Breed Information",
-        description: "Learn about your pet's breed and needs.",
-        icon: PawPrint,
-      },
-      {
-        title: "Health & Wellness",
-        description: "Tips for a healthier, longer life.",
-        icon: HeartPulse,
-      },
-      {
-        title: "Food & Nutrition",
-        description: "Balanced diet and nutrition advice.",
-        icon: Utensils,
-      },
-      {
-        title: "Grooming",
-        description: "Grooming tips for a clean happy pet.",
-        icon: Sparkles,
-      },
-      {
-        title: "Training",
-        description: "Step-by-step training guides.",
-        icon: Dumbbell,
-      },
-      {
-        title: "Safety",
-        description: "Keep your pet safe at home and outside.",
-        icon: ShieldCheck,
-      },
-      {
-        title: "Basic Care",
-        description: "Daily care routines made simple.",
-        icon: Heart,
-      },
-      {
-        title: "PawChat AI",
-        description: "Ask anything. Get smart, personalized answers.",
-        icon: MessageCircle,
-      },
+      { title: "Breed Information", description: "Learn about your pet's breed and needs.", icon: PawPrint },
+      { title: "Health & Wellness", description: "Tips for a healthier, longer life.", icon: HeartPulse },
+      { title: "Food & Nutrition", description: "Balanced diet and nutrition advice.", icon: Utensils },
+      { title: "Grooming", description: "Grooming tips for a clean happy pet.", icon: Sparkles },
+      { title: "Training", description: "Step-by-step training guides.", icon: Dumbbell },
+      { title: "Safety", description: "Keep your pet safe at home and outside.", icon: ShieldCheck },
+      { title: "Basic Care", description: "Daily care routines made simple.", icon: Heart },
+      { title: "PawChat AI", description: "Ask anything. Get smart, personalized answers.", icon: MessageCircle },
     ],
   },
-
   {
     number: "05",
     eyebrow: "MEMORIES & PROGRESS",
@@ -317,49 +158,16 @@ const sections: SectionData[] = [
       "Save memories, celebrate milestones, and track your pet's journey as they grow happier and healthier every day.",
     icon: Camera,
     items: [
-      {
-        title: "Memories",
-        description: "Keep all your precious moments together.",
-        icon: Heart,
-      },
-      {
-        title: "Photos",
-        description: "Store and organize favorite photos.",
-        icon: ImageIcon,
-      },
-      {
-        title: "Videos",
-        description: "Save fun videos and cute memories.",
-        icon: Video,
-      },
-      {
-        title: "Albums",
-        description: "Create albums for every special occasion.",
-        icon: Camera,
-      },
-      {
-        title: "Milestones",
-        description: "Celebrate important moments.",
-        icon: Trophy,
-      },
-      {
-        title: "Timeline",
-        description: "A beautiful timeline of memories.",
-        icon: Activity,
-      },
-      {
-        title: "Pet Progress",
-        description: "Track health, habits, and improvements.",
-        icon: Weight,
-      },
-      {
-        title: "Care Score",
-        description: "See how well you're caring for your pet.",
-        icon: HeartPulse,
-      },
+      { title: "Memories", description: "Keep all your precious moments together.", icon: Heart },
+      { title: "Photos", description: "Store and organize favorite photos.", icon: ImageIcon },
+      { title: "Videos", description: "Save fun videos and cute memories.", icon: Video },
+      { title: "Albums", description: "Create albums for every special occasion.", icon: Camera },
+      { title: "Milestones", description: "Celebrate important moments.", icon: Trophy },
+      { title: "Timeline", description: "A beautiful timeline of memories.", icon: Activity },
+      { title: "Pet Progress", description: "Track health, habits, and improvements.", icon: Weight },
+      { title: "Care Score", description: "See how well you're caring for your pet.", icon: HeartPulse },
     ],
   },
-
   {
     number: "06",
     eyebrow: "REWARDS & GAMIFICATION",
@@ -369,49 +177,16 @@ const sections: SectionData[] = [
       "Every good habit brings you closer to exciting rewards. Stay consistent, level up, and unlock more.",
     icon: Trophy,
     items: [
-      {
-        title: "Daily Streaks",
-        description: "Build streaks by completing care tasks.",
-        icon: Flame,
-      },
-      {
-        title: "XP",
-        description: "Earn XP for every action and milestone.",
-        icon: Star,
-      },
-      {
-        title: "PawPoints",
-        description: "Collect PawPoints and redeem rewards.",
-        icon: PawPrint,
-      },
-      {
-        title: "Levels",
-        description: "Level up and unlock new perks.",
-        icon: Medal,
-      },
-      {
-        title: "Achievements",
-        description: "Complete achievements and show your wins.",
-        icon: Trophy,
-      },
-      {
-        title: "Badges",
-        description: "Unlock unique badges.",
-        icon: Award,
-      },
-      {
-        title: "Rewards Shop",
-        description: "Spend PawPoints on rewards.",
-        icon: Gift,
-      },
-      {
-        title: "Unlocks",
-        description: "Unlock premium features and surprises.",
-        icon: KeyRound,
-      },
+      { title: "Daily Streaks", description: "Build streaks by completing care tasks.", icon: Flame },
+      { title: "XP", description: "Earn XP for every action and milestone.", icon: Star },
+      { title: "PawPoints", description: "Collect PawPoints and redeem rewards.", icon: PawPrint },
+      { title: "Levels", description: "Level up and unlock new perks.", icon: Medal },
+      { title: "Achievements", description: "Complete achievements and show your wins.", icon: Trophy },
+      { title: "Avatars", description: "Unlock cute avatars for your pet.", icon: PawPrint },
+      { title: "Rewards Shop", description: "Spend PawPoints on rewards.", icon: Gift },
+      { title: "Unlocks", description: "Unlock premium features and surprises.", icon: KeyRound },
     ],
   },
-
   {
     number: "07",
     eyebrow: "PETMOJI & CUSTOMIZATION",
@@ -421,49 +196,16 @@ const sections: SectionData[] = [
       "Create adorable Petmojis and customize every detail. Because your pet deserves a look as special as their personality.",
     icon: WandSparkles,
     items: [
-      {
-        title: "Preset Pet Avatars",
-        description: "Choose from a variety of cute pet avatars.",
-        icon: PawPrint,
-      },
-      {
-        title: "Create Petmoji",
-        description: "Design your own Petmoji.",
-        icon: WandSparkles,
-      },
-      {
-        title: "Accessories",
-        description: "Add hats, bows, glasses and more.",
-        icon: Gift,
-      },
-      {
-        title: "Backgrounds",
-        description: "Pick beautiful backgrounds.",
-        icon: ImageIcon,
-      },
-      {
-        title: "Frames",
-        description: "Decorate with stylish frames.",
-        icon: Sparkles,
-      },
-      {
-        title: "Stickers",
-        description: "Add playful stickers.",
-        icon: Star,
-      },
-      {
-        title: "Paw Effects",
-        description: "Add magical paw effects.",
-        icon: PawPrint,
-      },
-      {
-        title: "PetCard Themes",
-        description: "Apply themes and make your PetCard stand out.",
-        icon: Sparkles,
-      },
+      { title: "Preset Pet Avatars", description: "Choose from a variety of cute pet avatars.", icon: PawPrint },
+      { title: "Create Petmoji", description: "Design your own Petmoji.", icon: WandSparkles },
+      { title: "Accessories", description: "Add hats, bows, glasses and more.", icon: Gift },
+      { title: "Backgrounds", description: "Pick beautiful backgrounds.", icon: ImageIcon },
+      { title: "Frames", description: "Decorate with stylish frames.", icon: Sparkles },
+      { title: "Stickers", description: "Add playful stickers.", icon: Star },
+      { title: "Paw Effects", description: "Add magical paw effects.", icon: PawPrint },
+      { title: "PetCard Themes", description: "Apply themes and make your PetCard stand out.", icon: Sparkles },
     ],
   },
-
   {
     number: "08",
     eyebrow: "FUN ZONE",
@@ -473,21 +215,9 @@ const sections: SectionData[] = [
       "Fun tools to keep your pet active, happy, and well-trained — every single day.",
     icon: GiWhistle,
     items: [
-      {
-        title: "Clicker",
-        description: "Mark the right behavior and reinforce habits.",
-        icon: Activity,
-      },
-      {
-        title: "Whistle",
-        description: "Different whistle sounds for commands.",
-        icon: GiWhistle,
-      },
-      {
-        title: "Training Tools",
-        description: "Interactive tools, tips, and guides.",
-        icon: Dumbbell,
-      },
+      { title: "Clicker", description: "Mark the right behavior and reinforce habits.", icon: Activity },
+      { title: "Whistle", description: "Different whistle sounds for commands.", icon: GiWhistle },
+      { title: "Training Tools", description: "Interactive tools, tips, and guides.", icon: Dumbbell },
     ],
   },
 ];
@@ -506,213 +236,131 @@ function IconBox({
   );
 }
 
-
 export default function FeaturesPage() {
   const [visible, setVisible] = useState<string[]>([]);
-  const [activeItems, setActiveItems] = useState<Record<string, number>>(
-    {}
-  );
-  const [showEmailForm, setShowEmailForm] =
-  useState(false);
+  const [activeItems, setActiveItems] = useState<Record<string, number>>({});
 
-const [isSubscribed, setIsSubscribed] =
-  useState(false);
+  const trackItem = (key: string) => (index: number) =>
+    setActiveItems((c) => (c[key] === index ? c : { ...c, [key]: index }));
 
-const [newsletterEmail, setNewsletterEmail] =
-  useState("");
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
+  const [newsletterError, setNewsletterError] = useState("");
 
-const [newsletterSubmitting, setNewsletterSubmitting] =
-  useState(false);
+  const handleNewsletterSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-const [newsletterError, setNewsletterError] =
-  useState("");
+    if (newsletterSubmitting) return;
 
-  const handleNewsletterSubmit = async (
-  event: FormEvent<HTMLFormElement>
-) => {
-  event.preventDefault();
+    setNewsletterError("");
 
-  if (newsletterSubmitting) {
-    return;
-  }
+    const email = newsletterEmail.trim().toLowerCase();
 
-  setNewsletterError("");
+    if (!email) {
+      setNewsletterError("Please enter your email address.");
+      return;
+    }
 
-  const email =
-    newsletterEmail.trim().toLowerCase();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!email) {
-    setNewsletterError(
-      "Please enter your email address."
-    );
-    return;
-  }
-
-  const emailRegex =
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!emailRegex.test(email)) {
-    setNewsletterError(
-      "Please enter a valid email address."
-    );
-    return;
-  }
-
-  try {
-    setNewsletterSubmitting(true);
-
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"}/newsletter/subscribe`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      }
-    );
-
-    let data: {
-      success?: boolean;
-      message?: string;
-    } = {};
+    if (!emailRegex.test(email)) {
+      setNewsletterError("Please enter a valid email address.");
+      return;
+    }
 
     try {
-      data = await response.json();
-    } catch {
-      data = {};
-    }
+      setNewsletterSubmitting(true);
 
-    if (!response.ok) {
-      throw new Error(
-        data.message ||
-          "Unable to subscribe right now."
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"}/newsletter/subscribe`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
       );
+
+      let data: { success?: boolean; message?: string } = {};
+
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to subscribe right now.");
+      }
+
+      setNewsletterEmail("");
+      setNewsletterError("");
+      setIsSubscribed(true);
+
+      setTimeout(() => {
+        setShowEmailForm(false);
+        setIsSubscribed(false);
+      }, 3000);
+    } catch (error) {
+      console.error("Newsletter subscription failed:", error);
+
+      setNewsletterError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setNewsletterSubmitting(false);
     }
+  };
 
-    // Success
-    setNewsletterEmail("");
-    setNewsletterError("");
-    setIsSubscribed(true);
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const overviewRailRef = useRef<HTMLDivElement | null>(null);
+  const overviewHoverRef = useRef(false);
 
-    // Automatically close after 3 seconds
-    setTimeout(() => {
-      setShowEmailForm(false);
-      setIsSubscribed(false);
-    }, 3000);
-  } catch (error) {
-    console.error(
-      "Newsletter subscription failed:",
-      error
-    );
-
-    setNewsletterError(
-      error instanceof Error
-        ? error.message
-        : "Something went wrong. Please try again."
-    );
-  } finally {
-    setNewsletterSubmitting(false);
-  }
-};
-  const sectionRefs = useRef<
-    Record<string, HTMLElement | null>
-  >({});
-
-  const overviewRailRef =
-    useRef<HTMLDivElement | null>(null);
-
-  const overviewHoverRef =
-    useRef(false);
-
+  /* ---------- overview rail auto-scroll ---------- */
   useEffect(() => {
     const rail = overviewRailRef.current;
 
-    if (!rail || sections.length <= 1) {
-      return;
-    }
+    if (!rail || sections.length <= 1) return;
 
     let animationFrame = 0;
     let previousTime = performance.now();
 
-    const railStyles =
-      window.getComputedStyle(rail);
+    const railStyles = window.getComputedStyle(rail);
+    const gap = parseFloat(railStyles.columnGap || railStyles.gap || "0");
 
-    const gap =
-      parseFloat(
-        railStyles.columnGap ||
-        railStyles.gap ||
-        "0"
-      );
+    const firstSet = Array.from(rail.children).slice(0, sections.length);
 
-    const firstSet = Array.from(
-      rail.children
-    ).slice(0, sections.length);
-
-    const loopWidth =
-      firstSet.reduce(
-        (total, child, index) => {
-          const width =
-            (child as HTMLElement)
-              .getBoundingClientRect()
-              .width;
-
-          return (
-            total +
-            width +
-            (index <
-              firstSet.length - 1
-              ? gap
-              : 0)
-          );
-        },
-        0
-      );
+    const loopWidth = firstSet.reduce((total, child, index) => {
+      const width = (child as HTMLElement).getBoundingClientRect().width;
+      return total + width + (index < firstSet.length - 1 ? gap : 0);
+    }, 0);
 
     const speed = 55;
 
     const animate = (time: number) => {
-      const delta =
-        Math.min(
-          time - previousTime,
-          32
-        );
-
+      const delta = Math.min(time - previousTime, 32);
       previousTime = time;
 
-      if (
-        !overviewHoverRef.current &&
-        !document.hidden
-      ) {
-        rail.scrollLeft +=
-          (speed * delta) / 1000;
+      if (!overviewHoverRef.current && !document.hidden) {
+        rail.scrollLeft += (speed * delta) / 1000;
 
-        if (
-          loopWidth > 0 &&
-          rail.scrollLeft >= loopWidth
-        ) {
+        if (loopWidth > 0 && rail.scrollLeft >= loopWidth) {
           rail.scrollLeft -= loopWidth;
         }
       }
 
-      animationFrame =
-        window.requestAnimationFrame(
-          animate
-        );
+      animationFrame = window.requestAnimationFrame(animate);
     };
 
-    animationFrame =
-      window.requestAnimationFrame(
-        animate
-      );
+    animationFrame = window.requestAnimationFrame(animate);
 
-    return () => {
-      window.cancelAnimationFrame(
-        animationFrame
-      );
-    };
+    return () => window.cancelAnimationFrame(animationFrame);
   }, []);
 
+  /* ---------- reveal on scroll ---------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -720,20 +368,14 @@ const [newsletterError, setNewsletterError] =
           if (!entry.isIntersecting) return;
 
           const number = entry.target.getAttribute("data-feature");
-
           if (!number) return;
 
           setVisible((current) =>
-            current.includes(number)
-              ? current
-              : [...current, number]
+            current.includes(number) ? current : [...current, number]
           );
         });
       },
-      {
-        threshold: 0.15,
-        rootMargin: "0px 0px -100px 0px",
-      }
+      { threshold: 0.15, rootMargin: "0px 0px -100px 0px" }
     );
 
     Object.values(sectionRefs.current).forEach((section) => {
@@ -750,6 +392,11 @@ const [newsletterError, setNewsletterError] =
     });
   };
 
+  const closeModal = () => {
+    setShowEmailForm(false);
+    setIsSubscribed(false);
+  };
+
   return (
     <main className={styles.page}>
       {/* =====================================================
@@ -763,14 +410,15 @@ const [newsletterError, setNewsletterError] =
           <div className={styles.heroLayout}>
             <div className={styles.heroCopy}>
               <h1>
-                Everything your pet needs.
-                <span>All in one place.</span>
+                One App. Every Paw-sibility.
+
+                <span>Your Pet's Life, Simplified.</span>
               </h1>
 
               <p>
-                From identity and safety to everyday care, health,
-                memories, rewards and smart tools — PetCard connects
-                your pet&apos;s entire world in one simple experience.
+                From identity and safety to everyday care, health, memories,
+                rewards and smart tools — PetCard connects your pet&apos;s
+                entire world in one simple experience.
               </p>
 
               <div className={styles.heroActions}>
@@ -780,13 +428,9 @@ const [newsletterError, setNewsletterError] =
                   onClick={() => scrollToFeature("01")}
                 >
                   Explore Features
-
                 </button>
 
-                <a
-                  href="#feature-overview"
-                  className="btn btn-outline"
-                >
+                <a href="#feature-overview" className="btn btn-outline">
                   View All
                 </a>
               </div>
@@ -795,78 +439,7 @@ const [newsletterError, setNewsletterError] =
             <div className={styles.heroVisual}>
               <div className={styles.heroGlow} />
 
-              <div className={styles.heroPhone}>
-                <div className={styles.heroPhoneNotch} />
-
-                <div className={styles.heroPhoneHeader}>
-                  <span>9:41</span>
-                  <strong>PetCard</strong>
-                  <span>•••</span>
-                </div>
-
-                <div className={styles.heroPetHeader}>
-                  <div className={styles.heroPetAvatar}>
-                    <PawPrint size={19} fill="currentColor" />
-                  </div>
-
-                  <div>
-                    <small>Good morning,</small>
-                    <strong>Bruno ❤️</strong>
-                  </div>
-
-                  <span className={styles.onlineDot}>
-                    Active
-                  </span>
-                </div>
-
-                <div className={styles.heroTodayCard}>
-                  <div>
-                    <small>Today&apos;s Care</small>
-                    <strong>3 / 5</strong>
-                  </div>
-
-                  <div className={styles.heroProgress}>
-                    <span />
-                  </div>
-                </div>
-
-                {[
-                  ["Feeding", "08:00 AM", true],
-                  ["Water", "09:30 AM", true],
-                  ["Walk", "06:00 PM", false],
-                  ["Training", "07:00 PM", false],
-                  ["Grooming", "08:00 PM", false],
-                ].map(([name, time, done]) => (
-                  <div className={styles.heroTask} key={String(name)}>
-                    <span>
-                      <Activity size={13} />
-                    </span>
-
-                    <div>
-                      <strong>{name}</strong>
-                      <small>{time}</small>
-                    </div>
-
-                    {done ? (
-                      <CircleCheck size={15} />
-                    ) : (
-                      <span className={styles.emptyCheck} />
-                    )}
-                  </div>
-                ))}
-
-                <div className={styles.heroPhoneNav}>
-                  <span>Home</span>
-                  <span>Care</span>
-
-                  <span className={styles.heroNavActive}>
-                    <PawPrint size={13} fill="currentColor" />
-                  </span>
-
-                  <span>History</span>
-                  <span>More</span>
-                </div>
-              </div>
+              <PhoneMockup screens={SCREENS.hero} />
 
               <div className={styles.heroFloatA}>
                 <ShieldCheck size={14} />
@@ -874,8 +447,7 @@ const [newsletterError, setNewsletterError] =
               </div>
 
               <div className={styles.heroFloatB}>
-                <Trophy size={14} />
-                7 day streak
+                <Trophy size={14} />7 day streak
               </div>
 
               <div className={styles.heroFloatC}>
@@ -891,15 +463,10 @@ const [newsletterError, setNewsletterError] =
           FEATURE OVERVIEW
           ===================================================== */}
 
-      <section
-        id="feature-overview"
-        className={styles.overview}
-      >
+      <section id="feature-overview" className={styles.overview}>
         <div className={styles.container}>
           <div className={styles.overviewHead}>
             <div>
-
-
               <h2>
                 One pet.
                 <span>Eight connected worlds.</span>
@@ -907,60 +474,52 @@ const [newsletterError, setNewsletterError] =
             </div>
 
             <p>
-              Explore the complete PetCard experience — built around
-              the way real pet parents care, protect, learn and play.
+              Explore the complete PetCard experience — built around the way
+              real pet parents care, protect, learn and play.
             </p>
           </div>
 
           <div
-  ref={overviewRailRef}
-  className={styles.overviewRail}
-  onMouseEnter={() => {
-    overviewHoverRef.current = true;
-  }}
-  onMouseLeave={() => {
-    overviewHoverRef.current = false;
-  }}
->
-            {[...sections, ...sections].map(
-              (section, index) => {
-                const Icon = section.icon;
+            ref={overviewRailRef}
+            className={styles.overviewRail}
+            onMouseEnter={() => {
+              overviewHoverRef.current = true;
+            }}
+            onMouseLeave={() => {
+              overviewHoverRef.current = false;
+            }}
+          >
+            {[...sections, ...sections].map((section, index) => {
+              const Icon = section.icon;
 
-                return (
-                  <button
-                    type="button"
-                    key={`${section.number}-${index}`}
-                    className={styles.overviewItem}
-                    onClick={() =>
-                      scrollToFeature(
-                        section.number
-                      )
-                    }
-                    aria-label={`Go to ${section.eyebrow}`}
-                  >
-                    <div className={styles.overviewTop}>
-                      <span className={styles.overviewNo}>
-                        {section.number}
-                      </span>
+              return (
+                <button
+                  type="button"
+                  key={`${section.number}-${index}`}
+                  className={styles.overviewItem}
+                  onClick={() => scrollToFeature(section.number)}
+                  aria-label={`Go to ${section.eyebrow}`}
+                >
+                  <div className={styles.overviewTop}>
+                    <span className={styles.overviewNo}>{section.number}</span>
 
-                      <span className={styles.overviewIcon}>
-                        <IconBox icon={Icon} />
-                      </span>
-                    </div>
+                    <span className={styles.overviewIcon}>
+                      <IconBox icon={Icon} />
+                    </span>
+                  </div>
 
-                    <div className={styles.overviewBottom}>
-                      <span className={styles.overviewLabel}>
-                        {section.eyebrow}
-                      </span>
+                  <div className={styles.overviewBottom}>
+                    <span className={styles.overviewLabel}>
+                      {section.eyebrow}
+                    </span>
 
-                      <span className={styles.overviewArrow}>
-                        <ChevronRight size={18} />
-                      </span>
-                    </div>
-                  </button>
-                );
-              }
-            )}
+                    <span className={styles.overviewArrow}>
+                      <ChevronRight size={18} />
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -979,8 +538,9 @@ const [newsletterError, setNewsletterError] =
       >
         <div className={styles.container}>
           <div
-            className={`${styles.identityLayout} ${visible.includes("01") ? styles.isVisible : ""
-              }`}
+            className={`${styles.identityLayout} ${
+              visible.includes("01") ? styles.isVisible : ""
+            }`}
           >
             <div className={styles.identityCopy}>
               <FeatureHeading section={sections[0]} />
@@ -997,84 +557,20 @@ const [newsletterError, setNewsletterError] =
                 <div>
                   <strong>Safety is love in action.</strong>
                   <p>
-                    Because they can&apos;t speak for themselves,
-                    we make sure someone can.
+                    Because they can&apos;t speak for themselves, we make sure
+                    someone can.
                   </p>
                 </div>
               </div>
-
             </div>
 
             <div className={styles.identityCenter}>
               <div className={styles.identityHalo} />
 
-              <div className={styles.identityPhone}>
-                <div className={styles.phoneBlackNotch} />
-
-                <div className={styles.idHeader}>
-                  <span>‹</span>
-                  <strong>PetCard</strong>
-                  <span>•••</span>
-                </div>
-
-                <div className={styles.idProfile}>
-                  <div className={styles.idProfileImage}>
-                    <Image
-                      src="/images/slider/huchiko.png"
-                      alt="Pet profile"
-                      fill
-                      sizes="50px"
-                    />
-                  </div>
-
-                  <div>
-                    <strong>Milo</strong>
-                    <small>Akita Inu · 2 Years</small>
-                  </div>
-                </div>
-
-                <div className={styles.idCardHero}>
-                  <span>Pet ID</span>
-                  <strong>PC24MILO0001</strong>
-
-                  <div className={styles.fakeQR}>
-                    <QrCode size={45} />
-                  </div>
-                </div>
-
-                <div className={styles.idEmergency}>
-                  <div>
-                    <HeartPulse size={14} />
-                    <strong>Emergency Card</strong>
-                  </div>
-
-                  <ChevronRight size={14} />
-                </div>
-
-                <div className={styles.idGuardians}>
-                  <div>
-                    <small>PRIMARY GUARDIAN</small>
-                    <strong>Riya Sharma</strong>
-                  </div>
-
-                  <div>
-                    <small>SECONDARY GUARDIAN</small>
-                    <strong>Karan Sharma</strong>
-                  </div>
-                </div>
-
-                <button type="button" className={styles.phoneAction}>
-                  Share PetCard
-                  <ArrowRight size={12} />
-                </button>
-
-                <div className={styles.phoneBottom}>
-                  Profile
-                  · Health
-                  · Guardians
-                  · Emergency
-                </div>
-              </div>
+              <PhoneMockup
+                screens={SCREENS.identity}
+                activeIndex={ITEM_SCREEN.identity[activeItems["01"] ?? 0]}
+              />
 
               <div className={styles.identityPet}>
                 <Image
@@ -1098,6 +594,7 @@ const [newsletterError, setNewsletterError] =
                 visible={visible.includes("01")}
                 large
                 className={styles.identityCarousel}
+                onActiveChange={trackItem("01")}
               />
             </div>
           </div>
@@ -1118,8 +615,9 @@ const [newsletterError, setNewsletterError] =
       >
         <div className={styles.container}>
           <div
-            className={`${styles.dailyLayout} ${visible.includes("02") ? styles.isVisible : ""
-              }`}
+            className={`${styles.dailyLayout} ${
+              visible.includes("02") ? styles.isVisible : ""
+            }`}
           >
             <div className={styles.dailyCopy}>
               <FeatureHeading section={sections[1]} />
@@ -1133,8 +631,6 @@ const [newsletterError, setNewsletterError] =
                 visible={visible.includes("02")}
                 className={styles.dailyCarousel}
               />
-
-
             </div>
 
             <div className={styles.dailyPhoneWrap}>
@@ -1142,89 +638,7 @@ const [newsletterError, setNewsletterError] =
                 <Heart size={39} />
               </div>
 
-              <div className={styles.dailyPhone}>
-                <div className={styles.phoneBlackNotch} />
-
-                <div className={styles.dailyProfile}>
-                  <div className={styles.dailyPetImage}>
-                    <Image
-                      src="/images/slider/browny.png"
-                      alt="Milo"
-                      fill
-                      sizes="42px"
-                    />
-                  </div>
-
-                  <div>
-                    <strong>Milo</strong>
-                    <small>Akita Inu · 2 Years</small>
-                  </div>
-
-                  <CalendarDays size={17} />
-                </div>
-
-                <div className={styles.dailyDateRow}>
-                  <strong>Today, May 20</strong>
-                  <span>3 / 5 Completed</span>
-                </div>
-
-                <div className={styles.dailyTaskList}>
-                  {[
-                    ["Feeding", "08:00 AM", true],
-                    ["Water", "09:30 AM", true],
-                    ["Walk", "06:00 PM", false],
-                    ["Training", "07:00 PM", false],
-                    ["Grooming", "08:00 PM", false],
-                  ].map(([title, time, done]) => (
-                    <button
-                      type="button"
-                      key={String(title)}
-                      className={styles.dailyTaskRow}
-                    >
-                      <span className={styles.dailyTaskIcon}>
-                        <Activity size={13} />
-                      </span>
-
-                      <span>
-                        <strong>{title}</strong>
-                        <small>{time}</small>
-                      </span>
-
-                      {done ? (
-                        <CircleCheck size={17} />
-                      ) : (
-                        <span className={styles.taskOutline} />
-                      )}
-                    </button>
-                  ))}
-                </div>
-
-                <div className={styles.dailyProgressLine}>
-                  <span />
-                </div>
-
-                <div className={styles.dailyReminder}>
-                  <Pill size={15} />
-
-                  <div>
-                    <small>Upcoming Reminder</small>
-                    <strong>Medicine</strong>
-                    <span>Tomorrow · 09:00 AM</span>
-                  </div>
-
-                  <Bell size={14} />
-                </div>
-
-                <div className={styles.dailyNav}>
-                  <span>Home</span>
-                  <span>Tasks</span>
-                  <span className={styles.dailyNavActive}>
-                    <PawPrint size={13} fill="currentColor" />
-                  </span>
-                  <span>History</span>
-                  <span>More</span>
-                </div>
-              </div>
+              <PhoneMockup screens={SCREENS.daily} />
 
               <div className={styles.dailyPet}>
                 <Image
@@ -1254,48 +668,14 @@ const [newsletterError, setNewsletterError] =
 
                 <div className={styles.calendarGrid}>
                   {[
-                    "28",
-                    "29",
-                    "30",
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                    "6",
-                    "7",
-                    "8",
-                    "9",
-                    "10",
-                    "11",
-                    "12",
-                    "13",
-                    "14",
-                    "15",
-                    "16",
-                    "17",
-                    "18",
-                    "19",
-                    "20",
-                    "21",
-                    "22",
-                    "23",
-                    "24",
-                    "25",
-                    "26",
-                    "27",
-                    "28",
-                    "29",
-                    "30",
-                    "31",
+                    "28", "29", "30", "1", "2", "3", "4", "5", "6", "7",
+                    "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+                    "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
+                    "28", "29", "30", "31",
                   ].map((day, index) => (
                     <span
                       key={`${day}-${index}`}
-                      className={
-                        day === "20"
-                          ? styles.calendarToday
-                          : ""
-                      }
+                      className={day === "20" ? styles.calendarToday : ""}
                     >
                       {day}
                     </span>
@@ -1384,8 +764,9 @@ const [newsletterError, setNewsletterError] =
       >
         <div className={styles.container}>
           <div
-            className={`${styles.healthLayout} ${visible.includes("03") ? styles.isVisible : ""
-              }`}
+            className={`${styles.healthLayout} ${
+              visible.includes("03") ? styles.isVisible : ""
+            }`}
           >
             <div className={styles.healthCopy}>
               <FeatureHeading section={sections[2]} />
@@ -1399,99 +780,10 @@ const [newsletterError, setNewsletterError] =
                 visible={visible.includes("03")}
                 className={styles.healthCarousel}
               />
-
-
             </div>
 
             <div className={styles.healthPhoneWrap}>
-              <div className={styles.healthPhone}>
-                <div className={styles.phoneBlackNotch} />
-
-                <div className={styles.healthTopBar}>
-                  <span>‹</span>
-                  <strong>Health Records</strong>
-                  <span>↗</span>
-                </div>
-
-                <div className={styles.healthPet}>
-                  <div className={styles.healthPetImage}>
-                    <Image
-                      src="/images/slider/kiki.png"
-                      alt="Milo"
-                      fill
-                      sizes="42px"
-                    />
-                  </div>
-
-                  <div>
-                    <strong>Milo</strong>
-                    <small>Akita Inu · 2 Years</small>
-                  </div>
-                </div>
-
-                <div className={styles.healthTabs}>
-                  <span className={styles.activeHealthTab}>
-                    Overview
-                  </span>
-                  <span>Vaccines</span>
-                  <span>Medicines</span>
-                  <span>Visits</span>
-                  <span>Documents</span>
-                </div>
-
-                <div className={styles.healthSummaryCards}>
-                  <HealthMini
-                    icon={PawPrint}
-                    title="Vaccines"
-                    value="Up to date"
-                  />
-                  <HealthMini
-                    icon={Weight}
-                    title="Weight"
-                    value="24.5 kg"
-                  />
-                  <HealthMini
-                    icon={Heart}
-                    title="Conditions"
-                    value="None"
-                  />
-                  <HealthMini
-                    icon={ShieldCheck}
-                    title="Allergies"
-                    value="None"
-                  />
-                </div>
-
-                <div className={styles.healthUpcoming}>
-                  <strong>Upcoming Reminders</strong>
-
-                  <div>
-                    <Pill size={13} />
-                    <span>
-                      <strong>Rabies Vaccine</strong>
-                      <small>Due on 20 Jun 2024</small>
-                    </span>
-                    <em>Upcoming</em>
-                  </div>
-
-                  <div>
-                    <Leaf size={13} />
-                    <span>
-                      <strong>Deworming</strong>
-                      <small>Due on 05 Jun 2024</small>
-                    </span>
-                    <em>Upcoming</em>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  className={styles.healthAddButton}
-                >
-                  <Plus size={15} />
-                  Add New Record
-                </button>
-              </div>
+              <PhoneMockup screens={SCREENS.health} />
 
               <div className={styles.healthCat}>
                 <Image
@@ -1599,8 +891,8 @@ const [newsletterError, setNewsletterError] =
                 <div>
                   <strong>Tip for a healthy pet</strong>
                   <p>
-                    Regular check-ups, timely vaccines and a
-                    balanced routine keep your pet happy and strong.
+                    Regular check-ups, timely vaccines and a balanced routine
+                    keep your pet happy and strong.
                   </p>
                 </div>
               </div>
@@ -1623,8 +915,9 @@ const [newsletterError, setNewsletterError] =
       >
         <div className={styles.container}>
           <div
-            className={`${styles.smartLayout} ${visible.includes("04") ? styles.isVisible : ""
-              }`}
+            className={`${styles.smartLayout} ${
+              visible.includes("04") ? styles.isVisible : ""
+            }`}
           >
             <div className={styles.smartCopy}>
               <FeatureHeading section={sections[3]} />
@@ -1646,88 +939,13 @@ const [newsletterError, setNewsletterError] =
 
                 <div>
                   <strong>Knowledge is love.</strong>
-                  <p>
-                    The more you learn, the better you care.
-                  </p>
+                  <p>The more you learn, the better you care.</p>
                 </div>
               </div>
             </div>
 
             <div className={styles.smartPhoneWrap}>
-              <div className={styles.smartPhone}>
-                <div className={styles.phoneBlackNotch} />
-
-                <div className={styles.chatHeader}>
-                  <span>‹</span>
-
-                  <div>
-                    <strong>PawChat AI</strong>
-                    <small>Your pet care assistant</small>
-                  </div>
-
-                  <div className={styles.chatAvatar}>
-                    <PawPrint size={14} fill="currentColor" />
-                  </div>
-                </div>
-
-                <div className={styles.chatQuestion}>
-                  How often should I groom my Golden Retriever?
-                </div>
-
-                <div className={styles.chatAnswer}>
-                  <div className={styles.chatPaw}>
-                    <PawPrint size={12} fill="currentColor" />
-                  </div>
-
-                  <div>
-                    <p>
-                      Golden Retrievers have a beautiful double coat
-                      that needs regular care!
-                    </p>
-
-                    <strong>Here&apos;s what I recommend:</strong>
-
-                    {[
-                      ["Brushing", "3–4 times a week"],
-                      ["Bathing", "Every 4–6 weeks"],
-                      ["Nail Trimming", "Every 2–3 weeks"],
-                      ["Ear Cleaning", "Once a week"],
-                    ].map(([title, value]) => (
-                      <div
-                        className={styles.aiRecommendation}
-                        key={title}
-                      >
-                        <Check size={11} />
-                        <span>
-                          <strong>{title}</strong>
-                          <small>{value}</small>
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className={styles.aiSuggestions}>
-                  <span>Feeding tips</span>
-                  <span>Training help</span>
-                  <span>Health advice</span>
-                </div>
-
-                <div className={styles.aiInput}>
-                  Ask anything about your pet...
-                  <Send size={13} />
-                </div>
-
-                <div className={styles.smartPhoneNav}>
-                  <span>Home</span>
-                  <span>Learn</span>
-                  <span className={styles.smartNavActive}>
-                    <MessageCircle size={13} />
-                  </span>
-                  <span>History</span>
-                  <span>More</span>
-                </div>
-              </div>
+              <PhoneMockup screens={SCREENS.smart} />
             </div>
 
             <div className={styles.smartAside}>
@@ -1737,8 +955,8 @@ const [newsletterError, setNewsletterError] =
                   <strong>So is their care.</strong>
 
                   <p>
-                    Personalized guidance for your pet&apos;s breed,
-                    age, and lifestyle.
+                    Personalized guidance for your pet&apos;s breed, age, and
+                    lifestyle.
                   </p>
 
                   <button type="button">
@@ -1747,6 +965,7 @@ const [newsletterError, setNewsletterError] =
                       src="/images/paw-white.png"
                       width={20}
                       height={20}
+                      alt=""
                     />
                   </button>
                 </div>
@@ -1841,8 +1060,9 @@ const [newsletterError, setNewsletterError] =
       >
         <div className={styles.container}>
           <div
-            className={`${styles.memoryLayout} ${visible.includes("05") ? styles.isVisible : ""
-              }`}
+            className={`${styles.memoryLayout} ${
+              visible.includes("05") ? styles.isVisible : ""
+            }`}
           >
             <div className={styles.memoryIntro}>
               <FeatureHeading section={sections[4]} />
@@ -1858,54 +1078,8 @@ const [newsletterError, setNewsletterError] =
               />
             </div>
 
-            <div className={styles.memoryGallery}>
-              <div className={styles.galleryHeader}>
-                <span>May 2024</span>
-                <div>
-                  <button type="button">
-                    <MoreHorizontal size={16} />
-                  </button>
-
-                  <button type="button">
-                    <Plus size={16} />
-                  </button>
-                </div>
-              </div>
-
-              <div className={styles.galleryTabs}>
-                <button type="button">All</button>
-                <button
-                  type="button"
-                  className={styles.galleryActive}
-                >
-                  Photos
-                </button>
-                <button type="button">Videos</button>
-                <button type="button">Albums</button>
-              </div>
-
-              <div className={styles.photoGrid}>
-                {[
-                  "/images/reward/coco.png",
-                  "/images/slider/huchiko.png",
-                  "/images/reward/huchiko.png",
-                  "/images/slider/noir.png",
-                  "/images/reward/zuzu.png",
-                  "/images/slider/waffle.png",
-                  "/images/slider/kiki.png",
-                  "/images/slider/cupid.png",
-                  "/images/slider/oreo.png",
-                ].map((src, index) => (
-                  <div className={styles.photoTile} key={src + index}>
-                    <Image
-                      src={src}
-                      alt="Pet memory"
-                      fill
-                      sizes="120px"
-                    />
-                  </div>
-                ))}
-              </div>
+            <div style={{ display: "grid", placeItems: "center" }}>
+              <PhoneMockup screens={SCREENS.memories} />
             </div>
 
             <div className={styles.memoryAside}>
@@ -1929,19 +1103,12 @@ const [newsletterError, setNewsletterError] =
                       ["Trick Master", "Dec 01, 2023", Trophy],
                     ] as Array<[string, string, React.ElementType]>
                   ).map(([title, date, Icon]) => {
-                    const MilestoneIcon =
-                      Icon as React.ElementType;
+                    const MilestoneIcon = Icon as React.ElementType;
 
                     return (
-                      <div
-                        className={styles.milestoneItem}
-                        key={String(title)}
-                      >
+                      <div className={styles.milestoneItem} key={String(title)}>
                         <span>
-                          <MilestoneIcon
-                            size={14}
-                            fill="currentColor"
-                          />
+                          <MilestoneIcon size={14} fill="currentColor" />
                         </span>
 
                         <strong>{title}</strong>
@@ -2014,8 +1181,8 @@ const [newsletterError, setNewsletterError] =
                 <div>
                   <strong>Keep creating happy memories!</strong>
                   <p>
-                    Every moment you save today becomes a memory
-                    you&apos;ll cherish forever.
+                    Every moment you save today becomes a memory you&apos;ll
+                    cherish forever.
                   </p>
                 </div>
               </div>
@@ -2038,8 +1205,9 @@ const [newsletterError, setNewsletterError] =
       >
         <div className={styles.container}>
           <div
-            className={`${styles.rewardLayout} ${visible.includes("06") ? styles.isVisible : ""
-              }`}
+            className={`${styles.rewardLayout} ${
+              visible.includes("06") ? styles.isVisible : ""
+            }`}
           >
             <div className={styles.rewardCopy}>
               <FeatureHeading section={sections[5]} />
@@ -2052,113 +1220,15 @@ const [newsletterError, setNewsletterError] =
                 items={sections[5].items}
                 visible={visible.includes("06")}
                 className={styles.rewardCarousel}
+                onActiveChange={trackItem("06")}
               />
             </div>
 
             <div className={styles.rewardPhoneWrap}>
-              <div className={styles.rewardPhone}>
-                <div className={styles.phoneBlackNotch} />
-
-                <div className={styles.rewardTop}>
-                  <span>‹</span>
-                  <strong>Rewards</strong>
-                  <CalendarDays size={15} />
-                </div>
-
-                <div className={styles.rewardProfile}>
-                  <div>
-                    <span>
-                      <PawPrint
-                        size={15}
-                        fill="currentColor"
-                      />
-                    </span>
-
-                    <div>
-                      <strong>Milo</strong>
-                      <small>Akita Inu · 2 Years</small>
-                    </div>
-                  </div>
-
-                  <Flame size={17} />
-                </div>
-
-                <div className={styles.rewardLevel}>
-                  <div>
-                    <strong>Level 12</strong>
-                    <span>580 / 1000 XP</span>
-                  </div>
-
-                  <div className={styles.xpLine}>
-                    <span />
-                  </div>
-                </div>
-
-                <div className={styles.rewardStats}>
-                  <div>
-                    <Flame size={14} />
-                    <strong>12</strong>
-                    <small>Day Streak</small>
-                  </div>
-
-                  <div>
-                    <PawPrint
-                      size={14}
-                      fill="currentColor"
-                    />
-                    <strong>2,450</strong>
-                    <small>PawPoints</small>
-                  </div>
-
-                  <div>
-                    <Star size={14} />
-                    <strong>580</strong>
-                    <small>Total XP</small>
-                  </div>
-                </div>
-
-                <div className={styles.rewardMission}>
-                  <div className={styles.missionHead}>
-                    <strong>Today&apos;s Mission</strong>
-                    <span>3 / 5</span>
-                  </div>
-
-                  <div>
-                    <Utensils size={14} />
-                    <span>
-                      <strong>Complete all daily care tasks</strong>
-                      <small>Earn 50 XP + 100 PawPoints</small>
-                    </span>
-                  </div>
-
-                  <div className={styles.missionProgress}>
-                    <span />
-                  </div>
-                </div>
-
-                <div className={styles.recentBadges}>
-                  <div className={styles.missionHead}>
-                    <strong>Recent Achievements</strong>
-                    <span>View All →</span>
-                  </div>
-
-                  <div className={styles.badgeRow}>
-                    <span>
-                      <Flame size={16} />
-                    </span>
-                    <span>
-                      <Leaf size={16} />
-                    </span>
-                    <span>
-                      <Clock3 size={16} />
-                    </span>
-                  </div>
-                </div>
-
-                <div className={styles.rewardPhoneBottom}>
-                  Home · Tasks · Rewards · More
-                </div>
-              </div>
+              <PhoneMockup
+                screens={SCREENS.rewards}
+                activeIndex={ITEM_SCREEN.rewards[activeItems["06"] ?? 0]}
+              />
 
               <div className={styles.rewardPet}>
                 <Image
@@ -2177,9 +1247,7 @@ const [newsletterError, setNewsletterError] =
                     <Flame size={15} />
                     Daily Streak
                   </span>
-                  <span className={styles.viewAll}>
-                    View Calendar →
-                  </span>
+                  <span className={styles.viewAll}>View Calendar →</span>
                 </div>
 
                 <div className={styles.weekRow}>
@@ -2194,17 +1262,9 @@ const [newsletterError, setNewsletterError] =
                   ].map(([day, done]) => (
                     <div key={String(day)}>
                       <span
-                        className={
-                          done
-                            ? styles.streakDone
-                            : styles.streakEmpty
-                        }
+                        className={done ? styles.streakDone : styles.streakEmpty}
                       >
-                        {done ? (
-                          <Check size={13} />
-                        ) : (
-                          ""
-                        )}
+                        {done ? <Check size={13} /> : ""}
                       </span>
 
                       <small>{day}</small>
@@ -2227,9 +1287,7 @@ const [newsletterError, setNewsletterError] =
                     <Trophy size={15} />
                     Top Achievements
                   </span>
-                  <span className={styles.viewAll}>
-                    View All →
-                  </span>
+                  <span className={styles.viewAll}>View All →</span>
                 </div>
 
                 <div className={styles.achievementGrid}>
@@ -2241,15 +1299,12 @@ const [newsletterError, setNewsletterError] =
                       ["Super Groomer", Sparkles],
                     ] as Array<[string, React.ElementType]>
                   ).map(([title, Icon]) => {
-                    const AchievementIcon =
-                      Icon as React.ElementType;
+                    const AchievementIcon = Icon as React.ElementType;
 
                     return (
                       <div key={String(title)}>
                         <span>
-                          <AchievementIcon
-                            size={18}
-                          />
+                          <AchievementIcon size={18} />
                         </span>
                         <strong>{title}</strong>
                         <small>Completed</small>
@@ -2265,9 +1320,7 @@ const [newsletterError, setNewsletterError] =
                     <Gift size={15} />
                     Rewards Shop
                   </span>
-                  <span className={styles.viewAll}>
-                    View Shop →
-                  </span>
+                  <span className={styles.viewAll}>View Shop →</span>
                 </div>
 
                 <div className={styles.shopGrid}>
@@ -2279,8 +1332,7 @@ const [newsletterError, setNewsletterError] =
                       ["Pet Hoodie", Sparkles],
                     ] as Array<[string, React.ElementType]>
                   ).map(([name, Icon]) => {
-                    const ShopIcon =
-                      Icon as React.ElementType;
+                    const ShopIcon = Icon as React.ElementType;
 
                     return (
                       <button
@@ -2293,10 +1345,7 @@ const [newsletterError, setNewsletterError] =
                         </span>
                         <strong>{name}</strong>
                         <small>
-                          <PawPrint
-                            size={9}
-                            fill="currentColor"
-                          />
+                          <PawPrint size={9} fill="currentColor" />
                           2,500
                         </small>
                       </button>
@@ -2310,8 +1359,7 @@ const [newsletterError, setNewsletterError] =
                 <div>
                   <strong>More care. More rewards.</strong>
                   <p>
-                    Turn everyday care into something amazing for
-                    your pet.
+                    Turn everyday care into something amazing for your pet.
                   </p>
                 </div>
               </div>
@@ -2334,8 +1382,9 @@ const [newsletterError, setNewsletterError] =
       >
         <div className={styles.container}>
           <div
-            className={`${styles.petmojiLayout} ${visible.includes("07") ? styles.isVisible : ""
-              }`}
+            className={`${styles.petmojiLayout} ${
+              visible.includes("07") ? styles.isVisible : ""
+            }`}
           >
             <div className={styles.petmojiCopy}>
               <FeatureHeading section={sections[6]} />
@@ -2352,99 +1401,7 @@ const [newsletterError, setNewsletterError] =
             </div>
 
             <div className={styles.petmojiEditor}>
-              <div className={styles.editorPhone}>
-                <div className={styles.phoneBlackNotch} />
-
-                <div className={styles.editorHeader}>
-                  <span>‹</span>
-                  <strong>Create Petmoji</strong>
-                  <span className={styles.editorCheck}>
-                    ✓
-                  </span>
-                </div>
-
-                <div className={styles.petmojiCanvas}>
-                  <div className={styles.petmojiCanvasGlow} />
-
-                  <div className={styles.petmojiCharacter}>
-                    <Image
-                      src="/images/slider/huchiko.png"
-                      alt="Petmoji"
-                      fill
-                      sizes="155px"
-                    />
-                  </div>
-
-                  <div className={styles.petmojiSparkleOne}>
-                    ✦
-                  </div>
-
-                  <div className={styles.petmojiSparkleTwo}>
-                    ✦
-                  </div>
-
-                  <div className={styles.petmojiHeart}>
-                    ❤️
-                  </div>
-                </div>
-
-                <div className={styles.editorTools}>
-                  {(
-                    [
-                      ["Avatar", PawPrint],
-                      ["Accessories", Gift],
-                      ["Background", ImageIcon],
-                      ["Stickers", Star],
-                      ["Effects", Sparkles],
-                    ] as Array<[string, React.ElementType]>
-                  ).map(([title, Icon]) => {
-                    const EditorIcon =
-                      Icon as React.ElementType;
-
-                    return (
-                      <button type="button" key={String(title)}>
-                        <EditorIcon size={14} />
-                        <small>{title}</small>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className={styles.editorSection}>
-                  <div className={styles.editorSectionHead}>
-                    <strong>Accessories</strong>
-                    <span>View All →</span>
-                  </div>
-
-                  <div className={styles.accessoryRow}>
-                    <span>🎩</span>
-                    <span className={styles.accessoryActive}>
-                      🕶️
-                    </span>
-                    <span>🎀</span>
-                    <span>🌸</span>
-                  </div>
-                </div>
-
-                <div className={styles.editorSection}>
-                  <div className={styles.editorSectionHead}>
-                    <strong>Backgrounds</strong>
-                    <span>View All →</span>
-                  </div>
-
-                  <div className={styles.backgroundRow}>
-                    <span>💗</span>
-                    <span>🏝️</span>
-                    <span>🌄</span>
-                    <span>🌌</span>
-                  </div>
-                </div>
-
-                <div className={styles.editorPreviewText}>
-                  Petmoji Preview
-                  <ArrowRight size={13} />
-                </div>
-              </div>
+              <PhoneMockup screens={SCREENS.petmoji} />
             </div>
 
             <div className={styles.petmojiAside}>
@@ -2465,23 +1422,12 @@ const [newsletterError, setNewsletterError] =
                     <button
                       type="button"
                       key={src}
-                      className={
-                        index === 0
-                          ? styles.avatarActive
-                          : ""
-                      }
+                      className={index === 0 ? styles.avatarActive : ""}
                     >
-                      <Image
-                        src={src}
-                        alt="Avatar"
-                        fill
-                        sizes="60px"
-                      />
+                      <Image src={src} alt="Avatar" fill sizes="60px" />
 
                       {index === 0 && (
-                        <span className={styles.avatarTick}>
-                          ✓
-                        </span>
+                        <span className={styles.avatarTick}>✓</span>
                       )}
                     </button>
                   ))}
@@ -2503,9 +1449,7 @@ const [newsletterError, setNewsletterError] =
                       sizes="200px"
                     />
 
-                    <span className={styles.previewSticker}>
-                      GOOD BOY
-                    </span>
+                    <span className={styles.previewSticker}>GOOD BOY</span>
                   </div>
 
                   <div className={styles.previewSmallGrid}>
@@ -2546,11 +1490,7 @@ const [newsletterError, setNewsletterError] =
                   ].map(([name, emoji], index) => (
                     <button
                       type="button"
-                      className={
-                        index === 0
-                          ? styles.themeActive
-                          : ""
-                      }
+                      className={index === 0 ? styles.themeActive : ""}
                       key={name}
                     >
                       <span>{emoji}</span>
@@ -2564,13 +1504,8 @@ const [newsletterError, setNewsletterError] =
                 <Sparkles size={18} />
 
                 <div>
-                  <strong>
-                    Express their personality.
-                  </strong>
-
-                  <p>
-                    Create a Petmoji that&apos;s 100% them.
-                  </p>
+                  <strong>Express their personality.</strong>
+                  <p>Create a Petmoji that&apos;s 100% them.</p>
                 </div>
               </div>
             </div>
@@ -2592,8 +1527,9 @@ const [newsletterError, setNewsletterError] =
       >
         <div className={styles.container}>
           <div
-            className={`${styles.funLayout} ${visible.includes("08") ? styles.isVisible : ""
-              }`}
+            className={`${styles.funLayout} ${
+              visible.includes("08") ? styles.isVisible : ""
+            }`}
           >
             <div className={styles.funCopy}>
               <FeatureHeading section={sections[7]} />
@@ -2606,127 +1542,15 @@ const [newsletterError, setNewsletterError] =
                 items={sections[7].items}
                 visible={visible.includes("08")}
                 className={styles.funCarousel}
-                onActiveChange={(index) =>
-                  setActiveItems((current) => ({
-                    ...current,
-                    "08": index,
-                  }))
-                }
+                onActiveChange={trackItem("08")}
               />
             </div>
 
             <div className={styles.funPhoneWrap}>
-              <div className={styles.funPhone}>
-                <div className={styles.phoneBlackNotch} />
-
-                <div className={styles.funPhoneHeader}>
-                  <span>9:41</span>
-                  <strong>Fun Zone</strong>
-                  <span>•••</span>
-                </div>
-
-                <div className={styles.funPetProfile}>
-                  <div className={styles.funPetAvatar}>
-                    <Image
-                      src="/images/reward/home-dog.png"
-                      alt="Milo"
-                      fill
-                      sizes="39px"
-                    />
-                  </div>
-
-                  <div>
-                    <strong>Milo</strong>
-                    <small>Golden Retriever · 2 Years</small>
-                  </div>
-                </div>
-
-                <div className={styles.funTabs}>
-                  <span
-                    className={
-                      activeItems["08"] === 0
-                        ? styles.funTabActive
-                        : ""
-                    }
-                  >
-                    Clicker
-                  </span>
-
-                  <span
-                    className={
-                      activeItems["08"] === 1
-                        ? styles.funTabActive
-                        : ""
-                    }
-                  >
-                    Whistle
-                  </span>
-
-                  <span
-                    className={
-                      activeItems["08"] === 2
-                        ? styles.funTabActive
-                        : ""
-                    }
-                  >
-                    Training
-                  </span>
-                </div>
-
-                <div className={styles.clickerArea}>
-                  <div className={styles.clickerTitle}>
-                    <strong>Clicker</strong>
-                    <small>
-                      Tap to click and reward good behavior!
-                    </small>
-                  </div>
-
-                  <button
-                    type="button"
-                    className={styles.clickButton}
-                  >
-                    <PawPrint
-                      size={50}
-                      fill="currentColor"
-                    />
-                  </button>
-
-                  <strong className={styles.clickCount}>
-                    128
-                  </strong>
-
-                  <span>Total Clicks</span>
-                </div>
-
-                <div className={styles.clickerTips}>
-                  <strong>Clicker Tips</strong>
-
-                  <span>
-                    • Click instantly when your pet does something
-                    good.
-                  </span>
-
-                  <span>
-                    • Follow the click with a treat or praise.
-                  </span>
-
-                  <span>
-                    • Consistency is the key to learning.
-                  </span>
-                </div>
-
-                <div className={styles.funNav}>
-                  <span>Home</span>
-                  <span>Progress</span>
-
-                  <span className={styles.funNavActive}>
-                    <PawPrint size={14} fill="currentColor" />
-                  </span>
-
-                  <span>Rewards</span>
-                  <span>More</span>
-                </div>
-              </div>
+              <PhoneMockup
+                screens={SCREENS.fun}
+                activeIndex={ITEM_SCREEN.fun[activeItems["08"] ?? 0]}
+              />
 
               <div className={styles.funPet}>
                 <Image
@@ -2745,9 +1569,7 @@ const [newsletterError, setNewsletterError] =
                     <Activity size={15} />
                     Clicker Training
                   </span>
-                  <span className={styles.viewAll}>
-                    View All →
-                  </span>
+                  <span className={styles.viewAll}>View All →</span>
                 </div>
 
                 <div className={styles.clickerSteps}>
@@ -2787,9 +1609,7 @@ const [newsletterError, setNewsletterError] =
                     <GiWhistle size={15} />
                     Whistle Commands
                   </span>
-                  <span className={styles.viewAll}>
-                    View All →
-                  </span>
+                  <span className={styles.viewAll}>View All →</span>
                 </div>
 
                 <div className={styles.whistleCommands}>
@@ -2800,10 +1620,7 @@ const [newsletterError, setNewsletterError] =
                   ].map(([title, subtitle]) => (
                     <button type="button" key={title}>
                       <span>
-                        <PawPrint
-                          size={18}
-                          fill="currentColor"
-                        />
+                        <PawPrint size={18} fill="currentColor" />
                       </span>
 
                       <strong>{title}</strong>
@@ -2812,10 +1629,7 @@ const [newsletterError, setNewsletterError] =
                   ))}
                 </div>
 
-                <button
-                  type="button"
-                  className={styles.waveButton}
-                >
+                <button type="button" className={styles.waveButton}>
                   <Play size={13} fill="currentColor" />
                   <span />
                   Try Now
@@ -2829,9 +1643,7 @@ const [newsletterError, setNewsletterError] =
                     Training Tools
                   </span>
 
-                  <span className={styles.viewAll}>
-                    View All →
-                  </span>
+                  <span className={styles.viewAll}>View All →</span>
                 </div>
 
                 <div className={styles.trainingGrid}>
@@ -2843,14 +1655,10 @@ const [newsletterError, setNewsletterError] =
                       ["Behavior Tips", BrainIcon],
                     ] as Array<[string, React.ElementType]>
                   ).map(([title, Icon]) => {
-                    const TrainingIcon =
-                      Icon as React.ElementType;
+                    const TrainingIcon = Icon as React.ElementType;
 
                     return (
-                      <button
-                        type="button"
-                        key={String(title)}
-                      >
+                      <button type="button" key={String(title)}>
                         <span>
                           <TrainingIcon size={19} />
                         </span>
@@ -2869,196 +1677,166 @@ const [newsletterError, setNewsletterError] =
                     </small>
                   </div>
 
-                  <button type="button">
-                    Start Training
-                  </button>
+                  <button type="button">Start Training</button>
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
       </section>
 
-
       {/* =====================================================
-    FINAL DOWNLOAD
-    ===================================================== */}
+          FINAL DOWNLOAD
+          ===================================================== */}
 
-     <section
-  className={`${styles.finalDownload} ${styles.homeReveal}`}
-  id="download-app"
-  data-home-reveal="download"
->
-  <div
-    className={`${styles.container} container ${styles.finalDownloadCard}`}
-  >
-    <div className={styles.finalPets}>
-      <Image
-        src="/images/AboutFooter.png"
-        alt="PETCARD pets"
-        fill
-        priority
-        className={styles.finalPetsImage}
-      />
-    </div>
-
-    <div className={styles.finalCopy}>
-      <h2>More to Discover. More to Love.</h2>
-
-      <p>
-        From everyday care to special memories, there's<br></br>  always something more
-        to explore with PETCARD.
-      </p>
-    </div>
-
-    <div className={styles.finalButtons}>
-      <Link
-        href="#feature-overview"
-        className="btn btn-outline"
+      <section
+        className={`${styles.finalDownload} ${styles.homeReveal}`}
+        id="download-app"
+        data-home-reveal="download"
       >
-        Discover What’s New
-      </Link>
-
-      <button
-        type="button"
-        className="btn btn-outline"
-        onClick={() => setShowEmailForm(true)}
-      >
-        Get PETCARD Updates
-      </button>
-    </div>
-  </div>
-
-  {/* MODAL — OUTSIDE finalDownloadCard */}
-  {showEmailForm && (
-    <div
-      className={styles.emailModalOverlay}
-      onClick={() => {
-        setShowEmailForm(false);
-        setIsSubscribed(false);
-      }}
-    >
-      <div
-        className={styles.emailModal}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          type="button"
-          className={styles.emailModalClose}
-          onClick={() => {
-            setShowEmailForm(false);
-            setIsSubscribed(false);
-          }}
-          aria-label="Close"
+        <div
+          className={`${styles.container} container ${styles.finalDownloadCard}`}
         >
-          ×
-        </button>
+          <div className={styles.finalPets}>
+            <Image
+              src="/images/AboutFooter.png"
+              alt="PETCARD pets"
+              fill
+              priority
+              className={styles.finalPetsImage}
+            />
+          </div>
 
-        {!isSubscribed ? (
-  <>
-    <div className={styles.emailModalIcon}>
-      <img
-        src="/images/paw.png"
-        height={24}
-        width={24}
-        alt="PETCARD"
-      />
-    </div>
+          <div className={styles.finalCopy}>
+            <h2>More to Discover. More to Love.</h2>
 
-    <h3>Get PETCARD Updates</h3>
+            <p>
+              From everyday care to special memories, there&apos;s
+              <br /> always something more to explore with PETCARD.
+            </p>
+          </div>
 
-    <p>
-      Stay updated with the latest PETCARD news,
-      features, and pet-care tips.
-    </p>
+          <div className={styles.finalButtons}>
+            <Link href="#feature-overview" className="btn btn-outline">
+              Discover What’s New
+            </Link>
 
-    <form
-      className={styles.emailForm}
-      onSubmit={handleNewsletterSubmit}
-    >
-      <div className={styles.emailInput}>
-        <Mail size={18} />
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() => setShowEmailForm(true)}
+            >
+              Get PETCARD Updates
+            </button>
+          </div>
+        </div>
 
-        <input
-          type="email"
-          value={newsletterEmail}
-          onChange={(event) => {
-            setNewsletterEmail(event.target.value);
-            setNewsletterError("");
-          }}
-          placeholder="Enter your email address"
-          autoComplete="email"
-          required
-          disabled={newsletterSubmitting}
-        />
-      </div>
+        {/* MODAL — OUTSIDE finalDownloadCard */}
+        {showEmailForm && (
+          <div className={styles.emailModalOverlay} onClick={closeModal}>
+            <div
+              className={styles.emailModal}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className={styles.emailModalClose}
+                onClick={closeModal}
+                aria-label="Close"
+              >
+                ×
+              </button>
 
-      <button
-        type="submit"
-        className={`${styles.notifyButton} btn btn-primary`}
-        disabled={newsletterSubmitting}
-      >
-        {newsletterSubmitting
-          ? "Subscribing..."
-          : "Get PETCARD Updates"}
-      </button>
-    </form>
+              {!isSubscribed ? (
+                <>
+                  <div className={styles.emailModalIcon}>
+                    <img
+                      src="/images/paw.png"
+                      height={24}
+                      width={24}
+                      alt="PETCARD"
+                    />
+                  </div>
 
-    {newsletterError && (
-      <p
-        className={styles.newsletterModalError}
-        role="alert"
-      >
-        {newsletterError}
-      </p>
-    )}
-  </>
-) : (
-  <div className={styles.emailSuccess}>
-    <div className={styles.emailSuccessIcon}>
-      <CheckCircle2
-        size={34}
-        strokeWidth={2.4}
-      />
-    </div>
+                  <h3>Get PETCARD Updates</h3>
 
-    <span className={styles.successEyebrow}>
-      PETCARD UPDATES
-    </span>
+                  <p>
+                    Stay updated with the latest PETCARD news, features, and
+                    pet-care tips.
+                  </p>
 
-    <h3>Successfully Subscribed!</h3>
+                  <form
+                    className={styles.emailForm}
+                    onSubmit={handleNewsletterSubmit}
+                  >
+                    <div className={styles.emailInput}>
+                      <Mail size={18} />
 
-    <p>
-      You&apos;re all set! Thank you for joining the
-      PETCARD community. We&apos;ll keep you updated
-      with the latest news, features, and pet-care tips.
-    </p>
-  </div>
-)}
-      </div>
-    </div>
-  )}
-</section>
+                      <input
+                        type="email"
+                        value={newsletterEmail}
+                        onChange={(event) => {
+                          setNewsletterEmail(event.target.value);
+                          setNewsletterError("");
+                        }}
+                        placeholder="Enter your email address"
+                        autoComplete="email"
+                        required
+                        disabled={newsletterSubmitting}
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className={`${styles.notifyButton} btn btn-primary`}
+                      disabled={newsletterSubmitting}
+                    >
+                      {newsletterSubmitting
+                        ? "Subscribing..."
+                        : "Get PETCARD Updates"}
+                    </button>
+                  </form>
+
+                  {newsletterError && (
+                    <p className={styles.newsletterModalError} role="alert">
+                      {newsletterError}
+                    </p>
+                  )}
+                </>
+              ) : (
+                <div className={styles.emailSuccess}>
+                  <div className={styles.emailSuccessIcon}>
+                    <CheckCircle2 size={34} strokeWidth={2.4} />
+                  </div>
+
+                  <span className={styles.successEyebrow}>
+                    PETCARD UPDATES
+                  </span>
+
+                  <h3>Successfully Subscribed!</h3>
+
+                  <p>
+                    You&apos;re all set! Thank you for joining the PETCARD
+                    community. We&apos;ll keep you updated with the latest
+                    news, features, and pet-care tips.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </section>
     </main>
   );
 }
-
 
 /* =========================================================
    REUSABLE COMPONENTS
    ========================================================= */
 
-function FeatureHeading({
-  section,
-}: {
-  section: SectionData;
-}) {
+function FeatureHeading({ section }: { section: SectionData }) {
   return (
     <div className={styles.featureHeading}>
-
-
       <h2>
         {section.title}
         <span>{section.highlight}</span>
@@ -3067,62 +1845,7 @@ function FeatureHeading({
   );
 }
 
-function FeatureMiniCard({
-  item,
-  large = false,
-}: {
-  item: Item;
-  large?: boolean;
-}) {
-  const Icon = item.icon;
-
-  return (
-    <button
-      type="button"
-      className={`${styles.miniCard} ${large ? styles.miniCardLarge : ""
-        }`}
-    >
-      <IconBox icon={Icon} />
-
-      <span className={styles.miniCardText}>
-        <strong>{item.title}</strong>
-        <small>{item.description}</small>
-      </span>
-
-      <ChevronRight
-        size={14}
-        className={styles.miniArrow}
-      />
-    </button>
-  );
-}
-
-function HealthMini({
-  icon: Icon,
-  title,
-  value,
-}: {
-  icon: React.ElementType;
-  title: string;
-  value: string;
-}) {
-  return (
-    <div className={styles.healthMini}>
-      <IconBox icon={Icon} />
-
-      <div>
-        <small>{title}</small>
-        <strong>{value}</strong>
-      </div>
-    </div>
-  );
-}
-
-function BrainIcon({
-  size = 20,
-}: {
-  size?: number;
-}) {
+function BrainIcon({ size = 20 }: { size?: number }) {
   return (
     <span
       style={{
@@ -3169,9 +1892,7 @@ function FeatureItemCarousel({
   useEffect(() => {
     if (!visible || total <= 1 || isHovered) return;
 
-    const mediaQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    );
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     if (mediaQuery.matches) return;
 
@@ -3179,9 +1900,7 @@ function FeatureItemCarousel({
       setActiveIndex((current) => (current + 1) % total);
     }, 2000);
 
-    return () => {
-      window.clearInterval(interval);
-    };
+    return () => window.clearInterval(interval);
   }, [visible, isHovered, total]);
 
   useEffect(() => {
@@ -3191,33 +1910,21 @@ function FeatureItemCarousel({
   const getOffset = (index: number) => {
     let offset = index - activeIndex;
 
-    if (offset > total / 2) {
-      offset -= total;
-    }
-
-    if (offset < -total / 2) {
-      offset += total;
-    }
+    if (offset > total / 2) offset -= total;
+    if (offset < -total / 2) offset += total;
 
     return offset;
   };
 
-  const selectItem = (index: number) => {
-    setActiveIndex(index);
-  };
-
-  const goPrevious = () => {
-    selectItem((activeIndex - 1 + total) % total);
-  };
-
-  const goNext = () => {
-    selectItem((activeIndex + 1) % total);
-  };
+  const selectItem = (index: number) => setActiveIndex(index);
+  const goPrevious = () => selectItem((activeIndex - 1 + total) % total);
+  const goNext = () => selectItem((activeIndex + 1) % total);
 
   return (
     <div
-      className={`${styles.miniCarousel} ${large ? styles.miniCarouselLarge : ""
-        } ${className}`}
+      className={`${styles.miniCarousel} ${
+        large ? styles.miniCarouselLarge : ""
+      } ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -3229,59 +1936,37 @@ function FeatureItemCarousel({
           const isActive = offset === 0;
           const isPrevious = offset === -1;
           const isNext = offset === 1;
-          const isVisible =
-            isActive || isPrevious || isNext;
+          const isShown = isActive || isPrevious || isNext;
 
           return (
             <button
               key={item.title}
               type="button"
-              className={`${styles.miniCarouselCard} ${isActive
-                ? styles.miniCarouselCardActive
-                : ""
-                } ${isPrevious
-                  ? styles.miniCarouselCardPrevious
-                  : ""
-                } ${isNext
-                  ? styles.miniCarouselCardNext
-                  : ""
-                } ${!isVisible
-                  ? styles.miniCarouselCardHidden
-                  : ""
-                }`}
+              className={`${styles.miniCarouselCard} ${
+                isActive ? styles.miniCarouselCardActive : ""
+              } ${isPrevious ? styles.miniCarouselCardPrevious : ""} ${
+                isNext ? styles.miniCarouselCardNext : ""
+              } ${!isShown ? styles.miniCarouselCardHidden : ""}`}
               onClick={() => selectItem(index)}
               onFocus={() => {
                 setIsHovered(true);
                 selectItem(index);
               }}
               onBlur={() => setIsHovered(false)}
-              aria-current={
-                isActive ? "true" : undefined
-              }
+              aria-current={isActive ? "true" : undefined}
               aria-label={`View ${item.title}`}
             >
-              <span
-                className={styles.miniCarouselVisual}
-                aria-hidden="true"
-              >
-                <span
-                  className={styles.miniCarouselVisualGlow}
-                />
+              <span className={styles.miniCarouselVisual} aria-hidden="true">
+                <span className={styles.miniCarouselVisualGlow} />
                 <Icon size={30} strokeWidth={2} />
               </span>
 
               <span className={styles.miniCarouselContent}>
-
-
                 <strong>{item.title}</strong>
-
                 <small>{item.description}</small>
               </span>
 
-              <span
-                className={styles.miniCarouselAction}
-                aria-hidden="true"
-              >
+              <span className={styles.miniCarouselAction} aria-hidden="true">
                 <ChevronRight size={18} />
               </span>
             </button>
@@ -3300,25 +1985,15 @@ function FeatureItemCarousel({
           </button>
 
           <div className={styles.miniCarouselProgress}>
-            <span
-              style={{
-                width: `${((activeIndex + 1) / total) * 100}%`,
-              }}
-            />
+            <span style={{ width: `${((activeIndex + 1) / total) * 100}%` }} />
           </div>
 
           <span className={styles.miniCarouselCounter}>
-            <strong>
-              {String(activeIndex + 1).padStart(2, "0")}
-            </strong>
+            <strong>{String(activeIndex + 1).padStart(2, "0")}</strong>
             <span>/ {String(total).padStart(2, "0")}</span>
           </span>
 
-          <button
-            type="button"
-            aria-label="Next feature"
-            onClick={goNext}
-          >
+          <button type="button" aria-label="Next feature" onClick={goNext}>
             <ChevronRight size={15} />
           </button>
         </div>
