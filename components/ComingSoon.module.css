@@ -1,366 +1,138 @@
 /* =========================================================
-   COMING SOON PAGE
+   COMING SOON PAGE  (fully fluid: clamp() sizes + 3 layouts)
+   Desktop  : > 900px   -> 2 columns, image bleeds to screen edge
+   Tablet   : <= 900px  -> stacked, centered
+   Phone    : <= 520px  -> tighter, form stacks
+   Needs (from globals.css): --text, --muted, --orange, --font-tagline
+   (fallbacks are provided below, so it also works without them)
    ========================================================= */
 
 .page {
+  --c-text: var(--text, #2b1a12);
+  --c-muted: var(--muted, #7a6a5f);
+  --c-orange: var(--orange, #ff7a00);
+
+  /* page gutter + max content width: grows on big screens, never overflows */
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: clamp(1380px, 70vw, 2800px);
+
   width: 100%;
-  overflow: hidden;
-
-  background:
-    #fffaf5;
+  overflow-x: clip;
+  background: #fffaf5;
 }
 
-
-/* =========================================================
-   GLOBAL CONTAINER
-   ========================================================= */
-
-.container {
-  width:
-    min(
-      1380px,
-      calc(100% - 48px)
-    );
-
-  margin-inline: auto;
-}
-
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-/* =========================================================
-   HERO
-   ========================================================= */
+/* ---------- HERO ---------- */
 
 .hero {
   position: relative;
-
   width: 100%;
   overflow: hidden;
-  background:
-    linear-gradient(
-      100deg,
-      #fffaf5 0%,
-      #fff8f0 34%,
-      #fff2df 58%,
-      #ffe9ca 100%
-    );
-}
-
-.heroGrid {
-  position: relative;
-
-  min-height: 640px;
-
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 0.82fr)
-    minmax(0, 1.18fr);
-
+  /* lets us measure the real page width (no scrollbar bug of 100vw) */
+  container-type: inline-size;
+  min-height: min(100svh, 1300px);
+  display: flex;
   align-items: stretch;
-
-  gap: 0;
+  background: linear-gradient(100deg, #fffaf5 0%, #fff8f0 34%, #fff2df 58%, #ffe9ca 100%);
 }
 
 .backgroundGlow {
   position: absolute;
-
-  width: 850px;
-  height: 850px;
-
-  top: -350px;
-  right: -180px;
-
+  width: clamp(420px, 60vw, 1100px);
+  aspect-ratio: 1;
+  top: -35%;
+  right: -12%;
   border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(
-        255,
-        170,
-        92,
-        0.18
-      ),
-      transparent 68%
-    );
-
+  background: radial-gradient(circle, rgba(255, 170, 92, 0.18), transparent 68%);
   pointer-events: none;
 }
 
+.container {
+  width: min(var(--max), calc(100% - 2 * var(--gutter)));
+  margin-inline: auto;
+  display: flex;
+}
 
-/* =========================================================
-   HERO GRID
-   ========================================================= */
+.heroGrid {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: stretch;
+  gap: clamp(16px, 3vw, 80px);
+}
 
+/* ---------- CONTENT ---------- */
 
-
-/* =========================================================
-   CONTENT
-   ========================================================= */
 .content {
   position: relative;
   z-index: 5;
-
   align-self: center;
-
-  max-width: 630px;
-
-  padding:
-    72px 0
-    72px;
-
-  animation:
-    contentReveal
-    0.9s
-    cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    )
-    both;
+  max-width: 44rem;
+  padding-block: clamp(32px, 6vw, 96px);
+  animation: contentReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .content h1 {
-  margin:
-    20px 0
-    18px;
-
-  color: var(--text);
-
-
- font-size: 74px;
-  line-height: 1.03;
+  margin: 0 0 clamp(14px, 1.6vw, 28px);
+  color: var(--c-text);
+  font-size: clamp(2.5rem, 1.2rem + 4.8vw, 10rem);
+  line-height: 1.04;
   letter-spacing: -0.045em;
+  text-wrap: balance;
 }
 
 .content h1 span {
-  color: var(--orange);
+  color: var(--c-orange);
 }
 
 .description {
-  max-width: 560px;
-
+  max-width: 36em;
   margin: 0;
-
-  color: var(--muted);
-
-  font-family: var(--font-tagline);
-
-  font-size: 14px;
-
-  line-height: 1.8;
-}
-@keyframes contentReveal {
-  from {
-    opacity: 0;
-
-    transform:
-      translateX(-35px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateX(0);
-  }
+  color: var(--c-muted);
+  font-family: var(--font-tagline, inherit);
+  font-size: clamp(0.95rem, 0.82rem + 0.45vw, 1.75rem);
+  line-height: 1.75;
 }
 
-
-/* =========================================================
-   BADGE
-   ========================================================= */
-
-.comingBadge {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  padding:
-    9px 13px;
-
-  border:
-    1px solid
-    #ebdccd;
-
-  border-radius:
-    999px;
-
-  color:
-    #aa7140;
-
-  background:
-    rgba(
-      255,
-      250,
-      242,
-      0.82
-    );
-
-  font-size:
-    10px;
-
-  font-weight:
-    800;
-
-  letter-spacing:
-    0.07em;
-}
-
-.comingBadge svg {
-  color:
-    var(--orange);
-}
-
-
-/* =========================================================
-   TITLE
-   ========================================================= */
-
-.titleHeart {
-  position: relative;
-
-  top: -9px;
-
-  margin-left: 10px;
-
-  color:
-    #cf7d42;
-
-  vertical-align:
-    middle;
-
-  transform:
-    rotate(-8deg);
-
-  animation:
-    titleHeartFloat
-    3s
-    ease-in-out
-    infinite;
-}
-
-@keyframes titleHeartFloat {
-  0%,
-  100% {
-    transform:
-      translateY(0)
-      rotate(-8deg);
-  }
-
-  50% {
-    transform:
-      translateY(-6px)
-      rotate(1deg);
-  }
-}
-
-
-/* =========================================================
-   DESCRIPTION
-   ========================================================= */
-
-
-/* =========================================================
-   LAUNCHING SOON
-   ========================================================= */
 .launchText {
   display: inline-flex;
-
   align-items: center;
-
   gap: 8px;
-
-  margin-top: 18px;
-
-  color:
-    var(--orange);
-
-  font-family:
-    var(--font-tagline);
-
-  font-size: 18px;
-
+  margin-top: clamp(14px, 1.5vw, 28px);
+  color: var(--c-orange);
+  font-family: var(--font-tagline, inherit);
+  font-size: clamp(1.1rem, 0.9rem + 0.7vw, 2.4rem);
   font-weight: 800;
 }
 
-.launchText svg {
-  color:
-    #c7814a;
+@keyframes contentReveal {
+  from { opacity: 0; transform: translateX(-35px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
-
-/* =========================================================
-   EMAIL FORM
-   ========================================================= */
+/* ---------- EMAIL FORM ---------- */
 
 .emailForm {
   display: flex;
-
   align-items: stretch;
-
   gap: 8px;
-
-  width:
-    min(
-      100%,
-      470px
-    );
-
-  margin-top:
-    22px;
-
-  padding:
-    5px;
-
-  border:
-    1px solid
-    #e6d9ce;
-
-  border-radius:
-    14px;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.87
-    );
-
-  box-shadow:
-    0 12px 32px
-      rgba(
-        56,
-        27,
-        14,
-        0.055
-      );
+  width: min(100%, clamp(420px, 36vw, 900px));
+  margin-top: clamp(18px, 2vw, 36px);
+  padding: 5px;
+  border: 1px solid #e6d9ce;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.87);
+  box-shadow: 0 12px 32px rgba(56, 27, 14, 0.055);
 }
 
 .emailInput {
   display: flex;
-
   align-items: center;
-
   gap: 8px;
-
   min-width: 0;
-
   flex: 1;
-
-  padding-inline:
-    10px;
-
-  color:
-    #8c7d73;
+  padding-inline: 10px;
+  color: #8c7d73;
 }
 
 .emailInput svg {
@@ -369,1367 +141,230 @@
 
 .emailInput input {
   width: 100%;
-
   min-width: 0;
-
-  height: 43px;
-
+  height: clamp(44px, 3vw, 76px);
   border: 0;
-
   outline: 0;
-
-  color:
-    var(--text);
-
-  background:
-    transparent;
-
-  font-family:
-    inherit;
-
-  font-size:
-    14px;
+  color: var(--c-text);
+  background: transparent;
+  font-family: inherit;
+  /* 16px minimum: stops iOS Safari from zooming into the field */
+  font-size: clamp(16px, 0.9rem + 0.3vw, 22px);
 }
 
 .emailInput input::placeholder {
-  color:
-    #aaa099;
+  color: #aaa099;
 }
+
 .notifyButton {
   flex-shrink: 0;
-
   min-width: 140px;
-
   border: 0;
-
   cursor: pointer;
+  white-space: nowrap;
 }
 
-
-/* =========================================================
-   NOTIFY HINT
-   ========================================================= */
-
 .notifyHint {
-  position: relative;
-
   display: flex;
-
   align-items: center;
-
   gap: 8px;
-
   width: fit-content;
-
-  margin-top:
-    17px;
-
-  color:
-    #5d514a;
-
-  font-size:
-    14px;
-
-  font-weight:
-    600;
+  max-width: 100%;
+  margin-top: clamp(12px, 1.2vw, 22px);
+  color: #5d514a;
+  font-size: clamp(0.875rem, 0.8rem + 0.25vw, 1.4rem);
+  font-weight: 600;
 }
 
 .notifyHint > svg {
-  color:
-    #9c6337;
+  flex-shrink: 0;
+  color: #9c6337;
 }
 
-.arrowDecoration {
-  position: absolute;
+/* ---------- VISUAL ---------- */
 
-  left: 275px;
-  top: 7px;
-
-  color:
-    #c17b47;
-
-  font-size:
-    28px;
-
-  transform:
-    rotate(-28deg);
-}
-
-
-/* =========================================================
-   VISUAL
-   ========================================================= */
-
-
-
-@keyframes visualReveal {
-  from {
-    opacity: 0;
-
-    transform:
-      translateX(45px)
-      scale(0.95);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateX(0)
-      scale(1);
-  }
+.visual {
+  position: relative;
+  min-height: clamp(520px, 44vw, 1300px);
+  overflow: hidden;
+  /* bleed to the right edge of the screen (cqw = hero width, scrollbar-safe) */
+  margin-right: calc((min(var(--max), 100cqw - 2 * var(--gutter)) - 100cqw) / 2);
+  animation: visualReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
 
 .visualLight {
   position: absolute;
-
-  width:
-    min(
-      720px,
-      100%
-    );
-
-  height:
-    720px;
-
-  right:
-    -80px;
-
-  bottom:
-    -190px;
-
-  border-radius:
-    50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(
-        255,
-        201,
-        137,
-        0.42
-      ),
-      rgba(
-        255,
-        222,
-        178,
-        0.16
-      )
-      48%,
-      transparent 72%
-    );
-
+  width: min(720px, 100%);
+  aspect-ratio: 1;
+  right: -80px;
+  bottom: -190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 201, 137, 0.42), rgba(255, 222, 178, 0.16) 48%, transparent 72%);
   pointer-events: none;
-}
-
-
-/* =========================================================
-   IMAGE
-   ========================================================= */
-
-
-.visual {
-  position: relative;
-
-  min-height: 640px;
-
-  display: flex;
-
-  align-items: stretch;
-
-  justify-content: stretch;
-
-  overflow: hidden;
-
-  margin-right: calc(
-    (100vw - 100%) / -2
-  );
-
-  animation:
-    visualReveal
-    1s
-    cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    )
-    0.08s
-    both;
 }
 
 .imageWrapper {
-  position: relative;
-
-  width: 100%;
-  height: 100%;
-
-  min-height: 640px;
-
-  display: block;
-
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 
+/* soft fade from the page colour into the photo (left on desktop) */
 .imageWrapper::before {
   content: "";
-
   position: absolute;
   inset: 0;
-
   z-index: 2;
-
   pointer-events: none;
-
-  background:
-    linear-gradient(
-      90deg,
-     #fff8f0,
-     #fff2df 3%,
-      rgba(255, 250, 245, 0.24) 18%,
-      rgba(255, 250, 245, 0) 32%
-    );
-}
-
-.imageWrapper::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  z-index: 3;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 248, 240, 0.12) 0%,
-      rgba(255, 248, 240, 0) 30%,
-      rgba(255, 248, 240, 0) 78%,
-      rgba(255, 242, 224, 0.10) 100%
-    );
+  background: linear-gradient(90deg, #fff8f0, #fff2df 3%, rgba(255, 250, 245, 0.24) 18%, rgba(255, 250, 245, 0) 32%);
 }
 
 .imageWrapper img {
   position: absolute;
-
   inset: 0;
-
   width: 100%;
   height: 100%;
-
-  display: block;
-
-
-  object-position: center center;
-
   max-width: none;
-
-  filter:
-    saturate(0.96)
-    contrast(0.98)
-    brightness(1.02);
-
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.96) contrast(0.98) brightness(1.02);
   transform: scale(1.015);
-
-  animation:
-    dogFloat
-    5.5s
-    ease-in-out
-    1s
-    infinite;
 }
 
 
-/* =========================================================
-   FLOATING DECORATIONS
-   ========================================================= */
+
+@keyframes visualReveal {
+  from { opacity: 0; transform: translateX(45px) scale(0.95); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* ---------- FLOATING DECORATIONS ---------- */
 
 .floatingPaw {
   position: absolute;
-
   z-index: 5;
-
   display: grid;
-
   place-items: center;
-
-  color:
-    var(--orange);
-
-  opacity:
-    0.4;
-
-  animation:
-    decorativeFloat
-    4s
-    ease-in-out
-    infinite;
+  color: var(--c-orange);
+  opacity: 0.4;
+  animation: decorativeFloat 4s ease-in-out infinite;
 }
 
-.floatingPawOne {
-  top:
-    25%;
-
-  left:
-    9%;
-}
-
-.floatingPawTwo {
-  top:
-    44%;
-
-  right:
-    9%;
-
-  opacity:
-    0.25;
-
-  animation-delay:
-    -1.6s;
-}
-
-@keyframes decorativeFloat {
-  0%,
-  100% {
-    transform:
-      translateY(0)
-      rotate(0);
-  }
-
-  50% {
-    transform:
-      translateY(-8px)
-      rotate(5deg);
-  }
-}
+.floatingPawOne { top: 25%; left: 9%; }
+.floatingPawTwo { top: 44%; right: 9%; opacity: 0.25; animation-delay: -1.6s; }
 
 .heartDecoration {
   position: absolute;
-
   z-index: 5;
+  right: 8%;
+  top: 22%;
+  color: #d78a50;
+  font-size: clamp(34px, 3vw, 90px);
+  opacity: 0.5;
+  animation: heartDecoration 3.5s ease-in-out infinite;
+}
 
-  right:
-    8%;
-
-  top:
-    22%;
-
-  color:
-    #d78a50;
-
-  font-size:
-    52px;
-
-  opacity:
-    0.5;
-
-  animation:
-    heartDecoration
-    3.5s
-    ease-in-out
-    infinite;
+@keyframes decorativeFloat {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50%      { transform: translateY(-8px) rotate(5deg); }
 }
 
 @keyframes heartDecoration {
-  0%,
-  100% {
-    transform:
-      rotate(-8deg)
-      translateY(0);
-  }
-
-  50% {
-    transform:
-      rotate(5deg)
-      translateY(-6px);
-  }
+  0%, 100% { transform: rotate(-8deg) translateY(0); }
+  50%      { transform: rotate(5deg) translateY(-6px); }
 }
-
 
 /* =========================================================
-   SNEAK PEEK
+   TABLET + PHONE  (stacked layout)
    ========================================================= */
 
-.sneakSection {
-  position: relative;
-
-  padding:
-    0 0
-    80px;
-
-  background:
-    #fffaf5;
-}
-
-.sneakCard {
-  overflow: hidden;
-
-  border:
-    1px solid
-    #eaded4;
-
-  border-radius:
-    27px;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.9
-    );
-
-  box-shadow:
-    0 18px 45px
-      rgba(
-        56,
-        27,
-        14,
-        0.05
-      );
-}
-
-.sneakTop {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 13px;
-
-  min-height:
-    68px;
-
-  padding-inline:
-    18px;
-
-  border-bottom:
-    1px solid
-    #eee3db;
-
-  color:
-    var(--text);
-
-  font-size:
-    18px;
-
-  font-weight:
-    800;
-
-  text-align:
-    center;
-}
-
-.sneakTop svg {
-  color:
-    var(--orange);
-}
-
-.sneakContent {
-  display: grid;
-
-  grid-template-columns:
-    repeat(
-      4,
-      minmax(0, 1fr)
-    );
-
-  gap: 1px;
-
-  background:
-    #eee3db;
-}
-
-.sneakItem {
-  min-height:
-    175px;
-
-  padding:
-    25px 22px;
-
-  background:
-    #fff;
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.sneakItem:hover {
-  position: relative;
-
-  z-index: 2;
-
-  transform:
-    translateY(-4px);
-
-  box-shadow:
-    0 10px 28px
-      rgba(
-        56,
-        27,
-        14,
-        0.07
-      );
-}
-
-.sneakIcon {
-  display: grid;
-
-  place-items: center;
-
-  width: 43px;
-  height: 43px;
-
-  margin-bottom:
-    13px;
-
-  border-radius:
-    12px;
-
-  background:
-    #fff4e7;
-
-  font-size:
-    19px;
-}
-
-.sneakItem strong {
-  display: block;
-
-  margin-bottom:
-    6px;
-
-  color:
-    var(--text);
-
-  font-size:
-    13px;
-}
-
-.sneakItem span {
-  display: block;
-
-  color:
-    var(--muted);
-
-  font-size:
-    9px;
-
-  line-height:
-    1.7;
-}
-
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 1000px) {
-  .container {
-    width:
-      min(
-        100%,
-        calc(100% - 36px)
-      );
-  }
-
+@media (max-width: 900px) {
   .hero {
-    min-height:
-      auto;
+    min-height: 0;
+    display: block;
   }
 
   .heroGrid {
-    min-height:
-      auto;
-
-    grid-template-columns:
-      1fr 0.9fr;
-
-    gap:
-      25px;
-
-    padding:
-      60px 0;
-  }
-
-  .content h1 {
-    font-size:
-      58px;
-  }
-
-  .visual {
-    min-height:
-      500px;
-  }
-
-  .imageWrapper {
-    height:
-      500px;
-  }
-
-  .sneakContent {
-    grid-template-columns:
-      repeat(
-        2,
-        minmax(0, 1fr)
-      );
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 760px) {
-
-  .container {
-    width:
-      min(
-        100%,
-        calc(100% - 28px)
-      );
-  }
-
-  .heroGrid {
-    grid-template-columns:
-      1fr;
-
-    gap:
-      10px;
-
-   
-    padding:
-      0px 0
-      0px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
   }
 
   .content {
-    max-width:
-      100%;
-
-    text-align:
-      center;
-
-    margin-inline:
-      auto;
+    width: 100%;
+    max-width: 38rem;
+    margin-inline: auto;
+    padding-block: clamp(28px, 7vw, 56px) 8px;
+    text-align: center;
   }
 
-  .comingBadge {
-    margin-inline:
-      auto;
-  }
-
- 
-
-  .titleHeart {
-    width:
-      34px;
-
-    height:
-      34px;
-
-    top:
-      -6px;
-
-    margin-left:
-      3px;
-  }
-
-  .description {
-    max-width:
-      520px;
-
-    margin-inline:
-      auto;
-
-    font-size:
-      10px;
-
-    line-height:
-      1.7;
+  .description,
+  .emailForm,
+  .notifyHint {
+    margin-inline: auto;
   }
 
   .launchText {
-    justify-content:
-      center;
-
-    font-size:
-      15px;
-  }
-
-  .emailForm {
-    width:
-      min(
-        100%,
-        430px
-      );
-
-    margin-inline:
-      auto;
+    justify-content: center;
   }
 
   .notifyHint {
-    margin-inline:
-      auto;
-
-    text-align:
-      left;
-  }
-
-  .arrowDecoration {
-    display:
-      none;
-  }
-
-  .visual {
-    min-height:
-      360px;
-  }
-
-  .imageWrapper {
-   
-    height:
-      370px;
-  }
-
-  .imageWrapper img{
-    object-fit: cover;
-  }
-
-  .floatingPawOne {
-    left:
-      7%;
-  }
-
-  .floatingPawTwo {
-    right:
-      5%;
-  }
-
-  .heartDecoration {
-    right:
-      7%;
-
-    top:
-      16%;
-
-    font-size:
-      39px;
-  }
-
-  .sneakSection {
-    padding-bottom:
-      60px;
-  }
-
-  .sneakTop {
-    min-height:
-      58px;
-
-    font-size:
-      13px;
-
-    gap:
-      8px;
-  }
-
-  .sneakContent {
-    grid-template-columns:
-      1fr;
-  }
-
-  .sneakItem {
-    min-height:
-      145px;
-  }
-
-  .finalSection {
-    padding-bottom:
-      65px;
-  }
-
-  .finalCard {
-    min-height:
-      auto;
-
-    padding:
-      30px 24px;
-
-    border-radius:
-      23px;
-  }
-
-  .finalContent {
-    max-width:
-      100%;
-  }
-
-  .finalContent h2 {
-    font-size:
-      29px;
-  }
-
-  .finalHeart {
-    right:
-      -18px;
-
-    bottom:
-      -20px;
-  }
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 380px) {
-  .content h1 {
-    font-size:
-      37px;
-  }
-
-  .description {
-    font-size:
-      9px;
-  }
-
-  .launchText {
-    font-size:
-      14px;
+    text-align: left;
   }
 
   .emailForm {
-    flex-direction:
-      column;
+    width: min(100%, 460px);
+  }
 
-    padding:
-      6px;
+  /* full-bleed image under the text */
+  .visual {
+    min-height: 0;
+    aspect-ratio: 4 / 3.4;
+    max-height: 75svh;
+    margin-inline: calc(var(--gutter) * -1);
+  }
+
+  /* fade from the page colour at the TOP instead of the left */
+  .imageWrapper::before {
+    background: linear-gradient(180deg, #fff2df, rgba(255, 242, 223, 0.35) 14%, rgba(255, 242, 223, 0) 32%);
+  }
+}
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .emailForm {
+    flex-direction: column;
+    padding: 6px;
   }
 
   .notifyButton {
-    width:
-      100%;
-
-    min-height:
-      44px;
-  }
-
-  .emailInput input {
-    height:
-      40px;
-  }
-
-  .visual {
-    min-height:
-      315px;
-  }
-
-  .imageWrapper {
-    height:
-      320px;
-  }
-
-  .sneakTop {
-    font-size:
-      11px;
-  }
-}
-
-
-/* =========================================================
-   LARGE LAPTOP
-   ========================================================= */
-
-@media (min-width: 1440px) {
-  .container {
-    width:
-      min(
-        1500px,
-        calc(100% - 80px)
-      );
-  }
-
-  .hero {
-    min-height:
-      720px;
-  }
-
-  .heroGrid {
-    min-height:
-      720px;
-
-    gap:
-      70px;
-  }
-
-  .content h1 {
-    font-size:
-      84px;
-  }
-
-  .description {
-    font-size:
-      15px;
-  }
-
-  .visual {
-    min-height:
-      700px;
-  }
-
-  .imageWrapper {
-    width:
-      870px;
-
-    height:
-      680px;
-  }
-
-  .sneakTop {
-    min-height:
-      74px;
-
-    font-size:
-      20px;
-  }
-
-  .sneakItem {
-    min-height:
-      195px;
-
-    padding:
-      30px;
-  }
-
-  .sneakItem strong {
-    font-size:
-      15px;
-  }
-
-  .sneakItem span {
-    font-size:
-      10px;
-  }
-
-  .finalCard {
-    min-height:
-      300px;
-
-    padding:
-      50px 65px;
-  }
-
-  .finalContent h2 {
-    font-size:
-      48px;
-  }
-}
-
-
-/* =========================================================
-   2K
-   ========================================================= */
-
-@media (min-width: 1920px) {
-  .container {
-    width:
-      min(
-        1800px,
-        calc(100% - 100px)
-      );
-  }
-
-  .heroGrid {
-    min-height:
-      800px;
-
-    gap:
-      100px;
-  }
-
-  .hero {
-    min-height:
-      800px;
-  }
- .imageWrapper {
     width: 100%;
-    height: 770px;
-  }
-
-  .imageWrapper img {
-    object-fit: cover;
-  }
-  .content h1 {
-    font-size:
-      101px;
-  }
-
-  .description {
-    max-width:
-      700px;
-
-    font-size:
-      17px;
-  }
-
-  .launchText {
-    font-size:
-      21px;
-  }
-
-  .emailForm {
-    width:
-      550px;
+    min-height: 46px;
   }
 
   .emailInput input {
-    height:
-      49px;
-
-    font-size:
-      12px;
-  }
-
-  .notifyButton {
-    min-width:
-      155px;
+    height: 46px;
   }
 
   .visual {
-    min-height:
-      790px;
+    aspect-ratio: 1 / 1;
   }
 
-  .imageWrapper {
-  
-
-    height:
-      770px;
-  }
-
-  .sneakTop {
-    min-height:
-      88px;
-
-    font-size:
-      24px;
-  }
-
-  .sneakItem {
-    min-height:
-      235px;
-
-    padding:
-      38px;
-  }
-
-  .sneakItem strong {
-    font-size:
-      18px;
-  }
-
-  .sneakItem span {
-    font-size:
-      12px;
-  }
-
-  .finalCard {
-    min-height:
-      340px;
-
-    padding:
-      60px 80px;
-  }
-
-  .finalContent h2 {
-    font-size:
-      55px;
-  }
-
-  .finalContent p {
-    font-size:
-      13px;
-  }
+  .floatingPawOne { left: 6%; }
+  .floatingPawTwo { right: 5%; }
+  .heartDecoration { right: 7%; top: 14%; }
 }
 
-
-/* =========================================================
-   4K
-   ========================================================= */
-
-@media (min-width: 2560px) {
-  .container {
-    width:
-      min(
-        1400px,
-        calc(100%)
-      );
-  }
-
-  .hero {
-    min-height:
-      980px;
-  }
-
-  .heroGrid {
-    min-height:
-      980px;
-
-    gap:
-      150px;
-  }
-
-  .content h1 {
-    font-size:
-      100px;
-  }
-
-  .description {
-    max-width:
-      850px;
-
-    font-size:
-      20px;
-  }
-
-   .imageWrapper {
-    width: 100%;
-    height: 900px;
-  }
-
-  .imageWrapper img {
-    object-fit: cover;
-  }
-  .launchText {
-    font-size:
-      26px;
-  }
-
-  .emailForm {
-    width:
-      680px;
-
-    padding:
-      7px;
-  }
-
-  .emailInput input {
-    height:
-      59px;
-
-    font-size:
-      15px;
-  }
-
-  .notifyButton {
-    min-width:
-      185px;
-
-    font-size:
-      13px;
-  }
-
+/* very short landscape phones: don't force a tall image */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
   .visual {
-    min-height:
-      950px;
-  }
-
-  .imageWrapper {
-   
-
-    height:
-      900px;
-  }
-
-  .sneakTop {
-    min-height:
-      110px;
-
-    font-size:
-      29px;
-  }
-
-  .sneakItem {
-    min-height:
-      300px;
-
-    padding:
-      45px;
-  }
-
-  .sneakItem strong {
-    font-size:
-      22px;
-  }
-
-  .sneakItem span {
-    font-size:
-      15px;
-  }
-
-  .finalCard {
-    min-height:
-      420px;
-
-    padding:
-      85px 105px;
-  }
-
-  .finalContent h2 {
-    font-size:
-      72px;
-  }
-
-  .finalContent p {
-    font-size:
-      17px;
+    aspect-ratio: 16 / 7;
+    max-height: none;
   }
 }
-
-
-/* =========================================================
-   8K
-   ========================================================= */
-
-@media (min-width: 3840px) {
-  .container {
-    width:
-      min(
-        2900px,
-        calc(100% - 220px)
-      );
-  }
-
-  .hero {
-    min-height:
-      1300px;
-  }
-
-  .heroGrid {
-    min-height:
-      1300px;
-
-    gap:
-      220px;
-  }
-
-  .content h1 {
-    font-size:
-      165px;
-  }
-
-  .description {
-    max-width:
-      1150px;
-
-    font-size:
-      27px;
-  }
-
-  .launchText {
-    font-size:
-      34px;
-  }
-
-  .emailForm {
-    width:
-      900px;
-  }
-
-  .emailInput input {
-    height:
-      76px;
-
-    font-size:
-      20px;
-  }
-
-  .notifyButton {
-    min-width:
-      240px;
-
-    font-size:
-      18px;
-  }
-
-  .notifyHint {
-    font-size:
-      18px;
-  }
-
-  .visual {
-    min-height:
-      1250px;
-  }
-
-  .imageWrapper {
-    
-
-    height:
-      1220px;
-  }
-
-  .sneakTop {
-    min-height:
-      140px;
-
-    font-size:
-      36px;
-  }
-
-  .sneakItem {
-    min-height:
-      390px;
-
-    padding:
-      60px;
-  }
-
-  .sneakItem strong {
-    font-size:
-      29px;
-  }
-
-  .sneakItem span {
-    font-size:
-      19px;
-  }
-
-  .finalCard {
-    min-height:
-      550px;
-
-    padding:
-      110px 140px;
-  }
-
-  .finalContent h2 {
-    font-size:
-      92px;
-  }
-
-  .finalContent p {
-    font-size:
-      23px;
-  }
-
-  .homeButton {
-    padding:
-      16px 24px;
-
-    font-size:
-      15px;
-  }
-}
-
 
 /* =========================================================
    REDUCED MOTION
@@ -1738,16 +373,9 @@
 @media (prefers-reduced-motion: reduce) {
   .content,
   .visual,
-  .titleHeart,
   .imageWrapper img,
   .floatingPaw,
   .heartDecoration {
     animation: none !important;
-  }
-
-  .notifyButton,
-  .homeButton,
-  .sneakItem {
-    transition: none !important;
   }
 }

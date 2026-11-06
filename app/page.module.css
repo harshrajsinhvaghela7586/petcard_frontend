@@ -11074,3 +11074,533 @@ overflow: visible;
     font-size: 3.5px;
   }
 }
+
+
+/* =========================================================================
+   HERO APP SCREENS  (replaces the old CSS phone mock-ups)
+   left = Digital PetCard, centre = Home, right = Level & XP
+   Everything scales with the width of .hsScene (cqw units), so one set of
+   rules works on every screen; only a few overrides are needed below.
+   The old .heroAppScene / .heroPhone / .phone* rules are no longer used
+   and can be deleted from this file whenever you like.
+   ========================================================================= */
+
+.hsScene {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+
+  width: 100%;
+  max-width: clamp(560px, 44vw, 1300px);
+  aspect-ratio: 1 / 0.94;
+
+  margin-inline: auto;
+  align-self: center;
+}
+
+.hsSun {
+  position: absolute;
+  z-index: -2;
+
+  left: 50%;
+  top: 9cqw;
+
+  width: 78cqw;
+  aspect-ratio: 1;
+
+  border-radius: 48% 52% 45% 55%;
+  background: linear-gradient(145deg, #ff9e35, #ffd083);
+
+  transform: translateX(-50%) rotate(-9deg);
+}
+
+.hsChip {
+  position: absolute;
+  z-index: 5;
+
+  display: grid;
+  place-items: center;
+
+  width: 9cqw;
+  aspect-ratio: 1;
+
+  border-radius: 28%;
+  background: #fff;
+  box-shadow: 0 2cqw 4.5cqw rgba(56, 27, 14, 0.12);
+
+  color: var(--orange);
+  font-size: 4.6cqw;
+
+  animation: petFloat 4.5s ease-in-out infinite;
+}
+
+.hsChipOne {
+  top: 4%;
+  left: 12%;
+}
+
+.hsChipTwo {
+  top: 2%;
+  right: 2%;
+  animation-delay: -1.4s;
+}
+
+.hsChipThree {
+  bottom: 4%;
+  left: 44%;
+  animation-delay: -2.2s;
+}
+
+.hsPhone {
+  --pw: 38cqw;
+
+  position: absolute;
+  overflow: hidden;
+
+  width: var(--pw);
+
+  border: calc(var(--pw) * 0.032) solid #171c2a;
+  border-radius: calc(var(--pw) * 0.15);
+  background: #171c2a;
+
+  box-shadow: 0 3cqw 6.5cqw rgba(56, 27, 14, 0.24);
+  transform-origin: center bottom;
+}
+
+.hsShot {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hsNotch {
+  position: absolute;
+  z-index: 2;
+
+  top: calc(var(--pw) * 0.028);
+  left: 50%;
+
+  width: calc(var(--pw) * 0.28);
+  height: calc(var(--pw) * 0.058);
+
+  border-radius: 999px;
+  background: #171c2a;
+
+  transform: translateX(-50%);
+}
+
+.hsMain {
+  --pw: 38cqw;
+
+  left: 50%;
+  top: 0;
+  z-index: 4;
+
+  transform: translateX(-50%);
+}
+
+.hsLeft {
+  --pw: 30cqw;
+
+  left: 1%;
+  top: 15%;
+  z-index: 2;
+
+  transform: rotate(-9deg);
+}
+
+.hsRight {
+  --pw: 30cqw;
+
+  right: 1%;
+  top: 15%;
+  z-index: 2;
+
+  transform: rotate(9deg);
+}
+
+/* single column (tablet / phone): centred and a little smaller */
+@media (max-width: 950px) {
+  .hsScene {
+    max-width: 560px;
+  }
+}
+
+/* phones: bigger phones so the screens stay readable */
+@media (max-width: 520px) {
+  .hsScene {
+    aspect-ratio: 1 / 1.1;
+  }
+
+  .hsMain {
+    --pw: 47cqw;
+  }
+
+  .hsLeft,
+  .hsRight {
+    --pw: 34cqw;
+    top: 17%;
+  }
+
+  .hsLeft {
+    left: -3%;
+  }
+
+  .hsRight {
+    right: -3%;
+  }
+
+  .hsChip {
+    width: 11cqw;
+    font-size: 5.6cqw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hsChip {
+    animation: none;
+  }
+}
+
+
+/* =========================================================================
+   DIGITAL PET CARD  (same layout as the app's Digital PetCard screen)
+   .pcApp is the size container; every size inside is in cqw, so the whole
+   card scales as one piece.
+   ========================================================================= */
+
+.pcApp {
+  container-type: inline-size;
+  position: relative;
+  z-index: 2;
+
+  width: min(420px, 88%);
+
+  transform: rotate(-3deg);
+
+  transition: transform 0.3s ease;
+}
+
+.pcApp:hover {
+  transform: translateY(-8px) rotate(-3deg);
+}
+
+.pcScreen {
+  padding: 2cqw 3.4cqw 4cqw;
+
+  border: 1px solid #f3e6da;
+  border-radius: 5.4cqw;
+
+  background: #fff;
+  box-shadow: 0 30px 65px rgba(56, 27, 14, 0.22);
+}
+
+.pcHeader {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 12cqw;
+
+  color: #381b0e;
+  font-size: 4.7cqw;
+  font-weight: 700;
+}
+
+.pcBack {
+  position: absolute;
+  left: 0.4cqw;
+
+  width: 5.6cqw;
+  height: 5.6cqw;
+}
+
+/* ---------- orange card ---------- */
+
+.pcCard {
+  overflow: hidden;
+
+  border: 0.3cqw solid #ff7a00;
+  border-radius: 4.8cqw;
+
+  background: #fffaf4;
+}
+
+.pcCardTop {
+  padding: 5cqw 4.4cqw 8cqw;
+
+  background: #ff7a00;
+  color: #fff;
+}
+
+.pcBrandRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 4.1cqw;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.pcPawBadge {
+  display: grid;
+  place-items: center;
+
+  width: 8.4cqw;
+  height: 8.4cqw;
+
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.pcPawBadge svg {
+  width: 4.2cqw;
+  height: 4.2cqw;
+}
+
+.pcIdentity {
+  display: flex;
+  align-items: center;
+  gap: 3.8cqw;
+
+  margin-top: 4.4cqw;
+}
+
+.pcAvatar {
+  position: relative;
+  flex: 0 0 auto;
+
+  width: 26cqw;
+  aspect-ratio: 1;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+  background: #fff3e3;
+}
+
+.pcAvatar img {
+  object-fit: contain;
+  padding: 2cqw;
+}
+
+.pcNameBlock {
+  min-width: 0;
+}
+
+.pcNameBlock h3 {
+  display: flex;
+  align-items: center;
+  gap: 1.4cqw;
+
+  margin: 0;
+
+  color: #fff;
+  font-family: var(--font-brand);
+  font-size: 6.2cqw;
+  line-height: 1.1;
+}
+
+.pcNameBlock h3 svg {
+  width: 3.6cqw;
+  height: 3.6cqw;
+}
+
+.pcNameBlock p {
+  margin: 0.8cqw 0 0;
+
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 3.3cqw;
+}
+
+.pcStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2cqw;
+
+  margin-top: 4.6cqw;
+}
+
+.pcStats span {
+  display: flex;
+  align-items: center;
+  gap: 0.9cqw;
+
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 2.9cqw;
+}
+
+.pcStats span svg {
+  flex: 0 0 auto;
+
+  width: 3.1cqw;
+  height: 3.1cqw;
+}
+
+.pcStats b {
+  display: block;
+
+  margin-top: 0.9cqw;
+
+  font-size: 4cqw;
+  font-weight: 800;
+}
+
+/* ---------- cream part: id + qr ---------- */
+
+.pcCardBottom {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3cqw;
+
+  margin-top: -4cqw;
+  padding: 4.2cqw 4.4cqw;
+
+  border-radius: 4.4cqw 4.4cqw 0 0;
+  background: #fffaf4;
+}
+
+.pcIdBlock {
+  flex: 1;
+  min-width: 0;
+}
+
+.pcIdBlock small {
+  display: block;
+
+  color: #8d7f75;
+  font-size: 3cqw;
+}
+
+.pcIdBlock strong {
+  display: block;
+  overflow: hidden;
+
+  margin: 1.2cqw 0 3.6cqw;
+
+  color: #381b0e;
+  font-size: 5cqw;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pcIdBlock b {
+  display: block;
+
+  margin-top: 0.8cqw;
+
+  color: #381b0e;
+  font-size: 3.7cqw;
+}
+
+.pcQr {
+  flex: 0 0 auto;
+
+  width: 24cqw;
+  aspect-ratio: 1;
+
+  padding: 1.8cqw;
+
+  border: 0.3cqw solid #f6dcc4;
+  border-radius: 3.2cqw;
+
+  background: #fffaf4;
+  color: #2b1a12;
+}
+
+.pcQr svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- note + actions ---------- */
+
+.pcNote {
+  display: flex;
+  align-items: center;
+  gap: 3.4cqw;
+
+  margin-top: 3.6cqw;
+  padding: 3.2cqw 3.6cqw;
+
+  border: 1px solid #f7dcc3;
+  border-radius: 3.8cqw;
+
+  background: #fdeedd;
+}
+
+.pcNoteIcon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+
+  width: 8.6cqw;
+  height: 8.6cqw;
+
+  border-radius: 50%;
+  background: #fff;
+  color: #ff7a00;
+}
+
+.pcNoteIcon svg {
+  width: 4.6cqw;
+  height: 4.6cqw;
+}
+
+.pcNote p {
+  margin: 0;
+
+  color: #4a3a30;
+  font-size: 3cqw;
+  line-height: 1.55;
+}
+
+.pcNote b {
+  color: #2b1a12;
+  font-weight: 700;
+}
+
+.pcActions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5cqw;
+
+  margin-top: 3.4cqw;
+}
+
+.pcActions div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.2cqw;
+
+  height: 19cqw;
+
+  border: 0.3cqw solid #fbe0c9;
+  border-radius: 3.6cqw;
+
+  background: #fffaf4;
+  color: #381b0e;
+
+  font-size: 3.1cqw;
+  font-weight: 700;
+}
+
+.pcActions svg {
+  width: 4.8cqw;
+  height: 4.8cqw;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcApp {
+    transition: none;
+  }
+}

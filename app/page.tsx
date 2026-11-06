@@ -2,9 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
-import {
-  ArrowRight,
+import {  ArrowRight,
   Award,
   CalendarCheck,
   Check,
@@ -28,6 +26,13 @@ import {
   ChevronLeft,
   LucideVideo,
   CirclePlay,
+  ArrowLeft,
+  Download,
+  Share2,
+  Printer,
+  ShieldCheck,
+  Cake,
+  Weight,
 } from "lucide-react";
 
 import styles from "./page.module.css";
@@ -37,6 +42,7 @@ import JourneySteps from "../components/home/JourneySteps/JourneySteps";
 import FeaturesOrbit from "../components/FeaturesOrbit";
 import PetWorldPage from "../components/home/PetWorld/PetWorld";
 import HomeTestimonialsPreview from "../components/HomeTestimonialsPreview";
+import { FaMars } from "react-icons/fa6";
 
 
 type IconComponent = typeof PawPrint;
@@ -82,14 +88,6 @@ const journey = [
   ["04", "Care Every Day", "Complete care tasks and build healthy habits.", "🧡"],
   ["05", "Earn & Grow", "Build streaks, earn PawPoints and unlock rewards.", "⭐"],
 ];
-
-const careItems = [
-  [Utensils, "Feeding", "08:00 AM", true],
-  [Droplets, "Water", "08:30 AM", true],
-  [Footprints, "Walk", "06:00 PM", false],
-  [Dumbbell, "Training", "07:00 PM", false],
-  [Sparkles, "Grooming", "08:00 PM", false],
-] as const;
 
 const ecosystem = [
   ["Daily Care", "Keep routines simple and visible."],
@@ -316,233 +314,213 @@ function PetCarousel() {
   );
 }
 
-function PhoneMockup({
-  type = "dashboard",
-  className = "",
-}: {
-  type?: "dashboard" | "card" | "reward";
-  className?: string;
-}) {
-  return (
-    <div className={`${styles.phoneShell} ${className}`}>
-      <div className={styles.phoneSpeaker} />
+/* =========================================================
+   HERO: real app screens inside phone frames
+   left = Digital PetCard, centre = Home, right = Level & XP
+   (screenshots live in /public/images/home/app-*.jpg)
+   ========================================================= */
 
-      <div className={styles.phoneScreen}>
-        <div className={styles.phoneStatus}>
-          <span>9:41</span>
-          <span>PetCard</span>
-          <span>●</span>
+const heroScreens = [
+  {
+    cls: "hsLeft",
+    src: "/images/home/app-petcard.jpg",
+    alt: "Digital PetCard screen in the PetCard app",
+  },
+  {
+    cls: "hsRight",
+    src: "/images/home/app-level.jpg",
+    alt: "Level and XP screen in the PetCard app",
+  },
+  {
+    cls: "hsMain",
+    src: "/images/home/app-home.jpg",
+    alt: "Home screen in the PetCard app",
+  },
+] as const;
+
+function HeroScreens() {
+  return (
+    <div
+      className={styles.hsScene}
+      aria-label="PetCard app preview"
+    >
+      <div className={styles.hsSun} />
+
+      <div className={`${styles.hsChip} ${styles.hsChipOne}`}>♡</div>
+      <div className={`${styles.hsChip} ${styles.hsChipTwo}`}>✦</div>
+      <div className={`${styles.hsChip} ${styles.hsChipThree}`}>🐾</div>
+
+      {heroScreens.map((screen) => (
+        <div
+          key={screen.cls}
+          className={`${styles.hsPhone} ${styles[screen.cls]}`}
+        >
+          <span className={styles.hsNotch} />
+
+          <Image
+            src={screen.src}
+            alt={screen.alt}
+            width={726}
+            height={1600}
+            sizes="(max-width: 950px) 46vw, 300px"
+            priority={screen.cls === "hsMain"}
+            className={styles.hsShot}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
+/* =========================================================
+   DIGITAL PET CARD (same layout as the app's Digital PetCard screen)
+   Edit the demo data here.
+   ========================================================= */
+
+const demoPet = {
+  name: "Lio",
+  breed: "Japanese Akita",
+  gender: "Male",
+  age: "9y",
+  weight: "63 kg",
+  id: "PC-2407-0184",
+  issued: "11/4/2026",
+};
+
+/** Decorative QR-style pattern. Deterministic, so server and browser render the same thing. */
+function PetQr({ seed }: { seed: string }) {
+  const N = 25;
+
+  let h = 2166136261;
+  for (let i = 0; i < seed.length; i += 1) {
+    h = Math.imul(h ^ seed.charCodeAt(i), 16777619) >>> 0;
+  }
+
+  const rnd = () => {
+    h = (Math.imul(h, 1664525) + 1013904223) >>> 0;
+    return h / 4294967296;
+  };
+
+  const inFinder = (x: number, y: number) =>
+    (x < 8 && y < 8) ||
+    (x >= N - 8 && y < 8) ||
+    (x < 8 && y >= N - 8);
+
+  let data = "";
+  for (let y = 0; y < N; y += 1) {
+    for (let x = 0; x < N; x += 1) {
+      if (!inFinder(x, y) && rnd() < 0.48) {
+        data += `M${x} ${y}h1v1h-1z`;
+      }
+    }
+  }
+
+  const finder = (ox: number, oy: number) =>
+    `M${ox} ${oy}h7v7h-7z` +
+    `M${ox + 1} ${oy + 1}v5h5v-5z` +
+    `M${ox + 2} ${oy + 2}h3v3h-3z`;
+
+  return (
+    <svg
+      viewBox={`0 0 ${N} ${N}`}
+      shapeRendering="crispEdges"
+      role="img"
+      aria-label="Sample QR code"
+    >
+      <path d={data} fill="currentColor" />
+      <path
+        d={finder(0, 0) + finder(N - 7, 0) + finder(0, N - 7)}
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+}
+
+function DigitalPetCard() {
+  const p = demoPet;
+
+  return (
+    <div className={styles.pcApp}>
+      <div className={styles.pcScreen}>
+        <div className={styles.pcHeader}>
+          <ArrowLeft className={styles.pcBack} />
+          <span>Digital PetCard</span>
         </div>
 
-        {type === "dashboard" && (
-          <>
-            <div className={styles.appGreeting}>
-              <div>
-                <small>Good morning,</small>
-                <strong>Bruno 🧡</strong>
-              </div>
-
-              <div className={styles.appAvatarSmall}>
-                <Image
-                  src="/images/home/home-dog.png"
-                  alt="Bruno"
-                  fill
-                  sizes="40px"
-                />
-              </div>
+        <div className={styles.pcCard}>
+          <div className={styles.pcCardTop}>
+            <div className={styles.pcBrandRow}>
+              <span>PETCARD</span>
+              <span className={styles.pcPawBadge}>
+                <PawPrint />
+              </span>
             </div>
 
-            <div className={styles.phoneProfileBanner}>
-              <div className={styles.phoneAvatar}>
+            <div className={styles.pcIdentity}>
+              <div className={styles.pcAvatar}>
                 <Image
                   src="/images/home/home-dog.png"
-                  alt="Bruno"
+                  alt={p.name}
                   fill
-                  sizes="76px"
+                  sizes="120px"
                 />
               </div>
 
-              <strong>Bruno</strong>
-              <small>Golden Retriever · 3 yrs · Male</small>
-            </div>
-
-            <div className={styles.phoneStats}>
-              <span>
-                🔥 7
-                <small>Streak</small>
-              </span>
-
-              <span>
-                ⭐ 240
-                <small>PawPoints</small>
-              </span>
-
-              <span>
-                🏆 Lv.4
-                <small>Level</small>
-              </span>
-            </div>
-
-            <div className={styles.phoneSectionTitle}>
-              <strong>Today&apos;s Care</strong>
-              <span>3 / 5</span>
-            </div>
-
-            {careItems.slice(0, 4).map(([Icon, title, time, done]) => (
-              <div className={styles.phoneCareRow} key={title}>
-                <span className={styles.careIcon}>
-                  <Icon size={13} />
-                </span>
-
-                <span>
-                  <b>{title}</b>
-                  <small>{time}</small>
-                </span>
-
-                <span
-                  className={
-                    done ? styles.careDone : styles.carePending
-                  }
-                >
-                  {done ? <Check size={12} /> : "50%"}
-                </span>
-              </div>
-            ))}
-          </>
-        )}
-
-        {type === "card" && (
-          <>
-            <div className={styles.digitalCardPreview}>
-              <span className={styles.cardChip}>PET CARD</span>
-
-              <div className={styles.cardPetImage}>
-                <Image
-                  src="/images/home/home-dog.png"
-                  alt="Pet profile"
-                  fill
-                  sizes="130px"
-                />
-              </div>
-
-              <strong>Bruno</strong>
-              <small>Golden Retriever · Male</small>
-
-              <div className={styles.cardId}>
-                PET ID · PC-2407-0184
-              </div>
-
-              <div className={styles.cardQr}>
-                <QrCode size={48} />
+              <div className={styles.pcNameBlock}>
+                <h3>
+                  {p.name} <PawPrint />
+                </h3>
+                <p>{p.breed}</p>
               </div>
             </div>
 
-            <div className={styles.cardDetails}>
-              <span>
-                <b>Guardian</b>
-                <small>Amber Patel</small>
-              </span>
-
-              <span>
-                <b>Age</b>
-                <small>3 years</small>
-              </span>
-
-              <span>
-                <b>Breed</b>
-                <small>Golden Retriever</small>
-              </span>
-
-              <span>
-                <b>Status</b>
-                <small>Healthy · Active</small>
-              </span>
-            </div>
-
-            <button className={styles.phoneAction}>
-              Share PET CARD <ArrowRight size={12} />
-            </button>
-          </>
-        )}
-
-        {type === "reward" && (
-          <>
-            <div className={styles.rewardHero}>
-              <span>🔥</span>
-              <small>YOUR STREAK</small>
-              <strong>7 DAYS</strong>
-              <p>Keep caring. Keep growing.</p>
-            </div>
-
-            <div className={styles.pointsCard}>
-              <span>
-                <Star size={15} /> PawPoints
-              </span>
-
-              <strong>240</strong>
-              <small>+20 today</small>
-            </div>
-
-            <div className={styles.rewardProgress}>
+            <div className={styles.pcStats}>
               <div>
-                <span>Level 4</span>
-                <span>320 XP</span>
+                <span><FaMars />Gender</span>
+                <b>{p.gender}</b>
               </div>
-
-              <i>
-                <b />
-              </i>
-            </div>
-
-            <div className={styles.unlockRow}>
-              <span>🎀</span>
-
               <div>
-                <b>Adventure Bandana</b>
-                <small>Unlocked today!</small>
+                <span><Cake />Age</span>
+                <b>{p.age}</b>
               </div>
-
-              <Award size={17} />
-            </div>
-
-            <div className={styles.unlockRow}>
-              <span>👑</span>
-
               <div>
-                <b>Golden Crown</b>
-                <small>80 PawPoints away</small>
+                <span><Weight />Weight</span>
+                <b>{p.weight}</b>
               </div>
-
-              <LockKeyhole size={15} />
             </div>
-          </>
-        )}
+          </div>
 
-        <div className={styles.phoneBottomNav}>
-          <span>
-            ⌂
-            <small>Home</small>
-          </span>
+          <div className={styles.pcCardBottom}>
+            <div className={styles.pcIdBlock}>
+              <small>PET ID</small>
+              <strong>{p.id}</strong>
+              <small>Issued on</small>
+              <b>{p.issued}</b>
+            </div>
 
-          <span>
-            ▣
-            <small>Records</small>
-          </span>
+            <div className={styles.pcQr}>
+              <PetQr seed={p.id} />
+            </div>
+          </div>
+        </div>
 
-          <span className="active">
-            🐾
-            <small>Pet</small>
+        <div className={styles.pcNote}>
+          <span className={styles.pcNoteIcon}>
+            <ShieldCheck />
           </span>
+          <p>
+            <b>This is {p.name}&apos;s official identity.</b>
+            <br />
+            Keep it safe and share when needed.
+          </p>
+        </div>
 
-          <span>
-            ♡
-            <small>Memories</small>
-          </span>
-
-          <span>
-            ◉
-            <small>Profile</small>
-          </span>
+        <div className={styles.pcActions}>
+          <div><Download />Download</div>
+          <div><Share2 />Share</div>
+          <div><Printer />Print</div>
         </div>
       </div>
     </div>
@@ -800,48 +778,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div
-            className={styles.heroAppScene}
-            aria-label="PetCard app preview"
-          >
-            <div className={styles.sceneSun} />
-
-            <div
-              className={`${styles.scenePaw} ${styles.scenePawOne}`}
-            >
-              ♡
-            </div>
-
-            <div
-              className={`${styles.scenePaw} ${styles.scenePawTwo}`}
-            >
-              ✦
-            </div>
-
-            <div
-              className={`${styles.scenePaw} ${styles.scenePawThree}`}
-            >
-              🐾
-            </div>
-
-            <div
-              className={`${styles.heroPhone} ${styles.phoneBackLeft}`}
-            >
-              <PhoneMockup type="card" />
-            </div>
-
-            <div
-              className={`${styles.heroPhone} ${styles.phoneMain}`}
-            >
-              <PhoneMockup type="dashboard" />
-            </div>
-
-            <div
-              className={`${styles.heroPhone} ${styles.phoneBackRight}`}
-            >
-              <PhoneMockup type="reward" />
-            </div>
-          </div>
+          <HeroScreens />
         </div>
       </section>
 
@@ -1035,42 +972,7 @@ export default function Home() {
           <div className={styles.identityVisual}>
             <div className={styles.identityGlow} />
 
-            <div className={styles.identityCardLarge}>
-              <div className={styles.identityCardTop}>
-                <span>PET CARD</span>
-                <span>●●●</span>
-              </div>
-
-              <div className={styles.identityAvatar}>
-                <Image
-                  src="/images/home/home-dog.png"
-                  alt="Bruno"
-                  fill
-                  sizes="190px"
-                />
-              </div>
-
-              <span className={styles.identityLabel}>
-                YOUR PET&apos;S DIGITAL IDENTITY
-              </span>
-
-              <h3>Bruno</h3>
-
-              <p>Golden Retriever · 3 years · Male</p>
-
-              <div className={styles.identityId}>
-                PC-2407-0184
-              </div>
-
-              <div className={styles.identityBottom}>
-                <span>
-                  <b>Guardian</b>
-                  Meet Patel
-                </span>
-
-                <QrCode size={58} />
-              </div>
-            </div>
+            <DigitalPetCard />
 
             <div
               className={`${styles.identityFloatChip} ${styles.chipOne}`}
