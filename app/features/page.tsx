@@ -657,13 +657,13 @@ export default function FeaturesPage() {
                     <CalendarDays size={15} />
                     Calendar View
                   </span>
-                  <ChevronRight size={14} />
+                
                 </div>
 
                 <div className={styles.calendarMonth}>
-                  <span>‹</span>
-                  <strong>May 2024</strong>
-                  <span>›</span>
+                  
+                  <strong>Nov 2026</strong>
+                  
                 </div>
 
                 <div className={styles.calendarGrid}>
@@ -724,7 +724,7 @@ export default function FeaturesPage() {
                     <Activity size={15} />
                     Recent Activity
                   </span>
-                  <span className={styles.viewAll}>View All →</span>
+                 
                 </div>
 
                 {[
@@ -799,14 +799,14 @@ export default function FeaturesPage() {
               <div className={styles.vaccinePanel}>
                 <div className={styles.panelTitle}>
                   <span>Vaccination Schedule</span>
-                  <span className={styles.viewAll}>View All →</span>
+                
                 </div>
 
                 {[
-                  ["DHPP", "20 May 2023", "Completed"],
-                  ["Rabies", "20 May 2023", "Completed"],
-                  ["Booster DHPP", "20 May 2024", "Upcoming"],
-                  ["Kennel Cough", "20 Jun 2024", "Upcoming"],
+                  ["DHPP", "20 May 2024", "Completed"],
+                  ["Rabies", "20 May 2024", "Completed"],
+                  ["Booster DHPP", "20 May 2025", "Upcoming"],
+                  ["Kennel Cough", "20 Jun 2025", "Upcoming"],
                 ].map(([name, date, status]) => (
                   <div className={styles.vaccineRow} key={name}>
                     <span className={styles.vaccineDot}>
@@ -840,7 +840,7 @@ export default function FeaturesPage() {
               <div className={styles.weightPanel}>
                 <div className={styles.panelTitle}>
                   <span>Weight Progress</span>
-                  <span className={styles.viewAll}>View Chart →</span>
+                  
                 </div>
 
                 <div className={styles.chartValue}>
@@ -864,25 +864,25 @@ export default function FeaturesPage() {
                     <Bell size={15} />
                     Health Alerts
                   </span>
-                  <span className={styles.viewAll}>View All →</span>
+                
                 </div>
 
                 <div className={styles.alertRow}>
                   <HeartPulse size={15} />
                   <span>
                     <strong>Due for Rabies vaccine</strong>
-                    <small>20 Jun 2024</small>
+                    <small>20 Jun 2026</small>
                   </span>
-                  <button type="button">Reminder</button>
+                  
                 </div>
 
                 <div className={styles.alertRow}>
                   <Bell size={15} />
                   <span>
                     <strong>Deworming due soon</strong>
-                    <small>05 Jun 2024</small>
+                    <small>05 Jun 2026</small>
                   </span>
-                  <button type="button">Reminder</button>
+                  
                 </div>
               </div>
 
@@ -959,15 +959,7 @@ export default function FeaturesPage() {
                     lifestyle.
                   </p>
 
-                  <button type="button">
-                    Explore Breed Info
-                    <img
-                      src="/images/paw-white.png"
-                      width={20}
-                      height={20}
-                      alt=""
-                    />
-                  </button>
+                 
                 </div>
 
                 <Image
@@ -981,7 +973,7 @@ export default function FeaturesPage() {
               <div className={styles.guidePanel}>
                 <div className={styles.panelTitle}>
                   <span>Top Guides for You</span>
-                  <span className={styles.viewAll}>View All →</span>
+                  
                 </div>
 
                 <div className={styles.guideGrid}>
@@ -1013,34 +1005,33 @@ export default function FeaturesPage() {
                 </div>
               </div>
 
-              <div className={styles.askPanel}>
-                <div className={styles.panelTitle}>
-                  <span>
-                    <MessageCircle size={15} />
-                    Ask PawChat AI
-                  </span>
-                </div>
+             <div className={styles.askPanel}>
+  <div className={styles.panelTitle}>
+    <span>
+      <MessageCircle size={15} />
+      Ask PawChat AI
+    </span>
+  </div>
 
-                {[
-                  "Is my dog's weight healthy?",
-                  "What food is best for my puppy?",
-                  "How do I calm my anxious dog?",
-                ].map((question) => (
-                  <button type="button" key={question}>
-                    {question}
-                    <ChevronRight size={13} />
-                  </button>
-                ))}
-              </div>
+  {[
+    "Is my rabbit's weight healthy?",
+    "What food is best for my rabbit?",
+    "How do I calm my anxious rabbit?",
+  ].map((question) => (
+    <div className={styles.askItem} key={question}>
+      {question}
+    </div>
+  ))}
+</div>
 
-              <div className={styles.smartCat}>
-                <Image
-                  src="/images/slider/waffle.png"
-                  alt="Cat"
-                  fill
-                  sizes="130px"
-                />
-              </div>
+<div className={styles.smartCat}>
+  <Image
+    src="/images/slider/waffle.png"
+    alt="Cat"
+    fill
+    sizes="130px"
+  />
+</div>
             </div>
           </div>
         </div>
@@ -1087,7 +1078,7 @@ export default function FeaturesPage() {
               <div className={styles.progressPanel}>
                 <div className={styles.panelTitle}>
                   <span>Pet Progress</span>
-                  <span>This Month⌄</span>
+                  <span>This Month</span>
                 </div>
 
                 <div className={styles.progressMetrics}>
@@ -1212,7 +1203,7 @@ export default function FeaturesPage() {
                     <Flame size={15} />
                     Daily Streak
                   </span>
-                  <span className={styles.viewAll}>View Calendar →</span>
+                 
                 </div>
 
                 <div className={styles.weekRow}>
@@ -1301,7 +1292,6 @@ export default function FeaturesPage() {
               <div className={styles.avatarPanel}>
                 <div className={styles.panelTitle}>
                   <span>Choose Your Avatar</span>
-                  <span className={styles.viewAll}>View All →</span>
                 </div>
 
                 <div className={styles.avatarRow}>
@@ -1437,7 +1427,7 @@ export default function FeaturesPage() {
                     <Activity size={15} />
                     Clicker Training
                   </span>
-                  <span className={styles.viewAll}>View All →</span>
+                 
                 </div>
 
                 <div className={styles.clickerSteps}>
@@ -1456,10 +1446,7 @@ export default function FeaturesPage() {
                   ))}
                 </div>
 
-                <div className={styles.goodBoy}>
-                  <strong>Good boy!</strong>
-                  <span>Click!</span>
-                </div>
+               
 
                 <div className={styles.funPetSmall}>
                   <Image
@@ -1477,7 +1464,7 @@ export default function FeaturesPage() {
                     <GiWhistle size={15} />
                     Whistle Commands
                   </span>
-                  <span className={styles.viewAll}>View All →</span>
+                  
                 </div>
 
                 <div className={styles.whistleCommands}>
@@ -1511,8 +1498,7 @@ export default function FeaturesPage() {
                     Training Tools
                   </span>
 
-                  <span className={styles.viewAll}>View All →</span>
-                </div>
+                  </div>
 
                 <div className={styles.trainingGrid}>
                   {(
@@ -1544,8 +1530,6 @@ export default function FeaturesPage() {
                       Complete lessons, earn XP and unlock badges.
                     </small>
                   </div>
-
-                  <button type="button">Start Training</button>
                 </div>
               </div>
             </div>

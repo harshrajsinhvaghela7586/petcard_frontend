@@ -4323,7 +4323,7 @@
   font-size: 4px;
 }
 
-.askPanel button {
+.askPanel .askItem {
   display: flex;
 
   align-items: center;
@@ -13277,4 +13277,55 @@ overflow: visible;
 @media (prefers-reduced-motion: reduce) {
   .deviceMockup,
   .deviceImg { transition: none !important; }
+}
+
+/* ================= FONT SCALE ================= */
+.page { --fs-xs:10px; --fs-sm:11px; --fs-md:12px; --fs-lg:14px; }
+@media (min-width:1440px){ .page{ --fs-xs:11px; --fs-sm:12px; --fs-md:13px; --fs-lg:15px; } }
+@media (min-width:1920px){ .page{ --fs-xs:12px; --fs-sm:13px; --fs-md:14px; --fs-lg:17px; } }
+@media (min-width:2560px){ .page{ --fs-xs:14px; --fs-sm:16px; --fs-md:18px; --fs-lg:22px; } }
+@media (min-width:3840px){ .page{ --fs-xs:20px; --fs-sm:23px; --fs-md:26px; --fs-lg:32px; } }
+
+/* xs — captions */
+.chartValue small, .vaccineRow small, .alertRow small, .guideCard small,
+.progressMetrics small, .progressMetrics span, .scoreCircle small,
+.weekRow small, .streakMessage small, .clickerSteps small,
+.trainingLevel small, .whistleCommands small, .identityBadge small
+{ font-size: var(--fs-xs); }
+
+/* sm — secondary text */
+.calendarGrid, .calendarMonth, .overviewStats small, .activityRow small,
+.vaccineRow strong, .vaccineRow em, .alertRow strong,
+.healthAsideTip p, .smartKnowledge p, .memoryMessage p, .rewardMessage p,
+.petmojiBottomMessage p, .scoreList > div, .scoreList strong,
+.guideCard strong, .askPanel .askItem, .whistleCommands strong,
+.trainingGrid strong, .clickerSteps strong, .previewSticker,
+.identityBadge, .goodBoy span, .miniCarouselCounter,
+.heroFloatA, .heroFloatB, .heroFloatC
+{ font-size: var(--fs-sm); }
+
+/* md — titles / body */
+.panelTitle, .activityRow strong, .calendarMonth strong,
+.healthAsideTip strong, .smartKnowledge strong, .memoryMessage strong,
+.rewardMessage strong, .petmojiBottomMessage strong, .streakMessage strong,
+.goodBoy strong, .trainingLevel strong, .smartBreedCard p,
+.identityBottomCard p, .miniCarouselContent small,
+.miniCarouselLarge .miniCarouselContent small
+{ font-size: var(--fs-md); }
+
+/* lg — numbers */
+.overviewStats strong, .progressMetrics strong { font-size: var(--fs-lg); }
+
+/* layout fixes for removed buttons / bigger text */
+.alertRow { grid-template-columns: auto 1fr; }
+.calendarMonth { justify-content: center; }
+.askPanel .askItem { cursor: default; }
+
+@media (max-width:1100px){
+  .progressMetrics { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width:760px){
+  .sectionDescription { font-size: 12px; }
+  .overviewHead > p   { font-size: 13px; }
+  .guideGrid, .trainingGrid { grid-template-columns: repeat(2,1fr); }
 }
