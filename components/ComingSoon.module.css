@@ -379,3 +379,12 @@
     animation: none !important;
   }
 }
+
+/* ---------- FORM STATUS ---------- */
+.formStatus {
+  margin: 10px 4px 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.formStatusSuccess { color: #2e7d32; }
+.formStatusError { color: #c62828; }
